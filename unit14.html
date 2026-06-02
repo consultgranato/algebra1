@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 14 — Factoring | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+
+      <!-- 14.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">14.1</span><span class="tlabel">Introduction to Factoring</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Big picture:</em> <span class="vw">Quadratic equations</span> (degree-2 polynomials) need new solving techniques. <span class="vw">Factoring</span> is the first one. Think of it as <strong>distribution in reverse</strong> &mdash; multiplication backwards. To factor confidently, you need to know your multiplication facts.</p>
+          <div class="kc"><div class="kc-lbl">Key concept &mdash; what is factoring?</div><div class="kc-body">
+            <strong>Factoring</strong> = breaking a polynomial into the product of its factors<br>
+            <strong>= distribution in reverse</strong><br><br>
+            Distribution: 3x(2x + 3) = 6x&sup2; + 9x<br>
+            Factoring: 6x&sup2; + 9x = 3x(2x + 3) &larr; same thing, backwards
+          </div></div>
+          <p class="note-h">Greatest Common Factor (GCF)</p>
+          <div class="kc"><div class="kc-lbl">GCF = Greatest Common Factor</div><div class="kc-body">
+            The <strong>largest factor that appears in ALL terms</strong> of the expression.<br><br>
+            <strong>Always check for GCF first</strong> before any other factoring technique. Always.
+          </div></div>
+          <div class="tip"><div class="tip-lbl">How to factor out the GCF</div><div class="tip-body">
+            Step 1 &mdash; Find the GCF of all coefficients and all variable parts<br>
+            Step 2 &mdash; Write the GCF outside parentheses<br>
+            Step 3 &mdash; Divide each term by the GCF and write inside parentheses<br>
+            Step 4 &mdash; Check by distributing back
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Factor: 6x&sup2; + 9x</div><div class="wsteps">
+            <span class="eq">GCF of 6 and 9 = 3. GCF of x&sup2; and x = x.</span>
+            <span class="eq">GCF = 3x</span>
+            <span class="eq">6x&sup2; + 9x = 3x(2x + 3) <span class="eq-note">&larr; divide each term by 3x</span></span>
+            <span class="eq">Check: 3x &middot; 2x + 3x &middot; 3 = 6x&sup2; + 9x &#10003;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Factor: 12x&sup3; &minus; 8x&sup2; + 4x</div><div class="wsteps">
+            <span class="eq">GCF of 12, 8, 4 = 4. GCF of x&sup3;, x&sup2;, x = x.</span>
+            <span class="eq">GCF = 4x</span>
+            <span class="eq">12x&sup3; &minus; 8x&sup2; + 4x = 4x(3x&sup2; &minus; 2x + 1)</span>
+            <span class="eq">Check by distributing &#10003;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Factor: 15x&sup2;y &minus; 10xy&sup2;</div><div class="wsteps">
+            <span class="eq">GCF of 15 and 10 = 5. GCF of variables = xy.</span>
+            <span class="eq">15x&sup2;y &minus; 10xy&sup2; = 5xy(3x &minus; 2y)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Did you hear that old math teachers never die? They just lose some of their functions.</div>
+        </div>
+      </div>
+
+      <!-- 14.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">14.2</span><span class="tlabel">Factoring Trinomials (Part 1)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>When to use this:</em> When the leading coefficient is <strong>1</strong> (i.e., the trinomial looks like x&sup2; + bx + c). <strong>Very first step: always factor out the GCF first</strong>, even if the GCF is 1.</p>
+          <div class="kc"><div class="kc-lbl">The shortcut &mdash; find two numbers</div><div class="kc-body">
+            For x&sup2; + bx + c: find two numbers p and q such that<br>
+            &nbsp;&nbsp;&nbsp;<strong>p &times; q = c</strong> (they multiply to the constant)<br>
+            &nbsp;&nbsp;&nbsp;<strong>p + q = b</strong> (they add to the middle coefficient)<br><br>
+            Then: x&sup2; + bx + c = <strong>(x + p)(x + q)</strong>
+          </div></div>
+          <div class="tip"><div class="tip-lbl">The X Method</div><div class="tip-body">
+            Draw an X. Write the <strong>product (c)</strong> on TOP. Write the <strong>sum (b)</strong> on the BOTTOM.<br>
+            Fill in the two sides = two numbers that multiply to the top and add to the bottom.
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Factor: x&sup2; + 7x + 12</div><div class="wsteps">
+            <span class="eq">Step 1: GCF = 1 (nothing to factor out)</span>
+            <span class="eq">Step 2: Find p and q: p &times; q = 12, p + q = 7</span>
+            <span class="eq">Try: 3 &times; 4 = 12, 3 + 4 = 7 &#10003;</span>
+            <span class="eq">Answer: (x + 3)(x + 4)</span>
+            <span class="eq">Check by FOIL: x&sup2; + 4x + 3x + 12 = x&sup2; + 7x + 12 &#10003;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Factor: x&sup2; + 2x &minus; 15</div><div class="wsteps">
+            <span class="eq">p &times; q = &minus;15, p + q = 2</span>
+            <span class="eq">Try: 5 &times; (&minus;3) = &minus;15, 5 + (&minus;3) = 2 &#10003;</span>
+            <span class="eq">Answer: (x + 5)(x &minus; 3)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Factor: x&sup2; &minus; 9x + 20</div><div class="wsteps">
+            <span class="eq">p &times; q = 20, p + q = &minus;9</span>
+            <span class="eq">Try: (&minus;4) &times; (&minus;5) = 20, (&minus;4) + (&minus;5) = &minus;9 &#10003;</span>
+            <span class="eq">Answer: (x &minus; 4)(x &minus; 5)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 14.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">14.3</span><span class="tlabel">Factoring Trinomials (Part 2)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">Now we handle cases where the shortcut from 14.2 doesn&rsquo;t apply: <strong>a &ne; 1</strong>, <strong>negative leading term</strong>, and the special <strong>Difference of Squares</strong> pattern.</p>
+          <div class="warn"><div class="warn-lbl">When the first term is negative</div><div class="warn-body">Factor out <strong>&minus;1</strong> first! This changes all signs inside and makes the leading coefficient positive, so you can use normal methods.</div></div>
+          <div class="kc"><div class="kc-lbl">Split the Middle Term method (a &ne; 1)</div><div class="kc-body">
+            For ax&sup2; + bx + c where a &ne; 1:<br>
+            Step 1 &mdash; Multiply a &middot; c (call it k)<br>
+            Step 2 &mdash; Find two numbers that &times; = k and + = b<br>
+            Step 3 &mdash; <strong>Split the middle term</strong> into two terms using those numbers<br>
+            Step 4 &mdash; <strong>Factor by grouping</strong>: group first two terms, group last two terms, factor each group, factor out common binomial
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Difference of Squares</div><div class="kc-body">
+            <strong>a&sup2; &minus; b&sup2; = (a + b)(a &minus; b)</strong><br><br>
+            Recognize it: two perfect squares with a subtraction sign between them.<br>
+            Examples: x&sup2; &minus; 25 = (x + 5)(x &minus; 5) &nbsp;&nbsp; 4x&sup2; &minus; 9 = (2x + 3)(2x &minus; 3)
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Factor: 2x&sup2; + 7x + 3 (a = 2)</div><div class="wsteps">
+            <span class="eq">a &middot; c = 2 &times; 3 = 6</span>
+            <span class="eq">Find: p &times; q = 6, p + q = 7 &rarr; 1 and 6</span>
+            <span class="eq">Split: 2x&sup2; + 1x + 6x + 3 <span class="eq-note">&larr; split 7x into 1x + 6x</span></span>
+            <span class="eq">Group: x(2x + 1) + 3(2x + 1)</span>
+            <span class="eq">Factor binomial: (x + 3)(2x + 1)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Factor: &minus;x&sup2; + 5x &minus; 6</div><div class="wsteps">
+            <span class="eq">First term is negative &rarr; factor out &minus;1</span>
+            <span class="eq">&minus;1(x&sup2; &minus; 5x + 6)</span>
+            <span class="eq">Now factor inside: p &times; q = 6, p + q = &minus;5 &rarr; (&minus;2) and (&minus;3)</span>
+            <span class="eq">Answer: &minus;(x &minus; 2)(x &minus; 3)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Factor: 9x&sup2; &minus; 16</div><div class="wsteps">
+            <span class="eq">Recognize Difference of Squares: (3x)&sup2; &minus; 4&sup2;</span>
+            <span class="eq">Answer: (3x + 4)(3x &minus; 4)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 14.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">14.4</span><span class="tlabel">Solving Equations by Factoring</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Big idea:</em> Now that we can factor, we can use the <span class="vw">Zero Product Property</span> to solve quadratic equations.</p>
+          <div class="kc"><div class="kc-lbl">Zero Product Property (ZPP)</div><div class="kc-body">
+            If <strong>A &middot; B = 0</strong>, then <strong>A = 0 OR B = 0</strong><br><br>
+            Think about it: the only way a product equals zero is if at least one factor is zero.
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Process: Solving equations by factoring (5 steps)</div><div class="kc-body">
+            Step 1 &mdash; Move all terms to <strong>one side = 0</strong><br>
+            Step 2 &mdash; <strong>Factor completely</strong> (GCF first!)<br>
+            Step 3 &mdash; Apply <strong>Zero Product Property</strong>: set each factor = 0<br>
+            Step 4 &mdash; <strong>Solve each linear equation</strong><br>
+            Step 5 &mdash; <strong>Check</strong> solutions in the original equation
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Solve: x&sup2; + 5x + 6 = 0</div><div class="wsteps">
+            <span class="eq">Already = 0. Factor: (x + 2)(x + 3) = 0</span>
+            <span class="eq">ZPP: x + 2 = 0 &nbsp;OR&nbsp; x + 3 = 0</span>
+            <span class="eq">x = &minus;2 &nbsp;OR&nbsp; x = &minus;3</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Solve: x&sup2; &minus; 7x = 0</div><div class="wsteps">
+            <span class="eq">Factor out GCF: x(x &minus; 7) = 0</span>
+            <span class="eq">ZPP: x = 0 &nbsp;OR&nbsp; x &minus; 7 = 0</span>
+            <span class="eq">x = 0 &nbsp;OR&nbsp; x = 7</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Solve: 2x&sup2; + x = 1</div><div class="wsteps">
+            <span class="eq">Move everything to one side: 2x&sup2; + x &minus; 1 = 0</span>
+            <span class="eq">Factor: (2x &minus; 1)(x + 1) = 0</span>
+            <span class="eq">ZPP: 2x &minus; 1 = 0 &nbsp;OR&nbsp; x + 1 = 0</span>
+            <span class="eq">x = 1/2 &nbsp;OR&nbsp; x = &minus;1</span>
+          </div></div>
+          <div class="tip"><div class="tip-lbl">Always check!</div><div class="tip-body">Plug both answers back into the original equation to verify.</div></div>
+        </div>
+      </div>
+
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 14.1</div>
+        <div class="vcard"><div><div class="vtag">14.1</div><div class="vterm">Quadratic equation</div><div class="vdef">A degree-2 polynomial equation &mdash; the highest exponent is 2. Looks like ax&sup2; + bx + c = 0.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="eq-box">x&sup2; + 5x + 6 = 0</span><br>Degree 2 &rarr; quadratic</div></div></div>
+        <div class="vcard"><div><div class="vtag">14.1</div><div class="vterm">Factor (noun)</div><div class="vdef">A number or expression multiplied with another to get a product. 3 and 4 are factors of 12.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Factors of 12: 1, 2, 3, 4, 6, 12<br>Factors of x&sup2; + 5x + 6: <span class="eq-box">(x+2)(x+3)</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">14.1</div><div class="vterm">Factoring</div><div class="vdef">Breaking down a polynomial into its factors &mdash; distribution in reverse / multiplication backwards.</div></div><div><div class="vex-lbl">Example</div><div class="vex">6x&sup2; + 9x<br>= <span class="chip chip-g">3x(2x + 3)</span><br>(factored form)</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">14.1</div><div class="vterm">Factoring is actually just&hellip;</div><div class="vdef">Distribution in reverse / multiplication backwards. If you can distribute, you can factor &mdash; just think about what was multiplied together to get the expression.</div></div></div>
+        <div class="vcard"><div><div class="vtag">14.1</div><div class="vterm">Greatest Common Factor (GCF)</div><div class="vdef">The largest factor appearing in ALL terms of the expression. Always factor this out first, before any other technique.</div></div><div><div class="vex-lbl">Example</div><div class="vex">12x&sup3; &minus; 8x&sup2; + 4x<br>GCF = <span class="chip chip-p">4x</span><br>= 4x(3x&sup2; &minus; 2x + 1)</div></div></div>
+        <div class="vsec">New in 14.2</div>
+        <div class="vcard wide"><div><div class="vtag">14.2</div><div class="vterm">Very first step when factoring is&hellip;</div><div class="vdef">Always factor out the GCF first &mdash; even if the GCF is 1. This is the rule before any other technique.</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">14.2</div><div class="vterm">You can use the shortcut when&hellip;</div><div class="vdef">a = 1 (the leading coefficient is 1). For x&sup2; + bx + c, find two numbers that multiply to c and add to b.</div></div></div>
+        <div class="vcard"><div><div class="vtag">14.2</div><div class="vterm">Split the Middle Term</div><div class="vdef">A technique for factoring when a &ne; 1: multiply a&middot;c, find two numbers for that product and the middle sum, then rewrite the middle term as two terms and factor by grouping.</div></div><div><div class="vex-lbl">Example</div><div class="vex">2x&sup2; + 7x + 3<br>a&middot;c = 6; find 1 and 6<br>2x&sup2;+x+6x+3<br>= (x+3)(2x+1)</div></div></div>
+        <div class="vcard"><div><div class="vtag">14.2</div><div class="vterm">X Method</div><div class="vdef">A visual tool: write the product on top of the X and the sum on the bottom. Find the two numbers that fill in the sides.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup2; + 7x + 12<br>Top = 12, Bottom = 7<br>Sides = <span class="chip chip-g">3</span> and <span class="chip chip-g">4</span></div></div></div>
+        <div class="vsec">New in 14.3</div>
+        <div class="vcard wide"><div><div class="vtag">14.3</div><div class="vterm">When the first term is negative&hellip;</div><div class="vdef">Factor out &minus;1 first! Change all signs inside, then proceed with normal factoring techniques. Example: &minus;x&sup2; + 5x &minus; 6 = &minus;1(x&sup2; &minus; 5x + 6) = &minus;(x&minus;2)(x&minus;3).</div></div></div>
+        <div class="vcard"><div><div class="vtag">14.3</div><div class="vterm">Difference of Squares</div><div class="vdef">a&sup2; &minus; b&sup2; = (a + b)(a &minus; b). Two perfect squares separated by subtraction. Always factors into conjugate binomials.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup2; &minus; 25 = (x+5)(x&minus;5)<br>4x&sup2; &minus; 9 = (2x+3)(2x&minus;3)<br><span class="chip chip-a">Sum of squares (a&sup2;+b&sup2;) does NOT factor!</span></div></div></div>
+        <div class="vsec">New in 14.4</div>
+        <div class="vcard"><div><div class="vtag">14.4</div><div class="vterm">Zero Product Property (ZPP)</div><div class="vdef">If A &middot; B = 0, then A = 0 OR B = 0. The only way a product is zero is if at least one factor is zero.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(x+2)(x+3) = 0<br>x+2 = 0 &rarr; x = &minus;2<br>x+3 = 0 &rarr; x = &minus;3</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">14.4</div><div class="vterm">How to solve equations by factoring</div><div class="vdef">Move everything to one side = 0, factor completely, apply Zero Product Property (set each factor = 0), solve each linear equation, check both solutions.</div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('14.1',this)">14.1</button>
+          <button class="pqf-btn" onclick="setQFilter('14.2',this)">14.2</button>
+          <button class="pqf-btn" onclick="setQFilter('14.3',this)">14.3</button>
+          <button class="pqf-btn" onclick="setQFilter('14.4',this)">14.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('14.1',this)">14.1 &mdash; Intro to Factoring</button>
+              <button class="tpbtn" onclick="selTopic('14.2',this)">14.2 &mdash; Trinomials Part 1</button>
+              <button class="tpbtn" onclick="selTopic('14.3',this)">14.3 &mdash; Trinomials Part 2</button>
+              <button class="tpbtn" onclick="selTopic('14.4',this)">14.4 &mdash; Solve by Factoring</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Factoring out the GCF from polynomials.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 14</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:14,name:"Factoring",topics:[
+  {id:"14.1",label:"Introduction to Factoring",videos:[]},
+  {id:"14.2",label:"Factoring Trinomials (Part 1)",videos:[]},
+  {id:"14.3",label:"Factoring Trinomials (Part 2)",videos:[]},
+  {id:"14.4",label:"Solving Equations by Factoring",videos:[]},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='14'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+// ── PRACTICE BANKS (15 per topic) ───────────────────────────────────────────
+const BANKS={
+'14.1':[
+  {q:"Factor out the GCF:",eq:"4x² + 8x",a:"4x(x+2)",fmt:"factored form",h:"GCF of 4 and 8 is 4; GCF of x² and x is x. Factor out 4x."},
+  {q:"Factor out the GCF:",eq:"6x³ − 9x²",a:"3x²(2x-3)",fmt:"factored form",h:"GCF of 6 and 9 is 3; GCF of x³ and x² is x²."},
+  {q:"Factor out the GCF:",eq:"10x² + 15x",a:"5x(2x+3)",fmt:"factored form",h:"GCF of 10 and 15 is 5; GCF of x² and x is x."},
+  {q:"Factor out the GCF:",eq:"12x³ + 8x² − 4x",a:"4x(3x²+2x-1)",fmt:"factored form",h:"GCF is 4x. Divide each term by 4x."},
+  {q:"Factor out the GCF:",eq:"18x⁴ − 12x³",a:"6x³(3x-2)",fmt:"factored form",h:"GCF of 18 and 12 is 6; GCF of x⁴ and x³ is x³."},
+  {q:"Factor out the GCF:",eq:"20x² − 5",a:"5(4x²-1)",fmt:"factored form",h:"GCF is 5 (no variable since second term has no x)."},
+  {q:"Factor out the GCF:",eq:"9x³ + 3x²",a:"3x²(3x+1)",fmt:"factored form",h:"GCF of 9 and 3 is 3; GCF of x³ and x² is x²."},
+  {q:"Factor out the GCF:",eq:"14x⁴ − 7x²",a:"7x²(2x²-1)",fmt:"factored form",h:"GCF is 7x²."},
+  {q:"Factor out the GCF:",eq:"2x² − 6x",a:"2x(x-3)",fmt:"factored form",h:"GCF of 2 and 6 is 2; GCF of x² and x is x."},
+  {q:"Factor out the GCF:",eq:"15x³ + 10x² − 5x",a:"5x(3x²+2x-1)",fmt:"factored form",h:"GCF is 5x. Divide each term by 5x."},
+  {q:"Factor out the GCF:",eq:"8x² − 12",a:"4(2x²-3)",fmt:"factored form",h:"GCF is 4. No variable factor since 12 has no x."},
+  {q:"Factor out the GCF:",eq:"24x³ − 16x²",a:"8x²(3x-2)",fmt:"factored form",h:"GCF of 24 and 16 is 8; GCF of x³ and x² is x²."},
+  {q:"Factor out the GCF:",eq:"6x + 9",a:"3(2x+3)",fmt:"factored form",h:"GCF is 3."},
+  {q:"Factor out the GCF:",eq:"x³ + x² + x",a:"x(x²+x+1)",fmt:"factored form",h:"GCF is x."},
+  {q:"Factor out the GCF:",eq:"16x⁴ − 4x²",a:"4x²(4x²-1)",fmt:"factored form",h:"GCF is 4x²."},
+],
+'14.2':[
+  {q:"Factor:",eq:"x² + 5x + 6",a:"(x+2)(x+3)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 6 and add to 5. Try 2 and 3."},
+  {q:"Factor:",eq:"x² + 7x + 12",a:"(x+3)(x+4)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 12 and add to 7. Try 3 and 4."},
+  {q:"Factor:",eq:"x² − x − 12",a:"(x-4)(x+3)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −12 and add to −1. Try −4 and 3."},
+  {q:"Factor:",eq:"x² + 2x − 15",a:"(x+5)(x-3)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −15 and add to 2. Try 5 and −3."},
+  {q:"Factor:",eq:"x² − 9x + 20",a:"(x-4)(x-5)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 20 and add to −9. Try −4 and −5."},
+  {q:"Factor:",eq:"x² + 8x + 15",a:"(x+3)(x+5)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 15 and add to 8. Try 3 and 5."},
+  {q:"Factor:",eq:"x² − 7x + 10",a:"(x-2)(x-5)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 10 and add to −7. Try −2 and −5."},
+  {q:"Factor:",eq:"x² + 3x − 10",a:"(x+5)(x-2)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −10 and add to 3. Try 5 and −2."},
+  {q:"Factor:",eq:"x² − 5x − 14",a:"(x-7)(x+2)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −14 and add to −5. Try −7 and 2."},
+  {q:"Factor:",eq:"x² + 6x + 9",a:"(x+3)(x+3)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 9 and add to 6. Try 3 and 3 — perfect square!"},
+  {q:"Factor:",eq:"x² − 4x − 21",a:"(x-7)(x+3)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −21 and add to −4. Try −7 and 3."},
+  {q:"Factor:",eq:"x² + 10x + 21",a:"(x+3)(x+7)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 21 and add to 10. Try 3 and 7."},
+  {q:"Factor:",eq:"x² − 8x + 12",a:"(x-2)(x-6)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 12 and add to −8. Try −2 and −6."},
+  {q:"Factor:",eq:"x² + x − 6",a:"(x+3)(x-2)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −6 and add to 1. Try 3 and −2."},
+  {q:"Factor:",eq:"x² − 11x + 30",a:"(x-5)(x-6)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 30 and add to −11. Try −5 and −6."},
+],
+'14.3':[
+  {q:"Factor:",eq:"2x² + 5x + 3",a:"(2x+3)(x+1)",fmt:"factored form",h:"a·c = 6. Find 2 and 3 (×=6, +=5). Split: 2x²+2x+3x+3 → 2x(x+1)+3(x+1)."},
+  {q:"Factor:",eq:"3x² + 7x + 2",a:"(3x+1)(x+2)",fmt:"factored form",h:"a·c = 6. Find 1 and 6 (×=6, +=7). Split: 3x²+x+6x+2 → x(3x+1)+2(3x+1)."},
+  {q:"Factor:",eq:"x² − 25",a:"(x+5)(x-5)",fmt:"factored form",h:"Difference of squares: x²−25 = x²−5². Use a²−b²=(a+b)(a−b)."},
+  {q:"Factor:",eq:"4x² − 9",a:"(2x+3)(2x-3)",fmt:"factored form",h:"Difference of squares: (2x)²−3². Use a²−b²=(a+b)(a−b)."},
+  {q:"Factor:",eq:"−x² + 4x + 5",a:"-(x-5)(x+1)",fmt:"factored form",h:"First term negative → factor out −1: −(x²−4x−5). Then factor: −(x−5)(x+1)."},
+  {q:"Factor:",eq:"2x² + 7x + 6",a:"(2x+3)(x+2)",fmt:"factored form",h:"a·c = 12. Find 3 and 4 (×=12, +=7). Split: 2x²+3x+4x+6."},
+  {q:"Factor:",eq:"x² − 36",a:"(x+6)(x-6)",fmt:"factored form",h:"Difference of squares: x²−36 = x²−6²."},
+  {q:"Factor:",eq:"3x² − 11x − 4",a:"(3x+1)(x-4)",fmt:"factored form",h:"a·c = −12. Find 1 and −12 (×=−12, +=−11). Split: 3x²+x−12x−4."},
+  {q:"Factor:",eq:"−x² + 3x − 2",a:"-(x-1)(x-2)",fmt:"factored form",h:"Factor out −1: −(x²−3x+2). Then factor: −(x−1)(x−2)."},
+  {q:"Factor:",eq:"9x² − 16",a:"(3x+4)(3x-4)",fmt:"factored form",h:"Difference of squares: (3x)²−4²."},
+  {q:"Factor:",eq:"2x² − 3x − 2",a:"(2x+1)(x-2)",fmt:"factored form",h:"a·c = −4. Find 1 and −4 (×=−4, +=−3). Split: 2x²+x−4x−2."},
+  {q:"Factor:",eq:"25x² − 1",a:"(5x+1)(5x-1)",fmt:"factored form",h:"Difference of squares: (5x)²−1²."},
+  {q:"Factor:",eq:"4x² + 12x + 9",a:"(2x+3)(2x+3)",fmt:"factored form",h:"a·c = 36. Find 6 and 6. This is a perfect square trinomial!"},
+  {q:"Factor:",eq:"−x² − x + 6",a:"-(x+3)(x-2)",fmt:"factored form",h:"Factor out −1: −(x²+x−6). Then factor: −(x+3)(x−2)."},
+  {q:"Factor:",eq:"6x² − x − 2",a:"(3x-2)(2x+1)",fmt:"factored form",h:"a·c = −12. Find 3 and −4 (×=−12, +=−1). Split: 6x²+3x−4x−2."},
+],
+'14.4':[
+  {q:"Solve by factoring:",eq:"x² + 3x − 10 = 0",a:"x=2 or x=-5",fmt:"x = ___ or x = ___",h:"Factor: (x+5)(x−2)=0. ZPP: x=−5 or x=2."},
+  {q:"Solve by factoring:",eq:"x² − 9 = 0",a:"x=3 or x=-3",fmt:"x = ___ or x = ___",h:"Factor (diff of squares): (x+3)(x−3)=0. ZPP: x=3 or x=−3."},
+  {q:"Solve by factoring:",eq:"x² + 5x + 6 = 0",a:"x=-2 or x=-3",fmt:"x = ___ or x = ___",h:"Factor: (x+2)(x+3)=0. ZPP: x=−2 or x=−3."},
+  {q:"Solve by factoring:",eq:"x² − 7x = 0",a:"x=0 or x=7",fmt:"x = ___ or x = ___",h:"Factor out GCF x: x(x−7)=0. ZPP: x=0 or x=7."},
+  {q:"Solve by factoring:",eq:"x² − x − 12 = 0",a:"x=4 or x=-3",fmt:"x = ___ or x = ___",h:"Factor: (x−4)(x+3)=0. ZPP: x=4 or x=−3."},
+  {q:"Solve by factoring:",eq:"2x² + x − 1 = 0",a:"x=1/2 or x=-1",fmt:"x = ___ or x = ___",h:"Factor: (2x−1)(x+1)=0. ZPP: x=1/2 or x=−1."},
+  {q:"Solve by factoring:",eq:"x² − 4x = 0",a:"x=0 or x=4",fmt:"x = ___ or x = ___",h:"Factor out x: x(x−4)=0. ZPP: x=0 or x=4."},
+  {q:"Solve by factoring:",eq:"x² + 8x + 16 = 0",a:"x=-4",fmt:"x = ___",h:"Factor (perfect square): (x+4)²=0. ZPP: x=−4 (double root)."},
+  {q:"Solve by factoring:",eq:"2x² + x = 1",a:"x=1/2 or x=-1",fmt:"x = ___ or x = ___",h:"Move to one side: 2x²+x−1=0. Factor: (2x−1)(x+1)=0."},
+  {q:"Solve by factoring:",eq:"x² − 6x + 9 = 0",a:"x=3",fmt:"x = ___",h:"Factor (perfect square): (x−3)²=0. ZPP: x=3 (double root)."},
+  {q:"Solve by factoring:",eq:"3x² − 12x = 0",a:"x=0 or x=4",fmt:"x = ___ or x = ___",h:"Factor out 3x: 3x(x−4)=0. ZPP: x=0 or x=4."},
+  {q:"Solve by factoring:",eq:"x² + 2x = 8",a:"x=2 or x=-4",fmt:"x = ___ or x = ___",h:"Move to one side: x²+2x−8=0. Factor: (x+4)(x−2)=0."},
+  {q:"Solve by factoring:",eq:"x² − 16 = 0",a:"x=4 or x=-4",fmt:"x = ___ or x = ___",h:"Factor (diff of squares): (x+4)(x−4)=0. ZPP: x=4 or x=−4."},
+  {q:"Solve by factoring:",eq:"2x² − 8 = 0",a:"x=2 or x=-2",fmt:"x = ___ or x = ___",h:"Factor out 2: 2(x²−4)=0. Factor diff of squares: 2(x+2)(x−2)=0."},
+  {q:"Solve by factoring:",eq:"x² − 5x + 4 = 0",a:"x=1 or x=4",fmt:"x = ___ or x = ___",h:"Factor: (x−1)(x−4)=0. ZPP: x=1 or x=4."},
+]};
+
+// ── TEST BANK (5 per topic = 20 total) ──────────────────────────────────────
+const T=[
+  {t:"14.1",q:"Factor out the GCF:",eq:"6x² + 9x",a:"3x(2x+3)",fmt:"factored form",h:"GCF is 3x."},
+  {t:"14.1",q:"Factor out the GCF:",eq:"10x³ − 5x²",a:"5x²(2x-1)",fmt:"factored form",h:"GCF is 5x²."},
+  {t:"14.1",q:"Factor out the GCF:",eq:"8x² − 12x + 4",a:"4(2x²-3x+1)",fmt:"factored form",h:"GCF is 4 (no x factor since last term is constant)."},
+  {t:"14.1",q:"Factor out the GCF:",eq:"3x⁴ + 9x³ − 6x²",a:"3x²(x²+3x-2)",fmt:"factored form",h:"GCF is 3x²."},
+  {t:"14.1",q:"Factor out the GCF:",eq:"14x² − 7x",a:"7x(2x-1)",fmt:"factored form",h:"GCF is 7x."},
+  {t:"14.2",q:"Factor:",eq:"x² + 9x + 18",a:"(x+3)(x+6)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 18 and add to 9. Try 3 and 6."},
+  {t:"14.2",q:"Factor:",eq:"x² − 3x − 28",a:"(x-7)(x+4)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −28 and add to −3. Try −7 and 4."},
+  {t:"14.2",q:"Factor:",eq:"x² + 4x − 12",a:"(x+6)(x-2)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to −12 and add to 4. Try 6 and −2."},
+  {t:"14.2",q:"Factor:",eq:"x² − 10x + 24",a:"(x-4)(x-6)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 24 and add to −10. Try −4 and −6."},
+  {t:"14.2",q:"Factor:",eq:"x² + 11x + 28",a:"(x+4)(x+7)",fmt:"(x+_)(x+_)",h:"Find numbers that multiply to 28 and add to 11. Try 4 and 7."},
+  {t:"14.3",q:"Factor:",eq:"2x² + 9x + 4",a:"(2x+1)(x+4)",fmt:"factored form",h:"a·c = 8. Find 1 and 8. Split: 2x²+x+8x+4 → x(2x+1)+4(2x+1)."},
+  {t:"14.3",q:"Factor:",eq:"x² − 49",a:"(x+7)(x-7)",fmt:"factored form",h:"Difference of squares: x²−49 = x²−7²."},
+  {t:"14.3",q:"Factor:",eq:"−x² + 7x − 12",a:"-(x-3)(x-4)",fmt:"factored form",h:"Factor out −1: −(x²−7x+12). Factor: −(x−3)(x−4)."},
+  {t:"14.3",q:"Factor:",eq:"3x² − 5x − 2",a:"(3x+1)(x-2)",fmt:"factored form",h:"a·c = −6. Find 1 and −6. Split: 3x²+x−6x−2."},
+  {t:"14.3",q:"Factor:",eq:"16x² − 25",a:"(4x+5)(4x-5)",fmt:"factored form",h:"Difference of squares: (4x)²−5²."},
+  {t:"14.4",q:"Solve by factoring:",eq:"x² + 6x + 8 = 0",a:"x=-2 or x=-4",fmt:"x = ___ or x = ___",h:"Factor: (x+2)(x+4)=0. ZPP: x=−2 or x=−4."},
+  {t:"14.4",q:"Solve by factoring:",eq:"x² − 5x = 0",a:"x=0 or x=5",fmt:"x = ___ or x = ___",h:"Factor out x: x(x−5)=0. ZPP: x=0 or x=5."},
+  {t:"14.4",q:"Solve by factoring:",eq:"x² − 25 = 0",a:"x=5 or x=-5",fmt:"x = ___ or x = ___",h:"Factor (diff of squares): (x+5)(x−5)=0."},
+  {t:"14.4",q:"Solve by factoring:",eq:"x² + 3x = 4",a:"x=1 or x=-4",fmt:"x = ___ or x = ___",h:"Move to one side: x²+3x−4=0. Factor: (x+4)(x−1)=0."},
+  {t:"14.4",q:"Solve by factoring:",eq:"3x² − 3x = 0",a:"x=0 or x=1",fmt:"x = ___ or x = ___",h:"Factor out 3x: 3x(x−1)=0. ZPP: x=0 or x=1."},
+];
+
+// ── VOCAB QUIZ BANK ──────────────────────────────────────────────────────────
+const VQB=[
+  {topic:'14.1',type:'mc',q:'What does it mean to "factor" a polynomial?',opts:['Add terms together','Distribute to expand','Break it into products — distribution in reverse','Solve for x'],a:2},
+  {topic:'14.1',type:'mc',q:'What is the GCF of 12x³ and 8x²?',opts:['4x','4x²','8x²','2x'],a:1},
+  {topic:'14.1',type:'tf',q:'True or False: You should always factor out the GCF as the very first step.',opts:['True','False'],a:0},
+  {topic:'14.1',type:'mc',q:'Which is the correct factored form of 6x² + 9x?',opts:['3(2x² + 3x)','3x(2x + 3)','x(6x + 9)','6x(x + 1.5)'],a:1},
+  {topic:'14.1',type:'mc',q:'What is a "factor" in math?',opts:['A number added to get a sum','A number multiplied with another to get a product','The answer to a division problem','A term with a variable'],a:1},
+  {topic:'14.2',type:'mc',q:'For x² + bx + c (a = 1), what two conditions must the two numbers satisfy?',opts:['They add to c and multiply to b','They multiply to c and add to b','They equal b and c','They are both positive'],a:1},
+  {topic:'14.2',type:'mc',q:'What goes on TOP of the X in the X Method?',opts:['The sum (b)','The constant (c)','The product (a·c)','The leading coefficient'],a:2},
+  {topic:'14.2',type:'tf',q:'True or False: You can use the simple shortcut (find two numbers) when the leading coefficient is 1.',opts:['True','False'],a:0},
+  {topic:'14.2',type:'mc',q:'Factor x² + 5x + 6. Which is correct?',opts:['(x+1)(x+6)','(x+2)(x+3)','(x−2)(x−3)','(x+6)(x−1)'],a:1},
+  {topic:'14.2',type:'mc',q:'What goes on the BOTTOM of the X in the X Method?',opts:['The product','The sum (b)','The constant','The GCF'],a:1},
+  {topic:'14.3',type:'mc',q:'What should you do first if the leading term is negative (like −x²)?',opts:['Move the negative to the other side','Factor out −1','Ignore the negative','Divide everything by −1 and flip signs'],a:1},
+  {topic:'14.3',type:'mc',q:'Which expression is a Difference of Squares?',opts:['x² + 9','x² − 7','x² − 16','x² + 16'],a:2},
+  {topic:'14.3',type:'mc',q:'What is the factored form of a² − b²?',opts:['(a−b)²','(a+b)²','(a+b)(a−b)','(a−b)(a−b)'],a:2},
+  {topic:'14.3',type:'tf',q:'True or False: x² + 25 can be factored using the Difference of Squares pattern.',opts:['True','False'],a:1},
+  {topic:'14.3',type:'mc',q:'Factor 4x² − 1. Which is correct?',opts:['(2x+1)(2x+1)','(4x−1)(x+1)','(2x+1)(2x−1)','(4x+1)(x−1)'],a:2},
+  {topic:'14.4',type:'mc',q:'What does the Zero Product Property say?',opts:['If A·B = 0, then A = 0 AND B = 0','If A·B = 0, then A = 0 OR B = 0','If A·B = 1, then A = 1 or B = 1','If A + B = 0, then A = −B'],a:1},
+  {topic:'14.4',type:'mc',q:'What is Step 1 of solving an equation by factoring?',opts:['Factor immediately','Apply ZPP','Move all terms to one side = 0','Check your answer'],a:2},
+  {topic:'14.4',type:'tf',q:'True or False: A quadratic equation can have two solutions.',opts:['True','False'],a:0},
+  {topic:'14.4',type:'mc',q:'Solve: (x − 3)(x + 5) = 0. What are the solutions?',opts:['x = 3 and x = 5','x = −3 and x = 5','x = 3 and x = −5','x = −3 and x = −5'],a:2},
+  {topic:'14.4',type:'mc',q:'To solve x² − 5x = 0, what do you factor out first?',opts:['5','x − 5','x','5x'],a:2},
+];
+
+const DESCS={
+  '14.1':'Factoring out the GCF from polynomials.',
+  '14.2':'Factoring trinomials with leading coefficient = 1 using the X method.',
+  '14.3':'Factoring when a ≠ 1, negative leading terms, and Difference of Squares.',
+  '14.4':'Solving quadratic equations using factoring and the Zero Product Property.'
+};
+let curTopic='14.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+// ── ANSWER NORMALIZATION ─────────────────────────────────────────────────────
+function norm(s){
+  return s.toString().toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/[−–]/g,'-')
+    .replace(/×/g,'*')
+    .replace(/\^/g,'')
+    .replace(/²/g,'2').replace(/³/g,'3').replace(/⁴/g,'4').replace(/⁵/g,'5')
+    .trim();
+}
+
+// Normalize a factored binomial pair like (x+2)(x+3) — sort factors so order doesn't matter
+function normFactored(s){
+  const n=norm(s);
+  // Extract binomials from pattern like (a+b)(c+d)
+  const m=n.match(/^\(([^)]+)\)\(([^)]+)\)$/);
+  if(m){const parts=[m[1],m[2]].sort();return'('+parts[0]+')'+'('+parts[1]+')';}
+  return n;
+}
+
+// Normalize solution sets like "x=2 or x=-5" — sort solution values
+function normSolutions(s){
+  const n=norm(s);
+  // Split on 'or'
+  const parts=n.split('or').map(p=>p.trim()).sort();
+  return parts.join('or');
+}
+
+function isMatch(u,c){
+  if(norm(u)===norm(c))return true;
+  if(normFactored(u)===normFactored(c))return true;
+  if(normSolutions(u)===normSolutions(c))return true;
+  // Allow x=-4 to match x=-4 (double root listed once)
+  const un=norm(u),cn=norm(c);
+  return un===cn;
+}
+
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['14.1','14.2','14.3','14.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'14.1':'Topic 14.1','14.2':'Topic 14.2','14.3':'Topic 14.3','14.4':'Topic 14.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=isMatch(uval,p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=isMatch(inp.value,p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

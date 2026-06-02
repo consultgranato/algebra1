@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 16 — Solving Quadratic Equations | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 16.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">16.1</span><span class="tlabel">Solving by Square Roots</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> When a quadratic has no x term (just x&#xB2; and a constant), you can solve it directly by taking square roots. Remember: every positive number has TWO square roots!</p>
+          <div class="kc"><div class="kc-lbl">Square Root Method</div><div class="kc-body">
+            Works when: <strong>no x term</strong> (b = 0 in ax&#xB2; + bx + c = 0)<br><br>
+            Steps: (1) Get x&#xB2; alone &nbsp; (2) Take &#xB1;&radic; of both sides &nbsp; (3) Simplify<br><br>
+            Always write <strong>&plusmn;</strong> — there are two solutions unless the right side is 0!
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; = 25</div><div class="wsteps">
+            <span class="eq">x = &plusmn;&radic;25 = &plusmn;5</span>
+            <span class="eq">x = 5 &nbsp; or &nbsp; x = &minus;5 &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; 3x&#xB2; &minus; 12 = 0</div><div class="wsteps">
+            <span class="eq">3x&#xB2; = 12</span>
+            <span class="eq">x&#xB2; = 4</span>
+            <span class="eq eq-div">x = &plusmn;2 &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; x&#xB2; + 16 = 0</div><div class="wsteps">
+            <span class="eq">x&#xB2; = &minus;16 &rarr; no real solution (&radic; of negative)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Why did the quadratic equation feel so lonely? Because it didn&apos;t know where its roots were.</div>
+        </div>
+      </div>
+
+      <!-- 16.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">16.2</span><span class="tlabel">Solving by Factoring</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> From Unit 14 you learned to factor polynomials. Now you use factoring to solve equations by applying the <span class="vw">Zero Product Property</span>.</p>
+          <div class="kc"><div class="kc-lbl">Zero Product Property (ZPP)</div><div class="kc-body">
+            If A &times; B = 0, then A = 0 OR B = 0<br><br>
+            Steps: (1) Move everything to one side (= 0) &nbsp; (2) Factor &nbsp; (3) Set each factor = 0 &nbsp; (4) Solve each
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; + 5x + 6 = 0</div><div class="wsteps">
+            <span class="eq">(x + 2)(x + 3) = 0</span>
+            <span class="eq">x + 2 = 0 &rarr; x = &minus;2</span>
+            <span class="eq eq-div">x + 3 = 0 &rarr; x = &minus;3 &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; x&#xB2; &minus; 5x = 0</div><div class="wsteps">
+            <span class="eq">x(x &minus; 5) = 0</span>
+            <span class="eq">x = 0 &nbsp; or &nbsp; x = 5 &checkmark;</span>
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Don&apos;t divide by x!</div><div class="warn-body">If x&#xB2; = 5x, don&apos;t divide both sides by x — you&apos;ll lose a solution. Move everything to one side and factor.</div></div>
+        </div>
+      </div>
+
+      <!-- 16.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">16.3</span><span class="tlabel">The Quadratic Formula</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> The <span class="vw">quadratic formula</span> works for ANY quadratic equation &mdash; even ones that can&apos;t be factored easily. It comes from completing the square on the general form.</p>
+          <div class="kc"><div class="kc-lbl">The Quadratic Formula</div><div class="kc-body">
+            For ax&#xB2; + bx + c = 0:<br>
+            <strong>x = (&minus;b &plusmn; &radic;(b&#xB2; &minus; 4ac)) / (2a)</strong><br><br>
+            Steps: (1) Write in standard form ax&#xB2;+bx+c=0 &nbsp; (2) Identify a, b, c &nbsp; (3) Plug in &nbsp; (4) Simplify both solutions
+          </div></div>
+          <p class="note-h">Worked example &mdash; x&#xB2; &minus; 5x + 6 = 0</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">a=1, b=&minus;5, c=6</span>
+            <span class="eq">x = (5 &plusmn; &radic;(25 &minus; 24)) / 2 = (5 &plusmn; &radic;1) / 2 = (5 &plusmn; 1) / 2</span>
+            <span class="eq">x = (5+1)/2 = 3 &nbsp;&nbsp; or &nbsp;&nbsp; x = (5&minus;1)/2 = 2 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; 2x&#xB2; + 3x &minus; 2 = 0</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">a=2, b=3, c=&minus;2</span>
+            <span class="eq">x = (&minus;3 &plusmn; &radic;(9 + 16)) / 4 = (&minus;3 &plusmn; &radic;25) / 4 = (&minus;3 &plusmn; 5) / 4</span>
+            <span class="eq">x = 2/4 = 1/2 &nbsp;&nbsp; or &nbsp;&nbsp; x = &minus;8/4 = &minus;2 &checkmark;</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> I tried to factor x&#xB2;&minus;4 but it fell apart into (x+2)(x&minus;2).</div>
+        </div>
+      </div>
+
+      <!-- 16.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">16.4</span><span class="tlabel">Discriminant &amp; Types of Solutions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> The expression under the radical in the quadratic formula is called the <span class="vw">discriminant</span>. It tells you how many real solutions exist WITHOUT solving the full equation.</p>
+          <div class="kc"><div class="kc-lbl">Discriminant = b&#xB2; &minus; 4ac</div><div class="kc-body">
+            <strong>D &gt; 0:</strong> TWO distinct real solutions (parabola crosses x-axis twice)<br>
+            <strong>D = 0:</strong> ONE real solution (parabola touches x-axis at vertex)<br>
+            <strong>D &lt; 0:</strong> NO real solutions (parabola doesn&apos;t cross x-axis)
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; &minus; 5x + 4</div><div class="wsteps">
+            <span class="eq">D = (&minus;5)&#xB2; &minus; 4(1)(4) = 25 &minus; 16 = 9</span>
+            <span class="eq">D = 9 &gt; 0 &rarr; two real solutions &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; x&#xB2; &minus; 4x + 4</div><div class="wsteps">
+            <span class="eq">D = 16 &minus; 16 = 0</span>
+            <span class="eq">D = 0 &rarr; one real solution (double root) &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; x&#xB2; + 2x + 5</div><div class="wsteps">
+            <span class="eq">D = 4 &minus; 20 = &minus;16</span>
+            <span class="eq">D = &minus;16 &lt; 0 &rarr; no real solutions &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 16.1</div>
+        <div class="vcard"><div><div class="vtag">16.1</div><div class="vterm">Square Root Method</div><div class="vdef">A method for solving quadratics with no x term. Isolate x², take ±√ of both sides.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x² = 49<br>x = ±7<br>x = 7 or x = -7</div></div></div>
+        <div class="vcard"><div><div class="vtag">16.1</div><div class="vterm">± Symbol</div><div class="vdef">Plus-or-minus. Indicates two solutions: one using + and one using -. Every positive number has two square roots.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x = ±5 means<br>x = 5 OR x = -5</div></div></div>
+        <div class="vsec">New in 16.2</div>
+        <div class="vcard"><div><div class="vtag">16.2</div><div class="vterm">Zero Product Property</div><div class="vdef">If A × B = 0, then A = 0 OR B = 0. Allows you to split a factored equation into two simpler equations.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(x-3)(x+5) = 0<br>x-3=0 → x=3<br>x+5=0 → x=-5</div></div></div>
+        <div class="vsec">New in 16.3</div>
+        <div class="vcard wide"><div><div class="vtag">16.3</div><div class="vterm">Quadratic Formula</div><div class="vdef">x = (-b ± √(b²-4ac)) / (2a). Works for any quadratic ax²+bx+c=0. Derived by completing the square on the general form.</div></div></div>
+        <div class="vsec">New in 16.4</div>
+        <div class="vcard"><div><div class="vtag">16.4</div><div class="vterm">Discriminant</div><div class="vdef">The expression b²-4ac. Determines the number of real solutions without fully solving. D&gt;0: two solutions; D=0: one; D&lt;0: none.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x²-6x+9=0<br>D = 36-36 = 0<br><span class="chip chip-g">One real solution</span></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('16.1',this)">16.1</button>
+          <button class="pqf-btn" onclick="setQFilter('16.2',this)">16.2</button>
+          <button class="pqf-btn" onclick="setQFilter('16.3',this)">16.3</button>
+          <button class="pqf-btn" onclick="setQFilter('16.4',this)">16.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('16.1',this)">16.1 &mdash; Square Roots</button>
+              <button class="tpbtn" onclick="selTopic('16.2',this)">16.2 &mdash; Factoring</button>
+              <button class="tpbtn" onclick="selTopic('16.3',this)">16.3 &mdash; Quadratic Formula</button>
+              <button class="tpbtn" onclick="selTopic('16.4',this)">16.4 &mdash; Discriminant</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Solving quadratic equations using the square root method.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 16</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='16'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'16.1':[
+  {q:"Solve:",eq:"x^2 = 25",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"x = ±√25 = ±5"},
+  {q:"Solve:",eq:"x^2 = 49",a:"x = 7 or x = -7",fmt:"x = ___ or x = ___",h:"x = ±√49 = ±7"},
+  {q:"Solve:",eq:"x^2 = 100",a:"x = 10 or x = -10",fmt:"x = ___ or x = ___",h:"x = ±√100 = ±10"},
+  {q:"Solve:",eq:"x^2 - 36 = 0",a:"x = 6 or x = -6",fmt:"x = ___ or x = ___",h:"x^2=36 → x=±6"},
+  {q:"Solve:",eq:"3x^2 - 12 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"3x^2=12 → x^2=4 → x=±2"},
+  {q:"Solve:",eq:"2x^2 = 50",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"x^2=25 → x=±5"},
+  {q:"Solve:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"x^2=9 → x=±3"},
+  {q:"Solve:",eq:"4x^2 = 64",a:"x = 4 or x = -4",fmt:"x = ___ or x = ___",h:"x^2=16 → x=±4"},
+  {q:"Solve:",eq:"x^2 + 4 = 0",a:"no real solution",fmt:"x = ___ or 'no real solution'",h:"x^2=-4. Can't take square root of negative."},
+  {q:"Solve:",eq:"5x^2 - 45 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"5x^2=45 → x^2=9 → x=±3"},
+  {q:"Solve:",eq:"x^2 = 1",a:"x = 1 or x = -1",fmt:"x = ___ or x = ___",h:"x=±√1=±1"},
+  {q:"Solve:",eq:"x^2 - 64 = 0",a:"x = 8 or x = -8",fmt:"x = ___ or x = ___",h:"x^2=64 → x=±8"},
+  {q:"Solve:",eq:"2x^2 - 72 = 0",a:"x = 6 or x = -6",fmt:"x = ___ or x = ___",h:"2x^2=72 → x^2=36 → x=±6"},
+  {q:"Solve:",eq:"x^2 = 0",a:"x = 0",fmt:"x = ___",h:"x=±√0=0. Only one solution."},
+  {q:"Solve:",eq:"(x + 1)^2 = 9",a:"x = 2 or x = -4",fmt:"x = ___ or x = ___",h:"x+1=±3. x+1=3→x=2; x+1=-3→x=-4"},
+],
+'16.2':[
+  {q:"Solve by factoring:",eq:"x^2 + 5x + 6 = 0",a:"x = -2 or x = -3",fmt:"x = ___ or x = ___",h:"(x+2)(x+3)=0 → x=-2 or x=-3"},
+  {q:"Solve by factoring:",eq:"x^2 - 7x + 12 = 0",a:"x = 3 or x = 4",fmt:"x = ___ or x = ___",h:"(x-3)(x-4)=0 → x=3 or x=4"},
+  {q:"Solve by factoring:",eq:"x^2 - x - 6 = 0",a:"x = 3 or x = -2",fmt:"x = ___ or x = ___",h:"(x-3)(x+2)=0 → x=3 or x=-2"},
+  {q:"Solve by factoring:",eq:"x^2 + x - 12 = 0",a:"x = 3 or x = -4",fmt:"x = ___ or x = ___",h:"(x+4)(x-3)=0 → x=-4 or x=3"},
+  {q:"Solve by factoring:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"(x+3)(x-3)=0 → x=±3"},
+  {q:"Solve by factoring:",eq:"x^2 + 6x = 0",a:"x = 0 or x = -6",fmt:"x = ___ or x = ___",h:"x(x+6)=0 → x=0 or x=-6"},
+  {q:"Solve by factoring:",eq:"x^2 - 4x = 0",a:"x = 0 or x = 4",fmt:"x = ___ or x = ___",h:"x(x-4)=0 → x=0 or x=4"},
+  {q:"Solve by factoring:",eq:"x^2 - 4x - 5 = 0",a:"x = 5 or x = -1",fmt:"x = ___ or x = ___",h:"(x-5)(x+1)=0 → x=5 or x=-1"},
+  {q:"Solve by factoring:",eq:"x^2 + 2x - 15 = 0",a:"x = 3 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-3)=0 → x=-5 or x=3"},
+  {q:"Solve by factoring:",eq:"x^2 - 25 = 0",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-5)=0 → x=±5"},
+  {q:"Solve by factoring:",eq:"2x^2 + 5x + 3 = 0",a:"x = -1 or x = -3/2",fmt:"x = ___ or x = ___",h:"(2x+3)(x+1)=0 → x=-3/2 or x=-1"},
+  {q:"Solve by factoring:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (may be one solution)",h:"(x-3)^2=0 → x=3 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 + 8x + 16 = 0",a:"x = -4",fmt:"x = ___ (may be one solution)",h:"(x+4)^2=0 → x=-4 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 - 10x + 25 = 0",a:"x = 5",fmt:"x = ___ (may be one solution)",h:"(x-5)^2=0 → x=5 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 - 3x - 18 = 0",a:"x = 6 or x = -3",fmt:"x = ___ or x = ___",h:"(x-6)(x+3)=0 → x=6 or x=-3"},
+],
+'16.3':[
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 5x + 6 = 0",a:"x = 3 or x = 2",fmt:"x = ___ or x = ___",h:"a=1,b=-5,c=6. D=25-24=1. x=(5±1)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 2x - 8 = 0",a:"x = 2 or x = -4",fmt:"x = ___ or x = ___",h:"a=1,b=2,c=-8. D=4+32=36. x=(-2±6)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 + 3x - 2 = 0",a:"x = 1/2 or x = -2",fmt:"x = ___ or x = ___",h:"a=2,b=3,c=-2. D=9+16=25. x=(-3±5)/4"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 4x + 1 = 0",a:"x = 2+√3 or x = 2-√3",fmt:"exact or decimal form",h:"a=1,b=-4,c=1. D=16-4=12. x=(4±√12)/2=(4±2√3)/2=2±√3"},
+  {q:"Use the quadratic formula to solve:",eq:"3x^2 - 7x + 2 = 0",a:"x = 2 or x = 1/3",fmt:"x = ___ or x = ___",h:"a=3,b=-7,c=2. D=49-24=25. x=(7±5)/6"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 6x + 5 = 0",a:"x = -1 or x = -5",fmt:"x = ___ or x = ___",h:"a=1,b=6,c=5. D=36-20=16. x=(-6±4)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 2x - 4 = 0",a:"x = 1+√5 or x = 1-√5",fmt:"exact or decimal form",h:"a=1,b=-2,c=-4. D=4+16=20. x=(2±√20)/2=1±√5"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 - 6x + 4 = 0",a:"x = 2 or x = 1",fmt:"x = ___ or x = ___",h:"a=2,b=-6,c=4. D=36-32=4. x=(6±2)/4"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 4x - 12 = 0",a:"x = 2 or x = -6",fmt:"x = ___ or x = ___",h:"a=1,b=4,c=-12. D=16+48=64. x=(-4±8)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (one solution)",h:"a=1,b=-6,c=9. D=36-36=0. x=6/2=3"},
+  {q:"Use the quadratic formula to solve:",eq:"4x^2 - 4x - 3 = 0",a:"x = 3/2 or x = -1/2",fmt:"x = ___ or x = ___",h:"a=4,b=-4,c=-3. D=16+48=64. x=(4±8)/8"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + x - 2 = 0",a:"x = 1 or x = -2",fmt:"x = ___ or x = ___",h:"a=1,b=1,c=-2. D=1+8=9. x=(-1±3)/2"},
+  {q:"How many solutions does this equation have?",eq:"x^2 + 2x + 5 = 0",a:"no real solutions",fmt:"0, 1, or 2 solutions / 'no real solutions'",h:"D=4-20=-16<0. No real solutions."},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 3x - 10 = 0",a:"x = 5 or x = -2",fmt:"x = ___ or x = ___",h:"a=1,b=-3,c=-10. D=9+40=49. x=(3±7)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 + x - 6 = 0",a:"x = 3/2 or x = -2",fmt:"x = ___ or x = ___",h:"a=2,b=1,c=-6. D=1+48=49. x=(-1±7)/4"},
+],
+'16.4':[
+  {q:"Find the discriminant:",eq:"x^2 - 5x + 4 = 0",a:"9",fmt:"numerical value",h:"D = (-5)^2 - 4(1)(4) = 25-16 = 9"},
+  {q:"Find the discriminant:",eq:"x^2 - 4x + 4 = 0",a:"0",fmt:"numerical value",h:"D = 16 - 16 = 0"},
+  {q:"Find the discriminant:",eq:"x^2 + 2x + 5 = 0",a:"-16",fmt:"numerical value",h:"D = 4 - 20 = -16"},
+  {q:"How many real solutions?",eq:"D = 25",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"D > 0 → two distinct real solutions."},
+  {q:"How many real solutions?",eq:"D = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D = 0 → one real solution (double root)."},
+  {q:"How many real solutions?",eq:"D = -4",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D < 0 → no real solutions."},
+  {q:"Find the discriminant and number of solutions:",eq:"x^2 + 6x + 9 = 0",a:"D=0, one solution",fmt:"D=___, one/two/no solutions",h:"D=36-36=0. One solution."},
+  {q:"Find the discriminant:",eq:"2x^2 - 3x + 1 = 0",a:"1",fmt:"numerical value",h:"D = 9 - 4(2)(1) = 9-8 = 1"},
+  {q:"How many real solutions?",eq:"x^2 - 2x + 3 = 0",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D = 4-12 = -8 < 0"},
+  {q:"Find the discriminant:",eq:"x^2 - 6x + 5 = 0",a:"16",fmt:"numerical value",h:"D = 36 - 20 = 16"},
+  {q:"How many real solutions?",eq:"4x^2 + 4x + 1 = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D = 16-16 = 0"},
+  {q:"Find the discriminant:",eq:"x^2 + x + 1 = 0",a:"-3",fmt:"numerical value",h:"D = 1 - 4 = -3"},
+  {q:"How many real solutions?",eq:"3x^2 - 5x - 2 = 0",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"D = 25+24 = 49 > 0"},
+  {q:"Without solving, how many real solutions?",eq:"x^2 - 8x + 16 = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D = 64-64 = 0"},
+  {q:"Find the discriminant:",eq:"5x^2 - 2x + 3 = 0",a:"-56",fmt:"numerical value",h:"D = 4 - 60 = -56"},
+]};
+
+const T=[
+  {t:"16.1",q:"Solve:",eq:"x^2 = 81",a:"x = 9 or x = -9",fmt:"x = ___ or x = ___",h:"x=±√81=±9"},
+  {t:"16.1",q:"Solve:",eq:"2x^2 - 8 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"2x^2=8 → x^2=4 → x=±2"},
+  {t:"16.1",q:"Solve:",eq:"x^2 - 16 = 0",a:"x = 4 or x = -4",fmt:"x = ___ or x = ___",h:"x^2=16 → x=±4"},
+  {t:"16.1",q:"Solve:",eq:"x^2 + 9 = 0",a:"no real solution",fmt:"x = ___ or 'no real solution'",h:"x^2=-9. No real solution."},
+  {t:"16.1",q:"Solve:",eq:"(x - 2)^2 = 16",a:"x = 6 or x = -2",fmt:"x = ___ or x = ___",h:"x-2=±4. x=6 or x=-2"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 9x + 20 = 0",a:"x = 4 or x = 5",fmt:"x = ___ or x = ___",h:"(x-4)(x-5)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 + 3x - 10 = 0",a:"x = 2 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-2)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 5x = 0",a:"x = 0 or x = 5",fmt:"x = ___ or x = ___",h:"x(x-5)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 4 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"(x+2)(x-2)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 + 4x + 4 = 0",a:"x = -2",fmt:"x = ___",h:"(x+2)^2=0 → x=-2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 7x + 10 = 0",a:"x = 5 or x = 2",fmt:"x = ___ or x = ___",h:"D=49-40=9. x=(7±3)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 4x - 5 = 0",a:"x = 1 or x = -5",fmt:"x = ___ or x = ___",h:"D=16+20=36. x=(-4±6)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"2x^2 - 5x + 2 = 0",a:"x = 2 or x = 1/2",fmt:"x = ___ or x = ___",h:"a=2,b=-5,c=2. D=25-16=9. x=(5±3)/4"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 2x - 3 = 0",a:"x = 1 or x = -3",fmt:"x = ___ or x = ___",h:"D=4+12=16. x=(-2±4)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 4x + 3 = 0",a:"x = 3 or x = 1",fmt:"x = ___ or x = ___",h:"D=16-12=4. x=(4±2)/2"},
+  {t:"16.4",q:"Find the discriminant:",eq:"x^2 + 4x + 4 = 0",a:"0",fmt:"numerical value",h:"D=16-16=0"},
+  {t:"16.4",q:"How many real solutions?",eq:"x^2 + x + 4 = 0",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D=1-16=-15<0"},
+  {t:"16.4",q:"Find the discriminant:",eq:"3x^2 + 2x - 1 = 0",a:"16",fmt:"numerical value",h:"D=4+12=16"},
+  {t:"16.4",q:"How many real solutions?",eq:"x^2 - 10x + 25 = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D=100-100=0"},
+  {t:"16.4",q:"How many real solutions?",eq:"x^2 - 3x - 4 = 0",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"D=9+16=25>0"},
+];
+
+const VQB=[
+  {topic:'16.1',type:'mc',q:'When is the square root method best used?',opts:['When b ≠ 0','When the equation has no x term','When a < 0','Always'],a:1},
+  {topic:'16.1',type:'mc',q:'x² = 36 has how many solutions?',opts:['None','One','Two','Three'],a:2},
+  {topic:'16.1',type:'tf',q:'True or False: x² = -9 has real solutions.',opts:['True','False'],a:1},
+  {topic:'16.2',type:'mc',q:'The Zero Product Property says: if AB = 0, then...',opts:['A = B','A = 0 and B = 0','A = 0 OR B = 0','AB = 1'],a:2},
+  {topic:'16.2',type:'mc',q:'To use factoring, what must you do first?',opts:['Move all terms to one side','Divide both sides by a','Add b to both sides','Factor immediately'],a:0},
+  {topic:'16.2',type:'tf',q:'True or False: To solve x² = 5x, you should divide both sides by x.',opts:['True','False'],a:1},
+  {topic:'16.3',type:'mc',q:'The quadratic formula is...',opts:['x = b ± √(b²-4ac)/2a','x = (-b ± √(b²-4ac))/(2a)','x = -b/(2a)','x = √(b²-4ac)/a'],a:1},
+  {topic:'16.3',type:'mc',q:'What is Step 1 before using the quadratic formula?',opts:['Identify a','Write in standard form ax²+bx+c=0','Find the discriminant','Factor the left side'],a:1},
+  {topic:'16.3',type:'tf',q:'True or False: The quadratic formula works for any quadratic equation.',opts:['True','False'],a:0},
+  {topic:'16.4',type:'mc',q:'The discriminant is...',opts:['b² + 4ac','b² - 4ac','-b/(2a)','√(b²-4ac)'],a:1},
+  {topic:'16.4',type:'mc',q:'If discriminant = 0, the equation has...',opts:['No solutions','One real solution','Two real solutions','Infinitely many solutions'],a:1},
+  {topic:'16.4',type:'mc',q:'If discriminant < 0, the equation has...',opts:['No real solutions','One real solution','Two real solutions','Cannot determine'],a:0},
+  {topic:'16.4',type:'tf',q:'True or False: A discriminant of 7 means there are two distinct real solutions.',opts:['True','False'],a:0},
+  {topic:'16.1',type:'mc',q:'Solve: 4x² - 100 = 0. What is x?',opts:['x = ±5','x = ±10','x = ±25','x = 5'],a:0},
+  {topic:'16.2',type:'mc',q:'What are the solutions to (x-2)(x+7) = 0?',opts:['x = 2 and x = -7','x = -2 and x = 7','x = 2 and x = 7','x = -2 and x = -7'],a:0},
+  {topic:'16.3',type:'mc',q:'For x²-6x+9=0, the discriminant is 0. This means...',opts:['No real solutions','Two solutions: x=3 and x=-3','One solution: x=3','The formula does not apply'],a:2},
+];
+
+const DESCS={'16.1':'Solving quadratic equations using the square root method (no x term).','16.2':'Solving by factoring and applying the Zero Product Property.','16.3':'Using the quadratic formula x = (-b±√(b²-4ac))/2a.','16.4':'Using the discriminant b²-4ac to determine the number of solutions.'};
+let curTopic='16.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){
+  return s.toString().toLowerCase()
+    .replace(/\s+/g,'').replace(/[−–]/g,'-')
+    .replace(/norealsolution/g,'norealsolution')
+    .replace(/nosolution/g,'norealsolution')
+    .trim();
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['16.1','16.2','16.3','16.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'16.1':'Topic 16.1','16.2':'Topic 16.2','16.3':'Topic 16.3','16.4':'Topic 16.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

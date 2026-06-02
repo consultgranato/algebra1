@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 — Exponent Properties | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+
+      <!-- 11.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">11.1</span><span class="tlabel">Zero &amp; Negative Exponents</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You already know that 2<sup>3</sup> = 2 &times; 2 &times; 2 = 8. That&apos;s repeated multiplication. Now we extend this idea to <span class="vw">zero exponents</span> and <span class="vw">negative exponents</span>.</p>
+          <div class="kc"><div class="kc-lbl">Base, Exponent, Power</div><div class="kc-body">
+            In the expression <strong>b<sup>n</sup></strong>:<br>
+            &bull; <strong>b</strong> is the <em>base</em> &mdash; the number being multiplied<br>
+            &bull; <strong>n</strong> is the <em>exponent</em> &mdash; how many times to multiply<br>
+            &bull; The whole thing (b<sup>n</sup>) is a <em>power</em><br><br>
+            Example: 5<sup>3</sup> = 5 &times; 5 &times; 5 = 125 &nbsp;(base=5, exponent=3, power=125)
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Zero Exponent Rule</div><div class="kc-body">
+            <strong>Anything raised to the zero power equals 1.</strong><br>
+            b<sup>0</sup> = 1 &nbsp;(for any b &ne; 0)<br><br>
+            Examples: 5<sup>0</sup> = 1 &nbsp;&bull;&nbsp; x<sup>0</sup> = 1 &nbsp;&bull;&nbsp; (&#8722;3)<sup>0</sup> = 1 &nbsp;&bull;&nbsp; 100<sup>0</sup> = 1
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Watch the parentheses!</div><div class="warn-body">
+            <strong>(&minus;3)<sup>0</sup> = 1</strong> &nbsp;&larr; the negative is inside, so the whole thing is raised to 0.<br>
+            <strong>&minus;3<sup>0</sup> = &minus;(3<sup>0</sup>) = &minus;1</strong> &nbsp;&larr; only 3 is raised to 0, then we negate.<br><br>
+            Parentheses matter!
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Negative Exponent Rule</div><div class="kc-body">
+            A negative exponent means <strong>reciprocal</strong> (flip it):<br>
+            <strong>a<sup>&minus;n</sup> = 1 / a<sup>n</sup></strong><br><br>
+            &bull; Negative exponent <strong>on top</strong> of a fraction: move it to the <strong>bottom</strong>, make the exponent positive.<br>
+            &bull; Negative exponent <strong>on bottom</strong> of a fraction: move it to the <strong>top</strong>, make the exponent positive.<br><br>
+            Examples:<br>
+            x<sup>&minus;3</sup> = 1/x<sup>3</sup><br>
+            1/x<sup>&minus;4</sup> = x<sup>4</sup><br>
+            2<sup>&minus;3</sup> = 1/2<sup>3</sup> = 1/8
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Simplify: 4<sup>&minus;2</sup></div><div class="wsteps">
+            <span class="eq">4<sup>&minus;2</sup> = 1/4&sup2; = 1/16</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Simplify: x<sup>&minus;1</sup> &middot; y&sup2;</div><div class="wsteps">
+            <span class="eq">x<sup>&minus;1</sup> = 1/x</span>
+            <span class="eq eq-div">= y&sup2; / x</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Simplify: 3 / x<sup>&minus;2</sup></div><div class="wsteps">
+            <span class="eq">x<sup>&minus;2</sup> is on the bottom with a negative exponent</span>
+            <span class="eq">Move x&sup2; to the top (exponent becomes positive)</span>
+            <span class="eq eq-div">= 3x&sup2;</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Mr. Behling: &ldquo;I love all of algebra, but I have to be honest. Exponents are number 4<sup>0</sup> in my heart.&rdquo; (4<sup>0</sup> = 1, so they&apos;re #1!)</div>
+        </div>
+      </div>
+
+      <!-- 11.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">11.2</span><span class="tlabel">Multiplying &amp; Dividing Powers</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> When you multiply or divide two powers with the same base, there are shortcuts so you don&apos;t have to expand everything.</p>
+          <div class="kc"><div class="kc-lbl">Multiplying Powers — Same Base</div><div class="kc-body">
+            <strong>a<sup>m</sup> &times; a<sup>n</sup> = a<sup>m+n</sup></strong><br>
+            When multiplying powers with the same base, <strong>ADD</strong> the exponents.<br><br>
+            Why? x<sup>3</sup> &middot; x<sup>5</sup> = (x&middot;x&middot;x)(x&middot;x&middot;x&middot;x&middot;x) = x<sup>8</sup> &nbsp;&checkmark;
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Dividing Powers — Same Base</div><div class="kc-body">
+            <strong>a<sup>m</sup> / a<sup>n</sup> = a<sup>m&minus;n</sup></strong><br>
+            When dividing powers with the same base, <strong>SUBTRACT</strong> the exponents.<br><br>
+            Top-heavy-bottom-heavy approach: bring the larger exponent to its side and subtract.<br><br>
+            Example: x<sup>7</sup> / x<sup>3</sup> = x<sup>7&minus;3</sup> = x<sup>4</sup>
+          </div></div>
+          <div class="tip"><div class="tip-lbl">Coefficients are separate!</div><div class="tip-body">
+            Handle coefficients (numbers out front) separately from the variable exponents.<br>
+            (2x<sup>3</sup>)(5x<sup>2</sup>) = (2&times;5)(x<sup>3+2</sup>) = 10x<sup>5</sup>
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Multiply: x<sup>3</sup> &middot; x<sup>5</sup></div><div class="wsteps">
+            <span class="eq">Same base (x) &rarr; ADD exponents</span>
+            <span class="eq eq-div">= x<sup>3+5</sup> = x<sup>8</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Multiply: (2x<sup>3</sup>)(5x&sup2;)</div><div class="wsteps">
+            <span class="eq">Coefficients: 2 &times; 5 = 10</span>
+            <span class="eq">Variables: x&sup3; &middot; x&sup2; = x<sup>3+2</sup> = x<sup>5</sup></span>
+            <span class="eq eq-div">= 10x<sup>5</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Multiply: (4x&sup2;)(3x<sup>4</sup>)</div><div class="wsteps">
+            <span class="eq">Coefficients: 4 &times; 3 = 12</span>
+            <span class="eq">Variables: x&sup2; &middot; x&#8308; = x<sup>2+4</sup> = x<sup>6</sup></span>
+            <span class="eq eq-div">= 12x<sup>6</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Divide: x<sup>9</sup> / x<sup>3</sup></div><div class="wsteps">
+            <span class="eq">Same base (x) &rarr; SUBTRACT exponents</span>
+            <span class="eq eq-div">= x<sup>9&minus;3</sup> = x<sup>6</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Divide: 12x<sup>7</sup> / 4x<sup>2</sup></div><div class="wsteps">
+            <span class="eq">Coefficients: 12 &divide; 4 = 3</span>
+            <span class="eq">Variables: x<sup>7&minus;2</sup> = x<sup>5</sup></span>
+            <span class="eq eq-div">= 3x<sup>5</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Divide: x<sup>5</sup> / x<sup>8</sup></div><div class="wsteps">
+            <span class="eq">5 &minus; 8 = &minus;3</span>
+            <span class="eq eq-div">= x<sup>&minus;3</sup> = 1/x&sup3; (apply negative exponent rule)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 11.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">11.3</span><span class="tlabel">Raising a Power to a Power</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Now we look at what happens when an entire power is raised to another power &mdash; like (x<sup>3</sup>)<sup>4</sup>.</p>
+          <div class="kc"><div class="kc-lbl">Power to a Power Rule</div><div class="kc-body">
+            <strong>(a<sup>m</sup>)<sup>n</sup> = a<sup>m &times; n</sup></strong><br>
+            When a power is raised to a power, <strong>MULTIPLY</strong> the exponents.<br><br>
+            Why? (x<sup>3</sup>)<sup>4</sup> means x<sup>3</sup> multiplied 4 times = x<sup>3+3+3+3</sup> = x<sup>12</sup> &nbsp;&checkmark;
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Distribute to ALL factors!</div><div class="warn-body">
+            When you raise a product inside parentheses to a power, the outer exponent applies to <strong>every factor</strong> inside &mdash; coefficient AND variable(s).<br><br>
+            (2x&sup2;)&sup3; = 2&sup3; &middot; (x&sup2;)&sup3; = 8x<sup>6</sup> &nbsp;&larr; don&apos;t forget to cube the 2!
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; (x&sup2;)<sup>5</sup></div><div class="wsteps">
+            <span class="eq">Multiply the exponents: 2 &times; 5 = 10</span>
+            <span class="eq eq-div">= x<sup>10</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; (3x<sup>4</sup>)&sup2;</div><div class="wsteps">
+            <span class="eq">Apply exponent to each factor:</span>
+            <span class="eq">3&sup2; = 9 &nbsp;&nbsp;and&nbsp;&nbsp; (x<sup>4</sup>)&sup2; = x<sup>4&times;2</sup> = x<sup>8</sup></span>
+            <span class="eq eq-div">= 9x<sup>8</sup></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; (2x&sup3;y)&sup3;</div><div class="wsteps">
+            <span class="eq">Apply exponent to each factor:</span>
+            <span class="eq">2&sup3; = 8 &nbsp;&nbsp;and&nbsp;&nbsp; (x&sup3;)&sup3; = x<sup>9</sup> &nbsp;&nbsp;and&nbsp;&nbsp; y&sup3; = y&sup3;</span>
+            <span class="eq eq-div">= 8x<sup>9</sup>y&sup3;</span>
+          </div></div>
+        </div>
+      </div>
+
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 11.1</div>
+        <div class="vcard"><div><div class="vtag">11.1</div><div class="vterm">Power vs. Base vs. Exponent</div><div class="vdef">In b<sup>n</sup>: <strong>b</strong> is the base (what is multiplied), <strong>n</strong> is the exponent (how many times), and the whole expression b<sup>n</sup> is called the power.</div></div><div><div class="vex-lbl">Example</div><div class="vex">5<sup>3</sup>: base = 5, exponent = 3<br>5<sup>3</sup> = 5&times;5&times;5 = 125 (the power)</div></div></div>
+        <div class="vcard"><div><div class="vtag">11.1</div><div class="vterm">Anything raised to the zero power&hellip;</div><div class="vdef">Any nonzero base raised to the exponent 0 equals 1. b<sup>0</sup> = 1. This applies to numbers, variables, and expressions.</div></div><div><div class="vex-lbl">Example</div><div class="vex">7<sup>0</sup> = 1<br>x<sup>0</sup> = 1<br>(-3)<sup>0</sup> = 1<br>BUT: -3<sup>0</sup> = -1 (careful!)</div></div></div>
+        <div class="vcard"><div><div class="vtag">11.1</div><div class="vterm">Negative exponents on top</div><div class="vdef">A negative exponent on the numerator (top) means move the factor to the denominator (bottom) and make the exponent positive.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x<sup>-3</sup> = 1/x<sup>3</sup><br>2<sup>-4</sup> = 1/2<sup>4</sup> = 1/16</div></div></div>
+        <div class="vcard"><div><div class="vtag">11.1</div><div class="vterm">Negative exponents on the bottom</div><div class="vdef">A negative exponent in the denominator (bottom) means move the factor to the numerator (top) and make the exponent positive.</div></div><div><div class="vex-lbl">Example</div><div class="vex">1/x<sup>-4</sup> = x<sup>4</sup><br>3/y<sup>-2</sup> = 3y<sup>2</sup></div></div></div>
+        <div class="vsec">New in 11.2</div>
+        <div class="vcard"><div><div class="vtag">11.2</div><div class="vterm">Shortcut for multiplying powers</div><div class="vdef">When multiplying two powers with the SAME base, keep the base and ADD the exponents. a<sup>m</sup> &times; a<sup>n</sup> = a<sup>m+n</sup>.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x<sup>4</sup> &middot; x<sup>6</sup> = x<sup>10</sup><br>(add: 4+6=10)</div></div></div>
+        <div class="vcard"><div><div class="vtag">11.2</div><div class="vterm">Shortcut for dividing powers</div><div class="vdef">When dividing two powers with the SAME base, keep the base and SUBTRACT the exponents. a<sup>m</sup> / a<sup>n</sup> = a<sup>m-n</sup>.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x<sup>9</sup> / x<sup>3</sup> = x<sup>6</sup><br>(subtract: 9-3=6)</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">11.2</div><div class="vterm">Top-heavy-bottom-heavy approach</div><div class="vdef">When dividing powers, determine which side has the larger exponent. That side &ldquo;wins.&rdquo; Place the difference of the exponents on the winning side. Example: x<sup>3</sup>/x<sup>8</sup> &rarr; bottom is heavier (8&gt;3), so result is 1/x<sup>5</sup>.</div></div></div>
+        <div class="vsec">New in 11.3</div>
+        <div class="vcard"><div><div class="vtag">11.3</div><div class="vterm">Shortcut for raising a power to a power</div><div class="vdef">When a power is raised to another power, keep the base and MULTIPLY the exponents. (a<sup>m</sup>)<sup>n</sup> = a<sup>m&times;n</sup>. Apply to ALL factors inside parentheses.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(x<sup>3</sup>)<sup>4</sup> = x<sup>12</sup> (multiply: 3&times;4)<br>(2x&sup2;)&sup3; = 8x<sup>6</sup></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('11.1',this)">11.1</button>
+          <button class="pqf-btn" onclick="setQFilter('11.2',this)">11.2</button>
+          <button class="pqf-btn" onclick="setQFilter('11.3',this)">11.3</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('11.1',this)">11.1 &mdash; Zero &amp; Negative Exponents</button>
+              <button class="tpbtn" onclick="selTopic('11.2',this)">11.2 &mdash; Multiplying &amp; Dividing Powers</button>
+              <button class="tpbtn" onclick="selTopic('11.3',this)">11.3 &mdash; Power to a Power</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Simplifying zero and negative exponents.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 11</strong><br>15 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:11,name:"Exponent Properties",topics:[
+  {id:"11.1",label:"Zero & Negative Exponents",videos:[]},
+  {id:"11.2",label:"Multiplying & Dividing Powers",videos:[]},
+  {id:"11.3",label:"Raising a Power to a Power",videos:[]},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='11'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'11.1':[
+  {q:"Simplify:",eq:"7^0",a:"1",fmt:"simplified form",h:"Anything to the zero power = 1."},
+  {q:"Simplify:",eq:"x^(-4)",a:"1/x^4",fmt:"simplified form",h:"Negative exponent on top: move to bottom, make positive."},
+  {q:"Simplify:",eq:"1/y^(-3)",a:"y^3",fmt:"simplified form",h:"Negative exponent on bottom: move to top, make positive."},
+  {q:"Simplify:",eq:"2^(-3)",a:"1/8",fmt:"simplified form",h:"2^(-3) = 1/2^3 = 1/8."},
+  {q:"Simplify:",eq:"(-5)^0",a:"1",fmt:"simplified form",h:"Anything (including a negative base in parentheses) to the 0 power = 1."},
+  {q:"Simplify:",eq:"-5^0",a:"-1",fmt:"simplified form",h:"-5^0 = -(5^0) = -(1) = -1. The negative is NOT in parentheses!"},
+  {q:"Simplify:",eq:"x^(-1)",a:"1/x",fmt:"simplified form",h:"x^(-1) = 1/x^1 = 1/x."},
+  {q:"Simplify:",eq:"3/x^(-2)",a:"3x^2",fmt:"simplified form",h:"x^(-2) on bottom moves to top as x^2: 3 * x^2 = 3x^2."},
+  {q:"Simplify:",eq:"5^(-2)",a:"1/25",fmt:"simplified form",h:"5^(-2) = 1/5^2 = 1/25."},
+  {q:"Simplify:",eq:"a^(-5)",a:"1/a^5",fmt:"simplified form",h:"Negative exponent: flip to denominator."},
+  {q:"Simplify:",eq:"1/x^(-1)",a:"x",fmt:"simplified form",h:"x^(-1) on bottom becomes x^1 = x on top."},
+  {q:"Simplify:",eq:"4^(-1)",a:"1/4",fmt:"simplified form",h:"4^(-1) = 1/4^1 = 1/4."},
+  {q:"Simplify:",eq:"(xy)^0",a:"1",fmt:"simplified form",h:"Any expression to the 0 power = 1 (as long as it's not 0)."},
+  {q:"Simplify:",eq:"x^0 * y^3",a:"y^3",fmt:"simplified form",h:"x^0 = 1, so 1 * y^3 = y^3."},
+  {q:"Simplify:",eq:"2^(-4)",a:"1/16",fmt:"simplified form",h:"2^(-4) = 1/2^4 = 1/16."},
+],
+'11.2':[
+  {q:"Simplify:",eq:"x^4 * x^6",a:"x^10",fmt:"simplified form",h:"Same base: add exponents. 4+6=10."},
+  {q:"Simplify:",eq:"x^9 / x^3",a:"x^6",fmt:"simplified form",h:"Same base: subtract exponents. 9-3=6."},
+  {q:"Simplify:",eq:"2x^3 * 5x^2",a:"10x^5",fmt:"simplified form",h:"Coefficients: 2*5=10. Variables: x^(3+2)=x^5."},
+  {q:"Simplify:",eq:"x^3 * x^3",a:"x^6",fmt:"simplified form",h:"3+3=6."},
+  {q:"Simplify:",eq:"x^8 / x^5",a:"x^3",fmt:"simplified form",h:"8-5=3."},
+  {q:"Simplify:",eq:"3x^2 * 4x^5",a:"12x^7",fmt:"simplified form",h:"3*4=12. x^(2+5)=x^7."},
+  {q:"Simplify:",eq:"x^5 / x^5",a:"1",fmt:"simplified form",h:"5-5=0, and x^0=1."},
+  {q:"Simplify:",eq:"6x^7 / 2x^4",a:"3x^3",fmt:"simplified form",h:"6/2=3. x^(7-4)=x^3."},
+  {q:"Simplify:",eq:"x^2 * x^0",a:"x^2",fmt:"simplified form",h:"x^0=1, so x^2*1=x^2. (Or: 2+0=2.)"},
+  {q:"Simplify:",eq:"x^5 / x^8",a:"1/x^3",fmt:"simplified form",h:"5-8=-3, so x^(-3) = 1/x^3."},
+  {q:"Simplify:",eq:"(4x^4)(2x^3)",a:"8x^7",fmt:"simplified form",h:"4*2=8. x^(4+3)=x^7."},
+  {q:"Simplify:",eq:"15x^6 / 5x^2",a:"3x^4",fmt:"simplified form",h:"15/5=3. x^(6-2)=x^4."},
+  {q:"Simplify:",eq:"x^3 * x * x^4",a:"x^8",fmt:"simplified form",h:"x = x^1. 3+1+4=8."},
+  {q:"Simplify:",eq:"10x^9 / 5x^3",a:"2x^6",fmt:"simplified form",h:"10/5=2. x^(9-3)=x^6."},
+  {q:"Simplify:",eq:"7x^2 * x^3",a:"7x^5",fmt:"simplified form",h:"Coefficient stays 7. x^(2+3)=x^5."},
+],
+'11.3':[
+  {q:"Simplify:",eq:"(x^3)^4",a:"x^12",fmt:"simplified form",h:"Multiply exponents: 3*4=12."},
+  {q:"Simplify:",eq:"(x^2)^5",a:"x^10",fmt:"simplified form",h:"Multiply exponents: 2*5=10."},
+  {q:"Simplify:",eq:"(2x^2)^3",a:"8x^6",fmt:"simplified form",h:"2^3=8. (x^2)^3=x^6."},
+  {q:"Simplify:",eq:"(3x^4)^2",a:"9x^8",fmt:"simplified form",h:"3^2=9. (x^4)^2=x^8."},
+  {q:"Simplify:",eq:"(x^5)^2",a:"x^10",fmt:"simplified form",h:"5*2=10."},
+  {q:"Simplify:",eq:"(4x^3)^2",a:"16x^6",fmt:"simplified form",h:"4^2=16. (x^3)^2=x^6."},
+  {q:"Simplify:",eq:"(x^1)^7",a:"x^7",fmt:"simplified form",h:"1*7=7."},
+  {q:"Simplify:",eq:"(2x)^4",a:"16x^4",fmt:"simplified form",h:"2^4=16. x^1 to the 4th = x^4."},
+  {q:"Simplify:",eq:"(x^2)^0",a:"1",fmt:"simplified form",h:"Anything to the 0 power = 1."},
+  {q:"Simplify:",eq:"(5x^2)^2",a:"25x^4",fmt:"simplified form",h:"5^2=25. (x^2)^2=x^4."},
+  {q:"Simplify:",eq:"(x^4)^3",a:"x^12",fmt:"simplified form",h:"4*3=12."},
+  {q:"Simplify:",eq:"(3x^2y)^2",a:"9x^4y^2",fmt:"simplified form",h:"3^2=9. (x^2)^2=x^4. y^2."},
+  {q:"Simplify:",eq:"(2x^3)^4",a:"16x^12",fmt:"simplified form",h:"2^4=16. (x^3)^4=x^12."},
+  {q:"Simplify:",eq:"(x^3)^3",a:"x^9",fmt:"simplified form",h:"3*3=9."},
+  {q:"Simplify:",eq:"(2x^3y)^3",a:"8x^9y^3",fmt:"simplified form",h:"2^3=8. (x^3)^3=x^9. y^3."},
+]};
+
+const T=[
+  {t:"11.1",q:"Simplify:",eq:"9^0",a:"1",fmt:"simplified form",h:"Anything to the 0 power = 1."},
+  {t:"11.1",q:"Simplify:",eq:"x^(-3)",a:"1/x^3",fmt:"simplified form",h:"x^(-3) = 1/x^3."},
+  {t:"11.1",q:"Simplify:",eq:"1/a^(-2)",a:"a^2",fmt:"simplified form",h:"Negative exponent on bottom: move to top, make positive."},
+  {t:"11.1",q:"Simplify:",eq:"3^(-2)",a:"1/9",fmt:"simplified form",h:"3^(-2) = 1/3^2 = 1/9."},
+  {t:"11.1",q:"Simplify:",eq:"-4^0",a:"-1",fmt:"simplified form",h:"-4^0 = -(4^0) = -(1) = -1. The negative is outside the base."},
+  {t:"11.2",q:"Simplify:",eq:"x^5 * x^4",a:"x^9",fmt:"simplified form",h:"Add exponents: 5+4=9."},
+  {t:"11.2",q:"Simplify:",eq:"x^10 / x^4",a:"x^6",fmt:"simplified form",h:"Subtract exponents: 10-4=6."},
+  {t:"11.2",q:"Simplify:",eq:"4x^3 * 3x^2",a:"12x^5",fmt:"simplified form",h:"4*3=12. x^(3+2)=x^5."},
+  {t:"11.2",q:"Simplify:",eq:"8x^6 / 4x^2",a:"2x^4",fmt:"simplified form",h:"8/4=2. x^(6-2)=x^4."},
+  {t:"11.2",q:"Simplify:",eq:"x^3 / x^7",a:"1/x^4",fmt:"simplified form",h:"3-7=-4, so x^(-4)=1/x^4."},
+  {t:"11.3",q:"Simplify:",eq:"(x^4)^3",a:"x^12",fmt:"simplified form",h:"Multiply exponents: 4*3=12."},
+  {t:"11.3",q:"Simplify:",eq:"(2x^3)^2",a:"4x^6",fmt:"simplified form",h:"2^2=4. (x^3)^2=x^6."},
+  {t:"11.3",q:"Simplify:",eq:"(3x^2)^3",a:"27x^6",fmt:"simplified form",h:"3^3=27. (x^2)^3=x^6."},
+  {t:"11.3",q:"Simplify:",eq:"(x^6)^2",a:"x^12",fmt:"simplified form",h:"6*2=12."},
+  {t:"11.3",q:"Simplify:",eq:"(2x^2y)^3",a:"8x^6y^3",fmt:"simplified form",h:"2^3=8. (x^2)^3=x^6. y^3."},
+];
+
+const VQB=[
+  {topic:'11.1',type:'mc',q:'What is the exponent in the expression 6³?',opts:['6','3','18','2'],a:1},
+  {topic:'11.1',type:'mc',q:'What does anything raised to the zero power equal?',opts:['0','Itself','1','Undefined'],a:2},
+  {topic:'11.1',type:'tf',q:'True or False: (-7)⁰ = 1.',opts:['True','False'],a:0},
+  {topic:'11.1',type:'mc',q:'What is -3⁰?',opts:['1','0','-1','3'],a:2},
+  {topic:'11.1',type:'mc',q:'x⁻⁵ is equal to...',opts:['x⁵','1/x⁵','-x⁵','-1/x⁵'],a:1},
+  {topic:'11.1',type:'tf',q:'True or False: 1/y⁻² = y².',opts:['True','False'],a:0},
+  {topic:'11.2',type:'mc',q:'When multiplying powers with the same base, you should...',opts:['Multiply the exponents','Add the exponents','Subtract the exponents','Keep the exponent the same'],a:1},
+  {topic:'11.2',type:'mc',q:'When dividing powers with the same base, you should...',opts:['Divide the exponents','Multiply the exponents','Add the exponents','Subtract the exponents'],a:3},
+  {topic:'11.2',type:'tf',q:'True or False: x⁴ · x³ = x¹².',opts:['True','False'],a:1},
+  {topic:'11.2',type:'mc',q:'What is x⁸ / x⁵?',opts:['x³','x¹³','x⁴⁰','1/x³'],a:0},
+  {topic:'11.2',type:'mc',q:'What is (3x²)(4x³)?',opts:['7x⁵','12x⁵','12x⁶','7x⁶'],a:1},
+  {topic:'11.3',type:'mc',q:'When raising a power to a power, you should...',opts:['Add the exponents','Subtract the exponents','Multiply the exponents','Divide the exponents'],a:2},
+  {topic:'11.3',type:'tf',q:'True or False: (x²)³ = x⁶.',opts:['True','False'],a:0},
+  {topic:'11.3',type:'mc',q:'What is (x³)⁴?',opts:['x⁷','x¹','x¹²','x³⁴'],a:2},
+  {topic:'11.3',type:'mc',q:'What is (2x²)³?',opts:['6x⁵','8x⁶','2x⁶','8x⁵'],a:1},
+];
+
+const DESCS={'11.1':'Simplifying zero and negative exponents.','11.2':'Multiplying and dividing powers with the same base.','11.3':'Raising a power to a power — multiply the exponents!'};
+let curTopic='11.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/\^/g,'^').trim();}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  return false;
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['11.1','11.2','11.3'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'11.1':'Topic 11.1','11.2':'Topic 11.2','11.3':'Topic 11.3'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

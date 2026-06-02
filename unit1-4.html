@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Units 1–4 — Getting the Rust Off | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+
+      <!-- 1.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">1.2</span><span class="tlabel">Adding &amp; Subtracting Integers</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">An <span class="vw">integer</span> is any whole number, positive, negative, or zero. Adding and subtracting integers is all about direction on the number line.</p>
+          <div class="kc"><div class="kc-lbl">Key rules</div><div class="kc-body">
+            <strong>Add positive</strong> &rarr; move RIGHT on the number line<br>
+            <strong>Add negative</strong> &rarr; move LEFT on the number line<br>
+            <strong>Subtract</strong> &rarr; flip the sign and add: a &minus; b = a + (&minus;b)<br><br>
+            <strong>Tug-o-war method:</strong> same signs add, different signs subtract (keep the sign of the bigger absolute value)<br>
+            <strong>Money analogy:</strong> positive = money in your pocket, negative = debt
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; &minus;2 + 5</div><div class="wsteps">
+            <span class="eq">Start at &minus;2, move right 5 spaces</span>
+            <span class="eq">&minus;2 + 5 = <strong>3</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; &minus;4 + (&minus;7)</div><div class="wsteps">
+            <span class="eq">Same signs &rarr; add: 4 + 7 = 11, keep negative</span>
+            <span class="eq">&minus;4 + (&minus;7) = <strong>&minus;11</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; 3 &minus; (&minus;6)</div><div class="wsteps">
+            <span class="eq">Flip: 3 &minus; (&minus;6) = 3 + 6</span>
+            <span class="eq">= <strong>9</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 1.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">1.3</span><span class="tlabel">Multiplying &amp; Dividing Integers</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">The key rule for multiplying and dividing integers is all about the <strong>signs</strong>.</p>
+          <div class="kc"><div class="kc-lbl">Sign rules</div><div class="kc-body">
+            <strong>Same signs &rarr; positive answer</strong><br>
+            &nbsp;&nbsp;&nbsp;(+)(+) = + &nbsp;&nbsp; (&minus;)(&minus;) = +<br><br>
+            <strong>Different signs &rarr; negative answer</strong><br>
+            &nbsp;&nbsp;&nbsp;(+)(&minus;) = &minus; &nbsp;&nbsp; (&minus;)(+) = &minus;<br><br>
+            The same rules apply to <strong>division</strong>.
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
+            <span class="eq">(&minus;4) &times; (&minus;5) = +20 <span class="eq-note">&larr; same signs = positive</span></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2</div><div class="wsteps">
+            <span class="eq">3 &times; (&minus;7) = &minus;21 <span class="eq-note">&larr; different signs = negative</span></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3</div><div class="wsteps">
+            <span class="eq">(&minus;18) &divide; (&minus;3) = +6 <span class="eq-note">&larr; same signs = positive</span></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 1.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">1.4</span><span class="tlabel">Order of Operations</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">A <span class="vw">numerical expression</span> is a combination of numbers and operations. To <span class="vw">evaluate</span> it means to find its value. We always follow <span class="vw">PEMDAS</span>.</p>
+          <div class="kc"><div class="kc-lbl">PEMDAS &mdash; Order of Operations</div><div class="kc-body">
+            <strong>P</strong> &mdash; Parentheses (innermost first)<br>
+            <strong>E</strong> &mdash; Exponents<br>
+            <strong>M/D</strong> &mdash; Multiply &amp; Divide (left to right)<br>
+            <strong>A/S</strong> &mdash; Add &amp; Subtract (left to right)<br><br>
+            Memory trick: &ldquo;Please Excuse My Dear Aunt Sally&rdquo;
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Evaluate: 3 + 4 &times; 2</div><div class="wsteps">
+            <span class="eq">Multiply first: 4 &times; 2 = 8</span>
+            <span class="eq">Then add: 3 + 8 = <strong>11</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Evaluate: (3 + 4) &times; 2</div><div class="wsteps">
+            <span class="eq">Parentheses first: 3 + 4 = 7</span>
+            <span class="eq">Then multiply: 7 &times; 2 = <strong>14</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Evaluate: 2&sup2; + 3 &times; (5 &minus; 2)</div><div class="wsteps">
+            <span class="eq">P: (5 &minus; 2) = 3 &rarr; 2&sup2; + 3 &times; 3</span>
+            <span class="eq">E: 2&sup2; = 4 &rarr; 4 + 3 &times; 3</span>
+            <span class="eq">M: 3 &times; 3 = 9 &rarr; 4 + 9 = <strong>13</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 2.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">2.1</span><span class="tlabel">Introduction to Fractions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">A <span class="vw">fraction</span> represents part of a whole. The <span class="vw">numerator</span> (top) tells how many parts you have. The <span class="vw">denominator</span> (bottom) tells how many equal parts the whole is split into.</p>
+          <div class="kc"><div class="kc-lbl">Three forms of a negative fraction (all equivalent)</div><div class="kc-body">
+            &minus;a/b &nbsp;=&nbsp; a/(&minus;b) &nbsp;=&nbsp; &minus;(a/b)<br><br>
+            The first form (&minus;a/b) is preferred.
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
+            <span class="eq">3/4 means: 3 out of 4 equal parts</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Equivalent fractions</div><div class="wsteps">
+            <span class="eq">1/2 = 2/4 = 3/6 = 4/8 (all the same value)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Negative fraction</div><div class="wsteps">
+            <span class="eq">&minus;3/4 = 3/(&minus;4) = &minus;(3/4) <span class="eq-note">&larr; all equivalent; use &minus;3/4</span></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 2.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">2.3</span><span class="tlabel">Simplifying Fractions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">To <span class="vw">simplify</span> a fraction, divide both the numerator and denominator by their <span class="vw">GCF</span> (Greatest Common Factor). The value of the fraction does not change &mdash; you just write it in a simpler form.</p>
+          <div class="kc"><div class="kc-lbl">GCF Method</div><div class="kc-body">
+            Step 1 &mdash; Find the GCF of numerator and denominator<br>
+            Step 2 &mdash; Divide both by the GCF<br>
+            Step 3 &mdash; Check: can it simplify further?
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Simplify 8/12</div><div class="wsteps">
+            <span class="eq">GCF(8,12) = 4</span>
+            <span class="eq">8 &divide; 4 = 2, &nbsp;12 &divide; 4 = 3</span>
+            <span class="eq">= <strong>2/3</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Simplify 15/25</div><div class="wsteps">
+            <span class="eq">GCF(15,25) = 5 &rarr; 15/25 = <strong>3/5</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Simplify 18/24</div><div class="wsteps">
+            <span class="eq">GCF(18,24) = 6 &rarr; 18/24 = <strong>3/4</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 2.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">2.4</span><span class="tlabel">Adding &amp; Subtracting Fractions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><strong>Same denominator:</strong> add or subtract the numerators only; keep the denominator. <strong>Different denominators:</strong> find the <span class="vw">LCD</span> (Least Common Denominator), convert each fraction to an equivalent fraction with that denominator, then add or subtract. Always simplify the answer.</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Same denominator: 3/8 + 1/8</div><div class="wsteps">
+            <span class="eq">Same denominator &rarr; add numerators: 3 + 1 = 4</span>
+            <span class="eq">= 4/8 = <strong>1/2</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Different denominators: 1/4 + 1/3</div><div class="wsteps">
+            <span class="eq">LCD of 4 and 3 = 12</span>
+            <span class="eq">1/4 = 3/12 &nbsp;&nbsp; 1/3 = 4/12</span>
+            <span class="eq">3/12 + 4/12 = <strong>7/12</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Subtraction: 5/6 &minus; 1/4</div><div class="wsteps">
+            <span class="eq">LCD of 6 and 4 = 12</span>
+            <span class="eq">5/6 = 10/12 &nbsp;&nbsp; 1/4 = 3/12</span>
+            <span class="eq">10/12 &minus; 3/12 = <strong>7/12</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 2.5 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">2.5</span><span class="tlabel">Multiplying &amp; Dividing Fractions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><strong>Multiply:</strong> multiply numerators together, multiply denominators together, then simplify. <strong>Divide:</strong> use <span class="vw">Keep-Change-Flip (KCF)</span> &mdash; keep the first fraction, change &divide; to &times;, flip the second fraction, then multiply.</p>
+          <div class="kc"><div class="kc-lbl">Keep-Change-Flip (KCF)</div><div class="kc-body">
+            a/b &divide; c/d &nbsp;&rarr;&nbsp; <strong>Keep</strong> a/b &nbsp;&times;&nbsp; <strong>Flip</strong> d/c
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Multiply: 2/3 &times; 3/4</div><div class="wsteps">
+            <span class="eq">Numerators: 2 &times; 3 = 6 &nbsp;&nbsp; Denominators: 3 &times; 4 = 12</span>
+            <span class="eq">= 6/12 = <strong>1/2</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Divide: 3/4 &divide; 1/2</div><div class="wsteps">
+            <span class="eq">KCF: 3/4 &times; 2/1</span>
+            <span class="eq">= 6/4 = <strong>3/2</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Divide: 2/5 &divide; 4/5</div><div class="wsteps">
+            <span class="eq">KCF: 2/5 &times; 5/4 = 10/20 = <strong>1/2</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 3.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">3.1</span><span class="tlabel">Introduction to Variables</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">A <span class="vw">variable</span> is a symbol (usually x or y) that represents an unknown number. Mr. Behling&rsquo;s rule: <strong>&ldquo;A variable is just a number. Don&rsquo;t let it freak you out.&rdquo;</strong></p>
+          <div class="kc"><div class="kc-lbl">Key ideas about variables</div><div class="kc-body">
+            <strong>Multiplication shortcut:</strong> 2x means &ldquo;2 times x&rdquo; &mdash; no &times; symbol needed<br>
+            <strong>Invisible coefficient:</strong> x = 1&middot;x and &minus;x = &minus;1&middot;x<br>
+            Operations with variables look like: x+5, x&minus;3, 4x, x/2
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
+            <span class="eq">x means &ldquo;some unknown number&rdquo;</span>
+            <span class="eq">If x = 5, then x + 3 = 5 + 3 = 8</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Invisible coefficient</div><div class="wsteps">
+            <span class="eq">x = 1x &nbsp;&nbsp; &minus;x = &minus;1x</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Reading expressions</div><div class="wsteps">
+            <span class="eq">4x = 4 times x &nbsp;&nbsp; x/2 = x divided by 2</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 3.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">3.2</span><span class="tlabel">Adding &amp; Subtracting Variables (Like Terms)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><span class="vw">Like terms</span> have the same variable with the same exponent (or are both constants). You can only <span class="vw">combine like terms</span> &mdash; you cannot combine unlike terms.</p>
+          <div class="kc"><div class="kc-lbl">The apple analogy</div><div class="kc-body">
+            3 apples + 1 apple = 4 apples<br>
+            3a + 1a = 4a &nbsp;&nbsp; (same idea!)<br><br>
+            3 apples + 1 banana &ne; 4 anything &rarr; <strong>cannot combine unlike terms</strong>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
+            <span class="eq">3x + 5x = 8x <span class="eq-note">&larr; like terms, add coefficients</span></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2</div><div class="wsteps">
+            <span class="eq">7y &minus; 3y + 2y = 6y</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Unlike terms</div><div class="wsteps">
+            <span class="eq">3x + 5 &rarr; cannot simplify (x-term and constant are unlike)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 3.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">3.3</span><span class="tlabel">Multiplying Variables (Exponents)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">When you multiply the same variable repeatedly, use <span class="vw">exponents</span> as a shortcut. Mathematicians are lazy &mdash; we use shortcuts!</p>
+          <div class="kc"><div class="kc-lbl">Exponent shortcut for multiplying</div><div class="kc-body">
+            x &middot; x = x&sup2; &nbsp;&nbsp; x &middot; x &middot; x = x&sup3;<br><br>
+            <strong>When multiplying powers with the same base: ADD the exponents</strong><br>
+            x&sup2; &middot; x&sup3; = x&sup5; &nbsp;&nbsp; x&sup4; &middot; x = x&sup5;<br><br>
+            Multiply coefficients separately: (2x&sup3;)(4x&sup2;) = 8x&sup5;
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
+            <span class="eq">x&sup2; &middot; x&sup3; = x^(2+3) = x&sup5;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2</div><div class="wsteps">
+            <span class="eq">(3x&sup2;)(5x&sup3;) = 15x&sup5; <span class="eq-note">&larr; multiply coefficients, add exponents</span></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3</div><div class="wsteps">
+            <span class="eq">(2x&sup3;)(4x&sup2;) = 8x&sup5;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 4.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">4.1</span><span class="tlabel">The Language of Algebra</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">Algebra has its own vocabulary. Understanding the parts of an expression is like understanding the parts of a sentence.</p>
+          <div class="kc"><div class="kc-lbl">Key vocabulary</div><div class="kc-body">
+            <strong>Term:</strong> a number, a variable, or a number times a variable (e.g., 3x, &minus;5, x&sup2;)<br>
+            <strong>Coefficient:</strong> the number in front of the variable (e.g., in 3x, the coefficient is 3)<br>
+            <strong>Constant:</strong> a term with no variable (just a number, e.g., 7)<br>
+            <strong>Algebraic expression:</strong> one or more terms combined with + or &minus; <strong>(no equal sign)</strong><br>
+            <strong>Equation:</strong> has an equal sign. &nbsp;<strong>Expression:</strong> no equal sign.
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Identify parts of 3x + 5</div><div class="wsteps">
+            <span class="eq">Terms: 3x and 5</span>
+            <span class="eq">Coefficient of x: 3</span>
+            <span class="eq">Constant: 5</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Expression or Equation?</div><div class="wsteps">
+            <span class="eq">2x + 7 &rarr; Expression (no = sign)</span>
+            <span class="eq">2x + 7 = 11 &rarr; Equation (has = sign)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Identify: &minus;4x&sup2; + 2x &minus; 9</div><div class="wsteps">
+            <span class="eq">3 terms. Coefficients: &minus;4 and 2. Constant: &minus;9</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">4.2</span><span class="tlabel">Simplifying Expressions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">To simplify an expression: (1) <strong>Distribute</strong> to remove parentheses, (2) <strong>Combine like terms</strong>. <em>Say it out loud</em> when distributing!</p>
+          <div class="kc"><div class="kc-lbl">Distributive Property</div><div class="kc-body">
+            a(b + c) = ab + ac<br><br>
+            Draw arcs from the outside term to each inside term. Say it out loud!<br><br>
+            <strong>Watch the negative!</strong> Circle the negative sign before parentheses.<br>
+            &minus;(x + 3) = &minus;1(x + 3) = &minus;x &minus; 3
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Simplify: 3(x + 4) &minus; 2x</div><div class="wsteps">
+            <span class="eq">Distribute: 3x + 12 &minus; 2x</span>
+            <span class="eq">Combine like terms: <strong>x + 12</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Simplify: &minus;(x + 3) + 5x</div><div class="wsteps">
+            <span class="eq">Circle the negative: &minus;1(x + 3) + 5x</span>
+            <span class="eq">Distribute: &minus;x &minus; 3 + 5x</span>
+            <span class="eq">Combine: <strong>4x &minus; 3</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Simplify: 2(3x &minus; 1) + 4</div><div class="wsteps">
+            <span class="eq">Distribute: 6x &minus; 2 + 4</span>
+            <span class="eq">Combine constants: <strong>6x + 2</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">4.4</span><span class="tlabel">Evaluating Expressions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">To <span class="vw">evaluate</span> an expression, replace the variable with the given number (use parentheses!), then use PEMDAS. Remember: &ldquo;<strong>A variable is just a number. Don&rsquo;t let it freak you out.</strong>&rdquo;</p>
+          <div class="kc"><div class="kc-lbl">Process</div><div class="kc-body">
+            Step 1 &mdash; Substitute (replace x with the given number, put in parentheses)<br>
+            Step 2 &mdash; Use PEMDAS to evaluate
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Evaluate 3x &minus; 5 when x = 4</div><div class="wsteps">
+            <span class="eq">3(4) &minus; 5</span>
+            <span class="eq">= 12 &minus; 5 = <strong>7</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Evaluate 3x &minus; 5 when x = &minus;2</div><div class="wsteps">
+            <span class="eq">3(&minus;2) &minus; 5</span>
+            <span class="eq">= &minus;6 &minus; 5 = <strong>&minus;11</strong></span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Evaluate 3x &minus; 5 when x = 0</div><div class="wsteps">
+            <span class="eq">3(0) &minus; 5 = 0 &minus; 5 = <strong>&minus;5</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">Unit 1.2 — Integers</div>
+        <div class="vcard"><div><div class="vtag">1.2</div><div class="vterm">Integer</div><div class="vdef">Any whole number: positive, negative, or zero. No fractions or decimals.</div></div><div><div class="vex-lbl">Examples</div><div class="vex">&hellip; &minus;3, &minus;2, &minus;1, 0, 1, 2, 3, &hellip;</div></div></div>
+        <div class="vcard"><div><div class="vtag">1.2</div><div class="vterm">Negative number</div><div class="vdef">A number less than zero; found to the left of zero on the number line.</div></div><div><div class="vex-lbl">Example</div><div class="vex">&minus;5 is 5 units to the LEFT of zero</div></div></div>
+        <div class="vcard"><div><div class="vtag">1.2</div><div class="vterm">Opposite</div><div class="vdef">Two numbers the same distance from zero but on opposite sides. The opposite of a is &minus;a.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Opposite of 4 = &minus;4<br>Opposite of &minus;7 = 7</div></div></div>
+        <div class="vcard"><div><div class="vtag">1.2</div><div class="vterm">Absolute value</div><div class="vdef">The distance from zero on the number line. Always non-negative. Written |a|.</div></div><div><div class="vex-lbl">Example</div><div class="vex">|&minus;5| = 5 &nbsp;&nbsp; |3| = 3</div></div></div>
+        <div class="vsec">Unit 1.3 — Multiplying &amp; Dividing</div>
+        <div class="vcard"><div><div class="vtag">1.3</div><div class="vterm">Product</div><div class="vdef">The result of multiplication.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3 &times; 4 = 12 &nbsp;&rarr;&nbsp; 12 is the product</div></div></div>
+        <div class="vcard"><div><div class="vtag">1.3</div><div class="vterm">Quotient</div><div class="vdef">The result of division.</div></div><div><div class="vex-lbl">Example</div><div class="vex">12 &divide; 4 = 3 &nbsp;&rarr;&nbsp; 3 is the quotient</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">1.3</div><div class="vterm">Sign rules for &times; and &divide;</div><div class="vdef">Same signs &rarr; positive answer. Different signs &rarr; negative answer. Applies to both multiplication and division.</div></div></div>
+        <div class="vsec">Unit 1.4 — Order of Operations</div>
+        <div class="vcard"><div><div class="vtag">1.4</div><div class="vterm">Numerical expression</div><div class="vdef">A combination of numbers and operations (no variable, no equal sign).</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="eq-box">3 + 4 &times; 2</span> is a numerical expression</div></div></div>
+        <div class="vcard"><div><div class="vtag">1.4</div><div class="vterm">Evaluate</div><div class="vdef">Find the numerical value of an expression by performing the operations.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Evaluate 3 + 4 &times; 2 = <span class="chip chip-g">11</span></div></div></div>
+        <div class="vcard wide"><div><div class="vtag">1.4</div><div class="vterm">PEMDAS — Order of Operations</div><div class="vdef">Parentheses, Exponents, Multiply/Divide (left to right), Add/Subtract (left to right). Memory: "Please Excuse My Dear Aunt Sally."</div></div></div>
+        <div class="vsec">Unit 2.1 — Fractions</div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Fraction</div><div class="vdef">Represents part of a whole. Written as numerator over denominator.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3/4 = 3 parts out of 4 equal parts</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Numerator</div><div class="vdef">The TOP number of a fraction. Tells how many parts you have.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3/4 &rarr; <span class="chip chip-p">3</span> is the numerator</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Denominator</div><div class="vdef">The BOTTOM number of a fraction. Tells how many equal parts the whole is split into.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3/4 &rarr; <span class="chip chip-a">4</span> is the denominator</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Equivalent fractions</div><div class="vdef">Fractions that have the same value but different numerators and denominators.</div></div><div><div class="vex-lbl">Example</div><div class="vex">1/2 = 2/4 = 3/6 = 4/8</div></div></div>
+        <div class="vsec">Unit 2.3 — Simplifying</div>
+        <div class="vcard"><div><div class="vtag">2.3</div><div class="vterm">Simplify (a fraction)</div><div class="vdef">Divide numerator and denominator by their GCF to get an equivalent fraction in lowest terms.</div></div><div><div class="vex-lbl">Example</div><div class="vex">8/12 &rarr; GCF = 4 &rarr; <span class="chip chip-g">2/3</span></div></div></div>
+        <div class="vsec">Unit 2.4 — Adding &amp; Subtracting Fractions</div>
+        <div class="vcard"><div><div class="vtag">2.4</div><div class="vterm">Least Common Denominator (LCD)</div><div class="vdef">The smallest number that is a multiple of both denominators. Used to add or subtract fractions with different denominators.</div></div><div><div class="vex-lbl">Example</div><div class="vex">LCD of 4 and 6 = 12</div></div></div>
+        <div class="vsec">Unit 2.5 — Multiplying &amp; Dividing Fractions</div>
+        <div class="vcard"><div><div class="vtag">2.5</div><div class="vterm">Reciprocal</div><div class="vdef">The flipped version of a fraction. Multiply a fraction by its reciprocal to get 1.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Reciprocal of 3/4 = <span class="chip chip-p">4/3</span></div></div></div>
+        <div class="vcard wide"><div><div class="vtag">2.5</div><div class="vterm">Keep-Change-Flip (KCF)</div><div class="vdef">The rule for dividing fractions: Keep the first fraction, Change ÷ to ×, Flip the second fraction. Then multiply.</div></div></div>
+        <div class="vsec">Unit 3.1 — Variables</div>
+        <div class="vcard"><div><div class="vtag">3.1</div><div class="vterm">Variable</div><div class="vdef">A symbol (usually x or y) that represents an unknown number.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x, y, n, t are all variables<br>x + 5 means "some number plus 5"</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">3.1</div><div class="vterm">"A variable is just a number."</div><div class="vdef">Mr. Behling's most important reminder: don't let the variable freak you out. It's just a placeholder for a number you don't know yet.</div></div></div>
+        <div class="vsec">Unit 3.2 — Like Terms</div>
+        <div class="vcard"><div><div class="vtag">3.2</div><div class="vterm">Like terms</div><div class="vdef">Terms with the same variable raised to the same exponent (or both constants). You can add or subtract like terms.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="chip chip-g">3x</span> and <span class="chip chip-g">5x</span> are like terms<br><span class="chip chip-a">3x</span> and <span class="chip chip-a">5</span> are NOT like terms</div></div></div>
+        <div class="vcard"><div><div class="vtag">3.2</div><div class="vterm">Combining like terms</div><div class="vdef">Adding or subtracting the coefficients of like terms. The variable part stays the same.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3x + 5x = <span class="chip chip-g">8x</span><br>7y &minus; 2y = <span class="chip chip-g">5y</span></div></div></div>
+        <div class="vsec">Unit 3.3 — Exponents</div>
+        <div class="vcard"><div><div class="vtag">3.3</div><div class="vterm">Exponent</div><div class="vdef">A number written above and to the right of the base, telling how many times to multiply the base by itself.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup3; = x &middot; x &middot; x (3 times)</div></div></div>
+        <div class="vcard"><div><div class="vtag">3.3</div><div class="vterm">Multiplying same-base variables</div><div class="vdef">When multiplying powers with the same base, add the exponents. x^a · x^b = x^(a+b).</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup2; &middot; x&sup3; = <span class="chip chip-g">x&sup5;</span></div></div></div>
+        <div class="vsec">Unit 4.1 — Language of Algebra</div>
+        <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Term</div><div class="vdef">A single number, variable, or product of numbers and variables separated by + or −.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3x + 5: terms are <span class="chip chip-p">3x</span> and <span class="chip chip-p">5</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Coefficient</div><div class="vdef">The number multiplied by the variable in a term.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3x: coefficient = <span class="chip chip-p">3</span><br>In &minus;7y: coefficient = &minus;7</div></div></div>
+        <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Constant</div><div class="vdef">A term with no variable — just a fixed number.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3x + 5: constant = <span class="chip chip-g">5</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Equation vs. Expression</div><div class="vdef">Expression: no equal sign (e.g., 3x + 5). Equation: has an equal sign (e.g., 3x + 5 = 11).</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="chip chip-a">3x + 5</span> = expression<br><span class="chip chip-g">3x + 5 = 11</span> = equation</div></div></div>
+        <div class="vsec">Unit 4.2 — Simplifying Expressions</div>
+        <div class="vcard"><div><div class="vtag">4.2</div><div class="vterm">Distributive property</div><div class="vdef">a(b + c) = ab + ac. Multiply the outside term by each term inside the parentheses.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3(x + 4) = 3x + 12</div></div></div>
+        <div class="vsec">Unit 4.4 — Evaluating Expressions</div>
+        <div class="vcard"><div><div class="vtag">4.4</div><div class="vterm">Evaluate (an expression)</div><div class="vdef">Find the value of an expression for a specific value of the variable. Substitute, then use PEMDAS.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Evaluate 2x + 1 when x = 3:<br>2(3) + 1 = <span class="chip chip-g">7</span></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('unit1',this)">Unit 1</button>
+          <button class="pqf-btn" onclick="setQFilter('unit2',this)">Unit 2</button>
+          <button class="pqf-btn" onclick="setQFilter('unit3',this)">Unit 3</button>
+          <button class="pqf-btn" onclick="setQFilter('unit4',this)">Unit 4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic group to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('unit1',this)">Unit 1 &mdash; Integers &amp; Operations</button>
+              <button class="tpbtn" onclick="selTopic('unit2',this)">Unit 2 &mdash; Fractions</button>
+              <button class="tpbtn" onclick="selTopic('unit3',this)">Unit 3 &mdash; Variables</button>
+              <button class="tpbtn" onclick="selTopic('unit4',this)">Unit 4 &mdash; Expressions</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Integer operations and order of operations.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Units 1&ndash;4</strong><br>20 questions &middot; mixed topics &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='1–4'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'unit1':[
+  {q:"Calculate:",eq:"-3 + (-7)",a:"-10",fmt:"numerical answer",h:"Same signs: add 3+7=10, keep negative."},
+  {q:"Calculate:",eq:"-4 + 9",a:"5",fmt:"numerical answer",h:"Different signs: 9−4=5, keep sign of bigger (positive)."},
+  {q:"Calculate:",eq:"5 - (-8)",a:"13",fmt:"numerical answer",h:"Flip: 5 - (-8) = 5 + 8 = 13."},
+  {q:"Calculate:",eq:"(-4) × (-5)",a:"20",fmt:"numerical answer",h:"Same signs = positive. 4×5=20."},
+  {q:"Calculate:",eq:"3 × (-7)",a:"-21",fmt:"numerical answer",h:"Different signs = negative. 3×7=21."},
+  {q:"Calculate:",eq:"(-18) ÷ (-3)",a:"6",fmt:"numerical answer",h:"Same signs = positive. 18÷3=6."},
+  {q:"Calculate:",eq:"(-24) ÷ 4",a:"-6",fmt:"numerical answer",h:"Different signs = negative. 24÷4=6."},
+  {q:"Evaluate using PEMDAS:",eq:"3 + 4 × 2",a:"11",fmt:"numerical answer",h:"Multiply first: 4×2=8. Then add: 3+8=11."},
+  {q:"Evaluate using PEMDAS:",eq:"(3 + 4) × 2",a:"14",fmt:"numerical answer",h:"Parentheses first: 3+4=7. Then multiply: 7×2=14."},
+  {q:"Evaluate using PEMDAS:",eq:"2² + 3 × (5 - 2)",a:"13",fmt:"numerical answer",h:"P: 5-2=3. E: 2²=4. M: 3×3=9. A: 4+9=13."},
+  {q:"Calculate:",eq:"-6 - (-2)",a:"-4",fmt:"numerical answer",h:"Flip: -6+2 = -4."},
+  {q:"Evaluate using PEMDAS:",eq:"10 - 2 × 3 + 1",a:"5",fmt:"numerical answer",h:"Multiply first: 2×3=6. Then left to right: 10-6+1=5."},
+  {q:"Calculate:",eq:"(-3)²",a:"9",fmt:"numerical answer",h:"(-3)×(-3) = 9. Same signs = positive."},
+  {q:"Evaluate using PEMDAS:",eq:"4 × (2 + 3) - 6",a:"14",fmt:"numerical answer",h:"P: 2+3=5. M: 4×5=20. S: 20-6=14."},
+  {q:"Calculate:",eq:"-8 + 3 - (-5)",a:"0",fmt:"numerical answer",h:"-8+3 = -5; then -5-(-5) = -5+5 = 0."},
+],
+'unit2':[
+  {q:"Simplify:",eq:"8/12",a:"2/3",fmt:"fraction in simplest form",h:"GCF(8,12)=4. 8÷4=2, 12÷4=3."},
+  {q:"Simplify:",eq:"15/25",a:"3/5",fmt:"fraction in simplest form",h:"GCF(15,25)=5."},
+  {q:"Add:",eq:"1/4 + 1/3",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 3/12+4/12=7/12."},
+  {q:"Subtract:",eq:"5/6 - 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 10/12-3/12=7/12."},
+  {q:"Multiply:",eq:"2/3 × 3/4",a:"1/2",fmt:"fraction in simplest form",h:"2×3=6, 3×4=12. 6/12=1/2."},
+  {q:"Divide:",eq:"3/4 ÷ 1/2",a:"3/2",fmt:"fraction (improper is ok)",h:"KCF: 3/4 × 2/1 = 6/4 = 3/2."},
+  {q:"Simplify:",eq:"18/24",a:"3/4",fmt:"fraction in simplest form",h:"GCF(18,24)=6."},
+  {q:"Add:",eq:"2/5 + 1/5",a:"3/5",fmt:"fraction in simplest form",h:"Same denominator: 2+1=3, keep 5."},
+  {q:"Subtract:",eq:"3/4 - 1/8",a:"5/8",fmt:"fraction in simplest form",h:"LCD=8. 6/8-1/8=5/8."},
+  {q:"Multiply:",eq:"1/2 × 4/5",a:"2/5",fmt:"fraction in simplest form",h:"1×4=4, 2×5=10. 4/10=2/5."},
+  {q:"Divide:",eq:"2/5 ÷ 4/5",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 2/5 × 5/4 = 10/20 = 1/2."},
+  {q:"Simplify:",eq:"20/30",a:"2/3",fmt:"fraction in simplest form",h:"GCF(20,30)=10."},
+  {q:"Add:",eq:"1/3 + 1/6",a:"1/2",fmt:"fraction in simplest form",h:"LCD=6. 2/6+1/6=3/6=1/2."},
+  {q:"Multiply:",eq:"3/5 × 5/6",a:"1/2",fmt:"fraction in simplest form",h:"3×5=15, 5×6=30. 15/30=1/2."},
+  {q:"Divide:",eq:"5/8 ÷ 5/4",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 5/8 × 4/5 = 20/40 = 1/2."},
+],
+'unit3':[
+  {q:"Simplify:",eq:"3x + 5x",a:"8x",fmt:"simplified expression",h:"Like terms: add coefficients 3+5=8."},
+  {q:"Simplify:",eq:"7y - 3y",a:"4y",fmt:"simplified expression",h:"Like terms: 7-3=4."},
+  {q:"Simplify:",eq:"2x + 4x - x",a:"5x",fmt:"simplified expression",h:"2+4-1=5."},
+  {q:"Can this be simplified? Why or why not:",eq:"3x + 5",a:"no",fmt:"yes or no",h:"3x and 5 are unlike terms (variable vs. constant)."},
+  {q:"Multiply:",eq:"x² · x³",a:"x^5",fmt:"x^n form",h:"Same base: add exponents 2+3=5."},
+  {q:"Multiply:",eq:"(3x²)(5x³)",a:"15x^5",fmt:"simplified expression",h:"Multiply coefficients: 3×5=15. Add exponents: 2+3=5."},
+  {q:"Multiply:",eq:"(2x³)(4x²)",a:"8x^5",fmt:"simplified expression",h:"2×4=8, 3+2=5."},
+  {q:"Simplify:",eq:"4a + 2b - a",a:"3a+2b",fmt:"simplified expression",h:"Combine a terms: 4a-a=3a. 2b stays."},
+  {q:"Multiply:",eq:"(x⁴)(x)",a:"x^5",fmt:"x^n form",h:"x has exponent 1. Add: 4+1=5."},
+  {q:"Simplify:",eq:"6x - 2x + x",a:"5x",fmt:"simplified expression",h:"6-2+1=5."},
+  {q:"Can this be simplified?",eq:"5x² + 3x",a:"no",fmt:"yes or no",h:"x² and x terms are unlike (different exponents)."},
+  {q:"Multiply:",eq:"(-2x²)(3x⁴)",a:"-6x^6",fmt:"simplified expression",h:"-2×3=-6, 2+4=6."},
+  {q:"Simplify:",eq:"8m - 3m + 2m",a:"7m",fmt:"simplified expression",h:"8-3+2=7."},
+  {q:"Multiply:",eq:"(5x)(2x)",a:"10x²",fmt:"simplified expression",h:"5×2=10, 1+1=2."},
+  {q:"Simplify:",eq:"x + x + x",a:"3x",fmt:"simplified expression",h:"Each x has coefficient 1. 1+1+1=3."},
+],
+'unit4':[
+  {q:"Simplify:",eq:"3(x + 4) - 2x",a:"x+12",fmt:"simplified expression",h:"Distribute: 3x+12-2x. Combine: x+12."},
+  {q:"Simplify:",eq:"2(3x - 1) + 4",a:"6x+2",fmt:"simplified expression",h:"Distribute: 6x-2+4. Combine constants: 6x+2."},
+  {q:"Simplify:",eq:"-(x + 3) + 5x",a:"4x-3",fmt:"simplified expression",h:"Distribute -1: -x-3+5x. Combine: 4x-3."},
+  {q:"Evaluate 3x - 5 when",eq:"x = 4",a:"7",fmt:"numerical answer",h:"3(4)-5 = 12-5 = 7."},
+  {q:"Evaluate 3x - 5 when",eq:"x = -2",a:"-11",fmt:"numerical answer",h:"3(-2)-5 = -6-5 = -11."},
+  {q:"Evaluate 2x + 1 when",eq:"x = 3",a:"7",fmt:"numerical answer",h:"2(3)+1 = 6+1 = 7."},
+  {q:"Simplify:",eq:"4(x - 2) + 3x",a:"7x-8",fmt:"simplified expression",h:"Distribute: 4x-8+3x. Combine: 7x-8."},
+  {q:"Evaluate x² + 1 when",eq:"x = 3",a:"10",fmt:"numerical answer",h:"(3)²+1 = 9+1 = 10."},
+  {q:"Identify: In the expression 5x - 7, what is the coefficient?",eq:"",a:"5",fmt:"numerical answer",h:"The coefficient is the number in front of x."},
+  {q:"Identify: In the expression 5x - 7, what is the constant?",eq:"",a:"-7",fmt:"numerical answer",h:"The constant is the term with no variable."},
+  {q:"Simplify:",eq:"5 - 2(x - 3)",a:"-2x+11",fmt:"simplified expression",h:"Distribute -2: 5-2x+6. Combine: -2x+11."},
+  {q:"Evaluate -x + 4 when",eq:"x = -3",a:"7",fmt:"numerical answer",h:"-(-3)+4 = 3+4 = 7."},
+  {q:"Is 3x + 5 = 11 an expression or an equation?",eq:"",a:"equation",fmt:"expression or equation",h:"It has an equal sign, so it is an equation."},
+  {q:"Simplify:",eq:"2x + 3(x - 4)",a:"5x-12",fmt:"simplified expression",h:"Distribute: 2x+3x-12. Combine: 5x-12."},
+  {q:"Evaluate 4x when",eq:"x = -2",a:"-8",fmt:"numerical answer",h:"4(-2) = -8."},
+]};
+
+const T=[
+  {t:"unit1",q:"Calculate:",eq:"-5 + (-9)",a:"-14",fmt:"numerical answer",h:"Same signs: 5+9=14, keep negative."},
+  {t:"unit1",q:"Calculate:",eq:"(-3) × (-8)",a:"24",fmt:"numerical answer",h:"Same signs = positive. 3×8=24."},
+  {t:"unit1",q:"Calculate:",eq:"4 - (-7)",a:"11",fmt:"numerical answer",h:"Flip: 4+7=11."},
+  {t:"unit1",q:"Evaluate using PEMDAS:",eq:"5 + 2 × (4 - 1)",a:"11",fmt:"numerical answer",h:"P: 4-1=3. M: 2×3=6. A: 5+6=11."},
+  {t:"unit1",q:"Calculate:",eq:"(-36) ÷ 9",a:"-4",fmt:"numerical answer",h:"Different signs = negative. 36÷9=4."},
+  {t:"unit2",q:"Simplify:",eq:"12/18",a:"2/3",fmt:"fraction in simplest form",h:"GCF(12,18)=6."},
+  {t:"unit2",q:"Add:",eq:"1/3 + 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 4/12+3/12=7/12."},
+  {t:"unit2",q:"Subtract:",eq:"3/4 - 1/3",a:"5/12",fmt:"fraction in simplest form",h:"LCD=12. 9/12-4/12=5/12."},
+  {t:"unit2",q:"Multiply:",eq:"2/3 × 9/4",a:"3/2",fmt:"fraction (improper ok)",h:"2×9=18, 3×4=12. 18/12=3/2."},
+  {t:"unit2",q:"Divide:",eq:"1/2 ÷ 3/4",a:"2/3",fmt:"fraction in simplest form",h:"KCF: 1/2 × 4/3 = 4/6 = 2/3."},
+  {t:"unit3",q:"Simplify:",eq:"4x + 9x",a:"13x",fmt:"simplified expression",h:"Like terms: 4+9=13."},
+  {t:"unit3",q:"Multiply:",eq:"(2x²)(6x³)",a:"12x^5",fmt:"simplified expression",h:"2×6=12, 2+3=5."},
+  {t:"unit3",q:"Simplify:",eq:"10y - 3y + y",a:"8y",fmt:"simplified expression",h:"10-3+1=8."},
+  {t:"unit3",q:"Can 4x + 2 be simplified further?",eq:"",a:"no",fmt:"yes or no",h:"4x and 2 are unlike terms."},
+  {t:"unit3",q:"Multiply:",eq:"(x³)(x⁴)",a:"x^7",fmt:"x^n form",h:"Add exponents: 3+4=7."},
+  {t:"unit4",q:"Simplify:",eq:"3(x + 2) - x",a:"2x+6",fmt:"simplified expression",h:"Distribute: 3x+6-x. Combine: 2x+6."},
+  {t:"unit4",q:"Evaluate 2x - 3 when x = 5",eq:"",a:"7",fmt:"numerical answer",h:"2(5)-3 = 10-3 = 7."},
+  {t:"unit4",q:"Simplify:",eq:"-(2x - 4) + x",a:"-x+4",fmt:"simplified expression",h:"Distribute -1: -2x+4+x. Combine: -x+4."},
+  {t:"unit4",q:"Evaluate x² - x when x = 4",eq:"",a:"12",fmt:"numerical answer",h:"(4)²-4 = 16-4 = 12."},
+  {t:"unit4",q:"Simplify:",eq:"5(2x - 1) - 3x",a:"7x-5",fmt:"simplified expression",h:"Distribute: 10x-5-3x. Combine: 7x-5."},
+];
+
+const VQB=[
+  {topic:'unit1',type:'mc',q:'What is the absolute value of -8?',opts:['−8','0','8','−1'],a:2},
+  {topic:'unit1',type:'mc',q:'What is (-3) × (-4)?',opts:['−12','12','7','−7'],a:1},
+  {topic:'unit1',type:'tf',q:'True or False: A negative times a negative gives a negative answer.',opts:['True','False'],a:1},
+  {topic:'unit1',type:'mc',q:'According to PEMDAS, what do you do FIRST in 3 + 4 × 2?',opts:['Add 3+4','Multiply 4×2','Subtract','Nothing — left to right'],a:1},
+  {topic:'unit1',type:'mc',q:'What is 5 − (−3)?',opts:['2','8','−2','−8'],a:1},
+  {topic:'unit1',type:'mc',q:'What does "evaluate" a numerical expression mean?',opts:['Simplify the variable','Find its numerical value','Write it differently','None of these'],a:1},
+  {topic:'unit2',type:'mc',q:'What is the numerator of the fraction 5/8?',opts:['8','5','3','13'],a:1},
+  {topic:'unit2',type:'mc',q:'What is the LCD of 1/4 and 1/6?',opts:['24','10','12','2'],a:2},
+  {topic:'unit2',type:'tf',q:'True or False: 2/4 and 1/2 are equivalent fractions.',opts:['True','False'],a:0},
+  {topic:'unit2',type:'mc',q:'To divide fractions, you use Keep-Change-Flip. What do you flip?',opts:['The first fraction','Both fractions','The second fraction','Nothing'],a:2},
+  {topic:'unit2',type:'mc',q:'Simplify 6/9. What is the GCF of 6 and 9?',opts:['2','3','9','6'],a:1},
+  {topic:'unit3',type:'mc',q:'According to Mr. Behling, "A variable is just a ___."',opts:['letter','mystery','number','symbol'],a:2},
+  {topic:'unit3',type:'mc',q:'What are like terms?',opts:['Terms with the same coefficient','Terms with the same variable and exponent','Any two terms','Constants only'],a:1},
+  {topic:'unit3',type:'tf',q:'True or False: 3x and 3y are like terms.',opts:['True','False'],a:1},
+  {topic:'unit3',type:'mc',q:'When multiplying x³ · x⁴, you __ the exponents.',opts:['multiply','subtract','add','divide'],a:2},
+  {topic:'unit3',type:'mc',q:'What is the coefficient of x in the expression x + 5?',opts:['5','0','x','1'],a:3},
+  {topic:'unit4',type:'mc',q:'Which of these is an EQUATION (not an expression)?',opts:['3x + 5','2x − 7','4x + 1 = 9','5y'],a:2},
+  {topic:'unit4',type:'mc',q:'What is a "constant" in an algebraic expression?',opts:['A term with a variable','A term with no variable','The leading coefficient','The exponent'],a:1},
+  {topic:'unit4',type:'mc',q:'Using the distributive property: 2(x + 3) = ?',opts:['2x + 3','x + 6','2x + 6','2x + 2'],a:2},
+  {topic:'unit4',type:'tf',q:'True or False: To evaluate an expression, you substitute the given number for the variable.',opts:['True','False'],a:0},
+  {topic:'unit4',type:'mc',q:'Evaluate 4x − 2 when x = 3.',opts:['10','14','10','2'],a:0},
+];
+
+const DESCS={
+  'unit1':'Integer operations and order of operations (1.2, 1.3, 1.4).',
+  'unit2':'Fraction operations: simplify, add, subtract, multiply, divide (2.1, 2.3, 2.4, 2.5).',
+  'unit3':'Variables, like terms, and multiplying with exponents (3.1, 3.2, 3.3).',
+  'unit4':'Simplifying and evaluating algebraic expressions (4.1, 4.2, 4.4).'
+};
+let curTopic='unit1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){
+  return s.toString().toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/[−–]/g,'-')
+    .replace(/×/g,'*')
+    .replace(/\^/g,'')
+    .replace(/²/g,'2').replace(/³/g,'3').replace(/⁴/g,'4').replace(/⁵/g,'5').replace(/⁶/g,'6').replace(/⁷/g,'7')
+    .trim();
+}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  // fraction equivalents: handle 3/2 vs 1.5 etc. — just string match
+  // expression vs equation answers
+  if((un==='yes'||un==='y')&&cn==='yes')return true;
+  if((un==='no'||un==='n')&&cn==='no')return true;
+  return false;
+}
+
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">'+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const groups=['unit1','unit2','unit3','unit4'];
+  groups.forEach(g=>{
+    const pool=T.filter(p=>p.t===g);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){
+  const lbl={'unit1':'Unit 1','unit2':'Unit 2','unit3':'Unit 3','unit4':'Unit 4'};
+  return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');
+}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=isMatch(uval,p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=isMatch(inp.value,p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

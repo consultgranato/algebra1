@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 7 — Functions | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+
+      <!-- 7.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">7.1</span><span class="tlabel">Relations &amp; Functions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You have been working with x- and y-values all year. A <span class="vw">relation</span> is simply any pairing of x-values (inputs) with y-values (outputs). A <span class="vw">function</span> is a special kind of relation with one extra rule.</p>
+          <div class="kc"><div class="kc-lbl">What is a Relation?</div><div class="kc-body">
+            A <strong>relation</strong> is any set of ordered pairs (x, y). It can be shown as:<br>
+            &bull; A <strong>mapping diagram</strong> — bubbles on the left map to bubbles on the right<br>
+            &bull; A <strong>table</strong> — two columns, x and y<br>
+            &bull; A set of <strong>ordered pairs</strong> — e.g., {(1,2), (3,4)}<br>
+            &bull; A <strong>graph</strong> — points or curves on the coordinate plane
+          </div></div>
+          <div class="kc"><div class="kc-lbl">What is a Function?</div><div class="kc-body">
+            A <strong>function</strong> is a relation where each x-value is paired with <strong>EXACTLY ONE</strong> y-value.<br><br>
+            Think of it like a vending machine: each button (x) gives you exactly one item (y). If pressing button B3 sometimes gives chips and sometimes gives candy, it&apos;s not a function!<br><br>
+            <strong>The one rule:</strong> No x-value can repeat with a different y-value.
+          </div></div>
+          <p class="note-h">Vertical Line Test (VLT)</p>
+          <div class="kc"><div class="kc-lbl">Vertical Line Test</div><div class="kc-body">
+            If you can draw a vertical line anywhere on a graph and it crosses the graph <strong>more than once</strong>, it is <strong>NOT a function</strong>.<br>
+            If every vertical line crosses at most once &rarr; <strong>IS a function</strong>.
+          </div></div>
+          <p class="note-h">Discrete vs. Continuous</p>
+          <div class="kc"><div class="kc-lbl">Discrete vs. Continuous Graphs</div><div class="kc-body">
+            <strong>Discrete:</strong> Individual, unconnected dots. The values are separate (e.g., number of students).<br>
+            <strong>Continuous:</strong> A connected curve or line. The values flow without gaps (e.g., temperature over time).
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Is {(1,3),(2,5),(3,3)} a function?</div><div class="wsteps">
+            <span class="eq">x-values: 1, 2, 3 &mdash; all different &checkmark;</span>
+            <span class="eq">Each x pairs with exactly one y.</span>
+            <span class="eq eq-div">&rarr; YES, it is a function.</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Is {(2,4),(3,7),(2,9)} a function?</div><div class="wsteps">
+            <span class="eq">x = 2 appears twice (paired with 4 and 9).</span>
+            <span class="eq">One x goes to TWO different y-values!</span>
+            <span class="eq eq-div">&rarr; NO, NOT a function.</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; VLT on a circle vs. a line</div><div class="wsteps">
+            <span class="eq">Circle: a vertical line in the middle crosses at 2 points &rarr; NOT a function.</span>
+            <span class="eq">A straight diagonal line: any vertical line crosses once &rarr; IS a function.</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Math teachers have been putting the &ldquo;fun&rdquo; in functions since time t = 0.</div>
+        </div>
+      </div>
+
+      <!-- 7.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">7.2</span><span class="tlabel">Domain &amp; Range</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Now that we know what a relation is, we need vocabulary for describing all the inputs and outputs it uses.</p>
+          <div class="kc"><div class="kc-lbl">Domain &amp; Range</div><div class="kc-body">
+            <strong>Domain</strong> = the set of all x-values (inputs). Domain comes before Range &mdash; just like X comes before Y in the alphabet!<br>
+            <strong>Range</strong> = the set of all y-values (outputs).<br><br>
+            <strong>Memory trick:</strong> &ldquo;D comes before R, X comes before Y.&rdquo;
+          </div></div>
+          <div class="tip"><div class="tip-lbl">Shadow Technique</div><div class="tip-body">
+            <strong>Domain (x-values):</strong> Imagine a flashlight shining straight down onto the x-axis. The shadow shows which x-values are used.<br>
+            <strong>Range (y-values):</strong> Imagine a flashlight shining sideways onto the y-axis. The shadow shows which y-values are used.
+          </div></div>
+          <p class="note-h">Other names for the coordinate plane</p>
+          <div class="kc"><div class="kc-lbl">Names for the x-y plane</div><div class="kc-body">
+            The coordinate plane has several names:<br>
+            &bull; <strong>Cartesian plane</strong> (named after mathematician Ren&eacute; Descartes)<br>
+            &bull; <strong>xy-plane</strong><br>
+            &bull; <strong>Coordinate plane</strong>
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Table: find domain &amp; range</div><div class="wsteps">
+            <span class="eq">x: 1, 3, 5, 7 &nbsp;&nbsp;|&nbsp;&nbsp; y: 2, 6, 10, 14</span>
+            <span class="eq">Domain = {1, 3, 5, 7}</span>
+            <span class="eq eq-div">Range = {2, 6, 10, 14}</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Ordered pairs: {(2,5),(4,7),(-1,3)}</div><div class="wsteps">
+            <span class="eq">Domain = {-1, 2, 4}  (all x-values, list in order)</span>
+            <span class="eq eq-div">Range = {3, 5, 7}  (all y-values, list in order)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Discrete graph with 4 points</div><div class="wsteps">
+            <span class="eq">Points: (0,1), (2,3), (4,5), (-2,1)</span>
+            <span class="eq">Domain = {-2, 0, 2, 4}</span>
+            <span class="eq eq-div">Range = {1, 3, 5} (don&apos;t list 1 twice!)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> I love math puns. They are right in my domain.</div>
+        </div>
+      </div>
+
+      <!-- 7.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">7.3</span><span class="tlabel">Linear Functions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You have graphed lines before. Now we identify which functions are <span class="vw">linear</span> &mdash; meaning they form a straight line when graphed &mdash; and which are not.</p>
+          <div class="kc"><div class="kc-lbl">What makes a function linear?</div><div class="kc-body">
+            A <strong>linear function</strong> has a <strong>CONSTANT RATE OF CHANGE</strong> (the slope is always the same).<br><br>
+            Three ways to identify:<br>
+            &bull; <strong>Graph:</strong> forms a straight line<br>
+            &bull; <strong>Table:</strong> y-values change by the same amount each step (constant differences)<br>
+            &bull; <strong>Ordered pairs:</strong> slope between any two points is constant<br><br>
+            General form: y = mx + b (slope-intercept form, coming up in Unit 8!)
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Non-linear clue</div><div class="warn-body">If the differences in y-values are NOT constant in a table, or if the graph is a curve, it is NOT linear.</div></div>
+          <p class="note-h">Worked examples &mdash; tables</p>
+          <div class="worked"><div class="wlbl">Example 1 &mdash; Linear table</div><div class="wsteps">
+            <span class="eq">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 3, 5, 7, 9</span>
+            <span class="eq">Differences in y: 5-3=2, 7-5=2, 9-7=2 &rarr; constant!</span>
+            <span class="eq eq-div">&rarr; LINEAR function &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2 &mdash; Non-linear table</div><div class="wsteps">
+            <span class="eq">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 1, 4, 9, 16</span>
+            <span class="eq">Differences in y: 3, 5, 7 &rarr; NOT constant!</span>
+            <span class="eq eq-div">&rarr; NOT linear (this is y = x&sup2;, a parabola)</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3 &mdash; Linear from equation</div><div class="wsteps">
+            <span class="eq">Is y = 2x + 1 linear? &rarr; YES (it&apos;s in y = mx + b form)</span>
+            <span class="eq">Is y = x&sup2; + 3 linear? &rarr; NO (there is an exponent on x)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 7.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">7.4</span><span class="tlabel">Function Notation</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> We have been writing functions as y = expression. <span class="vw">Function notation</span> is a new way to write the same thing, and it makes it crystal clear what the input and output are.</p>
+          <div class="kc"><div class="kc-lbl">Reading f(x)</div><div class="kc-body">
+            <strong>f(x)</strong> is read &ldquo;f of x&rdquo; &mdash; where f is the <em>name</em> of the function and x is the <em>input</em>.<br>
+            f(x) replaces y. So y = 3x &minus; 2 becomes f(x) = 3x &minus; 2.<br><br>
+            You can use other letters too: g(x), h(x), k(x).<br><br>
+            <strong>f(x) does NOT mean f times x!</strong>
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Forward vs. Backward Problems</div><div class="kc-body">
+            <strong>Forward problems:</strong> Given an x-value, find f(x). Just substitute and simplify.<br>
+            &nbsp;&nbsp;Example: &ldquo;Find f(4)&rdquo; &rarr; plug in x = 4.<br><br>
+            <strong>Backward problems:</strong> Given f(x) = some number, find x. Solve like an equation.<br>
+            &nbsp;&nbsp;Example: &ldquo;If f(x) = 10, find x&rdquo; &rarr; set expression = 10 and solve.
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Forward: f(x) = 3x &minus; 2</div><div class="wsteps">
+            <span class="eq">f(4)  = 3(4) &minus; 2 = 12 &minus; 2 = 10</span>
+            <span class="eq">f(-1) = 3(-1) &minus; 2 = -3 &minus; 2 = -5</span>
+            <span class="eq">f(0)  = 3(0) &minus; 2 = 0 &minus; 2 = -2</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Backward: f(x) = 3x &minus; 2, find x when f(x) = 10</div><div class="wsteps">
+            <span class="eq">3x &minus; 2 = 10</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+2 &nbsp; +2</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x = 12</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&divide;3</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = 4 &checkmark;</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> What did one algebra student say to another? Don&apos;t bother me. I have my own problems.</div>
+        </div>
+      </div>
+
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 7.1</div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Relation</div><div class="vdef">Any pairing of input values (x) with output values (y). Every function is a relation, but not every relation is a function.</div></div><div><div class="vex-lbl">Example</div><div class="vex">{(1,2),(3,4),(5,6)}<br>This is a relation (and a function).</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Mapping</div><div class="vdef">A diagram that shows which x-values (left bubble) pair with which y-values (right bubble) using arrows.</div></div><div><div class="vex-lbl">Example</div><div class="vex">1 &rarr; 5<br>2 &rarr; 7<br>3 &rarr; 5 &nbsp;&larr; ok! (two x&apos;s can share a y)</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Table</div><div class="vdef">A representation of a relation using two columns: one for x-values (input) and one for y-values (output).</div></div><div><div class="vex-lbl">Example</div><div class="vex">x | y<br>1 | 3<br>2 | 5<br>3 | 7</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Ordered pair</div><div class="vdef">A pair of numbers (x, y) that gives the coordinates of a point. The first number is always the x (input), the second is y (output).</div></div><div><div class="vex-lbl">Example</div><div class="vex">(3, 7) &rarr; x = 3, y = 7<br>Always x first, then y.</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Graph (as a representation)</div><div class="vdef">Points or a curve plotted on the coordinate plane, showing all ordered pairs of a relation visually.</div></div><div><div class="vex-lbl">Example</div><div class="vex">A set of dots on the grid.<br>Connected line = continuous.<br>Separate dots = discrete.</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Function</div><div class="vdef">A relation where each x-value is paired with EXACTLY ONE y-value. No x repeats with a different y.</div></div><div><div class="vex-lbl">Example</div><div class="vex">{(1,2),(2,5),(3,8)} &rarr; <span class="chip chip-g">Function</span><br>{(1,2),(1,5)} &rarr; <span class="chip chip-a">NOT a function</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Discrete graph</div><div class="vdef">A graph made of individual, unconnected dots. The data has separate, countable values (no values between the dots).</div></div><div><div class="vex-lbl">Example</div><div class="vex">Number of siblings: can be 0,1,2,3 &mdash; not 1.5.<br>&rarr; <span class="chip chip-p">Discrete</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">7.1</div><div class="vterm">Continuous graph</div><div class="vdef">A graph that is an unbroken connected curve or line. Values between any two points are also included.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Temperature over time &mdash; every decimal temperature is possible.<br>&rarr; <span class="chip chip-g">Continuous</span></div></div></div>
+        <div class="vsec">New in 7.2</div>
+        <div class="vcard"><div><div class="vtag">7.2</div><div class="vterm">Domain</div><div class="vdef">The set of ALL x-values (inputs) used in a relation. &ldquo;D comes before R, just like X comes before Y.&rdquo;</div></div><div><div class="vex-lbl">Example</div><div class="vex">{(2,5),(4,7),(-1,3)}<br>Domain = {-1, 2, 4}</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.2</div><div class="vterm">Range</div><div class="vdef">The set of ALL y-values (outputs) used in a relation. These are the results after you apply the function.</div></div><div><div class="vex-lbl">Example</div><div class="vex">{(2,5),(4,7),(-1,3)}<br>Range = {3, 5, 7}</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.2</div><div class="vterm">X-axis</div><div class="vdef">The horizontal number line on the coordinate plane. Domain values live here (inputs).</div></div><div><div class="vex-lbl">Example</div><div class="vex">The line going left &larr;&rarr; right.<br>Positive x is to the right.</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.2</div><div class="vterm">Y-axis</div><div class="vdef">The vertical number line on the coordinate plane. Range values live here (outputs).</div></div><div><div class="vex-lbl">Example</div><div class="vex">The line going up &uarr;&darr; down.<br>Positive y is upward.</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.2</div><div class="vterm">Origin</div><div class="vdef">The point (0, 0) where the x-axis and y-axis cross. The starting center of the coordinate plane.</div></div><div><div class="vex-lbl">Example</div><div class="vex">The point exactly in the<br>middle of the grid: (0, 0)</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">7.2</div><div class="vterm">Different names for the x-y plane</div><div class="vdef">The coordinate plane is also called the <strong>Cartesian plane</strong> (after Ren&eacute; Descartes), the <strong>xy-plane</strong>, or simply the <strong>coordinate plane</strong>. All mean the same thing: a grid with an x-axis and y-axis.</div></div></div>
+        <div class="vsec">New in 7.3</div>
+        <div class="vcard"><div><div class="vtag">7.3</div><div class="vterm">Constant rate of change</div><div class="vdef">When the ratio of change in y to change in x is always the same. This is the slope. Linear functions always have a constant rate of change.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Table: y goes up by 3 every time x goes up by 1.<br>Rate of change = 3 (constant!) &rarr; linear</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.3</div><div class="vterm">Linear function (graph)</div><div class="vdef">A function whose graph is a straight line. The exponent on x is 1 (no x&sup2;, no |x|, etc.).</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 2x + 1 &rarr; straight line &checkmark;<br>y = x&sup2; &rarr; parabola, NOT linear</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.3</div><div class="vterm">Linear function (table)</div><div class="vdef">In a table, a linear function shows constant differences in the y-values when x increases by the same amount each row.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x: 1,2,3 | y: 5,8,11<br>Differences: +3, +3 &rarr; linear &checkmark;</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.3</div><div class="vterm">Linear function (ordered pairs)</div><div class="vdef">A set of ordered pairs is linear if the slope (rise over run) between any two pairs is always equal.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(0,1),(1,3),(2,5): slope = 2/1 = 2 each time &rarr; linear &checkmark;</div></div></div>
+        <div class="vsec">New in 7.4</div>
+        <div class="vcard"><div><div class="vtag">7.4</div><div class="vterm">Function notation</div><div class="vdef">Writing a function as f(x) instead of y. It names the function (f) and shows the input (x). f(x) = expression.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 3x &minus; 2 becomes f(x) = 3x &minus; 2.<br>f(x) is NOT f times x!</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.4</div><div class="vterm">How do you read &ldquo;f(x)&rdquo;?</div><div class="vdef">Read as &ldquo;f of x&rdquo;. The letter before the parenthesis is the function name. The value inside is the input.</div></div><div><div class="vex-lbl">Example</div><div class="vex">f(3) = &ldquo;f of 3&rdquo; &rarr; plug in x = 3<br>g(0) = &ldquo;g of zero&rdquo; &rarr; plug in x = 0</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.4</div><div class="vterm">&ldquo;Forward&rdquo; problems</div><div class="vdef">Given an x-value, find f(x). Substitute the given number in for x and simplify. These go input &rarr; output.</div></div><div><div class="vex-lbl">Example</div><div class="vex">f(x) = 4x &minus; 1. Find f(3):<br>f(3) = 4(3) &minus; 1 = 11</div></div></div>
+        <div class="vcard"><div><div class="vtag">7.4</div><div class="vterm">&ldquo;Backward&rdquo; problems</div><div class="vdef">Given the output f(x) = some value, find the input x. Set the expression equal to the given value and solve like an equation.</div></div><div><div class="vex-lbl">Example</div><div class="vex">f(x) = 4x &minus; 1. If f(x) = 11, find x:<br>4x &minus; 1 = 11 &rarr; 4x = 12 &rarr; x = 3</div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('7.1',this)">7.1</button>
+          <button class="pqf-btn" onclick="setQFilter('7.2',this)">7.2</button>
+          <button class="pqf-btn" onclick="setQFilter('7.3',this)">7.3</button>
+          <button class="pqf-btn" onclick="setQFilter('7.4',this)">7.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('7.1',this)">7.1 &mdash; Relations &amp; Functions</button>
+              <button class="tpbtn" onclick="selTopic('7.2',this)">7.2 &mdash; Domain &amp; Range</button>
+              <button class="tpbtn" onclick="selTopic('7.3',this)">7.3 &mdash; Linear Functions</button>
+              <button class="tpbtn" onclick="selTopic('7.4',this)">7.4 &mdash; Function Notation</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Identifying relations, functions, and using the Vertical Line Test.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 7</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:7,name:"Functions",topics:[
+  {id:"7.1",label:"Relations & Functions",videos:[]},
+  {id:"7.2",label:"Domain & Range",videos:[]},
+  {id:"7.3",label:"Linear Functions",videos:[]},
+  {id:"7.4",label:"Function Notation",videos:[]},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='7'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'7.1':[
+  {q:"Is this a function?",eq:"{(1,2),(2,3),(3,2)}",a:"yes",fmt:"yes or no",h:"All x-values are different: 1, 2, 3. Each x has exactly one y."},
+  {q:"Is this a function?",eq:"{(2,5),(2,7),(3,9)}",a:"no",fmt:"yes or no",h:"x = 2 appears twice with different y-values (5 and 7). Not a function!"},
+  {q:"Is this a function?",eq:"{(0,0),(1,1),(2,4),(3,9)}",a:"yes",fmt:"yes or no",h:"All x-values (0,1,2,3) are different. Each maps to exactly one y."},
+  {q:"Is this mapping a function? x = 3 maps to both y = 5 and y = 7.",eq:"",a:"no",fmt:"yes or no",h:"One x-value (3) goes to two different y-values. That breaks the function rule."},
+  {q:"A graph fails the Vertical Line Test. Is it a function?",eq:"",a:"no",fmt:"yes or no",h:"Failing the VLT means a vertical line crosses the graph more than once — not a function."},
+  {q:"A graph passes the Vertical Line Test. Is it a function?",eq:"",a:"yes",fmt:"yes or no",h:"Passing the VLT means every vertical line crosses at most once — it is a function."},
+  {q:"Is this a function?",eq:"{(4,1),(5,1),(6,1)}",a:"yes",fmt:"yes or no",h:"All x-values are different (4,5,6). Multiple x's sharing the same y is fine!"},
+  {q:"Is this a function? In a table: x = 1,2,3; y = 5,5,5.",eq:"",a:"yes",fmt:"yes or no",h:"x-values 1, 2, 3 are all different. Same y-value is allowed. Yes, it's a function."},
+  {q:"Is this a function? In a mapping: 1→A, 2→B, 2→C.",eq:"",a:"no",fmt:"yes or no",h:"x = 2 maps to both A and C. Not a function."},
+  {q:"Which describes a discrete graph?",eq:"",a:"individual unconnected dots",fmt:"individual unconnected dots or connected curve",h:"Discrete graphs show separate, unconnected points."},
+  {q:"Which describes a continuous graph?",eq:"",a:"connected curve",fmt:"individual unconnected dots or connected curve",h:"Continuous graphs are unbroken lines or curves."},
+  {q:"Is this a function?",eq:"{(-2,3),(-1,3),(0,3),(1,3)}",a:"yes",fmt:"yes or no",h:"All x-values are different. Having the same y is OK."},
+  {q:"Is a circle a function?",eq:"",a:"no",fmt:"yes or no",h:"A circle fails the VLT — a vertical line through the middle crosses it twice."},
+  {q:"Is a straight diagonal line a function?",eq:"",a:"yes",fmt:"yes or no",h:"A non-vertical straight line passes the VLT — every vertical line crosses it once."},
+  {q:"Is this a function?",eq:"{(1,2),(3,4),(1,6)}",a:"no",fmt:"yes or no",h:"x = 1 appears twice with y = 2 and y = 6. Not a function."},
+],
+'7.2':[
+  {q:"Find the domain:",eq:"{(2,5),(4,7),(-1,3)}",a:"{-1,2,4}",fmt:"{list of values}",h:"Domain = all x-values. List: -1, 2, 4."},
+  {q:"Find the range:",eq:"{(2,5),(4,7),(-1,3)}",a:"{3,5,7}",fmt:"{list of values}",h:"Range = all y-values. List: 3, 5, 7."},
+  {q:"Find the domain:",eq:"{(0,1),(1,3),(2,5),(3,7)}",a:"{0,1,2,3}",fmt:"{list of values}",h:"Domain = x-values: 0, 1, 2, 3."},
+  {q:"Find the range:",eq:"{(0,1),(1,3),(2,5),(3,7)}",a:"{1,3,5,7}",fmt:"{list of values}",h:"Range = y-values: 1, 3, 5, 7."},
+  {q:"Find the domain of this table: x = -2, 0, 2, 4; y = 3, 5, 7, 9.",eq:"",a:"{-2,0,2,4}",fmt:"{list of values}",h:"Domain = all x-values in the table."},
+  {q:"Find the range of this table: x = -2, 0, 2, 4; y = 3, 5, 7, 9.",eq:"",a:"{3,5,7,9}",fmt:"{list of values}",h:"Range = all y-values in the table."},
+  {q:"Find the domain:",eq:"{(5,2),(5,3),(5,4)}",a:"{5}",fmt:"{list of values}",h:"Domain = x-values. Only x = 5 appears (once!)."},
+  {q:"Find the range:",eq:"{(5,2),(5,3),(5,4)}",a:"{2,3,4}",fmt:"{list of values}",h:"Range = y-values: 2, 3, 4."},
+  {q:"The coordinate plane is also called the:",eq:"",a:"Cartesian plane",fmt:"name of the plane",h:"Named after René Descartes. Also called xy-plane or coordinate plane."},
+  {q:"Which axis holds the domain values?",eq:"",a:"x-axis",fmt:"x-axis or y-axis",h:"Domain = x-values, which are measured on the x-axis (horizontal)."},
+  {q:"Which axis holds the range values?",eq:"",a:"y-axis",fmt:"x-axis or y-axis",h:"Range = y-values, which are measured on the y-axis (vertical)."},
+  {q:"Find the domain:",eq:"{(-3,0),(0,3),(3,6)}",a:"{-3,0,3}",fmt:"{list of values}",h:"x-values: -3, 0, 3."},
+  {q:"Find the range:",eq:"{(-3,0),(0,3),(3,6)}",a:"{0,3,6}",fmt:"{list of values}",h:"y-values: 0, 3, 6."},
+  {q:"What is the origin?",eq:"",a:"(0,0)",fmt:"ordered pair",h:"The origin is the point (0,0) where the axes cross."},
+  {q:"Find the range. Table: x = 1,2,3; y = 4,4,4.",eq:"",a:"{4}",fmt:"{list of values}",h:"Range = all y-values. Only 4 appears, so range = {4}."},
+],
+'7.3':[
+  {q:"Is y = 2x + 1 a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"It's in y = mx + b form with no exponents on x. Linear!"},
+  {q:"Is y = x squared + 3 a linear function?",eq:"",a:"not linear",fmt:"linear or not linear",h:"The exponent on x is 2, not 1. This is a parabola, not linear."},
+  {q:"Table: x = 1,2,3; y = 3,5,7. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences in y: 5-3=2, 7-5=2. Constant difference of 2. Linear!"},
+  {q:"Table: x = 1,2,3; y = 1,4,9. Is this linear?",eq:"",a:"not linear",fmt:"linear or not linear",h:"Differences in y: 3, 5 — NOT constant. Not linear."},
+  {q:"Table: x = 0,1,2,3; y = 5,8,11,14. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences in y: 3,3,3 — constant. Linear!"},
+  {q:"Is y = -3x + 7 a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"It's in y = mx + b form. Linear!"},
+  {q:"Table: x = 1,2,3; y = 2,6,18. Is this linear?",eq:"",a:"not linear",fmt:"linear or not linear",h:"Differences: 4, 12 — NOT constant. Not linear (exponential)."},
+  {q:"Is y = 5 a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"y = 5 is a horizontal line. It's linear (slope = 0)."},
+  {q:"Table: x = -2,-1,0,1; y = -3,-1,1,3. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences: +2,+2,+2 — constant. Linear!"},
+  {q:"A graph is a straight diagonal line. Is it a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"A straight line graph = linear function."},
+  {q:"A graph is a U-shaped curve. Is it a linear function?",eq:"",a:"not linear",fmt:"linear or not linear",h:"A U-shape (parabola) is NOT a straight line. Not linear."},
+  {q:"Table: x = 1,2,3,4; y = 10,8,6,4. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences: -2,-2,-2 — constant. Linear (decreasing)!"},
+  {q:"Is y = |x| a linear function?",eq:"",a:"not linear",fmt:"linear or not linear",h:"The absolute value function forms a V-shape, not a straight line. Not linear."},
+  {q:"A linear function always has a constant rate of change. True or false?",eq:"",a:"true",fmt:"true or false",h:"By definition, linear functions have the same slope (rate of change) everywhere."},
+  {q:"Table: x = 0,1,2,3; y = 0,1,4,9. Is this linear?",eq:"",a:"not linear",fmt:"linear or not linear",h:"Differences: 1, 3, 5 — NOT constant. Not linear (y = x²)."},
+],
+'7.4':[
+  {q:"f(x) = 4x - 1. Find f(3).",eq:"",a:"f(3) = 11",fmt:"f(_) = ___",h:"f(3) = 4(3) - 1 = 12 - 1 = 11."},
+  {q:"f(x) = 4x - 1. Find f(0).",eq:"",a:"f(0) = -1",fmt:"f(_) = ___",h:"f(0) = 4(0) - 1 = 0 - 1 = -1."},
+  {q:"f(x) = 4x - 1. Find f(-2).",eq:"",a:"f(-2) = -9",fmt:"f(_) = ___",h:"f(-2) = 4(-2) - 1 = -8 - 1 = -9."},
+  {q:"g(x) = -2x + 6. Find g(0).",eq:"",a:"g(0) = 6",fmt:"g(_) = ___",h:"g(0) = -2(0) + 6 = 6."},
+  {q:"g(x) = -2x + 6. Find g(3).",eq:"",a:"g(3) = 0",fmt:"g(_) = ___",h:"g(3) = -2(3) + 6 = -6 + 6 = 0."},
+  {q:"g(x) = -2x + 6. Find g(-1).",eq:"",a:"g(-1) = 8",fmt:"g(_) = ___",h:"g(-1) = -2(-1) + 6 = 2 + 6 = 8."},
+  {q:"h(x) = 3x + 2. Find h(5).",eq:"",a:"h(5) = 17",fmt:"h(_) = ___",h:"h(5) = 3(5) + 2 = 15 + 2 = 17."},
+  {q:"h(x) = 3x + 2. Find h(-3).",eq:"",a:"h(-3) = -7",fmt:"h(_) = ___",h:"h(-3) = 3(-3) + 2 = -9 + 2 = -7."},
+  {q:"f(x) = 3x - 1. If f(x) = 5, find x.",eq:"",a:"x = 2",fmt:"x = ___",h:"3x - 1 = 5 → 3x = 6 → x = 2."},
+  {q:"f(x) = 2x + 4. If f(x) = 10, find x.",eq:"",a:"x = 3",fmt:"x = ___",h:"2x + 4 = 10 → 2x = 6 → x = 3."},
+  {q:"g(x) = 5x - 5. If g(x) = 20, find x.",eq:"",a:"x = 5",fmt:"x = ___",h:"5x - 5 = 20 → 5x = 25 → x = 5."},
+  {q:"f(x) = -x + 8. If f(x) = 3, find x.",eq:"",a:"x = 5",fmt:"x = ___",h:"-x + 8 = 3 → -x = -5 → x = 5."},
+  {q:"k(x) = 6x. Find k(4).",eq:"",a:"k(4) = 24",fmt:"k(_) = ___",h:"k(4) = 6(4) = 24."},
+  {q:"f(x) = x - 7. Find f(10).",eq:"",a:"f(10) = 3",fmt:"f(_) = ___",h:"f(10) = 10 - 7 = 3."},
+  {q:"f(x) = 2x - 3. If f(x) = -3, find x.",eq:"",a:"x = 0",fmt:"x = ___",h:"2x - 3 = -3 → 2x = 0 → x = 0."},
+]};
+
+const T=[
+  {t:"7.1",q:"Is this a function?",eq:"{(1,5),(2,5),(3,5)}",a:"yes",fmt:"yes or no",h:"All x-values are different (1,2,3). Yes, it's a function."},
+  {t:"7.1",q:"Is this a function?",eq:"{(3,1),(3,2),(4,5)}",a:"no",fmt:"yes or no",h:"x = 3 maps to two y-values (1 and 2). Not a function."},
+  {t:"7.1",q:"A graph passes the Vertical Line Test. Is it a function?",eq:"",a:"yes",fmt:"yes or no",h:"Passing VLT means each x has at most one y. Yes, a function."},
+  {t:"7.1",q:"Is a vertical straight line a function?",eq:"",a:"no",fmt:"yes or no",h:"A vertical line fails the VLT — every point on it has the same x but different y-values."},
+  {t:"7.1",q:"Is this a function?",eq:"{(-1,4),(0,4),(1,4),(2,4)}",a:"yes",fmt:"yes or no",h:"All x-values are unique. Same y-values are perfectly fine."},
+  {t:"7.2",q:"Find the domain:",eq:"{(3,9),(5,25),(7,49)}",a:"{3,5,7}",fmt:"{list of values}",h:"Domain = x-values: 3, 5, 7."},
+  {t:"7.2",q:"Find the range:",eq:"{(3,9),(5,25),(7,49)}",a:"{9,25,49}",fmt:"{list of values}",h:"Range = y-values: 9, 25, 49."},
+  {t:"7.2",q:"What is another name for the coordinate plane?",eq:"",a:"Cartesian plane",fmt:"name",h:"The coordinate plane is also called the Cartesian plane or xy-plane."},
+  {t:"7.2",q:"Find the domain. Table: x = -1, 0, 1, 2; y = 3, 5, 7, 9.",eq:"",a:"{-1,0,1,2}",fmt:"{list of values}",h:"Domain = all x-values in the table."},
+  {t:"7.2",q:"Find the range. Table: x = -1, 0, 1, 2; y = 3, 5, 7, 9.",eq:"",a:"{3,5,7,9}",fmt:"{list of values}",h:"Range = all y-values in the table."},
+  {t:"7.3",q:"Table: x = 1,2,3,4; y = 2,4,6,8. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences in y: +2,+2,+2 — constant. Linear!"},
+  {t:"7.3",q:"Table: x = 1,2,3; y = 1,8,27. Is this linear?",eq:"",a:"not linear",fmt:"linear or not linear",h:"Differences: 7, 19 — NOT constant. Not linear (y = x³)."},
+  {t:"7.3",q:"Is y = -5x + 3 a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"It's in y = mx + b form. Linear!"},
+  {t:"7.3",q:"A graph is a curved parabola. Is it a linear function?",eq:"",a:"not linear",fmt:"linear or not linear",h:"A parabola is NOT a straight line. Not linear."},
+  {t:"7.3",q:"Table: x = 0,2,4,6; y = 1,5,9,13. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences: +4,+4,+4 — constant. Linear!"},
+  {t:"7.4",q:"f(x) = 5x - 3. Find f(2).",eq:"",a:"f(2) = 7",fmt:"f(_) = ___",h:"f(2) = 5(2) - 3 = 10 - 3 = 7."},
+  {t:"7.4",q:"g(x) = -3x + 9. Find g(3).",eq:"",a:"g(3) = 0",fmt:"g(_) = ___",h:"g(3) = -3(3) + 9 = -9 + 9 = 0."},
+  {t:"7.4",q:"f(x) = 2x + 1. Find f(-4).",eq:"",a:"f(-4) = -7",fmt:"f(_) = ___",h:"f(-4) = 2(-4) + 1 = -8 + 1 = -7."},
+  {t:"7.4",q:"h(x) = 4x - 8. If h(x) = 0, find x.",eq:"",a:"x = 2",fmt:"x = ___",h:"4x - 8 = 0 → 4x = 8 → x = 2."},
+  {t:"7.4",q:"f(x) = 3x + 6. If f(x) = 18, find x.",eq:"",a:"x = 4",fmt:"x = ___",h:"3x + 6 = 18 → 3x = 12 → x = 4."},
+];
+
+const VQB=[
+  {topic:'7.1',type:'mc',q:'Which of the following is the definition of a function?',opts:['Any set of ordered pairs','Each x-value has exactly one y-value','Every y-value has exactly one x-value','A graph with no curves'],a:1},
+  {topic:'7.1',type:'mc',q:'Which set is NOT a function?',opts:['{(1,2),(2,3),(3,4)}','{(1,2),(1,3),(2,4)}','{(1,2),(2,2),(3,2)}','{(0,0),(1,1),(2,2)}'],a:1},
+  {topic:'7.1',type:'tf',q:'True or False: A relation where multiple x-values share the same y-value can still be a function.',opts:['True','False'],a:0},
+  {topic:'7.1',type:'mc',q:'The Vertical Line Test says a graph is a function if...',opts:['Every horizontal line crosses it once','Every vertical line crosses it at most once','It has no curves','It passes through the origin'],a:1},
+  {topic:'7.1',type:'mc',q:'What describes a discrete graph?',opts:['A connected, unbroken curve','Individual unconnected dots','A straight line only','Any graph that passes the VLT'],a:1},
+  {topic:'7.1',type:'tf',q:'True or False: A circle passes the Vertical Line Test.',opts:['True','False'],a:1},
+  {topic:'7.2',type:'mc',q:'The domain of a relation is...',opts:['All y-values (outputs)','All x-values (inputs)','The slope of the function','The number of ordered pairs'],a:1},
+  {topic:'7.2',type:'mc',q:'The range of {(1,4),(2,6),(3,4)} is...',opts:['{1,2,3}','{4,6}','{1,2,3,4,6}','{4,4,6}'],a:1},
+  {topic:'7.2',type:'mc',q:'The coordinate plane is also called the...',opts:['Number plane','Cartesian plane','Function plane','Ordered plane'],a:1},
+  {topic:'7.2',type:'tf',q:'True or False: "D comes before R, just like X comes before Y" is a memory trick for domain and range.',opts:['True','False'],a:0},
+  {topic:'7.2',type:'mc',q:'The origin is located at...',opts:['(1,0)','(0,1)','(0,0)','(-1,-1)'],a:2},
+  {topic:'7.3',type:'mc',q:'A linear function always has a...',opts:['Curved graph','Constant rate of change','Positive slope','Negative y-intercept'],a:1},
+  {topic:'7.3',type:'mc',q:'How do you identify a linear function from a table?',opts:['The y-values are always positive','The y-values have constant differences','The x-values are always 1,2,3...','The table has exactly 4 rows'],a:1},
+  {topic:'7.3',type:'tf',q:'True or False: y = x² is a linear function.',opts:['True','False'],a:1},
+  {topic:'7.3',type:'mc',q:'Which equation is linear?',opts:['y = x²','y = 2x + 5','y = x³','y = |x|'],a:1},
+  {topic:'7.4',type:'mc',q:'f(x) is read as...',opts:['f times x','f of x','f plus x','function x'],a:1},
+  {topic:'7.4',type:'mc',q:'A "forward" function problem means...',opts:['Given f(x), find the function rule','Given x, find f(x)','Given f(x) = number, find x','Graph the function'],a:1},
+  {topic:'7.4',type:'tf',q:'True or False: f(3) means f multiplied by 3.',opts:['True','False'],a:1},
+  {topic:'7.4',type:'mc',q:'f(x) = 2x + 1. What is f(4)?',opts:['7','9','8','5'],a:1},
+  {topic:'7.4',type:'mc',q:'f(x) = 3x - 6. If f(x) = 0, what is x?',opts:['x = -6','x = 2','x = 6','x = -2'],a:1},
+];
+
+const DESCS={'7.1':'Identifying relations, functions, and using the Vertical Line Test.','7.2':'Finding domain and range from tables, ordered pairs, and graphs.','7.3':'Identifying linear functions from graphs, tables, and equations.','7.4':'Using function notation for forward and backward problems.'};
+let curTopic='7.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/≤/g,'<=').replace(/≥/g,'>=').trim();}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  if((un==='nosolution'||un==='ns')&&cn.includes('nosolution'))return true;
+  if((un==='allrealnumbers'||un==='arn'||un==='allreal')&&cn.includes('allrealnumbers'))return true;
+  return un===cn.replace(/≤/g,'<=').replace(/≥/g,'>=');
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['7.1','7.2','7.3','7.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'7.1':'Topic 7.1','7.2':'Topic 7.2','7.3':'Topic 7.3','7.4':'Topic 7.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a)||(norm(uval)==='nosolution'&&p.a.toLowerCase().includes('nosolution'))||(norm(uval)==='arn'&&p.a.toLowerCase().includes('allreal'))||(norm(uval)==='allrealnumbers'&&p.a.toLowerCase().includes('allreal'));
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a)||(norm(inp.value)==='nosolution'&&p.a.toLowerCase().includes('nosolution'))||(norm(inp.value)==='arn'&&p.a.toLowerCase().includes('allreal'));
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

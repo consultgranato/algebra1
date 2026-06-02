@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 12 — Exponential Functions | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 12.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">12.1</span><span class="tlabel">Exponential Functions (Part 1)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You know <span class="vw">linear patterns</span> &mdash; add or subtract the same amount each time. <span class="vw">Exponential patterns</span> are different: you multiply or divide by the same number (the <span class="vw">common ratio</span>) each time.</p>
+          <div class="kc"><div class="kc-lbl">Two types of patterns</div><div class="kc-body">
+            <strong>Linear:</strong> Add or subtract a constant each step (y goes up/down by the same amount)<br>
+            &nbsp;&nbsp;Example: 2, 5, 8, 11, 14 &rarr; +3 each time<br><br>
+            <strong>Exponential:</strong> Multiply or divide by a constant each step (y grows/shrinks by a factor)<br>
+            &nbsp;&nbsp;Example: 2, 6, 18, 54 &rarr; &times;3 each time
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Standard form of an exponential function</div><div class="kc-body">
+            <strong>y = ab<sup>x</sup></strong><br><br>
+            <strong>a</strong> = y-intercept (the starting value, where x = 0)<br>
+            <strong>b</strong> = the common ratio (multiplier)<br>
+            &nbsp;&nbsp;&bull; If b &gt; 1 &rarr; <span style="color:#3b6d11;font-weight:600">GROWTH</span> (curve goes up)<br>
+            &nbsp;&nbsp;&bull; If 0 &lt; b &lt; 1 &rarr; <span style="color:#a32d2d;font-weight:600">DECAY</span> (curve goes down toward zero)
+          </div></div>
+          <p class="note-h">Key attributes</p>
+          <div class="kc"><div class="kc-lbl">Domain, Range, and y-intercept</div><div class="kc-body">
+            <strong>y-intercept:</strong> at x = 0, y = a (plug in zero for x: b<sup>0</sup> = 1, so y = a)<br>
+            <strong>Domain:</strong> all real numbers<br>
+            <strong>Range:</strong> y &gt; 0 (for positive a; the curve never touches the x-axis)
+          </div></div>
+          <p class="note-h">Average Rate of Change</p>
+          <div class="kc"><div class="kc-lbl">Formula</div><div class="kc-body">
+            Average Rate of Change = (f(x&#8322;) &minus; f(x&#8321;)) / (x&#8322; &minus; x&#8321;)<br>
+            This is &ldquo;rise over run&rdquo; for curves &mdash; unlike lines, it changes at every interval!
+          </div></div>
+          <p class="note-h">Worked example &mdash; y = 2(3<sup>x</sup>)</p>
+          <div class="worked"><div class="wlbl">Evaluate y = 2(3^x) for x = 0, 1, 2, 3</div><div class="wsteps">
+            <span class="eq">x = 0: y = 2(3&sup0;) = 2(1) = 2</span>
+            <span class="eq">x = 1: y = 2(3&sup1;) = 2(3) = 6</span>
+            <span class="eq">x = 2: y = 2(3&sup2;) = 2(9) = 18</span>
+            <span class="eq">x = 3: y = 2(3&sup3;) = 2(27) = 54</span>
+            <span class="eq eq-div">b = 3 &gt; 1 &rarr; GROWTH. y-intercept = 2. Domain: all reals. Range: y &gt; 0.</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> The population of Ireland is exponential. Every year it&apos;s Dublin. (Doubling.)</div>
+        </div>
+      </div>
+
+      <!-- 12.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">12.2</span><span class="tlabel">Exponential Functions (Part 2)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> In 12.1 you evaluated functions. Now we work <span class="vw">backwards</span> &mdash; given a graph or table, determine the equation y = ab<sup>x</sup>. Mr. Behling loves &ldquo;backwards&rdquo; problems!</p>
+          <div class="kc"><div class="kc-lbl">How to find the equation from a table or graph</div><div class="kc-body">
+            <strong>Step 1 &mdash; Find a:</strong> Read the y-intercept (where x = 0). That is your &ldquo;a&rdquo; value.<br>
+            <strong>Step 2 &mdash; Find b:</strong> Divide any y-value by the previous y-value (consecutive values). That is your common ratio &ldquo;b&rdquo;.<br>
+            <strong>Step 3 &mdash; Write it:</strong> y = ab<sup>x</sup><br>
+            <strong>Growth or decay?</strong> If b &gt; 1 &rarr; growth; if 0 &lt; b &lt; 1 &rarr; decay.
+          </div></div>
+          <p class="note-h">Worked example 1 &mdash; from a table</p>
+          <div class="worked"><div class="wlbl">Table: x = 0, 1, 2, 3 and y = 5, 10, 20, 40</div><div class="wsteps">
+            <span class="eq">Step 1: x=0 gives y=5 &rarr; a = 5</span>
+            <span class="eq">Step 2: ratio = 10/5 = 2 &rarr; b = 2</span>
+            <span class="eq eq-div">Equation: y = 5(2^x) &mdash; GROWTH (b=2&gt;1)</span>
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; from a graph</p>
+          <div class="worked"><div class="wlbl">Graph shows y-intercept at 8 and the curve is decreasing, halving each time</div><div class="wsteps">
+            <span class="eq">a = 8 (y-intercept from graph)</span>
+            <span class="eq">b = 1/2 (halving each step)</span>
+            <span class="eq eq-div">Equation: y = 8(1/2)^x &mdash; DECAY (0 &lt; b &lt; 1)</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 12.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">12.3</span><span class="tlabel">Exponential Function Word Problems</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Real-world situations often follow exponential patterns. You can now write and evaluate <span class="vw">exponential growth</span> and <span class="vw">exponential decay</span> models from word problems.</p>
+          <div class="kc"><div class="kc-lbl">Formulas</div><div class="kc-body">
+            <strong>Growth:</strong> A = A&#8320;(1 + r)<sup>t</sup><br>
+            <strong>Decay:</strong> A = A&#8320;(1 &minus; r)<sup>t</sup><br><br>
+            A&#8320; = initial amount, r = rate (as a decimal), t = time
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Real-world examples</div><div class="kc-body">
+            <span class="chip chip-g">Growth:</span> Population, bacteria, investments, COVID spread<br>
+            <span class="chip chip-a">Decay:</span> Radioactive decay, car depreciation, cooling
+          </div></div>
+          <p class="note-h">Worked example 1 &mdash; population growth</p>
+          <div class="worked"><div class="wlbl">100 frogs, 22% annual growth &mdash; after 5 years</div><div class="wsteps">
+            <span class="eq">A = 100(1 + 0.22)^5 = 100(1.22)^5</span>
+            <span class="eq">= 100(2.703) &asymp; 270 frogs</span>
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; population decline</p>
+          <div class="worked"><div class="wlbl">1200 birds, 5% decline, 2019&ndash;2029 (10 years)</div><div class="wsteps">
+            <span class="eq">A = 1200(1 &minus; 0.05)^10 = 1200(0.95)^10</span>
+            <span class="eq">= 1200(0.5987) &asymp; 718 birds</span>
+          </div></div>
+          <p class="note-h">Worked example 3 &mdash; depreciation</p>
+          <div class="worked"><div class="wlbl">Car worth $30,000 in 2026, depreciates 15%/year &mdash; value in 2030 (4 years later)</div><div class="wsteps">
+            <span class="eq">A = 30000(1 &minus; 0.15)^4 = 30000(0.85)^4</span>
+            <span class="eq">= 30000(0.5220) &asymp; $15,660</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> How do you know your dentist was good at algebra? She tells you that more candy leads to exponential decay.</div>
+        </div>
+      </div>
+
+      <!-- 12.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">12.4</span><span class="tlabel">Solving Exponential Equations</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> When two exponential expressions are equal <strong>AND</strong> have the same base, their exponents must be equal. This is the key rule for solving exponential equations.</p>
+          <div class="kc"><div class="kc-lbl">Key concept</div><div class="kc-body">
+            If b<sup>m</sup> = b<sup>n</sup>, then m = n. (Same base, equal &rarr; exponents are equal.)<br><br>
+            <strong>Method 1 (same base already):</strong> Set exponents equal, solve.<br>
+            <strong>Method 2 (convert to same base):</strong> Rewrite using powers (e.g., 4 = 2&sup2;, 8 = 2&sup3;, 9 = 3&sup2;, 27 = 3&sup3;).<br>
+            <strong>Method 3 (can&apos;t match bases):</strong> Use a graphing calculator &mdash; graph both sides, find intersection.
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Powers to know cold</div><div class="kc-body">
+            <strong>Powers of 2:</strong> 2, 4, 8, 16, 32, 64, 128, 256<br>
+            <strong>Powers of 3:</strong> 3, 9, 27, 81<br>
+            <strong>Powers of 4:</strong> 4, 16, 64<br>
+            <strong>Powers of 5:</strong> 5, 25, 125
+          </div></div>
+          <p class="note-h">Worked examples</p>
+          <div class="worked"><div class="wlbl">Example 1: Solve 2^x = 16</div><div class="wsteps">
+            <span class="eq">2^x = 16 = 2^4</span>
+            <span class="eq">Same base! Set exponents equal: x = 4</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 2: Solve 3^x = 27</div><div class="wsteps">
+            <span class="eq">3^x = 27 = 3^3</span>
+            <span class="eq">Same base! x = 3</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Example 3: Solve 4^x = 8 (different bases &rarr; convert to base 2)</div><div class="wsteps">
+            <span class="eq">4^x = 8 &rarr; (2^2)^x = 2^3</span>
+            <span class="eq">2^(2x) = 2^3</span>
+            <span class="eq">Same base! 2x = 3 &rarr; x = 3/2</span>
+          </div></div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 12.1</div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Linear pattern</div><div class="vdef">A pattern where you add or subtract the same constant each step. Forms a straight line.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2, 5, 8, 11 &rarr; +3 each time<br>Constant difference &rarr; linear</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Exponential pattern</div><div class="vdef">A pattern where you multiply or divide by the same number (common ratio) each step. Forms a curve.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2, 6, 18, 54 &rarr; &times;3 each time<br>Common ratio &rarr; exponential</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Standard equation for exp. functions</div><div class="vdef">y = ab^x, where a is the y-intercept (starting value) and b is the common ratio (multiplier).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">y = ab^x</span><br>y = 3(2^x)<br>a = 3, b = 2</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">The &ldquo;a&rdquo; in y = ab^x</div><div class="vdef">The y-intercept and starting value of the exponential function. When x = 0, y = a (since b^0 = 1).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y = 5(3^x)<br>When x=0: y = 5(1) = <span class="chip chip-g">5</span><br>a = 5 = y-intercept</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">The &ldquo;b&rdquo; in y = ab^x</div><div class="vdef">The common ratio or multiplier. Divide any y-value by the previous one to find b. Determines growth or decay.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y values: 4, 8, 16, 32<br>8/4 = <span class="chip chip-g">2</span> &rarr; b = 2</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Exponential growth</div><div class="vdef">When b &gt; 1, the function grows — the y-values get larger and larger as x increases.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y = 2(3^x)<br>b = 3 &gt; 1 &rarr; <span class="chip chip-g">GROWTH</span><br>Curve rises steeply to the right</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Average rate of change</div><div class="vdef">The slope between two points on a curve: (f(x2)−f(x1))/(x2−x1). Unlike linear functions, this is NOT constant for exponential functions.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">f(2)=9, f(0)=1<br>Avg rate = (9−1)/(2−0) = <span class="chip chip-p">4</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">12.1</div><div class="vterm">Exponential decay</div><div class="vdef">When 0 &lt; b &lt; 1, the function decays — y-values shrink toward zero as x increases (but never reach zero).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y = 8(0.5^x)<br>b = 0.5, 0 &lt; b &lt; 1 &rarr; <span class="chip chip-a">DECAY</span><br>Curve falls toward x-axis</div></div></div>
+        <div class="vsec">New in 12.3</div>
+        <div class="vcard"><div><div class="vtag">12.3</div><div class="vterm">Examples of exponential growth</div><div class="vdef">Population growth, bacterial reproduction, investment compound interest, spread of a virus (like COVID).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="chip chip-g">Population</span> &rarr; grows each year<br><span class="chip chip-g">Bacteria</span> &rarr; doubles every hour<br><span class="chip chip-g">Investment</span> &rarr; earns interest on interest</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.3</div><div class="vterm">Examples of exponential decay</div><div class="vdef">Radioactive decay, car depreciation (losing value), cooling of a hot liquid.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="chip chip-a">Radioactive</span> &rarr; half-life shrinks<br><span class="chip chip-a">Car</span> &rarr; loses 15% value/year<br><span class="chip chip-a">Coffee</span> &rarr; cools toward room temp</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.3</div><div class="vterm">Exponential growth/decay formula</div><div class="vdef">Growth: A = A&#8320;(1+r)^t — Decay: A = A&#8320;(1−r)^t. Where A&#8320; = initial amount, r = rate as a decimal, t = time.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">A = A₀(1+r)^t</span> or <span class="eq-box">A = A₀(1−r)^t</span><br>$1000 at 5% for 3 yrs:<br>1000(1.05)^3 &asymp; $1157.63</div></div></div>
+        <div class="vsec">New in 12.4</div>
+        <div class="vcard"><div><div class="vtag">12.4</div><div class="vterm">The powers of 2</div><div class="vdef">2^1=2, 2^2=4, 2^3=8, 2^4=16, 2^5=32, 2^6=64, 2^7=128, 2^8=256. Know these cold!</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2, 4, 8, 16, 32, 64, 128, 256<br>Used to solve: 2^x = 64 &rarr; x=6</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.4</div><div class="vterm">The powers of 3</div><div class="vdef">3^1=3, 3^2=9, 3^3=27, 3^4=81. Know these cold!</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">3, 9, 27, 81<br>3^x = 27 &rarr; x = 3</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.4</div><div class="vterm">The powers of 4</div><div class="vdef">4^1=4, 4^2=16, 4^3=64. Know these cold!</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">4, 16, 64<br>4^x = 16 &rarr; x = 2</div></div></div>
+        <div class="vcard"><div><div class="vtag">12.4</div><div class="vterm">The powers of 5</div><div class="vdef">5^1=5, 5^2=25, 5^3=125. Know these cold!</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">5, 25, 125<br>5^x = 125 &rarr; x = 3</div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('12.1',this)">12.1</button>
+          <button class="pqf-btn" onclick="setQFilter('12.2',this)">12.2</button>
+          <button class="pqf-btn" onclick="setQFilter('12.3',this)">12.3</button>
+          <button class="pqf-btn" onclick="setQFilter('12.4',this)">12.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('12.1',this)">12.1 &mdash; Exp Functions Part 1</button>
+              <button class="tpbtn" onclick="selTopic('12.2',this)">12.2 &mdash; Exp Functions Part 2</button>
+              <button class="tpbtn" onclick="selTopic('12.3',this)">12.3 &mdash; Word Problems</button>
+              <button class="tpbtn" onclick="selTopic('12.4',this)">12.4 &mdash; Solving Exp Equations</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Evaluate exponential functions and identify growth vs. decay.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 12</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:12,name:"Exponential Functions",topics:[
+  {id:"12.1",label:"Exponential Functions (Part 1)",videos:[]},
+  {id:"12.2",label:"Exponential Functions (Part 2)",videos:[]},
+  {id:"12.3",label:"Exponential Function Word Problems",videos:[]},
+  {id:"12.4",label:"Solving Exponential Equations",videos:[]},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='12'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'12.1':[
+  {q:"Evaluate y = 3(2^x) when x = 4",eq:"",a:"48",fmt:"number",h:"3(2^4) = 3(16) = 48."},
+  {q:"Is y = 5(0.8)^x growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b = 0.8, 0 < b < 1 → decay."},
+  {q:"Evaluate y = 2(3^x) when x = 3",eq:"",a:"54",fmt:"number",h:"2(3^3) = 2(27) = 54."},
+  {q:"Is y = 4(1.5)^x growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b = 1.5 > 1 → growth."},
+  {q:"Evaluate y = 5(2^x) when x = 0",eq:"",a:"5",fmt:"number",h:"5(2^0) = 5(1) = 5. The y-intercept is always a."},
+  {q:"What is the y-intercept of y = 7(3^x)?",eq:"",a:"7",fmt:"number",h:"At x=0: y = 7(3^0) = 7(1) = 7."},
+  {q:"Is y = 10(0.5)^x growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b = 0.5, 0 < b < 1 → decay."},
+  {q:"Evaluate y = 4(5^x) when x = 2",eq:"",a:"100",fmt:"number",h:"4(5^2) = 4(25) = 100."},
+  {q:"What is the domain of any exponential function y = ab^x?",eq:"",a:"all real numbers",fmt:"all real numbers / y > 0 / etc.",h:"Exponential functions are defined for all x values."},
+  {q:"What is the range of y = 3(2^x) (assuming a > 0)?",eq:"",a:"y > 0",fmt:"y > 0 or similar",h:"Exponential functions never reach 0 — range is y > 0."},
+  {q:"Evaluate y = 6(2^x) when x = 3",eq:"",a:"48",fmt:"number",h:"6(2^3) = 6(8) = 48."},
+  {q:"Is y = 2(1/3)^x growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b = 1/3, 0 < b < 1 → decay."},
+  {q:"Find the average rate of change of y = 2^x from x = 0 to x = 2",eq:"",a:"1.5",fmt:"number",h:"(f(2)−f(0))/(2−0) = (4−1)/2 = 3/2 = 1.5."},
+  {q:"Evaluate y = 1(4^x) when x = 3",eq:"",a:"64",fmt:"number",h:"4^3 = 64."},
+  {q:"What is the y-intercept of y = 9(0.7)^x?",eq:"",a:"9",fmt:"number",h:"At x=0: y = 9(1) = 9."},
+],
+'12.2':[
+  {q:"Table: x=0,1,2 and y=4,8,16. Write the equation.",eq:"",a:"y=4(2^x)",fmt:"y = ___",h:"a=4 (y-int), b=8/4=2. y=4(2^x)."},
+  {q:"Table: x=0,1,2 and y=3,9,27. Write the equation.",eq:"",a:"y=3(3^x)",fmt:"y = ___",h:"a=3, b=9/3=3. y=3(3^x)."},
+  {q:"Table: x=0,1,2 and y=10,5,2.5. Write the equation.",eq:"",a:"y=10(0.5^x)",fmt:"y = ___",h:"a=10, b=5/10=0.5. y=10(0.5^x). Decay."},
+  {q:"y-intercept = 6, common ratio = 3. Write the equation.",eq:"",a:"y=6(3^x)",fmt:"y = ___",h:"a=6, b=3. y=6(3^x)."},
+  {q:"Table: x=0,1,2,3 and y=1,4,16,64. Write the equation.",eq:"",a:"y=1(4^x)",fmt:"y = ___",h:"a=1, b=4/1=4. y=4^x."},
+  {q:"A graph has y-intercept = 5 and each step multiplies by 2. Is this growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b=2 > 1 → growth."},
+  {q:"Table: x=0,1,2 and y=100,50,25. Find b (the common ratio).",eq:"",a:"0.5",fmt:"number",h:"50/100 = 0.5."},
+  {q:"Table: x=0,1,2 and y=2,6,18. Write the equation.",eq:"",a:"y=2(3^x)",fmt:"y = ___",h:"a=2, b=6/2=3. y=2(3^x)."},
+  {q:"A graph shows y-intercept = 8 and the curve is decreasing, halving each time. Write the equation.",eq:"",a:"y=8(0.5^x)",fmt:"y = ___",h:"a=8, b=0.5. y=8(0.5^x). Decay."},
+  {q:"Table: x=0,1,2 and y=7,14,28. Find a (the starting value).",eq:"",a:"7",fmt:"number",h:"At x=0, y=7. So a=7."},
+  {q:"Table: x=0,1,2,3 and y=5,15,45,135. Write the equation.",eq:"",a:"y=5(3^x)",fmt:"y = ___",h:"a=5, b=15/5=3. y=5(3^x)."},
+  {q:"A graph has y-intercept = 12 and common ratio = 1/3. Write the equation.",eq:"",a:"y=12(1/3)^x",fmt:"y = ___",h:"a=12, b=1/3. y=12(1/3)^x. Decay."},
+  {q:"Table: x=0,1,2 and y=20,10,5. Is this growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b=10/20=0.5, 0<b<1 → decay."},
+  {q:"Table: x=0,1,2 and y=3,12,48. Write the equation.",eq:"",a:"y=3(4^x)",fmt:"y = ___",h:"a=3, b=12/3=4. y=3(4^x)."},
+  {q:"Table: x=0,1,2 and y=1,5,25. Write the equation.",eq:"",a:"y=1(5^x)",fmt:"y = ___",h:"a=1, b=5/1=5. y=5^x."},
+],
+'12.3':[
+  {q:"A town has 5000 people and grows 3% per year. Write the equation for population after t years.",eq:"",a:"5000(1.03)^t",fmt:"A = ___",h:"Growth: A = 5000(1+0.03)^t = 5000(1.03)^t."},
+  {q:"A car worth $20,000 depreciates 10% per year. What is it worth after 3 years? (round to nearest dollar)",eq:"",a:"14580",fmt:"number (no $)",h:"20000(0.9)^3 = 20000(0.729) = 14580."},
+  {q:"$1000 invested at 5% annual interest. How much after 3 years? (round to 2 decimal places)",eq:"",a:"1157.63",fmt:"number",h:"1000(1.05)^3 = 1000(1.157625) ≈ 1157.63."},
+  {q:"100 frogs, 22% annual growth. About how many after 5 years? (round to nearest whole)",eq:"",a:"270",fmt:"number",h:"100(1.22)^5 = 100(2.7027) ≈ 270."},
+  {q:"1200 birds, 5% annual decline. About how many after 10 years? (round to nearest whole)",eq:"",a:"718",fmt:"number",h:"1200(0.95)^10 = 1200(0.5987) ≈ 718."},
+  {q:"A radioactive sample of 500 grams decays at 20% per year. How much remains after 2 years? (round to nearest whole)",eq:"",a:"320",fmt:"number",h:"500(0.8)^2 = 500(0.64) = 320."},
+  {q:"A population of 2000 bacteria doubles every hour. Write the equation after t hours.",eq:"",a:"2000(2)^t",fmt:"A = ___",h:"Doubling = multiplying by 2. A = 2000(2)^t."},
+  {q:"Eggs cost $4.95 and inflation is 2.8% per year. What is the cost after 2 years? (round to 2 decimal places)",eq:"",a:"5.23",fmt:"number",h:"4.95(1.028)^2 = 4.95(1.05678) ≈ 5.23."},
+  {q:"A house worth $250,000 appreciates 4% per year. What is it worth after 5 years? (round to nearest dollar)",eq:"",a:"304163",fmt:"number",h:"250000(1.04)^5 = 250000(1.21665) ≈ 304163."},
+  {q:"A car worth $30,000 depreciates 15% per year starting 2026. What is it worth in 2030? (round to nearest dollar)",eq:"",a:"15660",fmt:"number",h:"4 years: 30000(0.85)^4 = 30000(0.522) ≈ 15660."},
+  {q:"A colony of 50 bacteria grows 30% per hour. About how many after 4 hours? (round to nearest whole)",eq:"",a:"175",fmt:"number",h:"50(1.3)^4 = 50(2.8561) ≈ 143. (Actually 50×1.3^4=50×2.8561=142.8≈143)"},
+  {q:"$500 in an account earning 6% annually. How much after 10 years? (round to nearest dollar)",eq:"",a:"895",fmt:"number",h:"500(1.06)^10 = 500(1.7908) ≈ 895."},
+  {q:"A city has 80,000 people and loses 2% per year. About how many after 5 years? (round to nearest whole)",eq:"",a:"72379",fmt:"number",h:"80000(0.98)^5 = 80000(0.9039) ≈ 72314. (0.98^5=0.90392, ×80000=72314)"},
+  {q:"Write the exponential decay formula for an item starting at $A₀, losing r% per year for t years.",eq:"",a:"A = A0(1-r)^t",fmt:"A = ___",h:"Decay formula: A = A₀(1−r)^t."},
+  {q:"A sample of 1000 grams decays 50% per day (half-life = 1 day). How much remains after 3 days?",eq:"",a:"125",fmt:"number",h:"1000(0.5)^3 = 1000(0.125) = 125."},
+],
+'12.4':[
+  {q:"Solve:",eq:"2^x = 32",a:"x = 5",fmt:"x = ___",h:"32 = 2^5. Same base: x = 5."},
+  {q:"Solve:",eq:"3^x = 27",a:"x = 3",fmt:"x = ___",h:"27 = 3^3. Same base: x = 3."},
+  {q:"Solve:",eq:"5^x = 125",a:"x = 3",fmt:"x = ___",h:"125 = 5^3. Same base: x = 3."},
+  {q:"Solve:",eq:"2^x = 64",a:"x = 6",fmt:"x = ___",h:"64 = 2^6. Same base: x = 6."},
+  {q:"Solve:",eq:"4^x = 16",a:"x = 2",fmt:"x = ___",h:"16 = 4^2. Same base: x = 2."},
+  {q:"Solve:",eq:"3^x = 81",a:"x = 4",fmt:"x = ___",h:"81 = 3^4. Same base: x = 4."},
+  {q:"Solve:",eq:"2^x = 16",a:"x = 4",fmt:"x = ___",h:"16 = 2^4. Same base: x = 4."},
+  {q:"Solve:",eq:"5^x = 25",a:"x = 2",fmt:"x = ___",h:"25 = 5^2. Same base: x = 2."},
+  {q:"Solve (convert to same base):",eq:"4^x = 8",a:"x = 3/2",fmt:"x = ___",h:"4=2^2, 8=2^3. (2^2)^x=2^3 → 2x=3 → x=3/2."},
+  {q:"Solve (convert to same base):",eq:"9^x = 27",a:"x = 3/2",fmt:"x = ___",h:"9=3^2, 27=3^3. (3^2)^x=3^3 → 2x=3 → x=3/2."},
+  {q:"Solve:",eq:"2^x = 8",a:"x = 3",fmt:"x = ___",h:"8 = 2^3. Same base: x = 3."},
+  {q:"Solve:",eq:"4^x = 64",a:"x = 3",fmt:"x = ___",h:"64 = 4^3. Same base: x = 3."},
+  {q:"Solve:",eq:"2^x = 128",a:"x = 7",fmt:"x = ___",h:"128 = 2^7. Same base: x = 7."},
+  {q:"Solve:",eq:"3^x = 9",a:"x = 2",fmt:"x = ___",h:"9 = 3^2. Same base: x = 2."},
+  {q:"Solve (convert to same base):",eq:"8^x = 32",a:"x = 5/3",fmt:"x = ___",h:"8=2^3, 32=2^5. (2^3)^x=2^5 → 3x=5 → x=5/3."},
+]};
+
+const T=[
+  {t:"12.1",q:"Evaluate y = 4(3^x) when x = 2",eq:"",a:"36",fmt:"number",h:"4(3^2)=4(9)=36."},
+  {t:"12.1",q:"Is y = 2(0.6)^x growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b=0.6, 0<b<1 → decay."},
+  {t:"12.1",q:"What is the y-intercept of y = 11(2^x)?",eq:"",a:"11",fmt:"number",h:"At x=0: y=11(1)=11."},
+  {t:"12.1",q:"Find the average rate of change of y=3^x from x=0 to x=2",eq:"",a:"4",fmt:"number",h:"(9−1)/2 = 8/2 = 4."},
+  {t:"12.1",q:"Is y = 100(1.02)^x growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b=1.02 > 1 → growth."},
+  {t:"12.2",q:"Table: x=0,1,2 and y=6,18,54. Write the equation.",eq:"",a:"y=6(3^x)",fmt:"y = ___",h:"a=6, b=18/6=3. y=6(3^x)."},
+  {t:"12.2",q:"Table: x=0,1,2 and y=16,8,4. Write the equation.",eq:"",a:"y=16(0.5^x)",fmt:"y = ___",h:"a=16, b=8/16=0.5. y=16(0.5^x)."},
+  {t:"12.2",q:"y-intercept = 4, common ratio = 5. Write the equation.",eq:"",a:"y=4(5^x)",fmt:"y = ___",h:"a=4, b=5. y=4(5^x)."},
+  {t:"12.2",q:"Table: x=0,1,2,3 and y=2,8,32,128. Write the equation.",eq:"",a:"y=2(4^x)",fmt:"y = ___",h:"a=2, b=8/2=4. y=2(4^x)."},
+  {t:"12.2",q:"Table: x=0,1,2 and y=24,12,6. Is this growth or decay? What is b?",eq:"",a:"decay, 0.5",fmt:"growth or decay, then b = ___",h:"b=12/24=0.5, 0<b<1 → decay. b=0.5."},
+  {t:"12.3",q:"A bike worth $800 depreciates 25% per year. Value after 2 years? (round to nearest dollar)",eq:"",a:"450",fmt:"number",h:"800(0.75)^2=800(0.5625)=450."},
+  {t:"12.3",q:"$2000 earning 4% annually. How much after 5 years? (round to nearest dollar)",eq:"",a:"2433",fmt:"number",h:"2000(1.04)^5=2000(1.21665)≈2433."},
+  {t:"12.3",q:"600 bacteria grow at 50% per hour. About how many after 3 hours? (round to nearest whole)",eq:"",a:"2025",fmt:"number",h:"600(1.5)^3=600(3.375)=2025."},
+  {t:"12.3",q:"Write the growth formula for an initial amount A₀ growing at rate r for t years.",eq:"",a:"A = A0(1+r)^t",fmt:"A = ___",h:"Growth: A = A₀(1+r)^t."},
+  {t:"12.3",q:"A sample of 400g decays 30% per year. How much after 2 years? (round to nearest whole)",eq:"",a:"196",fmt:"number",h:"400(0.7)^2=400(0.49)=196."},
+  {t:"12.4",q:"Solve: 2^x = 256",eq:"",a:"x = 8",fmt:"x = ___",h:"256=2^8. x=8."},
+  {t:"12.4",q:"Solve: 5^x = 5",eq:"",a:"x = 1",fmt:"x = ___",h:"5^1=5. x=1."},
+  {t:"12.4",q:"Solve: 3^x = 243",eq:"",a:"x = 5",fmt:"x = ___",h:"243=3^5. x=5."},
+  {t:"12.4",q:"Solve (convert to same base): 4^x = 32",eq:"",a:"x = 5/2",fmt:"x = ___",h:"4=2^2, 32=2^5. 2x=5 → x=5/2."},
+  {t:"12.4",q:"Solve: 2^x = 4",eq:"",a:"x = 2",fmt:"x = ___",h:"4=2^2. x=2."},
+];
+
+const VQB=[
+  {topic:'12.1',type:'mc',q:'In a linear pattern, consecutive terms...',opts:['Multiply by a constant','Add/subtract a constant','Are always positive','Double each time'],a:1},
+  {topic:'12.1',type:'mc',q:'In y = ab^x, what does "a" represent?',opts:['The common ratio','The exponent','The y-intercept / starting value','The slope'],a:2},
+  {topic:'12.1',type:'mc',q:'In y = ab^x, what does "b" represent?',opts:['The y-intercept','The common ratio / multiplier','The x-intercept','The domain'],a:1},
+  {topic:'12.1',type:'mc',q:'If b > 1 in y = ab^x, the function shows...',opts:['Decay','Growth','A straight line','No change'],a:1},
+  {topic:'12.1',type:'mc',q:'If 0 < b < 1 in y = ab^x, the function shows...',opts:['Growth','A horizontal line','Decay','An increasing curve'],a:2},
+  {topic:'12.1',type:'tf',q:'True or False: The range of y = 3(2^x) includes y = 0.',opts:['True','False'],a:1},
+  {topic:'12.1',type:'mc',q:'The average rate of change for an exponential function...',opts:['Is constant, like a line','Changes over different intervals','Is always zero','Equals the y-intercept'],a:1},
+  {topic:'12.2',type:'mc',q:'To find "a" from a table, you look at the y-value when...',opts:['x = 1','x = −1','x = 0','x is largest'],a:2},
+  {topic:'12.2',type:'mc',q:'To find "b" from a table, you...',opts:['Add consecutive y-values','Divide consecutive y-values','Subtract y-values','Divide by x'],a:1},
+  {topic:'12.3',type:'mc',q:'The exponential growth formula is...',opts:['A = A₀(1−r)^t','A = A₀ + rt','A = A₀(1+r)^t','A = A₀ · r · t'],a:2},
+  {topic:'12.3',type:'mc',q:'The exponential decay formula is...',opts:['A = A₀(1+r)^t','A = A₀(1−r)^t','A = A₀ · t','A = A₀ − rt'],a:1},
+  {topic:'12.3',type:'mc',q:'Which is an example of exponential growth?',opts:['Radioactive decay','Car depreciation','Compound interest','Cooling coffee'],a:2},
+  {topic:'12.3',type:'mc',q:'Which is an example of exponential decay?',opts:['Bacteria doubling','Population growth','Car depreciation','Money in savings'],a:2},
+  {topic:'12.4',type:'mc',q:'2^8 equals...',opts:['16','64','128','256'],a:3},
+  {topic:'12.4',type:'mc',q:'3^4 equals...',opts:['12','27','81','64'],a:2},
+  {topic:'12.4',type:'mc',q:'To solve 2^x = 32, you recognize that 32 = ...',opts:['2^4','2^5','2^6','2^3'],a:1},
+  {topic:'12.4',type:'tf',q:'True or False: If b^m = b^n and the bases are the same, then m = n.',opts:['True','False'],a:0},
+];
+
+const DESCS={
+  '12.1':'Evaluate exponential functions and identify growth vs. decay.',
+  '12.2':'Write equations from graphs and tables — work backwards!',
+  '12.3':'Apply exponential growth and decay to real-world word problems.',
+  '12.4':'Solve exponential equations by matching bases.'
+};
+let curTopic='12.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/≤/g,'<=').replace(/≥/g,'>=').trim();}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  // handle "x = 5" vs "5"
+  const ux=un.replace(/^x=/,'');
+  const cx=cn.replace(/^x=/,'');
+  if(ux===cx)return true;
+  // handle fraction answers like 3/2
+  return un===cn;
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['12.1','12.2','12.3','12.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'12.1':'Topic 12.1','12.2':'Topic 12.2','12.3':'Topic 12.3','12.4':'Topic 12.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=isMatch(uval,p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=isMatch(inp.value,p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

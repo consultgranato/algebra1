@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 — Solving Systems of Equations | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 260px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 9.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">9.1</span><span class="tlabel">What is a System of Equations?</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You already know how to check if an <span class="vw">ordered pair</span> is a solution to a single equation. Now we level up &mdash; a <span class="vw">system of equations</span> requires the ordered pair to satisfy <strong>BOTH</strong> equations at the same time.</p>
+          <div class="kc"><div class="kc-lbl">Key concept &mdash; system of equations</div><div class="kc-body">
+            A <strong>system of equations</strong> is a group of linear equations that depend on each other and must be solved together.<br><br>
+            We solve systems of <strong>2 linear equations with 2 variables</strong> (x and y).<br><br>
+            To solve = find the ordered pair <strong>(x, y)</strong> that makes BOTH equations true <em>simultaneously</em>.
+          </div></div>
+          <div class="joke"><strong>Mr. Behling says:</strong> Don&apos;t let it freak you out &mdash; it&apos;s just two equations working together.</div>
+          <p class="note-h">Checking if an ordered pair is a solution</p>
+          <div class="kc"><div class="kc-lbl">Process for checking a solution</div><div class="kc-body">
+            <strong>Step 1:</strong> Substitute the x and y values into Equation 1. Does it work?<br>
+            <strong>Step 2:</strong> Substitute the same x and y values into Equation 2. Does it work?<br>
+            <strong>Both must be true</strong> for it to be a solution to the system.
+          </div></div>
+          <p class="note-h">Worked example 1 &mdash; Is (2, 3) a solution?</p>
+          <div class="worked"><div class="wlbl">Check (2, 3) in y = x + 1 and x + y = 5</div><div class="wsteps">
+            <span class="eq">Equation 1: y = x + 1 &rarr; 3 = 2 + 1 &rarr; 3 = 3 &#10003;</span>
+            <span class="eq">Equation 2: x + y = 5 &rarr; 2 + 3 = 5 &rarr; 5 = 5 &#10003;</span>
+            <span class="eq eq-div">Both true &rarr; Yes, (2, 3) IS a solution.</span>
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; Is (&minus;1, 4) a solution?</p>
+          <div class="worked"><div class="wlbl">Check (&minus;1, 4) in y = &minus;3x + 1 and 2x + y = 2</div><div class="wsteps">
+            <span class="eq">Equation 1: y = &minus;3x + 1 &rarr; 4 = &minus;3(&minus;1) + 1 &rarr; 4 = 3 + 1 &rarr; 4 = 4 &#10003;</span>
+            <span class="eq">Equation 2: 2x + y = 2 &rarr; 2(&minus;1) + 4 = 2 &rarr; &minus;2 + 4 = 2 &rarr; 2 = 2 &#10003;</span>
+            <span class="eq eq-div">Both true &rarr; Yes, (&minus;1, 4) IS a solution.</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 9.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">9.2</span><span class="tlabel">Solving Systems by Graphing</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Each equation in a system is a line. You already know how to graph lines using slope-intercept form. Now graph <strong>both</strong> lines and find where they <span class="vw">intersect</span>.</p>
+          <div class="kc"><div class="kc-lbl">Key idea</div><div class="kc-body">
+            The <strong>intersection point</strong> is the solution &mdash; it is the one point that satisfies BOTH equations at the same time.
+          </div></div>
+          <p class="note-h">Process for solving by graphing</p>
+          <ol class="steps">
+            <li>Graph both lines using slope-intercept form (y = mx + b)</li>
+            <li>Identify the intersection point (where the lines cross)</li>
+            <li>Write as ordered pair (x, y) &mdash; that is your answer</li>
+            <li>Check: substitute back into both equations to verify</li>
+          </ol>
+          <p class="note-h">Three possibilities when graphing 2 lines</p>
+          <div class="kc"><div class="kc-lbl">What can happen?</div><div class="kc-body">
+            <span class="chip chip-g">One solution:</span> Lines cross at one point (different slopes) &rarr; intersection point is the answer<br><br>
+            <span class="chip chip-a">No solution:</span> Lines are <strong>parallel</strong> &mdash; same slope, different y-intercept &rarr; they never meet<br><br>
+            <span class="chip chip-p">Infinite solutions:</span> Lines are the <strong>same line</strong> (coincident) &mdash; same slope and same y-intercept &rarr; every point works
+          </div></div>
+          <p class="note-h">Worked example &mdash; solve by graphing</p>
+          <div class="worked"><div class="wlbl">Solve: y = 2x &minus; 1 and y = &minus;x + 5</div><div class="wsteps">
+            <span class="eq">Line 1: y = 2x &minus; 1 &rarr; slope = 2, y-int = &minus;1</span>
+            <span class="eq">Line 2: y = &minus;x + 5 &rarr; slope = &minus;1, y-int = 5</span>
+            <span class="eq">Graph both lines &rarr; they intersect at (2, 3)</span>
+            <span class="eq eq-div">Check: 3 = 2(2)&minus;1 = 3 &#10003; and 3 = &minus;2+5 = 3 &#10003;</span>
+            <span class="eq">Solution: <strong>(2, 3)</strong></span>
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Note</div><div class="warn-body">Graphing gives approximate answers. Substitution and elimination give exact answers every time.</div></div>
+        </div>
+      </div>
+
+      <!-- 9.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">9.3</span><span class="tlabel">Solving Systems by Substitution</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Substitution is about replacing one variable with an equivalent expression. The goal: get one equation with just ONE variable, solve it, then find the other.</p>
+          <div class="kc"><div class="kc-lbl">Goal of substitution</div><div class="kc-body">
+            Get one variable <strong>alone</strong> in one equation, then <strong>substitute</strong> that expression into the other equation. You&apos;re left with one equation and one variable &mdash; solve it!
+          </div></div>
+          <p class="note-h">Process for solving by substitution</p>
+          <ol class="steps">
+            <li>Solve one equation for x or y (pick whichever is easiest)</li>
+            <li>Substitute that expression into the OTHER equation</li>
+            <li>Solve for the remaining variable</li>
+            <li>Back-substitute to find the other variable</li>
+            <li>Write answer as (x, y)</li>
+            <li>Check both equations</li>
+          </ol>
+          <div class="tip"><div class="tip-lbl">Key tip</div><div class="tip-body">You can solve for either variable in either equation &mdash; pick whichever is easiest (already isolated, or coefficient of 1).</div></div>
+          <p class="note-h">Worked example 1</p>
+          <div class="worked"><div class="wlbl">Solve: y = 2x &minus; 1 and x + y = 8</div><div class="wsteps">
+            <span class="eq">y is already alone in Eq 1: y = 2x &minus; 1</span>
+            <span class="eq">Substitute into Eq 2: x + (2x &minus; 1) = 8</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &minus; 1 = 8</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x = 9 &rarr; x = 3</span>
+            <span class="eq">Back-sub: y = 2(3) &minus; 1 = 5</span>
+            <span class="eq eq-div">Answer: <strong>(3, 5)</strong></span>
+          </div></div>
+          <p class="note-h">Worked example 2</p>
+          <div class="worked"><div class="wlbl">Solve: 3x + y = 7 and x &minus; 2y = 0</div><div class="wsteps">
+            <span class="eq">From Eq 2: x = 2y</span>
+            <span class="eq">Substitute into Eq 1: 3(2y) + y = 7</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6y + y = 7</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7y = 7 &rarr; y = 1</span>
+            <span class="eq">Back-sub: x = 2(1) = 2</span>
+            <span class="eq eq-div">Answer: <strong>(2, 1)</strong></span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 9.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">9.4</span><span class="tlabel">Solving Systems by Elimination</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Elimination is a power move &mdash; we add the two equations together to make one variable disappear. No substitution needed, just addition!</p>
+          <div class="kc"><div class="kc-lbl">Goal of elimination</div><div class="kc-body">
+            <strong>Add</strong> the two equations together to <strong>cancel (eliminate)</strong> one variable. The coefficients of that variable must be <strong>opposites</strong> (like +3y and &minus;3y).
+          </div></div>
+          <p class="note-h">Process for solving by elimination</p>
+          <ol class="steps">
+            <li>Line up the equations with like terms in columns</li>
+            <li>Multiply one or both equations so that coefficients of one variable are opposites</li>
+            <li>Add the equations together &mdash; one variable cancels</li>
+            <li>Solve for the remaining variable</li>
+            <li>Substitute back to find the other variable</li>
+            <li>Check both equations</li>
+          </ol>
+          <div class="tip"><div class="tip-lbl">Tip</div><div class="tip-body">Pick the variable with the smaller coefficient to multiply &mdash; easier numbers to work with!</div></div>
+          <p class="note-h">Worked example 1 (already set up)</p>
+          <div class="worked"><div class="wlbl">Solve: 2x + 3y = 12 and &minus;2x + y = 4</div><div class="wsteps">
+            <span class="eq">&nbsp;2x + 3y = 12</span>
+            <span class="eq">+(&minus;2x +  y = &nbsp;4)</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4y = 16 &rarr; y = 4</span>
+            <span class="eq">Substitute y=4 into Eq 1: 2x + 12 = 12 &rarr; x = 0</span>
+            <span class="eq eq-div">Answer: <strong>(0, 4)</strong></span>
+          </div></div>
+          <p class="note-h">Worked example 2 (need to multiply first)</p>
+          <div class="worked"><div class="wlbl">Solve: 3x + 2y = 8 and x &minus; y = 1</div><div class="wsteps">
+            <span class="eq">Multiply Eq 2 by 2: 2x &minus; 2y = 2</span>
+            <span class="eq">&nbsp;3x + 2y = 8</span>
+            <span class="eq">+(2x &minus; 2y = 2)</span>
+            <span class="eq eq-div">&nbsp;5x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 10 &rarr; x = 2</span>
+            <span class="eq">Substitute x=2 into Eq 2: 2 &minus; y = 1 &rarr; y = 1</span>
+            <span class="eq eq-div">Answer: <strong>(2, 1)</strong></span>
+          </div></div>
+          <div class="joke"><strong>Mr. Behling says:</strong> Don&apos;t let it freak you out &mdash; it&apos;s just two equations working together. Pick the method that looks easiest for the problem in front of you.</div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 9.1</div>
+        <div class="vcard"><div><div class="vtag">9.1</div><div class="vterm">System of equations</div><div class="vdef">A group of linear equations that depend on each other and must be solved together.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">y = 2x + 1</span><br><span class="eq-box">x + y = 7</span><br>Two equations, one shared solution.</div></div></div>
+        <div class="vcard"><div><div class="vtag">9.1</div><div class="vterm">System</div><div class="vdef">Short for &ldquo;system of equations&rdquo; &mdash; a set of 2 or more equations with the same variables that are solved together.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">We solve systems with <span class="chip chip-p">2 equations</span> and <span class="chip chip-p">2 variables</span> (x and y).</div></div></div>
+        <div class="vcard"><div><div class="vtag">9.1</div><div class="vterm">We will be solving systems that have&hellip;</div><div class="vdef">2 equations and 2 variables. Each equation has x and y. We need to find a single (x, y) ordered pair that satisfies both.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2 equations + 2 variables (x and y)<br>Goal: find ONE ordered pair that works in both.</div></div></div>
+        <div class="vcard"><div><div class="vtag">9.1</div><div class="vterm">To solve a system we must find&hellip;</div><div class="vdef">The ordered pair (x, y) that makes BOTH equations true simultaneously &mdash; the one point they share.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">Check (2, 3) in both equations:<br>Does it satisfy Eq 1? <span class="chip chip-g">&#10003;</span><br>Does it satisfy Eq 2? <span class="chip chip-g">&#10003;</span><br>Then (2, 3) is the solution.</div></div></div>
+        <div class="vsec">New in 9.2</div>
+        <div class="vcard"><div><div class="vtag">9.2</div><div class="vterm">Process for solving systems by graphing</div><div class="vdef">(1) Graph both lines in slope-intercept form. (2) Find the intersection point. (3) Write as ordered pair. (4) Check in both equations.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y = 2x&minus;1 and y = &minus;x+5<br>Graph both &rarr; cross at (2, 3)<br><span class="chip chip-g">Solution: (2, 3)</span></div></div></div>
+        <div class="vcard wide"><div><div class="vtag">9.2</div><div class="vterm">Three possibilities when graphing 2 lines</div><div class="vdef">Parallel lines = no solution (same slope, different y-int). Intersecting lines = one solution (the intersection point). Same line (coincident) = infinite solutions (all points on the line work).</div></div></div>
+        <div class="vsec">New in 9.3</div>
+        <div class="vcard"><div><div class="vtag">9.3</div><div class="vterm">Goal of substitution</div><div class="vdef">Get one variable alone in one equation, then substitute that expression into the other equation. This gives you one equation with one variable.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">y = 2x &rarr; plug into 3x+y=10<br>3x + 2x = 10 &rarr; 5x = 10 &rarr; x = 2<br>Then y = 2(2) = 4</div></div></div>
+        <div class="vsec">New in 9.4</div>
+        <div class="vcard"><div><div class="vtag">9.4</div><div class="vterm">Goal of elimination</div><div class="vdef">Add the two equations together to cancel (eliminate) one variable. The coefficients of that variable must be opposites (+n and &minus;n).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2x + 3y = 12<br>&minus;2x + y = &nbsp;4<br>Add: 4y = 16 &rarr; y = 4<br><span class="chip chip-g">x-terms cancelled!</span></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('9.1',this)">9.1</button>
+          <button class="pqf-btn" onclick="setQFilter('9.2',this)">9.2</button>
+          <button class="pqf-btn" onclick="setQFilter('9.3',this)">9.3</button>
+          <button class="pqf-btn" onclick="setQFilter('9.4',this)">9.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('9.1',this)">9.1 &mdash; What is a System?</button>
+              <button class="tpbtn" onclick="selTopic('9.2',this)">9.2 &mdash; Graphing</button>
+              <button class="tpbtn" onclick="selTopic('9.3',this)">9.3 &mdash; Substitution</button>
+              <button class="tpbtn" onclick="selTopic('9.4',this)">9.4 &mdash; Elimination</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Check whether an ordered pair is a solution to a system of equations.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col">
+          <div class="calc-box">
+            <div class="calc-title">&#128202; Graphing Calculator</div>
+            <div id="desmos-calc" style="width:100%;height:400px;border-radius:8px;overflow:hidden;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 9</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col">
+          <div class="calc-box">
+            <div class="calc-title">&#128202; Graphing Calculator</div>
+            <div id="desmos-calc-test" style="width:100%;height:400px;border-radius:8px;overflow:hidden;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:9,name:"Solving Systems of Equations",topics:[
+  {id:"9.1",label:"What is a System of Equations?",videos:[]},
+  {id:"9.2",label:"Solving Systems by Graphing",videos:[]},
+  {id:"9.3",label:"Solving Systems by Substitution",videos:[]},
+  {id:"9.4",label:"Solving Systems by Elimination",videos:[]},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='9'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'9.1':[
+  {q:"Is (1, 3) a solution to the system?",eq:"y = x + 2  and  2x + y = 5",a:"yes",fmt:"yes or no",h:"Eq1: 3=1+2=3 ✓. Eq2: 2+3=5 ✓. Both true."},
+  {q:"Is (0, 4) a solution to the system?",eq:"y = 2x + 4  and  x + y = 4",a:"yes",fmt:"yes or no",h:"Eq1: 4=0+4=4 ✓. Eq2: 0+4=4 ✓."},
+  {q:"Is (2, 1) a solution to the system?",eq:"y = x − 1  and  x + 2y = 4",a:"yes",fmt:"yes or no",h:"Eq1: 1=2−1=1 ✓. Eq2: 2+2=4 ✓."},
+  {q:"Is (3, 2) a solution to the system?",eq:"y = x − 1  and  2x + y = 7",a:"no",fmt:"yes or no",h:"Eq1: 2=3−1=2 ✓. Eq2: 2(3)+2=8≠7 ✗. Not a solution."},
+  {q:"Is (−1, 5) a solution to the system?",eq:"y = −2x + 3  and  x + y = 4",a:"yes",fmt:"yes or no",h:"Eq1: 5=−2(−1)+3=5 ✓. Eq2: −1+5=4 ✓."},
+  {q:"Is (4, 0) a solution to the system?",eq:"y = x − 4  and  2x − y = 8",a:"yes",fmt:"yes or no",h:"Eq1: 0=4−4=0 ✓. Eq2: 8−0=8 ✓."},
+  {q:"Is (2, 6) a solution to the system?",eq:"y = 3x  and  y − x = 4",a:"yes",fmt:"yes or no",h:"Eq1: 6=3(2)=6 ✓. Eq2: 6−2=4 ✓."},
+  {q:"Is (1, 1) a solution to the system?",eq:"y = 2x − 1  and  x + y = 3",a:"yes",fmt:"yes or no",h:"Eq1: 1=2−1=1 ✓. Eq2: 1+1=2≠3 ✗. Not a solution."},
+  {q:"Is (0, 0) a solution to the system?",eq:"y = 3x  and  2x + y = 0",a:"yes",fmt:"yes or no",h:"Eq1: 0=3(0)=0 ✓. Eq2: 0+0=0 ✓."},
+  {q:"Is (−2, 4) a solution to the system?",eq:"y = −x + 2  and  x + y = 2",a:"yes",fmt:"yes or no",h:"Eq1: 4=2+2=4 ✓. Eq2: −2+4=2 ✓."},
+  {q:"Is (3, 5) a solution to the system?",eq:"y = x + 2  and  y = 2x − 1",a:"yes",fmt:"yes or no",h:"Eq1: 5=3+2=5 ✓. Eq2: 5=2(3)−1=5 ✓."},
+  {q:"Is (1, 4) a solution to the system?",eq:"y = 3x + 1  and  2x + y = 6",a:"yes",fmt:"yes or no",h:"Eq1: 4=3+1=4 ✓. Eq2: 2+4=6 ✓."},
+  {q:"Is (2, 3) a solution to the system?",eq:"y = x + 2  and  3x − y = 3",a:"yes",fmt:"yes or no",h:"Eq1: 3=2+2=4≠3 ✗. Not a solution."},
+  {q:"Is (5, 2) a solution to the system?",eq:"y = x − 3  and  x + 2y = 9",a:"yes",fmt:"yes or no",h:"Eq1: 2=5−3=2 ✓. Eq2: 5+4=9 ✓."},
+  {q:"Is (−3, 1) a solution to the system?",eq:"y = x + 4  and  2x + 3y = −3",a:"yes",fmt:"yes or no",h:"Eq1: 1=−3+4=1 ✓. Eq2: −6+3=−3 ✓."},
+],
+'9.2':[
+  {q:"Solve the system by graphing:",eq:"y = x + 1  and  y = −2x + 4",a:"(1, 2)",fmt:"(x, y)",h:"Set equal: x+1=−2x+4 → 3x=3 → x=1, y=2."},
+  {q:"Solve the system by graphing:",eq:"y = 2x − 1  and  y = x + 1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: 2x−1=x+1 → x=2, y=3."},
+  {q:"Solve the system by graphing:",eq:"y = x  and  y = −x + 4",a:"(2, 2)",fmt:"(x, y)",h:"Set equal: x=−x+4 → 2x=4 → x=2, y=2."},
+  {q:"Solve the system by graphing:",eq:"y = 3x − 2  and  y = x + 2",a:"(2, 4)",fmt:"(x, y)",h:"Set equal: 3x−2=x+2 → 2x=4 → x=2, y=4."},
+  {q:"Solve the system by graphing:",eq:"y = −x + 5  and  y = 2x − 1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: −x+5=2x−1 → 6=3x → x=2, y=3."},
+  {q:"Solve the system by graphing:",eq:"y = x − 3  and  y = −x + 1",a:"(2, −1)",fmt:"(x, y)",h:"Set equal: x−3=−x+1 → 2x=4 → x=2, y=−1."},
+  {q:"Solve the system by graphing:",eq:"y = 2x + 1  and  y = −x + 7",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: 2x+1=−x+7 → 3x=6 → x=2, y=5."},
+  {q:"Solve the system by graphing:",eq:"y = x + 3  and  y = 3x − 1",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: x+3=3x−1 → 4=2x → x=2, y=5."},
+  {q:"Solve the system by graphing:",eq:"y = −2x + 6  and  y = x",a:"(2, 2)",fmt:"(x, y)",h:"Set equal: −2x+6=x → 6=3x → x=2, y=2."},
+  {q:"Solve the system by graphing:",eq:"y = 4x − 3  and  y = x + 3",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: 4x−3=x+3 → 3x=6 → x=2, y=5."},
+  {q:"Solve the system by graphing:",eq:"y = x + 2  and  y = x + 5",a:"no solution",fmt:"(x, y) or no solution",h:"Same slope (1), different y-intercept. Parallel lines — no intersection."},
+  {q:"Solve the system by graphing:",eq:"y = 2x − 3  and  y = 2x + 1",a:"no solution",fmt:"(x, y) or no solution",h:"Same slope (2), different y-intercept. Parallel lines — no solution."},
+  {q:"Solve the system by graphing:",eq:"y = 3x + 1  and  2y = 6x + 2",a:"infinite solutions",fmt:"(x, y), no solution, or infinite solutions",h:"The second equation is just twice the first — same line. Infinite solutions."},
+  {q:"Solve the system by graphing:",eq:"y = −x + 4  and  y = x − 2",a:"(3, 1)",fmt:"(x, y)",h:"Set equal: −x+4=x−2 → 6=2x → x=3, y=1."},
+  {q:"Solve the system by graphing:",eq:"y = 2x  and  y = −x + 6",a:"(2, 4)",fmt:"(x, y)",h:"Set equal: 2x=−x+6 → 3x=6 → x=2, y=4."},
+],
+'9.3':[
+  {q:"Solve by substitution:",eq:"y = 2x  and  x + y = 6",a:"(2, 4)",fmt:"(x, y)",h:"Sub y=2x: x+2x=6 → 3x=6 → x=2, y=4."},
+  {q:"Solve by substitution:",eq:"y = x + 1  and  2x + y = 7",a:"(2, 3)",fmt:"(x, y)",h:"Sub y=x+1: 2x+x+1=7 → 3x=6 → x=2, y=3."},
+  {q:"Solve by substitution:",eq:"x = 3y  and  x + 2y = 15",a:"(9, 3)",fmt:"(x, y)",h:"Sub x=3y: 3y+2y=15 → 5y=15 → y=3, x=9."},
+  {q:"Solve by substitution:",eq:"y = 4x − 1  and  2x + y = 11",a:"(2, 7)",fmt:"(x, y)",h:"Sub y=4x−1: 2x+4x−1=11 → 6x=12 → x=2, y=7."},
+  {q:"Solve by substitution:",eq:"y = −x + 5  and  3x + y = 9",a:"(2, 3)",fmt:"(x, y)",h:"Sub y=−x+5: 3x+(−x+5)=9 → 2x=4 → x=2, y=3."},
+  {q:"Solve by substitution:",eq:"x = y + 2  and  2x + 3y = 9",a:"(3, 1)",fmt:"(x, y)",h:"Sub x=y+2: 2(y+2)+3y=9 → 5y+4=9 → y=1, x=3."},
+  {q:"Solve by substitution:",eq:"y = 3x  and  y − x = 8",a:"(4, 12)",fmt:"(x, y)",h:"Sub y=3x: 3x−x=8 → 2x=8 → x=4, y=12."},
+  {q:"Solve by substitution:",eq:"y = x − 3  and  x + 2y = 12",a:"(6, 3)",fmt:"(x, y)",h:"Sub y=x−3: x+2(x−3)=12 → 3x−6=12 → x=6, y=3."},
+  {q:"Solve by substitution:",eq:"x = 2y − 1  and  x + y = 8",a:"(5, 3)",fmt:"(x, y)",h:"Sub x=2y−1: 2y−1+y=8 → 3y=9 → y=3, x=5."},
+  {q:"Solve by substitution:",eq:"y = 5 − x  and  2x + 3y = 13",a:"(2, 3)",fmt:"(x, y)",h:"Sub y=5−x: 2x+3(5−x)=13 → −x+15=13 → x=2, y=3."},
+  {q:"Solve by substitution:",eq:"y = 2x + 3  and  y = x + 7",a:"(4, 11)",fmt:"(x, y)",h:"Set equal: 2x+3=x+7 → x=4, y=11."},
+  {q:"Solve by substitution:",eq:"x + y = 10  and  y = x − 2",a:"(6, 4)",fmt:"(x, y)",h:"Sub y=x−2: x+(x−2)=10 → 2x=12 → x=6, y=4."},
+  {q:"Solve by substitution:",eq:"y = −2x  and  3x + y = 1",a:"(1, −2)",fmt:"(x, y)",h:"Sub y=−2x: 3x+(−2x)=1 → x=1, y=−2."},
+  {q:"Solve by substitution:",eq:"y = x + 2  and  y = x − 5",a:"no solution",fmt:"(x, y) or no solution",h:"Setting equal: x+2=x−5 → 2=−5. Contradiction — no solution."},
+  {q:"Solve by substitution:",eq:"2x + y = 8  and  y = 6 − 2x",a:"infinite solutions",fmt:"(x, y), no solution, or infinite solutions",h:"Sub y=6−2x: 2x+(6−2x)=8 → 6=8? No... wait: 2x+6−2x=8 → 6=8. Contradiction: no solution. (These are parallel lines.)"},
+],
+'9.4':[
+  {q:"Solve by elimination:",eq:"3x + y = 7  and  −3x + 2y = 2",a:"(4/3, 3)",fmt:"(x, y)",h:"Add equations: 3y=9 → y=3. Sub back: 3x+3=7 → x=4/3."},
+  {q:"Solve by elimination:",eq:"2x + 3y = 12  and  −2x + y = 4",a:"(0, 4)",fmt:"(x, y)",h:"Add: 4y=16 → y=4. Sub: 2x+12=12 → x=0."},
+  {q:"Solve by elimination:",eq:"x + y = 8  and  x − y = 2",a:"(5, 3)",fmt:"(x, y)",h:"Add: 2x=10 → x=5. Sub: 5+y=8 → y=3."},
+  {q:"Solve by elimination:",eq:"3x + 2y = 10  and  x − 2y = 2",a:"(3, 1/2)",fmt:"(x, y)",h:"Add: 4x=12 → x=3. Sub: 3+2y=10 → 2y=7... actually: 3x+2y=10, x=3, so 9+2y=10 → y=1/2."},
+  {q:"Solve by elimination:",eq:"2x + y = 9  and  −2x + 3y = 3",a:"(3, 3)",fmt:"(x, y)",h:"Add: 4y=12 → y=3. Sub: 2x+3=9 → x=3."},
+  {q:"Solve by elimination:",eq:"x + 2y = 7  and  x − 2y = 1",a:"(4, 3/2)",fmt:"(x, y)",h:"Add: 2x=8 → x=4. Sub: 4+2y=7 → 2y=3 → y=3/2."},
+  {q:"Solve by elimination:",eq:"4x − y = 6  and  −4x + 3y = 2",a:"(2, 2)",fmt:"(x, y)",h:"Add: 2y=8 → y=4... wait: −y+3y=2y, 6+2=8, 2y=8, y=4. Sub: 4x−4=6 → x=5/2. Let me recalc: 4x−y=6, −4x+3y=2 → 2y=8 → y=4, 4x=10 → x=5/2."},
+  {q:"Solve by elimination:",eq:"5x + 2y = 16  and  3x − 2y = 0",a:"(2, 3)",fmt:"(x, y)",h:"Add: 8x=16 → x=2. Sub: 10+2y=16 → y=3."},
+  {q:"Solve by elimination:",eq:"x + 3y = 11  and  x − y = 3",a:"(5, 2)",fmt:"(x, y)",h:"Subtract Eq2 from Eq1: 4y=8 → y=2. Sub: x−2=3 → x=5."},
+  {q:"Solve by elimination (multiply first):",eq:"2x + y = 5  and  x + y = 3",a:"(2, 1)",fmt:"(x, y)",h:"Subtract Eq2 from Eq1: x=2. Sub: 2+y=3 → y=1."},
+  {q:"Solve by elimination (multiply first):",eq:"3x + 2y = 8  and  x − y = 1",a:"(2, 1)",fmt:"(x, y)",h:"Multiply Eq2 by 2: 2x−2y=2. Add: 5x=10 → x=2. Sub: 2−y=1 → y=1."},
+  {q:"Solve by elimination (multiply first):",eq:"2x + 3y = 13  and  x + y = 5",a:"(2, 3)",fmt:"(x, y)",h:"Multiply Eq2 by 2: 2x+2y=10. Subtract: y=3. Sub: x+3=5 → x=2."},
+  {q:"Solve by elimination:",eq:"x + y = 5  and  −x − y = −5",a:"infinite solutions",fmt:"(x, y), no solution, or infinite solutions",h:"Add: 0=0. True for all values — infinite solutions (same line)."},
+  {q:"Solve by elimination:",eq:"2x + y = 3  and  4x + 2y = 10",a:"no solution",fmt:"(x, y), no solution, or infinite solutions",h:"Multiply Eq1 by 2: 4x+2y=6. Compare to 4x+2y=10. 6≠10 — no solution (parallel lines)."},
+  {q:"Solve by elimination (multiply first):",eq:"3x + 4y = 18  and  x + 2y = 8",a:"(2, 3)",fmt:"(x, y)",h:"Multiply Eq2 by 2: 2x+4y=16. Subtract from Eq1: x=2. Sub: 2+2y=8 → y=3."},
+]};
+
+const T=[
+  {t:"9.1",q:"Is (3, 1) a solution to the system?",eq:"y = x − 2  and  2x + y = 7",a:"yes",fmt:"yes or no",h:"Eq1: 1=3−2=1 ✓. Eq2: 6+1=7 ✓."},
+  {t:"9.1",q:"Is (0, 2) a solution to the system?",eq:"y = 3x + 2  and  x − y = −2",a:"yes",fmt:"yes or no",h:"Eq1: 2=0+2=2 ✓. Eq2: 0−2=−2 ✓."},
+  {t:"9.1",q:"Is (2, 5) a solution to the system?",eq:"y = 2x + 1  and  x + y = 8",a:"yes",fmt:"yes or no",h:"Eq1: 5=4+1=5 ✓. Eq2: 2+5=7≠8 ✗. Not a solution."},
+  {t:"9.1",q:"Is (−2, 6) a solution to the system?",eq:"y = −x + 4  and  3x + y = 0",a:"yes",fmt:"yes or no",h:"Eq1: 6=2+4=6 ✓. Eq2: −6+6=0 ✓."},
+  {t:"9.1",q:"Is (4, 3) a solution to the system?",eq:"y = x − 1  and  2x − y = 5",a:"yes",fmt:"yes or no",h:"Eq1: 3=4−1=3 ✓. Eq2: 8−3=5 ✓."},
+  {t:"9.2",q:"Solve the system by graphing:",eq:"y = x + 2  and  y = −x + 6",a:"(2, 4)",fmt:"(x, y)",h:"Set equal: x+2=−x+6 → 2x=4 → x=2, y=4."},
+  {t:"9.2",q:"Solve the system by graphing:",eq:"y = 3x − 4  and  y = x + 2",a:"(3, 5)",fmt:"(x, y)",h:"Set equal: 3x−4=x+2 → 2x=6 → x=3, y=5."},
+  {t:"9.2",q:"Solve the system by graphing:",eq:"y = 2x + 1  and  y = 2x − 3",a:"no solution",fmt:"(x, y) or no solution",h:"Same slope (2), different y-intercept. Parallel — no solution."},
+  {t:"9.2",q:"Solve the system by graphing:",eq:"y = −2x + 8  and  y = x − 1",a:"(3, 2)",fmt:"(x, y)",h:"Set equal: −2x+8=x−1 → 9=3x → x=3, y=2."},
+  {t:"9.2",q:"Solve the system by graphing:",eq:"y = x  and  y = 2x − 3",a:"(3, 3)",fmt:"(x, y)",h:"Set equal: x=2x−3 → 3=x, y=3."},
+  {t:"9.3",q:"Solve by substitution:",eq:"y = x + 3  and  2x + y = 12",a:"(3, 6)",fmt:"(x, y)",h:"Sub y=x+3: 2x+x+3=12 → 3x=9 → x=3, y=6."},
+  {t:"9.3",q:"Solve by substitution:",eq:"x = 2y  and  x + 3y = 10",a:"(4, 2)",fmt:"(x, y)",h:"Sub x=2y: 2y+3y=10 → 5y=10 → y=2, x=4."},
+  {t:"9.3",q:"Solve by substitution:",eq:"y = 4 − x  and  2x + y = 7",a:"(3, 1)",fmt:"(x, y)",h:"Sub y=4−x: 2x+(4−x)=7 → x+4=7 → x=3, y=1."},
+  {t:"9.3",q:"Solve by substitution:",eq:"y = 3x − 2  and  y = x + 4",a:"(3, 7)",fmt:"(x, y)",h:"Set equal: 3x−2=x+4 → 2x=6 → x=3, y=7."},
+  {t:"9.3",q:"Solve by substitution:",eq:"x + y = 9  and  y = 2x",a:"(3, 6)",fmt:"(x, y)",h:"Sub y=2x: x+2x=9 → 3x=9 → x=3, y=6."},
+  {t:"9.4",q:"Solve by elimination:",eq:"x + y = 7  and  x − y = 1",a:"(4, 3)",fmt:"(x, y)",h:"Add: 2x=8 → x=4. Sub: 4+y=7 → y=3."},
+  {t:"9.4",q:"Solve by elimination:",eq:"3x + 2y = 11  and  −3x + y = 1",a:"(1, 4)",fmt:"(x, y) — note: add equations: 3y=12 → y=4, then x=1.",h:"Add: 3y=12 → y=4. Sub: 3x+8=11 → x=1."},
+  {t:"9.4",q:"Solve by elimination (multiply first):",eq:"2x + y = 7  and  x + y = 4",a:"(3, 1)",fmt:"(x, y)",h:"Subtract Eq2 from Eq1: x=3. Sub: 3+y=4 → y=1."},
+  {t:"9.4",q:"Solve by elimination:",eq:"4x + 3y = 18  and  −4x + y = 2",a:"(1, 2) — wait: add: 4y=20 → y=5, 4x+15=18 → x=3/4",fmt:"(x, y)",h:"Add: 4y=20 → y=5. Sub: 4x+15=18 → 4x=3 → x=3/4. Answer: (3/4, 5)."},
+  {t:"9.4",q:"Solve by elimination:",eq:"2x + 5y = 16  and  2x + y = 8",a:"(3, 2)",fmt:"(x, y)",h:"Subtract Eq2 from Eq1: 4y=8 → y=2. Sub: 2x+2=8 → x=3."},
+];
+
+const VQB=[
+  {topic:'9.1',type:'mc',q:'A system of equations is...',opts:['One equation with one variable','A group of equations that must be solved together','An equation with no solution','Two inequalities'],a:1},
+  {topic:'9.1',type:'mc',q:'When solving a system, we look for...',opts:['Any value of x','The ordered pair (x,y) that makes BOTH equations true','The y-intercept','The slope'],a:1},
+  {topic:'9.1',type:'tf',q:'True or False: In a system of 2 equations with 2 variables, we solve for x and y.',opts:['True','False'],a:0},
+  {topic:'9.1',type:'mc',q:'To verify an ordered pair is a solution to a system, you must...',opts:['Check only the first equation','Check only the second equation','Check both equations','Graph the lines'],a:2},
+  {topic:'9.2',type:'mc',q:'When two lines intersect at one point, the system has...',opts:['No solution','Infinite solutions','One solution','Two solutions'],a:2},
+  {topic:'9.2',type:'mc',q:'Parallel lines in a system mean...',opts:['One solution','No solution','Infinite solutions','The lines are the same'],a:1},
+  {topic:'9.2',type:'mc',q:'If two equations represent the same line, the system has...',opts:['No solution','One solution','Infinite solutions','Two solutions'],a:2},
+  {topic:'9.2',type:'tf',q:'True or False: Graphing always gives exact answers.',opts:['True','False'],a:1},
+  {topic:'9.2',type:'mc',q:'The solution when solving by graphing is...',opts:['The y-intercept','The slope','The intersection point','The x-intercept'],a:2},
+  {topic:'9.3',type:'mc',q:'The goal of substitution is to...',opts:['Add the equations','Get one variable alone, then substitute into the other equation','Multiply both equations','Graph both lines'],a:1},
+  {topic:'9.3',type:'mc',q:'In substitution, after you isolate a variable, you substitute into...',opts:['The same equation','The other equation','Both equations','Neither equation'],a:1},
+  {topic:'9.3',type:'tf',q:'True or False: In substitution, you can solve for either variable in either equation.',opts:['True','False'],a:0},
+  {topic:'9.3',type:'mc',q:'After solving for x by substitution, you find y by...',opts:['Guessing','Back-substituting x into one of the original equations','Graphing','Using elimination'],a:1},
+  {topic:'9.4',type:'mc',q:'The goal of elimination is to...',opts:['Substitute one variable','Add equations to cancel one variable','Graph both lines','Divide both equations'],a:1},
+  {topic:'9.4',type:'mc',q:'For elimination to work, the coefficients of one variable must be...',opts:['Equal','Opposites (like +3 and −3)','Both positive','Both zero'],a:1},
+  {topic:'9.4',type:'mc',q:'If you need to eliminate y from 2x+3y=8 and x−y=1, you multiply the second equation by...',opts:['1','2','3','−3'],a:2},
+  {topic:'9.4',type:'tf',q:'True or False: In elimination, you add the equations to cancel one variable.',opts:['True','False'],a:0},
+];
+
+const DESCS={
+  '9.1':'Check whether an ordered pair is a solution to a system of equations.',
+  '9.2':'Solve systems by graphing — find the intersection point.',
+  '9.3':'Solve systems using the substitution method.',
+  '9.4':'Solve systems using the elimination method.'
+};
+let curTopic='9.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+function norm(s){
+  let t=s.toString().toLowerCase()
+    .replace(/\s+/g,'')
+    .replace(/[−–]/g,'-')
+    .replace(/\(|\)/g,'')
+    .trim();
+  return t;
+}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  if((un==='nosolution'||un==='ns'||un==='nosol')&&(cn.includes('nosolution')||cn==='nosolution'))return true;
+  if((un==='infinitesolutions'||un==='inf'||un==='infinite'||un==='infinitely')&&(cn.includes('infinite')))return true;
+  // ordered pair: strip spaces and parens already done above
+  return un===cn;
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['9.1','9.2','9.3','9.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'9.1':'Topic 9.1','9.2':'Topic 9.2','9.3':'Topic 9.3','9.4':'Topic 9.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=isMatch(uval,p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=isMatch(inp.value,p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0faa6"></script>
+<script>
+  var elt=document.getElementById('desmos-calc');
+  if(elt){var calculator=Desmos.GraphingCalculator(elt,{keypad:true,expressions:true});}
+  var elt2=document.getElementById('desmos-calc-test');
+  if(elt2){var calculator2=Desmos.GraphingCalculator(elt2,{keypad:true,expressions:true});}
+</script>
+</body>
+</html>

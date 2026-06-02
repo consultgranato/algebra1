@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 — Solving Linear Equations | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+
+/* HEADER */
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.np.dim{opacity:.35;pointer-events:none}
+.content{padding:1.1rem 1.5rem 0}
+
+/* OPTION C TABS — all 3 levels */
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+
+/* NOTES */
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.undo-wrap{margin:.5rem 0}
+.undo-dir{display:flex;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);padding:2px 8px 1px}
+.undo-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.uh{background:var(--nnp);color:#fff;padding:6px 10px;font-weight:600;text-align:center;border:1px solid var(--nnpd)}
+.ul{padding:6px 10px;border:1px solid var(--border2);color:var(--text);background:var(--bg2);text-align:center}
+.ua{padding:6px 4px;border:1px solid var(--border2);background:#ede9f7;color:var(--nnp);font-weight:700;font-size:14px;text-align:center;width:28px}
+.undo-tbl tr:nth-child(even) .ul{background:var(--bg3)}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+
+/* VOCAB CARDS */
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+
+/* PRACTICE QUIZ */
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.match-pairs{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .85rem}
+.match-left{display:flex;flex-direction:column;gap:.35rem}
+.match-right{display:flex;flex-direction:column;gap:.35rem}
+.match-term{font-size:12px;font-weight:600;padding:.4rem .7rem;background:#ede9f7;border-radius:var(--radius-md);border:0.5px solid #c4b5e8;color:var(--nnpd)}
+.match-sel{width:100%;padding:.4rem .7rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;background:var(--bg2);color:var(--text);cursor:pointer}
+.match-sel.correct{border-color:var(--success-border);background:var(--success-bg)}
+.match-sel.wrong{border-color:var(--danger-border);background:var(--danger-bg)}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+
+/* PRACTICE / TEST */
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}.match-pairs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <div id="v-notes">
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">5.1</span><span class="tlabel">Solving Basic Equations</span>
+          <a href="https://youtu.be/CAsQLnY11pU" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Part 1</a>
+          <a href="https://youtu.be/-xF5heC4HC0" target="_blank" rel="noopener" class="vid-btn" style="margin-left:3px" onclick="event.stopPropagation()">&#9654; Part 2</a>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> An <span class="vw">equation</span> is a statement that two <span class="vw">algebraic expressions</span> are equal &mdash; think of it like a <strong>scale</strong>. Both sides are balanced. Whatever you do to one side you must do to the other. Always. A <span class="vw">variable</span> is just a number we don&apos;t know yet &mdash; don&apos;t let it freak you out!</p>
+          <div class="kc"><div class="kc-lbl">Key concept &mdash; solution</div><div class="kc-body">A <span class="vw">solution</span> to an equation is a number that, when you plug it in for x, makes the equation true. That&apos;s the magic number we&apos;re solving for.</div></div>
+          <p class="note-h">5 key principles for organizing your work</p>
+          <ol class="steps">
+            <li>Work <strong>vertically &mdash; top down</strong>. Do not work left to right. Do not erase.</li>
+            <li><strong>Line up your equal signs.</strong> Draw a vertical line through the equal sign to stay organized.</li>
+            <li><strong>Whatever you do to one side, you do to the other.</strong> Always. This keeps the equation balanced.</li>
+            <li>Keep going until <strong>x is by itself</strong>. Circle it. That&apos;s the goal.</li>
+            <li>Write <strong>&ldquo;Check&rdquo;</strong> and substitute your answer back in. Use &checkmark; if it works, &cross; if it doesn&apos;t.</li>
+          </ol>
+          <p class="note-h">The &ldquo;Undo&rdquo; table &mdash; your most important tool</p>
+          <p class="note-p" style="margin-bottom:.35rem">Ask: what is happening to x? List it top-to-bottom following PEMDAS. Then undo in <strong>reverse order</strong> bottom-to-top.</p>
+          <div class="undo-wrap">
+            <div class="undo-dir"><span>&darr; fill in top to bottom</span><span>undo bottom to top &uarr;</span></div>
+            <table class="undo-tbl">
+              <tr><th class="uh">What&apos;s happening to x</th><th class="uh" style="width:28px"></th><th class="uh">How to undo it</th></tr>
+              <tr><td class="ul">Adding a number &nbsp;(x + 5)</td><td class="ua">&rarr;</td><td class="ul">Subtract from both sides</td></tr>
+              <tr><td class="ul">Subtracting a number &nbsp;(x &minus; 5)</td><td class="ua">&rarr;</td><td class="ul">Add to both sides</td></tr>
+              <tr><td class="ul">Multiplying by a number &nbsp;(3x)</td><td class="ua">&rarr;</td><td class="ul">Divide both sides by that number</td></tr>
+              <tr><td class="ul">Dividing by a number &nbsp;(x &divide; 4)</td><td class="ua">&rarr;</td><td class="ul">Multiply both sides by that number</td></tr>
+            </table>
+          </div>
+          <div class="warn"><div class="warn-lbl">Gotcha &mdash; the invisible coefficient</div><div class="warn-body">When you see <strong>&minus;x</strong>, there is a <strong>&minus;1</strong> right there &mdash; it&apos;s invisible. So &minus;x is really &minus;1&middot;x. Watch your signs!</div></div>
+          <p class="note-h">Worked example 1 &mdash; basic two-step: solve 3x &minus; 7 = 14</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; undo table + check</div>
+          <div class="undo-wrap" style="margin-bottom:.5rem">
+            <div class="undo-dir"><span>&darr; x is &times;3, then &minus;7</span><span>undo: +7 first, then &divide;3 &uarr;</span></div>
+            <table class="undo-tbl">
+              <tr><th class="uh">What&apos;s happening to x</th><th class="uh" style="width:28px"></th><th class="uh">Undo</th></tr>
+              <tr><td class="ul">Multiply by 3</td><td class="ua">&rarr;</td><td class="ul">Divide both sides by 3</td></tr>
+              <tr><td class="ul">Subtract 7</td><td class="ua">&rarr;</td><td class="ul">Add 7 to both sides <span style="font-size:10px;color:#854f0b">(do this FIRST &mdash; reverse!)</span></td></tr>
+            </table>
+          </div>
+          <div class="wsteps">
+            <span class="eq">3x &minus; 7 &nbsp;=&nbsp; 14</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+7 &nbsp;&nbsp;&nbsp;&nbsp;+7 <span class="eq-note">&larr; add 7 first (bottom of undo table)</span></span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 21</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7 &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 3(7) &minus; 7 = 21 &minus; 7 = 14 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; fraction result: solve 2x + 5 = 12</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; fraction answer is fine!</div><div class="wsteps">
+            <span class="eq">2x + 5 &nbsp;=&nbsp; 12</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;5 &nbsp;&nbsp;&nbsp;&nbsp;&minus;5</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2x &nbsp;=&nbsp; 7</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;2 &nbsp;&nbsp;&nbsp;&nbsp;&divide;2</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7/2 &nbsp;&checkmark; <span class="eq-note">&larr; a fraction is just a number. Don&apos;t panic!</span></span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 2(7/2) + 5 = 7 + 5 = 12 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example 3 &mdash; the gotcha: solve 6 &minus; x = 13</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; invisible &minus;1! Your radar should be up.</div><div class="wsteps">
+            <span class="eq">6 &minus; x &nbsp;=&nbsp; 13 <span class="eq-note">&larr; &minus;x means &minus;1&middot;x. The coefficient is &minus;1!</span></span>
+            <span class="eq">&nbsp;&nbsp;&minus;6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;6</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;x &nbsp;=&nbsp; 7</span>
+            <span class="eq">&nbsp;&divide;(&minus;1) &nbsp;&nbsp;&divide;(&minus;1)</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; &minus;7 &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 6 &minus; (&minus;7) = 6 + 7 = 13 &checkmark;</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> &ldquo;Hey, you knew x was 7 the whole time. Why didn&apos;t you say something?&rdquo;</div>
+        </div>
+      </div>
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">5.2</span><span class="tlabel">Solving Equations with Fractions</span>
+          <a href="https://youtu.be/jYLxGQKXtN4" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">Good news and bad news. Bad news: fractions show up in <span class="vw">equations</span>. Ugghh!!! Good news: we can use the exact same technique from 5.1. Same undo table &mdash; no new tools needed.</p>
+          <p class="note-h">Case 1 &mdash; x divided by a number: solve x/4 + 3 = 8</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; Case 1</div><div class="wsteps">
+            <span class="eq">x/4 + 3 &nbsp;=&nbsp; 8 <span class="eq-note">&larr; x is &divide;4, then +3. Undo: &minus;3 first, then &times;4</span></span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;3 &nbsp;&nbsp;&nbsp;&nbsp;&minus;3</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x/4 &nbsp;=&nbsp; 5</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 20 &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 20/4 + 3 = 5 + 3 = 8 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Case 2 &mdash; x multiplied by a fraction: solve (2/3)x = 10</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; Case 2 &mdash; multiply by the reciprocal</div><div class="wsteps">
+            <span class="eq">(2/3)x &nbsp;=&nbsp; 10 <span class="eq-note">&larr; x is &times;(2/3). Undo: multiply by the reciprocal 3/2</span></span>
+            <span class="eq">(3/2)&middot;(2/3)x &nbsp;=&nbsp; 10&middot;(3/2) <span class="eq-note">&larr; the 2s and 3s cancel</span></span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 15 &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (2/3)(15) = 10 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Case 3 &mdash; compound fraction: solve (3x + 1)/4 = 5</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; Case 3 &mdash; watch the implicit parentheses!</div><div class="wsteps">
+            <span class="eq">(3x + 1)/4 &nbsp;=&nbsp; 5 <span class="eq-note">&larr; think: (3x + 1) &divide; 4 = 5. Undo &divide;4 first</span></span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x + 1 &nbsp;=&nbsp; 20</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;1 &nbsp;&nbsp;&nbsp;&nbsp;&minus;1</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 19</span>
+            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3</span>
+            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 19/3 &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (3(19/3)+1)/4 = 20/4 = 5 &checkmark;</span>
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Sign errors in numerators</div><div class="warn-body">When you see (6 &minus; 3x)/5, think (6 &minus; 3x) &divide; 5. The &minus;3 stays with x. Say it out loud: &ldquo;negative three times x.&rdquo;</div></div>
+          <div class="joke"><strong>Joke:</strong> 4 out of 3 people struggle with fractions.</div>
+        </div>
+      </div>
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">5.3</span><span class="tlabel">Solving More Complex Equations</span>
+          <a href="https://youtu.be/rXHHW4PGGP8" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">What if an <span class="vw">equation</span> has parentheses, multiple <span class="vw">terms</span> on each side, or x on <strong>both sides</strong>? Double underline that. We have a process &mdash; and we already know most of it.</p>
+          <div class="kc"><div class="kc-lbl">Process for solving equations (4 steps)</div><div class="kc-body">
+            <strong>Step 1 &mdash; Simplify each side completely:</strong><br>
+            &nbsp;&nbsp;&bull; Distribute to remove parentheses &mdash; circle negative signs first<br>
+            &nbsp;&nbsp;&bull; Combine like terms on each side<br>
+            &nbsp;&nbsp;&bull; Cover up the right side and deal with the left. Then switch.<br><br>
+            <strong>Step 2 &mdash; Get x on one side.</strong> Move the x <span class="vw">term</span> with the smaller <span class="vw">coefficient</span> &mdash; fewer negatives means fewer mistakes.<br><br>
+            <strong>Step 3 &mdash; Undo</strong> using the table from 5.1<br><br>
+            <strong>Step 4 &mdash; Check</strong> your <span class="vw">solution</span>
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Negative sign before parentheses</div><div class="warn-body">When you see &minus;(2x + 7), write a 1: &minus;1(2x + 7). Circle that &minus;1. It multiplies every term inside. Say it out loud as you go.</div></div>
+          <p class="note-h">Worked example &mdash; solve: 2(x + 4) = 3x &minus; 1</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">2(x + 4) &nbsp;=&nbsp; 3x &minus; 1</span>
+            <span class="eq">2x + 8 &nbsp;=&nbsp; 3x &minus; 1 <span class="eq-note">&larr; distribute</span></span>
+            <span class="eq">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x <span class="eq-note">&larr; move smaller coefficient (2 &lt; 3)</span></span>
+            <span class="eq eq-div">8 &nbsp;=&nbsp; x &minus; 1</span>
+            <span class="eq">+1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+1</span>
+            <span class="eq eq-div">9 &nbsp;=&nbsp; x &nbsp;&checkmark;</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 2(9+4) = 26; 3(9)&minus;1 = 26 &checkmark;</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> &ldquo;Dear Algebra, please stop asking me to find your x. She&apos;s not coming back and don&apos;t ask y.&rdquo;</div>
+        </div>
+      </div>
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">5.4</span><span class="tlabel">Special Case Equations</span>
+          <a href="https://youtu.be/47aM5mP2w7Y" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p">Important: we <strong>solve</strong> <span class="vw">equations</span>. We <strong>simplify</strong> and <strong>evaluate</strong> <span class="vw">algebraic expressions</span>. An equation has an equal sign. An expression does not. You cannot solve an expression.</p>
+          <div class="worked"><div class="wlbl">Common sense first &mdash; try numbers in: x + 1 = x + 2</div><div class="wsteps">
+            <span class="eq">x = 7: &nbsp;7+1=8 &nbsp;vs&nbsp; 7+2=9 &nbsp;&rarr;&nbsp; 8&ne;9. No.</span>
+            <span class="eq">x = 0: &nbsp;0+1=1 &nbsp;vs&nbsp; 0+2=2 &nbsp;&rarr;&nbsp; 1&ne;2. No.</span>
+            <span class="eq" style="font-style:italic;font-size:12px;color:var(--text2);font-family:sans-serif">How could any number +1 equal the same number +2? It just can&apos;t.</span>
+          </div></div>
+          <div class="kc"><div class="kc-lbl">The rule &mdash; when x disappears in Step 2</div><div class="kc-body">
+            <strong>FALSE statement</strong> (like 3 = 7) &rarr; <strong>No Solution</strong><br>
+            Would you rather have $1 or $2? Not equal. No value of x works.<br><br>
+            <strong>TRUE statement</strong> (like 6 = 6) &rarr; <strong>All Real Numbers</strong><br>
+            Every number makes the equation true.
+          </div></div>
+          <p class="note-h">No Solution &mdash; solve: 2x + 3 = 2x + 9</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">2x + 3 &nbsp;=&nbsp; 2x + 9</span>
+            <span class="eq">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x</span>
+            <span class="eq eq-div">3 &nbsp;=&nbsp; 9 &nbsp;&larr; FALSE &rarr; <strong>No Solution</strong></span>
+          </div></div>
+          <p class="note-h">All Real Numbers &mdash; solve: 12x &minus; 3(x &minus; 2) = 9x + 6</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">12x &minus; 3(x &minus; 2) &nbsp;=&nbsp; 9x + 6</span>
+            <span class="eq">9x + 6 &nbsp;=&nbsp; 9x + 6 <span class="eq-note">&larr; distribute, combine</span></span>
+            <span class="eq">&minus;9x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;9x</span>
+            <span class="eq eq-div">6 &nbsp;=&nbsp; 6 &nbsp;&larr; TRUE &rarr; <strong>All Real Numbers</strong></span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: pick any number &mdash; they all work.</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> &ldquo;Just another thing I hate about algebra&hellip; when the solution is &lsquo;no solution&rsquo;. Ugghh!!!&rdquo;</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">From Units 3 &amp; 4 &mdash; reviewed in 5.1</div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Variable</div><div class="vdef">A symbol (usually x) representing an unknown number. Don&apos;t let it freak you out &mdash; it&apos;s just a number we don&apos;t know yet.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><strong>x</strong> = some unknown<br>3x &rarr; 3 times that unknown<br>If x = 5, then 3x = <span class="chip chip-g">15</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Term</div><div class="vdef">A single number, variable, or number multiplied by variables. Terms are separated by + or &minus; signs.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">In <span class="eq-box">4x&sup2; + 3x &minus; 7</span><br><span class="chip chip-p">4x&sup2;</span> <span class="chip chip-p">3x</span> <span class="chip chip-p">&minus;7</span><br>= 3 terms total</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Coefficient</div><div class="vdef">The number multiplied by the variable. In x, it&apos;s an invisible 1. In &minus;x, it&apos;s an invisible &minus;1.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">5x</span> &rarr; coeff. <span class="chip chip-a">5</span><br><span class="eq-box">&minus;3x</span> &rarr; coeff. <span class="chip chip-a">&minus;3</span><br><span class="eq-box">x</span> &rarr; coeff. <span class="chip chip-a">1</span> (invisible!)<br><span class="eq-box">&minus;x</span> &rarr; coeff. <span class="chip chip-a">&minus;1</span> (invisible!)</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Constant</div><div class="vdef">A term with no variable. Its value never changes no matter what x is.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">In <span class="eq-box">3x + 7</span><br><span class="chip chip-a">7</span> is the constant<br>Stays 7 regardless of x</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Algebraic expression</div><div class="vdef">One or more terms combined with + or &minus; signs. No equal sign. You simplify or evaluate &mdash; you cannot solve an expression.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="chip chip-a">Expression</span>: <span class="eq-box">4x + 3</span><br><span class="chip chip-g">Equation</span>: <span class="eq-box">4x + 3 = 11</span></div></div></div>
+        <div class="vsec">New in Unit 5</div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Equation</div><div class="vdef">A statement that two expressions are equal &mdash; always has an equal sign. Think of a balanced scale. You solve an equation.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">2x + 5 = 13</span><br>= a balanced scale<br>Left side = Right side</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">Solution</div><div class="vdef">The value of x that makes an equation true. The magic number &mdash; plug it in and both sides are equal.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="eq-box">2x + 5 = 13</span><br>Solution: <span class="chip chip-g">x = 4</span><br>Check: 2(4)+5 = 13 &checkmark;</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">5.1</div><div class="vterm">The &ldquo;Undo&rdquo; table</div><div class="vdef" style="margin-bottom:.55rem">Fill in what&apos;s happening to x top-to-bottom. Undo in reverse order bottom-to-top. Your most important tool.</div>
+        <div class="undo-dir"><span>&darr; what&apos;s happening to x</span><span>undo in reverse &uarr;</span></div>
+        <table class="undo-tbl"><tr><th class="uh">What&apos;s happening to x</th><th class="uh" style="width:28px"></th><th class="uh">Undo</th></tr>
+        <tr><td class="ul">Adding (x + 5)</td><td class="ua">&rarr;</td><td class="ul">Subtract from both sides</td></tr>
+        <tr><td class="ul">Subtracting (x &minus; 5)</td><td class="ua">&rarr;</td><td class="ul">Add to both sides</td></tr>
+        <tr><td class="ul">Multiplying (3x)</td><td class="ua">&rarr;</td><td class="ul">Divide both sides</td></tr>
+        <tr><td class="ul">Dividing (x &divide; 4)</td><td class="ua">&rarr;</td><td class="ul">Multiply both sides</td></tr></table>
+        <div class="vex" style="margin-top:.5rem"><div class="vex-lbl">Reverse order example</div>3x + 7 = 22 &rarr; x is &times;3 then +7. Undo: &minus;7 first <span class="chip chip-a">(reverse!)</span> &rarr; 3x=15 &rarr; &divide;3 &rarr; x=5</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.1</div><div class="vterm">5 key principles for organizing your work</div><div class="vdef">The five rules: work vertically, line up equal signs, do same to both sides, keep going until x is alone, always check.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">1. Work &darr; top to bottom<br>2. Line up = signs<br>3. Same to both sides<br>4. Until x is alone<br>5. Write &ldquo;Check&rdquo; &checkmark;</div></div></div>
+        <div class="vsec">New in 5.3</div>
+        <div class="vcard"><div><div class="vtag">5.3</div><div class="vterm">Process for solving equations</div><div class="vdef">The 4-step process: (1) Simplify each side, (2) Get x on one side, (3) Undo using the table, (4) Check your answer.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">Step 1: Simplify<br>Step 2: Get x on one side<br>Step 3: Undo table<br>Step 4: Check &checkmark;</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.3</div><div class="vterm">Simplify each side</div><div class="vdef">Step 1: distribute to remove parentheses, then combine like terms on each side before anything else.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">2(x+3) + x = ...<br>&rarr; 2x + 6 + x = ...<br>&rarr; <span class="chip chip-g">3x + 6</span> = ... (simplified)</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.3</div><div class="vterm">Get x on one side</div><div class="vdef">Step 2: if x appears on both sides, move one x-term. Pick the side with the smaller coefficient to avoid negatives.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">5x + 2 = 3x + 8<br>&minus;3x &nbsp;&nbsp;&nbsp;&nbsp;&minus;3x<br>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;<br><span class="chip chip-g">2x + 2 = 8</span></div></div></div>
+        <div class="vsec">New in 5.4</div>
+        <div class="vcard"><div><div class="vtag">5.4</div><div class="vterm">Solve vs. Simplify vs. Evaluate</div><div class="vdef"><strong>Solve</strong> = find x in an equation. <strong>Simplify</strong> = reduce an expression. <strong>Evaluate</strong> = find the value of an expression for a given x.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="chip chip-p">Solve</span>: 2x&minus;1=7 &rarr; x=4<br><span class="chip chip-g">Simplify</span>: 3x+2x &rarr; 5x<br><span class="chip chip-a">Evaluate</span>: 3x at x=2 &rarr; 6</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.4</div><div class="vterm">Solve</div><div class="vdef">To find the value(s) of the variable that make an equation true. You can only solve equations &mdash; not expressions.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">Solve <span class="eq-box">4x + 1 = 13</span><br>&rarr; 4x = 12<br>&rarr; <span class="chip chip-g">x = 3</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">5.4</div><div class="vterm">What are the special cases?</div><div class="vdef">Two special outcomes when x cancels in Step 2: No Solution (false statement) and All Real Numbers (true statement).</div></div><div><div class="vex-lbl">Visual example</div><div class="vex"><span class="chip chip-a">No Solution</span>: 3 = 7<br><span class="chip chip-g">All Real Numbers</span>: 5 = 5</div></div></div>
+        <div class="vcard"><div><div class="vtag">5.4</div><div class="vterm">When is the solution &ldquo;No Solution&rdquo;?</div><div class="vdef">When x cancels in Step 2 and a FALSE statement remains (like 3 = 7). No value of x makes the equation true.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex" style="font-size:12px;line-height:1.8">5x + 3 = 5x + 9<br>&minus;5x &nbsp;&nbsp;&nbsp;&nbsp;&minus;5x<br>&mdash;&mdash;&mdash;&mdash;&mdash;<br>3 = 9 &larr; false!<br><span class="chip chip-a">No Solution</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">5.4</div><div class="vterm">When is the solution &ldquo;All Real Numbers&rdquo;?</div><div class="vdef">When x cancels in Step 2 and a TRUE statement remains (like 6 = 6). Every number makes the equation true.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex" style="font-size:12px;line-height:1.8">9x + 6 = 9x + 6<br>&minus;9x &nbsp;&nbsp;&nbsp;&nbsp;&minus;9x<br>&mdash;&mdash;&mdash;&mdash;&mdash;<br>6 = 6 &larr; true!<br><span class="chip chip-g">All Real Numbers</span></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('5.1',this)">5.1</button>
+          <button class="pqf-btn" onclick="setQFilter('5.3',this)">5.3</button>
+          <button class="pqf-btn" onclick="setQFilter('5.4',this)">5.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('5.1',this)">5.1 &mdash; Basic Equations</button>
+              <button class="tpbtn" onclick="selTopic('5.2',this)">5.2 &mdash; Fractions</button>
+              <button class="tpbtn" onclick="selTopic('5.3',this)">5.3 &mdash; Complex Equations</button>
+              <button class="tpbtn" onclick="selTopic('5.4',this)">5.4 &mdash; Special Cases</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Solving one- and two-step equations using the Undo table.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 5</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── VIDEO DATA PATTERN FOR CLAUDE CODE ── */
+const UNIT={id:5,name:"Solving Linear Equations",topics:[
+  {id:"5.1",label:"Solving Basic Equations",videos:[{label:"Part 1",url:"https://youtu.be/CAsQLnY11pU"},{label:"Part 2",url:"https://youtu.be/-xF5heC4HC0"}]},
+  {id:"5.2",label:"Solving Equations with Fractions",videos:[{label:"Watch",url:"https://youtu.be/jYLxGQKXtN4"}]},
+  {id:"5.3",label:"Solving More Complex Equations",videos:[{label:"Watch",url:"https://youtu.be/rXHHW4PGGP8"}]},
+  {id:"5.4",label:"Special Case Equations",videos:[{label:"Watch",url:"https://youtu.be/47aM5mP2w7Y"}]},
+]};
+
+/* ── UNIT NAV ── */
+const UNITS=[
+  {n:"1\u20134",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='5'?' on':'');
+    a.href=u.file;
+    a.title=u.name;
+    a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+/* ── PRACTICE BANKS ── */
+const BANKS={
+'5.1':[
+  {q:"Solve:",eq:"x + 9 = 17",a:"x = 8",fmt:"x = ___",h:"Subtract 9 from both sides."},
+  {q:"Solve:",eq:"x \u2212 5 = 12",a:"x = 17",fmt:"x = ___",h:"Add 5 to both sides."},
+  {q:"Solve:",eq:"4x = 28",a:"x = 7",fmt:"x = ___",h:"Divide both sides by 4."},
+  {q:"Solve:",eq:"\u22123x = 21",a:"x = \u22127",fmt:"x = ___",h:"Remember the invisible \u22121. Divide by \u22123."},
+  {q:"Solve:",eq:"x + 14 = 3",a:"x = \u221211",fmt:"x = ___",h:"Subtract 14 from both sides."},
+  {q:"Solve:",eq:"2x = \u221216",a:"x = \u22128",fmt:"x = ___",h:"Divide both sides by 2."},
+  {q:"Solve:",eq:"x \u00f7 3 = \u22126",a:"x = \u221218",fmt:"x = ___",h:"Multiply both sides by 3."},
+  {q:"Solve:",eq:"x \u2212 11 = \u22124",a:"x = 7",fmt:"x = ___",h:"Add 11 to both sides."},
+  {q:"Solve:",eq:"5x = \u221245",a:"x = \u22129",fmt:"x = ___",h:"Divide both sides by 5."},
+  {q:"Solve:",eq:"x + 6 = \u22122",a:"x = \u22128",fmt:"x = ___",h:"Subtract 6 from both sides."},
+  {q:"Solve:",eq:"x \u00f7 7 = 3",a:"x = 21",fmt:"x = ___",h:"Multiply both sides by 7."},
+  {q:"Solve:",eq:"\u22126x = 42",a:"x = \u22127",fmt:"x = ___",h:"Divide both sides by \u22126."},
+  {q:"Is x = 4 a solution?",eq:"3x \u2212 5 = 7",a:"yes",fmt:"yes or no",h:"3(4)\u22125 = 7. True!"},
+  {q:"Is x = 3 a solution?",eq:"2x + 4 = 9",a:"no",fmt:"yes or no",h:"2(3)+4=10 \u2260 9. False."},
+  {q:"Solve:",eq:"x \u2212 20 = 5",a:"x = 25",fmt:"x = ___",h:"Add 20 to both sides."},
+],
+'5.2':[
+  {q:"Solve:",eq:"x/5 + 2 = 6",a:"x = 20",fmt:"x = ___",h:"Subtract 2, then \u00d75."},
+  {q:"Solve:",eq:"(2/3)x = 8",a:"x = 12",fmt:"x = ___",h:"Multiply both sides by 3/2."},
+  {q:"Solve:",eq:"x/4 \u2212 1 = 3",a:"x = 16",fmt:"x = ___",h:"Add 1, then \u00d74."},
+  {q:"Solve:",eq:"(3/4)x = \u22129",a:"x = \u221212",fmt:"x = ___",h:"Multiply both sides by 4/3."},
+  {q:"Solve:",eq:"x/2 + 5 = \u22121",a:"x = \u221212",fmt:"x = ___",h:"Subtract 5, then \u00d72."},
+  {q:"Solve:",eq:"(1/2)x \u2212 3 = 5",a:"x = 16",fmt:"x = ___",h:"Add 3, then \u00d72."},
+  {q:"Solve:",eq:"x/6 = \u22124",a:"x = \u221224",fmt:"x = ___",h:"Multiply both sides by 6."},
+  {q:"Solve:",eq:"(5/2)x = 15",a:"x = 6",fmt:"x = ___",h:"Multiply both sides by 2/5."},
+  {q:"Solve:",eq:"x/3 \u2212 4 = 2",a:"x = 18",fmt:"x = ___",h:"Add 4, then \u00d73."},
+  {q:"Solve:",eq:"(4/5)x = 16",a:"x = 20",fmt:"x = ___",h:"Multiply both sides by 5/4."},
+  {q:"Solve:",eq:"x/9 + 1 = 4",a:"x = 27",fmt:"x = ___",h:"Subtract 1, then \u00d79."},
+  {q:"Solve:",eq:"(7/3)x = 14",a:"x = 6",fmt:"x = ___",h:"Multiply both sides by 3/7."},
+  {q:"Solve:",eq:"x/5 \u2212 3 = \u22121",a:"x = 10",fmt:"x = ___",h:"Add 3, then \u00d75."},
+  {q:"Solve:",eq:"(3/8)x = 9",a:"x = 24",fmt:"x = ___",h:"Multiply both sides by 8/3."},
+  {q:"Solve:",eq:"x/4 + 6 = 2",a:"x = \u221216",fmt:"x = ___",h:"Subtract 6, then \u00d74."},
+],
+'5.3':[
+  {q:"Solve:",eq:"2(x + 3) = 14",a:"x = 4",fmt:"x = ___",h:"Distribute: 2x+6=14. Subtract 6, divide by 2."},
+  {q:"Solve:",eq:"3x + 7 = x + 15",a:"x = 4",fmt:"x = ___",h:"Subtract x: 2x+7=15. Subtract 7, divide by 2."},
+  {q:"Solve:",eq:"4(x \u2212 2) = 2x + 6",a:"x = 7",fmt:"x = ___",h:"Distribute: 4x\u22128=2x+6. Subtract 2x, add 8, divide by 2."},
+  {q:"Solve:",eq:"5x \u2212 3 = 2x + 12",a:"x = 5",fmt:"x = ___",h:"Subtract 2x: 3x\u22123=12. Add 3, divide by 3."},
+  {q:"Solve:",eq:"\u22122(x + 4) = 10",a:"x = \u22129",fmt:"x = ___",h:"Circle the \u22122! Distribute: \u22122x\u22128=10. Add 8, divide by \u22122."},
+  {q:"Solve:",eq:"3(2x \u2212 1) = 4x + 9",a:"x = 6",fmt:"x = ___",h:"Distribute: 6x\u22123=4x+9. Subtract 4x, add 3, divide by 2."},
+  {q:"Solve:",eq:"5(x + 2) = 3x + 16",a:"x = 3",fmt:"x = ___",h:"Distribute: 5x+10=3x+16. Subtract 3x, subtract 10, divide by 2."},
+  {q:"Solve:",eq:"7x \u2212 5 = 4x + 10",a:"x = 5",fmt:"x = ___",h:"Subtract 4x: 3x\u22125=10. Add 5, divide by 3."},
+  {q:"Solve:",eq:"2(3x + 1) = 20",a:"x = 3",fmt:"x = ___",h:"Distribute: 6x+2=20. Subtract 2, divide by 6."},
+  {q:"Solve:",eq:"\u22123(x \u2212 4) = 18",a:"x = \u22122",fmt:"x = ___",h:"Circle the \u22123! Distribute: \u22123x+12=18. Subtract 12, divide by \u22123."},
+  {q:"Solve:",eq:"4x + 9 = 6x \u2212 3",a:"x = 6",fmt:"x = ___",h:"Subtract 4x: 9=2x\u22123. Add 3, divide by 2."},
+  {q:"Solve:",eq:"2(x \u2212 5) = \u22124",a:"x = 3",fmt:"x = ___",h:"Distribute: 2x\u221210=\u22124. Add 10, divide by 2."},
+  {q:"Solve:",eq:"6(x + 1) = 4x + 14",a:"x = 4",fmt:"x = ___",h:"Distribute: 6x+6=4x+14. Subtract 4x, subtract 6, divide by 2."},
+  {q:"Solve:",eq:"3x \u2212 8 = x + 4",a:"x = 6",fmt:"x = ___",h:"Subtract x: 2x\u22128=4. Add 8, divide by 2."},
+  {q:"Solve:",eq:"5(x \u2212 3) = 2x + 6",a:"x = 7",fmt:"x = ___",h:"Distribute: 5x\u221215=2x+6. Subtract 2x, add 15, divide by 3."},
+],
+'5.4':[
+  {q:"Solve:",eq:"5x + 3 = 5x + 9",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Subtract 5x \u2192 3=9. False \u2192 No Solution. You can also write: ns"},
+  {q:"Solve:",eq:"2(x + 4) = 2x + 8",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 2x+8=2x+8. Subtract 2x \u2192 8=8. True! You can also write: arn"},
+  {q:"Solve:",eq:"3x \u2212 6 = 3(x \u2212 2)",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute right: 3x\u22126=3x\u22126. True!"},
+  {q:"Solve:",eq:"4x + 1 = 4x \u2212 5",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Subtract 4x \u2192 1=\u22125. False."},
+  {q:"Solve:",eq:"6x + 2 = 6x + 2",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Subtract 6x \u2192 2=2. True!"},
+  {q:"Solve:",eq:"\u22122x + 7 = \u22122x + 3",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Add 2x \u2192 7=3. False."},
+  {q:"Solve:",eq:"4(x \u2212 1) = 4x \u2212 4",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 4x\u22124=4x\u22124. True!"},
+  {q:"Solve:",eq:"3x + 10 = 3(x + 4)",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 3x+10=3x+12. Subtract 3x \u2192 10=12. False."},
+  {q:"Solve:",eq:"5(2x + 1) = 10x + 5",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 10x+5=10x+5. True!"},
+  {q:"Solve:",eq:"\u2212x + 4 = \u2212x \u2212 1",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Add x \u2192 4=\u22121. False."},
+  {q:"Solve:",eq:"2x \u2212 3 = 2(x \u2212 2)",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 2x\u22123=2x\u22124. Subtract 2x \u2192 \u22123=\u22124. False."},
+  {q:"Solve:",eq:"7x \u2212 7 = 7(x \u2212 1)",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute right: 7x\u22127=7x\u22127. True!"},
+  {q:"Solve:",eq:"3x + 5 = 3x + 5",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Subtract 3x \u2192 5=5. True!"},
+  {q:"Solve:",eq:"2(3x + 4) = 6x + 7",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 6x+8=6x+7. Subtract 6x \u2192 8=7. False."},
+  {q:"Solve:",eq:"\u22124(x \u2212 2) = \u22124x + 8",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: \u22124x+8=\u22124x+8. True!"},
+]};
+
+const T=[
+  {t:"5.1",q:"Solve:",eq:"x + 22 = 31",a:"x = 9",fmt:"x = ___",h:"Subtract 22."},
+  {t:"5.1",q:"Solve:",eq:"x \u2212 8 = \u22123",a:"x = 5",fmt:"x = ___",h:"Add 8."},
+  {t:"5.1",q:"Solve:",eq:"7x = \u221235",a:"x = \u22125",fmt:"x = ___",h:"Divide by 7."},
+  {t:"5.1",q:"Solve:",eq:"x \u00f7 6 = 4",a:"x = 24",fmt:"x = ___",h:"Multiply by 6."},
+  {t:"5.1",q:"Is x = \u22122 a solution to 4x + 3 = \u22125?",eq:"Substitute.",a:"yes",fmt:"yes or no",h:"4(\u22122)+3=\u22125. True!"},
+  {t:"5.2",q:"Solve:",eq:"x/3 + 7 = 10",a:"x = 9",fmt:"x = ___",h:"Subtract 7, then \u00d73."},
+  {t:"5.2",q:"Solve:",eq:"(5/6)x = 15",a:"x = 18",fmt:"x = ___",h:"Multiply by 6/5."},
+  {t:"5.2",q:"Solve:",eq:"x/8 \u2212 2 = 1",a:"x = 24",fmt:"x = ___",h:"Add 2, then \u00d78."},
+  {t:"5.2",q:"Solve:",eq:"(3/5)x = 12",a:"x = 20",fmt:"x = ___",h:"Multiply by 5/3."},
+  {t:"5.2",q:"Solve:",eq:"x/7 + 3 = 6",a:"x = 21",fmt:"x = ___",h:"Subtract 3, then \u00d77."},
+  {t:"5.3",q:"Solve:",eq:"3(x + 5) = 24",a:"x = 3",fmt:"x = ___",h:"Distribute: 3x+15=24. Subtract 15, divide by 3."},
+  {t:"5.3",q:"Solve:",eq:"6x \u2212 4 = 3x + 11",a:"x = 5",fmt:"x = ___",h:"Subtract 3x: 3x\u22124=11. Add 4, divide by 3."},
+  {t:"5.3",q:"Solve:",eq:"2(3x \u2212 4) = 4x + 2",a:"x = 5",fmt:"x = ___",h:"Distribute: 6x\u22128=4x+2. Subtract 4x, add 8, divide by 2."},
+  {t:"5.3",q:"Solve:",eq:"\u22123(x \u2212 2) = 15",a:"x = \u22123",fmt:"x = ___",h:"Circle the \u22123! Distribute: \u22123x+6=15. Subtract 6, divide by \u22123."},
+  {t:"5.3",q:"Solve:",eq:"5(x + 1) = 3x + 13",a:"x = 4",fmt:"x = ___",h:"Distribute: 5x+5=3x+13. Subtract 3x, subtract 5, divide by 2."},
+  {t:"5.4",q:"Solve:",eq:"7x \u2212 2 = 7x + 4",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Subtract 7x \u2192 \u22122=4. False."},
+  {t:"5.4",q:"Solve:",eq:"4(x + 3) = 4x + 12",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 4x+12=4x+12. True!"},
+  {t:"5.4",q:"Solve:",eq:"9x \u2212 9 = 9(x \u2212 1)",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute right: 9x\u22129. True!"},
+  {t:"5.4",q:"Solve:",eq:"6x + 5 = 6x \u2212 3",a:"no solution",fmt:"no solution / all real numbers / x = ___",h:"Subtract 6x \u2192 5=\u22123. False."},
+  {t:"5.4",q:"Solve:",eq:"3(2x + 1) = 6x + 3",a:"all real numbers",fmt:"no solution / all real numbers / x = ___",h:"Distribute: 6x+3=6x+3. True!"},
+];
+
+const VQB=[
+  {topic:'5.1',type:'mc',q:'A variable is best described as...',opts:['A number that never changes','An unknown number represented by a letter','The answer to an equation','A number multiplied by itself'],a:1},
+  {topic:'5.1',type:'mc',q:'Which of the following is a TERM?',opts:['4x + 3','2x \u2212 1 = 7','3x\u00b2','x = 5'],a:2},
+  {topic:'5.1',type:'mc',q:'What is the coefficient in the term \u22127x?',opts:['7','x','\u22127x','\u22127'],a:3},
+  {topic:'5.1',type:'mc',q:'In the expression 3x + 5, what is the constant?',opts:['3','x','5','3x'],a:2},
+  {topic:'5.1',type:'tf',q:'True or False: An algebraic expression has an equal sign.',opts:['True','False'],a:1},
+  {topic:'5.1',type:'mc',q:'An equation always has...',opts:['A variable','An equal sign','Two terms','A coefficient'],a:1},
+  {topic:'5.1',type:'mc',q:'A solution to an equation is...',opts:['Any number you choose','The number that makes the equation true','Always a positive number','The largest number in the equation'],a:1},
+  {topic:'5.1',type:'mc',q:'In the Undo table, you undo operations in...',opts:['The same order (top to bottom)','Reverse order (bottom to top)','Alphabetical order','Random order'],a:1},
+  {topic:'5.1',type:'mc',q:'Which correctly summarizes the 5 key principles?',opts:['Work horizontally; erase mistakes; do one side only','Work vertically; line up = signs; same to both sides; until x alone; check','Work backwards; use a calculator; skip the check step','Distribute first; combine; skip the undo table'],a:1},
+  {topic:'5.3',type:'mc',q:'What is Step 1 of the process for solving equations?',opts:['Get x on one side','Check the solution','Simplify each side completely','Use the Undo table'],a:2},
+  {topic:'5.3',type:'mc',q:'When simplifying each side, you should...',opts:['Skip parentheses','Distribute and combine like terms','Move x to the right side only','Divide both sides first'],a:1},
+  {topic:'5.3',type:'mc',q:'When x appears on both sides, move the term with the...',opts:['Larger coefficient','Smaller coefficient','Variable on the right','Negative sign'],a:1},
+  {topic:'5.4',type:'match',q:'Match each action to the correct word.',pairs:[['Find x in an equation','Solve'],['Reduce 3x + 2x to 5x','Simplify'],['Find 3x when x = 4','Evaluate']],a:[0,1,2]},
+  {topic:'5.4',type:'mc',q:'Which word means to find the value of x that makes an equation true?',opts:['Simplify','Evaluate','Solve','Distribute'],a:2},
+  {topic:'5.4',type:'mc',q:'What are the two special cases in solving equations?',opts:['Positive and negative','No Solution and All Real Numbers','One and two solutions','Fractions and decimals'],a:1},
+  {topic:'5.4',type:'mc',q:'A FALSE statement after Step 2 means...',opts:['x = 0','All Real Numbers','No Solution','x = 3'],a:2},
+  {topic:'5.4',type:'mc',q:'A TRUE statement after Step 2 means...',opts:['x = 6','No Solution','All Real Numbers','x = 1'],a:2},
+];
+
+const DESCS={'5.1':'Solving one- and two-step equations using the Undo table.','5.2':'Solving equations that contain fractions.','5.3':'Equations with parentheses and variables on both sides.','5.4':'Identifying No Solution and All Real Numbers.'};
+let curTopic='5.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'\u232b',c:'clr',f:'bk'},{l:'\u00f7',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'\u00d7',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'\u2212',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'\u00b1',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'\u2212','*':'\u00d7','/':'\u00f7'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){const r=s.toString().toLowerCase().replace(/\s+/g,'').replace(/[\u2212\u2013]/g,'-').replace(/[^0-9a-z\-=\.\/]/g,'').trim();return r;}
+function isMatch(u,c){
+  const un=norm(u),cn=norm(c);
+  if(un===cn)return true;
+  if((un==='nosolution'||un==='ns')&&cn==='nosolution')return true;
+  if((un==='allrealnumbers'||un==='arn'||un==='allreal')&&cn==='allrealnumbers')return true;
+  return false;
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='match'){
+      inner='<div class="match-pairs"><div class="match-left">'+q.pairs.map(p=>'<div class="match-term">'+p[0]+'</div>').join('')+'</div><div class="match-right">'+q.pairs.map((_,j)=>'<select class="match-sel" id="vqm'+i+'_'+j+'"><option value="">\u2014 select \u2014</option>'+q.pairs.map(p=>'<option value="'+p[1]+'">'+p[1]+'</option>').join('')+'</select>').join('')+'</div></div>';
+    } else if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    let ok=false;
+    if(q.type==='match'){
+      ok=q.pairs.every((_,j)=>{const s=document.getElementById('vqm'+i+'_'+j);return s&&s.value===q.pairs[j][1];});
+      q.pairs.forEach((_,j)=>{const s=document.getElementById('vqm'+i+'_'+j);if(s){s.disabled=true;s.className='match-sel '+(s.value===q.pairs[j][1]?'correct':'wrong');}});
+    } else {
+      const sel=vqAnswers[i];ok=sel===q.a;
+      q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    }
+    if(ok){score++;topicMap[q.topic].c++;}
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'\u2713 Correct!':'\u2717 '+(q.type==='match'?'Check each match above':'Correct answer: <strong>'+q.opts[q.a]+'</strong>');
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there \u2014 review missed ones.','Good effort! A few more to go.','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">Topic '+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems \u2014 Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=shuffle(T).slice(0,20);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'5.1':'Topic 5.1','5.2':'Topic 5.2','5.3':'Topic 5.3','5.4':'Topic 5.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i),ok=isMatch(inp?inp.value:'',p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Answer: <strong>'+p.a+'</strong> \u2014 '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep reviewing the notes!','Getting there.','Nice effort! See topics below.','Great job!','Outstanding!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=90?4:pct>=75?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+function mkP(p,i,m,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=m+'c'+i;
+  const h=encodeURIComponent(p.h);
+  d.innerHTML='<div class="pmeta2"><div class="pnum">'+(i+1)+'</div><span class="ptag">Topic '+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'
+    +'<div class="pmath">'+p.eq+'</div>'
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" type="text" placeholder="Your answer\u2026" id="'+m+'a'+i+'" onkeydown="if(event.key===\'Enter\'&&\''+m+'\'===\'p\')chk('+i+')"\/>'
+    +(m==='p'?'<button class="cbtn" onclick="chk('+i+')">Check<\/button><button class="hbtn" onclick="sh('+i+',\''+h+'\',\''+m+'\')">Hint<\/button>':'')
+    +'<\/div><div class="fb" id="'+m+'fb'+i+'"><\/div>';
+  return d;
+}
+function chk(i){
+  const inp=document.getElementById('pa'+i),fb=document.getElementById('pfb'+i),p=pset[i],ok=isMatch(inp.value,p.a);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Not quite. Answer: <strong>'+p.a+'</strong>';
+  document.getElementById('pc'+i).classList.toggle('ok',ok);
+  document.getElementById('pc'+i).classList.toggle('no',!ok);
+  checkAllDone();
+}
+function sh(i,enc,m){const fb=document.getElementById(m+'fb'+i);fb.className='fb hint';fb.innerHTML='\ud83d\udca1 '+decodeURIComponent(enc);}
+
+document.querySelector('.thead').click();
+loadVQ();
+</script>
+</body>
+</html>

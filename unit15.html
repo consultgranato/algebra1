@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 15 — Graphing Quadratic Functions | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 15.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">15.1</span><span class="tlabel">Introduction to Quadratic Functions</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Linear functions make straight lines. <span class="vw">Quadratic functions</span> make U-shaped curves called <span class="vw">parabolas</span>. The parent function is y = x&#xB2;.</p>
+          <div class="kc"><div class="kc-lbl">Standard Form of a Quadratic</div><div class="kc-body">
+            <strong>y = ax&#xB2; + bx + c</strong><br><br>
+            <strong>a &gt; 0:</strong> parabola opens UP (makes a U)<br>
+            <strong>a &lt; 0:</strong> parabola opens DOWN (makes an upside-down U)<br>
+            <strong>|a| &gt; 1:</strong> narrower than parent<br>
+            <strong>|a| &lt; 1:</strong> wider than parent<br>
+            <strong>y-intercept:</strong> always the value of c (set x = 0)
+          </div></div>
+          <div class="worked"><div class="wlbl">Worked example &mdash; y = 2x&#xB2; &minus; 3x + 5</div><div class="wsteps">
+            <span class="eq">a = 2, b = &minus;3, c = 5</span>
+            <span class="eq">Opens UP (a = 2 &gt; 0)</span>
+            <span class="eq">Narrower than y = x&#xB2; (|a| = 2 &gt; 1)</span>
+            <span class="eq">y-intercept: (0, 5)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Why was the math book sad? Because it had too many problems.</div>
+        </div>
+      </div>
+
+      <!-- 15.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">15.2</span><span class="tlabel">Vertex &amp; Axis of Symmetry</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Every parabola has a <span class="vw">vertex</span> (the highest or lowest point) and a <span class="vw">axis of symmetry</span> (a vertical line through the vertex).</p>
+          <div class="kc"><div class="kc-lbl">Finding Axis of Symmetry and Vertex</div><div class="kc-body">
+            <strong>Axis of symmetry: x = &minus;b / (2a)</strong><br>
+            <strong>Vertex:</strong> plug AOS x-value back into the equation to find y<br><br>
+            If a &gt; 0: vertex is the <strong>minimum</strong><br>
+            If a &lt; 0: vertex is the <strong>maximum</strong>
+          </div></div>
+          <p class="note-h">Worked example &mdash; y = x&#xB2; + 4x + 3</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">a = 1, b = 4, c = 3</span>
+            <span class="eq">AOS: x = &minus;4 / (2&times;1) = &minus;4/2 = &minus;2</span>
+            <span class="eq">Vertex y: y = (&minus;2)&#xB2; + 4(&minus;2) + 3 = 4 &minus; 8 + 3 = &minus;1</span>
+            <span class="eq eq-div">Vertex: (&minus;2, &minus;1). Minimum (a &gt; 0) &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 15.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">15.3</span><span class="tlabel">Graphing in Standard Form</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> To graph a quadratic from standard form, you follow a systematic 5-step process. Use Desmos to check your work!</p>
+          <div class="kc"><div class="kc-lbl">5-Step Graphing Process (Standard Form)</div><div class="kc-body">
+            <strong>Step 1:</strong> Find axis of symmetry: x = &minus;b / 2a<br>
+            <strong>Step 2:</strong> Find vertex (plug AOS into equation)<br>
+            <strong>Step 3:</strong> Find y-intercept (set x = 0 &rarr; y = c)<br>
+            <strong>Step 4:</strong> Find symmetric points (reflect y-intercept)<br>
+            <strong>Step 5:</strong> Draw smooth parabola through all points
+          </div></div>
+          <p class="note-h">Worked example &mdash; y = x&#xB2; &minus; 6x + 8</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">a=1, b=-6, c=8</span>
+            <span class="eq">Step 1: AOS = &minus;(&minus;6)/(2&times;1) = 6/2 = 3 &rarr; x = 3</span>
+            <span class="eq">Step 2: y = 3&#xB2; &minus; 6(3) + 8 = 9&minus;18+8 = &minus;1 &rarr; vertex: (3, &minus;1)</span>
+            <span class="eq">Step 3: y-intercept: (0, 8)</span>
+            <span class="eq">Step 4: Symmetric point 6 units right: (6, 8)</span>
+            <span class="eq eq-div">Step 5: Draw parabola upward through these points &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 15.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">15.4</span><span class="tlabel">Graphing in Vertex Form</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> <span class="vw">Vertex form</span> makes graphing even easier because the vertex is visible right in the equation.</p>
+          <div class="kc"><div class="kc-lbl">Vertex Form</div><div class="kc-body">
+            <strong>y = a(x &minus; h)&#xB2; + k</strong><br><br>
+            <strong>Vertex:</strong> (h, k) — read directly from equation<br>
+            <strong>h:</strong> horizontal shift (opposite sign from what you see!)<br>
+            <strong>k:</strong> vertical shift<br>
+            <strong>a:</strong> determines direction and width (same as standard form)
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Watch the sign of h!</div><div class="warn-body">y = (x &minus; 3)&#xB2; + 1 &rarr; vertex is (3, 1) NOT (&minus;3, 1). The h value is whatever makes (x &minus; h) = 0.</div></div>
+          <p class="note-h">Worked example &mdash; y = 2(x &minus; 3)&#xB2; + 1</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">a = 2, h = 3, k = 1</span>
+            <span class="eq">Vertex: (3, 1). Opens up. Narrow (a=2).</span>
+            <span class="eq">Graph: start at (3,1). Go right 1 &rarr; up 2: (4, 3). Go left 1 &rarr; up 2: (2, 3).</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; y = &minus;(x + 2)&#xB2; + 4</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">y = &minus;1(x &minus; (&minus;2))&#xB2; + 4</span>
+            <span class="eq">a = &minus;1, h = &minus;2, k = 4</span>
+            <span class="eq">Vertex: (&minus;2, 4). Opens DOWN. Maximum.</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> I told an algebra joke. No response. I guess x didn&apos;t care.</div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 15.1</div>
+        <div class="vcard"><div><div class="vtag">15.1</div><div class="vterm">Quadratic Function</div><div class="vdef">A function of the form y = ax&#xB2; + bx + c where a ≠ 0. Produces a parabola.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = x&#xB2; &rarr; parent function<br>y = 2x&#xB2; &minus; 3 &rarr; quadratic</div></div></div>
+        <div class="vcard"><div><div class="vtag">15.1</div><div class="vterm">Parabola</div><div class="vdef">The U-shaped curve produced by a quadratic function. Can open up or down depending on the sign of a.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="chip chip-g">a &gt; 0:</span> opens up (U shape)<br><span class="chip chip-a">a &lt; 0:</span> opens down (∩ shape)</div></div></div>
+        <div class="vsec">New in 15.2</div>
+        <div class="vcard"><div><div class="vtag">15.2</div><div class="vterm">Vertex</div><div class="vdef">The highest or lowest point of the parabola. If a &gt; 0, it's the minimum. If a &lt; 0, it's the maximum.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = x&#xB2; + 4x + 3<br>Vertex: (&minus;2, &minus;1)<br><span class="chip chip-g">Minimum (a = 1 &gt; 0)</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">15.2</div><div class="vterm">Axis of Symmetry</div><div class="vdef">A vertical line that divides the parabola into two mirror-image halves. Formula: x = &minus;b / (2a).</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = x&#xB2; + 4x + 3<br>AOS: x = &minus;4/(2·1) = &minus;2<br>Equation: x = &minus;2</div></div></div>
+        <div class="vsec">New in 15.4</div>
+        <div class="vcard"><div><div class="vtag">15.4</div><div class="vterm">Vertex Form y = a(x-h)&#xB2; + k</div><div class="vdef">An alternate form of a quadratic where the vertex (h, k) is read directly from the equation.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 3(x &minus; 4)&#xB2; + 2<br>Vertex: (4, 2)<br>Opens up, narrow</div></div></div>
+        <div class="vcard wide"><div><div class="vtag">15.1–15.4</div><div class="vterm">Opens Up vs. Opens Down</div><div class="vdef">Determined by the sign of a. a &gt; 0 → opens up (minimum vertex). a &lt; 0 → opens down (maximum vertex). |a| determines width: larger |a| = narrower.</div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('15.1',this)">15.1</button>
+          <button class="pqf-btn" onclick="setQFilter('15.2',this)">15.2</button>
+          <button class="pqf-btn" onclick="setQFilter('15.3',this)">15.3</button>
+          <button class="pqf-btn" onclick="setQFilter('15.4',this)">15.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('15.1',this)">15.1 &mdash; Intro to Quadratics</button>
+              <button class="tpbtn" onclick="selTopic('15.2',this)">15.2 &mdash; Vertex &amp; AOS</button>
+              <button class="tpbtn" onclick="selTopic('15.3',this)">15.3 &mdash; Graphing Standard Form</button>
+              <button class="tpbtn" onclick="selTopic('15.4',this)">15.4 &mdash; Vertex Form</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Identifying a, b, c and key attributes from standard form.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-p" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 15</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-t" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='15'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'15.1':[
+  {q:"Identify a, b, and c:",eq:"y = 2x^2 + 3x - 5",a:"a=2, b=3, c=-5",fmt:"a=___, b=___, c=___",h:"In y=ax^2+bx+c: a=2, b=3, c=-5"},
+  {q:"Does the parabola open up or down?",eq:"y = -3x^2 + x + 1",a:"down",fmt:"up or down",h:"a=-3 < 0, so opens down."},
+  {q:"Does the parabola open up or down?",eq:"y = x^2 - 4",a:"up",fmt:"up or down",h:"a=1 > 0, so opens up."},
+  {q:"What is the y-intercept?",eq:"y = x^2 + 5x + 6",a:"6",fmt:"numerical value (or coordinate (0,___))",h:"y-intercept: set x=0 → y=c=6"},
+  {q:"What is the y-intercept?",eq:"y = -2x^2 + 3x - 1",a:"-1",fmt:"numerical value",h:"y-intercept = c = -1"},
+  {q:"Is the parabola narrower or wider than y = x^2?",eq:"y = 4x^2 + 1",a:"narrower",fmt:"narrower or wider",h:"|a|=4 > 1, so narrower."},
+  {q:"Is the parabola narrower or wider than y = x^2?",eq:"y = (1/3)x^2",a:"wider",fmt:"narrower or wider",h:"|a|=1/3 < 1, so wider."},
+  {q:"Identify a, b, and c:",eq:"y = -x^2 + 7",a:"a=-1, b=0, c=7",fmt:"a=___, b=___, c=___",h:"a=-1, b=0 (no x term), c=7"},
+  {q:"Does this parabola have a minimum or maximum?",eq:"y = 3x^2 - 2x + 1",a:"minimum",fmt:"minimum or maximum",h:"a=3 > 0, so vertex is a minimum."},
+  {q:"Does this parabola have a minimum or maximum?",eq:"y = -x^2 + 4x",a:"maximum",fmt:"minimum or maximum",h:"a=-1 < 0, so vertex is a maximum."},
+  {q:"What is the y-intercept?",eq:"y = 5x^2 - 3x + 8",a:"8",fmt:"numerical value",h:"y-intercept = c = 8"},
+  {q:"Identify a:",eq:"y = -(1/2)x^2 + 2x - 3",a:"-1/2",fmt:"numerical value",h:"The coefficient of x^2 is -1/2."},
+  {q:"Does this parabola open up or down?",eq:"y = 0.5x^2 - 4",a:"up",fmt:"up or down",h:"a=0.5 > 0, so opens up."},
+  {q:"What is the y-intercept?",eq:"y = x^2 - 9",a:"-9",fmt:"numerical value",h:"y-intercept = c = -9"},
+  {q:"Identify a, b, and c:",eq:"y = 4x^2 - x + 0",a:"a=4, b=-1, c=0",fmt:"a=___, b=___, c=___",h:"a=4, b=-1, c=0"},
+],
+'15.2':[
+  {q:"Find the axis of symmetry:",eq:"y = x^2 + 4x + 3",a:"x = -2",fmt:"x = ___",h:"AOS = -b/(2a) = -4/(2·1) = -2"},
+  {q:"Find the axis of symmetry:",eq:"y = x^2 - 6x + 8",a:"x = 3",fmt:"x = ___",h:"AOS = -(-6)/(2·1) = 6/2 = 3"},
+  {q:"Find the axis of symmetry:",eq:"y = 2x^2 + 4x - 1",a:"x = -1",fmt:"x = ___",h:"AOS = -4/(2·2) = -4/4 = -1"},
+  {q:"Find the vertex:",eq:"y = x^2 - 4x + 1",a:"(2, -3)",fmt:"(x, y)",h:"AOS: x=-(-4)/(2)=2. y=4-8+1=-3. Vertex: (2,-3)"},
+  {q:"Find the vertex:",eq:"y = x^2 + 2x + 5",a:"(-1, 4)",fmt:"(x, y)",h:"AOS: x=-2/2=-1. y=1-2+5=4. Vertex: (-1,4)"},
+  {q:"Find the axis of symmetry:",eq:"y = -x^2 + 6x - 2",a:"x = 3",fmt:"x = ___",h:"AOS = -6/(2·(-1)) = -6/-2 = 3"},
+  {q:"Find the vertex:",eq:"y = 2x^2 - 8x + 3",a:"(2, -5)",fmt:"(x, y)",h:"AOS: x=8/4=2. y=2(4)-8(2)+3=8-16+3=-5"},
+  {q:"Is the vertex a minimum or maximum?",eq:"y = -2x^2 + 4x + 1",a:"maximum",fmt:"minimum or maximum",h:"a=-2 < 0, so vertex is a maximum."},
+  {q:"Find the axis of symmetry:",eq:"y = 3x^2 - 12x + 5",a:"x = 2",fmt:"x = ___",h:"AOS = -(-12)/(2·3) = 12/6 = 2"},
+  {q:"Find the vertex:",eq:"y = -x^2 + 4x - 3",a:"(2, 1)",fmt:"(x, y)",h:"AOS: x=-4/(2·(-1))=2. y=-4+8-3=1. Vertex: (2,1)"},
+  {q:"Find the axis of symmetry:",eq:"y = x^2 - 10x + 21",a:"x = 5",fmt:"x = ___",h:"AOS = -(-10)/(2·1) = 10/2 = 5"},
+  {q:"Find the vertex:",eq:"y = x^2 + 6x + 9",a:"(-3, 0)",fmt:"(x, y)",h:"AOS: x=-6/2=-3. y=9-18+9=0. Vertex: (-3,0)"},
+  {q:"Find the axis of symmetry:",eq:"y = -3x^2 + 6x + 2",a:"x = 1",fmt:"x = ___",h:"AOS = -6/(2·(-3)) = -6/-6 = 1"},
+  {q:"Find the vertex:",eq:"y = x^2 - 2x + 4",a:"(1, 3)",fmt:"(x, y)",h:"AOS: x=2/2=1. y=1-2+4=3. Vertex: (1,3)"},
+  {q:"Find the axis of symmetry:",eq:"y = 4x^2 + 8x + 1",a:"x = -1",fmt:"x = ___",h:"AOS = -8/(2·4) = -8/8 = -1"},
+],
+'15.3':[
+  {q:"Find the axis of symmetry and vertex:",eq:"y = x^2 - 8x + 12",a:"x=4, vertex=(4,-4)",fmt:"x=___, vertex=(_,_)",h:"AOS: x=8/2=4. y=16-32+12=-4. Vertex: (4,-4)"},
+  {q:"What is the y-intercept?",eq:"y = x^2 - 5x + 4",a:"4",fmt:"numerical value",h:"Set x=0: y=c=4"},
+  {q:"Find the vertex:",eq:"y = x^2 + 2x - 3",a:"(-1, -4)",fmt:"(x, y)",h:"AOS: x=-1. y=1-2-3=-4. Vertex: (-1,-4)"},
+  {q:"Identify: AOS, vertex, y-intercept, opens up or down:",eq:"y = 2x^2 - 4x + 1",a:"x=1, vertex=(1,-1), y-int=1, up",fmt:"AOS x=___, vertex=(_,_), y-int=___, up or down",h:"AOS: x=4/4=1. y=2-4+1=-1. c=1 (y-int). a=2>0 (up)."},
+  {q:"Does this parabola have x-intercepts?",eq:"y = x^2 + 1",a:"no",fmt:"yes or no",h:"Vertex is (0,1), opens up. Minimum y-value is 1, never crosses x-axis."},
+  {q:"Find the y-intercept and vertex:",eq:"y = -x^2 + 4x - 3",a:"y-intercept=-3, vertex=(2,1)",fmt:"y-int=___, vertex=(_,_)",h:"y-int=c=-3. AOS: x=-4/-2=2. y=-4+8-3=1."},
+  {q:"Find the vertex:",eq:"y = x^2 - 4",a:"(0, -4)",fmt:"(x, y)",h:"b=0, so AOS x=0. y=0-4=-4. Vertex: (0,-4)"},
+  {q:"Identify the axis of symmetry:",eq:"y = -3x^2 + 12x - 5",a:"x = 2",fmt:"x = ___",h:"AOS = -12/(2·(-3)) = -12/-6 = 2"},
+  {q:"Find the vertex:",eq:"y = 3x^2 - 6x + 4",a:"(1, 1)",fmt:"(x, y)",h:"AOS: x=6/6=1. y=3-6+4=1. Vertex: (1,1)"},
+  {q:"What is the vertex and direction?",eq:"y = x^2 + 6x + 5",a:"vertex=(-3,-4), opens up",fmt:"vertex=(_,_), up or down",h:"AOS: x=-3. y=9-18+5=-4. a=1>0, opens up."},
+  {q:"Find the y-intercept:",eq:"y = -2x^2 + 5x + 3",a:"3",fmt:"y-intercept = ___",h:"Set x=0: y=c=3"},
+  {q:"Does this parabola open up or down?",eq:"y = x^2 + 2x + 1",a:"up",fmt:"up or down",h:"a=1>0 opens up"},
+  {q:"Find the vertex:",eq:"y = x^2 - 2x - 8",a:"(1, -9)",fmt:"(x, y)",h:"AOS: x=2/2=1. y=1-2-8=-9. Vertex: (1,-9)"},
+  {q:"Find the axis of symmetry:",eq:"y = -x^2 + 2x + 8",a:"x = 1",fmt:"x = ___",h:"AOS = -2/(2·(-1)) = -2/-2 = 1"},
+  {q:"Find the vertex:",eq:"y = 2x^2 + 8x + 6",a:"(-2, -2)",fmt:"(x, y)",h:"AOS: x=-8/4=-2. y=2(4)+8(-2)+6=8-16+6=-2."},
+],
+'15.4':[
+  {q:"Identify the vertex:",eq:"y = (x - 3)^2 + 5",a:"(3, 5)",fmt:"(x, y)",h:"h=3, k=5. Vertex: (3,5)"},
+  {q:"Identify the vertex:",eq:"y = (x + 2)^2 - 1",a:"(-2, -1)",fmt:"(x, y)",h:"y=(x-(-2))^2-1. h=-2, k=-1. Vertex: (-2,-1)"},
+  {q:"Identify the vertex:",eq:"y = 2(x - 4)^2 + 3",a:"(4, 3)",fmt:"(x, y)",h:"h=4, k=3. Vertex: (4,3)"},
+  {q:"Does this parabola open up or down?",eq:"y = -3(x + 1)^2 + 5",a:"down",fmt:"up or down",h:"a=-3 < 0, opens down."},
+  {q:"Write the vertex form equation:",eq:"vertex = (2, -1), a = 3",a:"y = 3(x - 2)^2 - 1",fmt:"y = ___",h:"y = a(x-h)^2+k = 3(x-2)^2-1"},
+  {q:"Identify the vertex:",eq:"y = -(x - 5)^2 + 2",a:"(5, 2)",fmt:"(x, y)",h:"h=5, k=2. Vertex: (5,2)"},
+  {q:"Write the vertex form equation:",eq:"vertex = (-3, 4), a = 1",a:"y = (x + 3)^2 + 4",fmt:"y = ___",h:"y=(x-(-3))^2+4 = (x+3)^2+4"},
+  {q:"Identify the vertex:",eq:"y = (x + 6)^2",a:"(-6, 0)",fmt:"(x, y)",h:"h=-6, k=0. Vertex: (-6,0)"},
+  {q:"Does this have a minimum or maximum?",eq:"y = 4(x - 1)^2 - 2",a:"minimum",fmt:"minimum or maximum",h:"a=4 > 0, vertex is minimum."},
+  {q:"Identify the vertex:",eq:"y = -2(x + 3)^2 - 1",a:"(-3, -1)",fmt:"(x, y)",h:"h=-3, k=-1. Vertex: (-3,-1)"},
+  {q:"Write the vertex form equation:",eq:"vertex = (0, 5), a = -1",a:"y = -(x)^2 + 5",fmt:"y = ___",h:"y = -1(x-0)^2+5 = -x^2+5"},
+  {q:"What is the axis of symmetry?",eq:"y = 3(x - 7)^2 + 2",a:"x = 7",fmt:"x = ___",h:"AOS passes through vertex: x=h=7"},
+  {q:"Identify the vertex:",eq:"y = (1/2)(x - 4)^2 - 3",a:"(4, -3)",fmt:"(x, y)",h:"h=4, k=-3. Vertex: (4,-3)"},
+  {q:"Write the vertex form equation:",eq:"vertex = (1, -4), a = 2",a:"y = 2(x - 1)^2 - 4",fmt:"y = ___",h:"y = 2(x-1)^2-4"},
+  {q:"How does y = 3(x-2)^2 + 1 compare to y = (x-2)^2 + 1?",eq:"",a:"narrower",fmt:"narrower or wider",h:"|a|=3 > 1, so narrower than a=1 version."},
+]};
+
+const T=[
+  {t:"15.1",q:"Identify a, b, c:",eq:"y = 3x^2 - x + 7",a:"a=3, b=-1, c=7",fmt:"a=___, b=___, c=___",h:"a=3, b=-1, c=7"},
+  {t:"15.1",q:"Does the parabola open up or down?",eq:"y = -5x^2 + 2x",a:"down",fmt:"up or down",h:"a=-5 < 0, opens down."},
+  {t:"15.1",q:"What is the y-intercept?",eq:"y = x^2 - 4x + 9",a:"9",fmt:"numerical value",h:"y-intercept = c = 9"},
+  {t:"15.1",q:"Is the parabola narrower or wider than y = x^2?",eq:"y = (1/4)x^2 - 1",a:"wider",fmt:"narrower or wider",h:"|a|=1/4 < 1, wider."},
+  {t:"15.1",q:"Does this have a minimum or maximum?",eq:"y = 2x^2 + 5",a:"minimum",fmt:"minimum or maximum",h:"a=2>0, minimum."},
+  {t:"15.2",q:"Find the axis of symmetry:",eq:"y = x^2 - 8x + 15",a:"x = 4",fmt:"x = ___",h:"AOS = 8/(2·1) = 4"},
+  {t:"15.2",q:"Find the vertex:",eq:"y = x^2 + 4x + 4",a:"(-2, 0)",fmt:"(x, y)",h:"AOS: x=-2. y=4-8+4=0."},
+  {t:"15.2",q:"Find the axis of symmetry:",eq:"y = -2x^2 + 8x - 3",a:"x = 2",fmt:"x = ___",h:"AOS = -8/(2·(-2)) = -8/-4 = 2"},
+  {t:"15.2",q:"Is this vertex a minimum or maximum?",eq:"y = -x^2 + 6x - 5",a:"maximum",fmt:"minimum or maximum",h:"a=-1 < 0, maximum."},
+  {t:"15.2",q:"Find the vertex:",eq:"y = 3x^2 - 12x + 7",a:"(2, -5)",fmt:"(x, y)",h:"AOS: x=12/6=2. y=12-24+7=-5."},
+  {t:"15.3",q:"Find the axis of symmetry and vertex:",eq:"y = x^2 + 2x - 8",a:"x=-1, vertex=(-1,-9)",fmt:"x=___, vertex=(_,_)",h:"AOS: x=-1. y=1-2-8=-9."},
+  {t:"15.3",q:"What is the y-intercept?",eq:"y = -x^2 + 3x + 10",a:"10",fmt:"numerical value",h:"c=10"},
+  {t:"15.3",q:"Find the vertex:",eq:"y = x^2 - 6x + 5",a:"(3, -4)",fmt:"(x, y)",h:"AOS: x=3. y=9-18+5=-4."},
+  {t:"15.3",q:"Does this parabola have x-intercepts?",eq:"y = x^2 + 4x + 5",a:"no",fmt:"yes or no",h:"Vertex is (-2,1), opens up. Minimum y=1, never touches x-axis."},
+  {t:"15.3",q:"Find the vertex:",eq:"y = -x^2 + 6x - 8",a:"(3, 1)",fmt:"(x, y)",h:"AOS: x=-6/(2·(-1))=3. y=-9+18-8=1."},
+  {t:"15.4",q:"Identify the vertex:",eq:"y = (x - 5)^2 + 3",a:"(5, 3)",fmt:"(x, y)",h:"h=5, k=3"},
+  {t:"15.4",q:"Identify the vertex:",eq:"y = (x + 4)^2 - 7",a:"(-4, -7)",fmt:"(x, y)",h:"h=-4, k=-7"},
+  {t:"15.4",q:"Write vertex form:",eq:"vertex = (3, -2), a = -1",a:"y = -(x - 3)^2 - 2",fmt:"y = ___",h:"y = -(x-3)^2-2"},
+  {t:"15.4",q:"Does this have a min or max?",eq:"y = -4(x + 1)^2 + 3",a:"maximum",fmt:"minimum or maximum",h:"a=-4 < 0, maximum."},
+  {t:"15.4",q:"What is the axis of symmetry?",eq:"y = 2(x - 6)^2 - 1",a:"x = 6",fmt:"x = ___",h:"AOS: x=h=6"},
+];
+
+const VQB=[
+  {topic:'15.1',type:'mc',q:'In y = ax² + bx + c, what determines if the parabola opens up or down?',opts:['b','c','a','The x-intercepts'],a:2},
+  {topic:'15.1',type:'mc',q:'If |a| > 1, the parabola is _____ compared to y = x².',opts:['Wider','The same','Narrower','Shifted'],a:2},
+  {topic:'15.1',type:'tf',q:'True or False: The y-intercept of y = ax² + bx + c is always c.',opts:['True','False'],a:0},
+  {topic:'15.1',type:'mc',q:'A parabola with a = -3 opens...',opts:['Up','Down','Left','Right'],a:1},
+  {topic:'15.2',type:'mc',q:'The axis of symmetry formula is...',opts:['x = b/2a','x = -b/2a','x = -b/a','x = 2a/b'],a:1},
+  {topic:'15.2',type:'mc',q:'If a > 0, the vertex is a...',opts:['Maximum','Minimum','Neither','Zero'],a:1},
+  {topic:'15.2',type:'tf',q:'True or False: The vertex lies ON the axis of symmetry.',opts:['True','False'],a:0},
+  {topic:'15.3',type:'mc',q:'Which is Step 1 of graphing a quadratic from standard form?',opts:['Find y-intercept','Find the vertex','Find the axis of symmetry','Find x-intercepts'],a:2},
+  {topic:'15.3',type:'tf',q:'True or False: Every parabola has exactly two x-intercepts.',opts:['True','False'],a:1},
+  {topic:'15.4',type:'mc',q:'In y = a(x - h)² + k, what is the vertex?',opts:['(a, k)','(h, a)','(h, k)','(-h, k)'],a:2},
+  {topic:'15.4',type:'mc',q:'In y = (x + 3)² - 2, what is the vertex?',opts:['(3, -2)','(-3, -2)','(3, 2)','(-3, 2)'],a:1},
+  {topic:'15.4',type:'tf',q:'True or False: y = -(x - 2)² + 5 opens down.',opts:['True','False'],a:0},
+  {topic:'15.2',type:'mc',q:'For y = 2x² - 4x + 1, the axis of symmetry is...',opts:['x = 4','x = 1','x = -1','x = 2'],a:1},
+  {topic:'15.4',type:'mc',q:'What is the axis of symmetry for y = (x - 7)² + 3?',opts:['x = 3','x = 7','x = -7','x = -3'],a:1},
+  {topic:'15.1',type:'mc',q:'What is the parent function of quadratics?',opts:['y = x','y = x²','y = 2x','y = x³'],a:1},
+  {topic:'15.3',type:'mc',q:'What point does the y-intercept tell you about the graph?',opts:['Where it crosses the x-axis','Where it crosses the y-axis','The vertex','The axis of symmetry'],a:1},
+];
+
+const DESCS={'15.1':'Identifying a, b, c and key attributes from standard form.','15.2':'Finding the axis of symmetry (x = -b/2a) and vertex.','15.3':'Full graphing analysis: AOS, vertex, intercepts, direction.','15.4':'Using vertex form y = a(x-h)² + k to identify and graph.'};
+let curTopic='15.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').trim();}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['15.1','15.2','15.3','15.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'15.1':'Topic 15.1','15.2':'Topic 15.2','15.3':'Topic 15.3','15.4':'Topic 15.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0faa6"></script>
+<script>var e=document.getElementById('desmos-calc-p');if(e)Desmos.GraphingCalculator(e);var e2=document.getElementById('desmos-calc-t');if(e2)Desmos.GraphingCalculator(e2);</script>
+</body>
+</html>

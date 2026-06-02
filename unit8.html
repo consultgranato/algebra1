@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 — Graphing Linear Functions | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
+.vid-btn:hover{background:var(--nnp);color:#fff}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 8.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">8.1</span><span class="tlabel">What is Slope?</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You&apos;ve graphed points on a coordinate plane. <span class="vw">Slope</span> describes how steep a line is &mdash; how much it rises or falls as you move from left to right.</p>
+          <div class="kc"><div class="kc-lbl">Slope Formula</div><div class="kc-body">
+            slope = <strong>rise / run</strong> = <strong>(y&#x2082; &minus; y&#x2081;) / (x&#x2082; &minus; x&#x2081;)</strong><br><br>
+            <strong>Positive slope:</strong> line goes up from left to right<br>
+            <strong>Negative slope:</strong> line goes down from left to right<br>
+            <strong>Zero slope:</strong> horizontal line (no rise)<br>
+            <strong>Undefined slope:</strong> vertical line (no run — division by zero)
+          </div></div>
+          <p class="note-h">Worked example 1 &mdash; slope from two points (2, 3) and (6, 11)</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">m = (y&#x2082; &minus; y&#x2081;) / (x&#x2082; &minus; x&#x2081;)</span>
+            <span class="eq">m = (11 &minus; 3) / (6 &minus; 2) = 8/4 = 2 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; slope from (1, 5) and (4, &minus;1)</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; negative slope</div><div class="wsteps">
+            <span class="eq">m = (&minus;1 &minus; 5) / (4 &minus; 1) = &minus;6/3 = &minus;2</span>
+          </div></div>
+          <p class="note-h">Worked example 3 &mdash; special slopes</p>
+          <div class="worked"><div class="wlbl">Zero and undefined</div><div class="wsteps">
+            <span class="eq">(2, 4) and (7, 4): m = (4&minus;4)/(7&minus;2) = 0/5 = 0 &rarr; horizontal</span>
+            <span class="eq">(3, 1) and (3, 9): m = (9&minus;1)/(3&minus;3) = 8/0 &rarr; undefined &rarr; vertical</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Why was the math book sad? Because it had too many problems.</div>
+        </div>
+      </div>
+
+      <!-- 8.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">8.2</span><span class="tlabel">Slope-Intercept Form</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Once you know the slope, you can write a complete equation for a line using <span class="vw">slope-intercept form</span>.</p>
+          <div class="kc"><div class="kc-lbl">Slope-Intercept Form</div><div class="kc-body">
+            <strong>y = mx + b</strong><br>
+            m = slope &nbsp;&nbsp; b = y-intercept (where the line crosses the y-axis)
+          </div></div>
+          <div class="kc"><div class="kc-lbl">How to graph y = mx + b (3 steps)</div><div class="kc-body">
+            <strong>Step 1:</strong> Plot the y-intercept (0, b) on the y-axis<br>
+            <strong>Step 2:</strong> Use slope (rise/run) to find the next point<br>
+            <strong>Step 3:</strong> Draw a line through both points
+          </div></div>
+          <p class="note-h">Worked example &mdash; graph y = 2x + 1</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">m = 2, b = 1</span>
+            <span class="eq">Step 1: plot (0, 1)</span>
+            <span class="eq">Step 2: slope 2/1 &rarr; go up 2, right 1 &rarr; plot (1, 3)</span>
+            <span class="eq">Step 3: draw line through (0,1) and (1,3) &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; identify m and b from y = &minus;(3/4)x + 5</p>
+          <div class="worked"><div class="wlbl">Identify slope and y-intercept</div><div class="wsteps">
+            <span class="eq">m = &minus;3/4 (slope is negative &rarr; line goes down)</span>
+            <span class="eq">b = 5 (y-intercept is 5)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> I told an algebra joke. No response. I guess x didn&apos;t care.</div>
+        </div>
+      </div>
+
+      <!-- 8.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">8.3</span><span class="tlabel">Writing Equations of Lines</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You can write the equation of any line if you know enough information. The most useful tools are <span class="vw">point-slope form</span> and slope-intercept form.</p>
+          <div class="kc"><div class="kc-lbl">Given slope and a point</div><div class="kc-body">
+            Use <strong>point-slope form: y &minus; y&#x2081; = m(x &minus; x&#x2081;)</strong><br>
+            Plug in m, x&#x2081;, y&#x2081; &rarr; simplify to slope-intercept form (y = mx + b)
+          </div></div>
+          <p class="note-h">Worked example 1 &mdash; slope = 3, through (2, 7)</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">y &minus; 7 = 3(x &minus; 2)</span>
+            <span class="eq">y &minus; 7 = 3x &minus; 6</span>
+            <span class="eq eq-div">y = 3x + 1 &checkmark;</span>
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Given two points</div><div class="kc-body">
+            <strong>Step 1:</strong> Find slope: m = (y&#x2082;&minus;y&#x2081;)/(x&#x2082;&minus;x&#x2081;)<br>
+            <strong>Step 2:</strong> Use point-slope form with one of the points<br>
+            <strong>Step 3:</strong> Simplify to y = mx + b
+          </div></div>
+          <p class="note-h">Worked example 2 &mdash; through (1, 4) and (3, 10)</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">m = (10&minus;4)/(3&minus;1) = 6/2 = 3</span>
+            <span class="eq">y &minus; 4 = 3(x &minus; 1)</span>
+            <span class="eq">y &minus; 4 = 3x &minus; 3</span>
+            <span class="eq eq-div">y = 3x + 1 &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 8.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">8.4</span><span class="tlabel">Standard Form &amp; Special Lines</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Standard form is another way to write linear equations. It&apos;s especially useful for finding intercepts quickly.</p>
+          <div class="kc"><div class="kc-lbl">Standard Form</div><div class="kc-body">
+            <strong>Ax + By = C</strong> where A, B, C are integers and A &ge; 0<br><br>
+            <strong>Find x-intercept:</strong> set y = 0, solve for x<br>
+            <strong>Find y-intercept:</strong> set x = 0, solve for y
+          </div></div>
+          <p class="note-h">Worked example &mdash; find intercepts of 3x + 2y = 12</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">x-intercept: set y=0 &rarr; 3x = 12 &rarr; x = 4 &rarr; (4, 0)</span>
+            <span class="eq">y-intercept: set x=0 &rarr; 2y = 12 &rarr; y = 6 &rarr; (0, 6)</span>
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Special Lines</div><div class="kc-body">
+            <strong>Horizontal line:</strong> y = k (slope = 0, passes through (0, k))<br>
+            <strong>Vertical line:</strong> x = h (undefined slope, passes through (h, 0))
+          </div></div>
+          <div class="worked"><div class="wlbl">Special line examples</div><div class="wsteps">
+            <span class="eq">y = 4 &rarr; horizontal line, all points have y-coordinate 4</span>
+            <span class="eq">x = &minus;3 &rarr; vertical line, all points have x-coordinate &minus;3</span>
+          </div></div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 8.1</div>
+        <div class="vcard"><div><div class="vtag">8.1</div><div class="vterm">Slope</div><div class="vdef">A measure of steepness of a line. Calculated as rise over run, or (y&#x2082;&minus;y&#x2081;)/(x&#x2082;&minus;x&#x2081;).</div></div><div><div class="vex-lbl">Example</div><div class="vex">Points (0,0) and (3,6):<br>m = (6&minus;0)/(3&minus;0) = 2<br><span class="chip chip-g">slope = 2</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">8.1</div><div class="vterm">Rise / Run</div><div class="vdef">Rise = vertical change (up or down). Run = horizontal change (left or right). Slope = rise &divide; run.</div></div><div><div class="vex-lbl">Example</div><div class="vex">From (1,2) to (4,8):<br>Rise = 8&minus;2 = 6<br>Run = 4&minus;1 = 3<br>m = 6/3 = 2</div></div></div>
+        <div class="vsec">New in 8.2</div>
+        <div class="vcard"><div><div class="vtag">8.2</div><div class="vterm">Slope-Intercept Form y = mx + b</div><div class="vdef">Standard form for a linear equation. m is the slope; b is the y-intercept.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="eq-box">y = 3x &minus; 2</span><br>m = 3, b = &minus;2<br>y-intercept at (0, &minus;2)</div></div></div>
+        <div class="vcard"><div><div class="vtag">8.2</div><div class="vterm">m (slope)</div><div class="vdef">The coefficient of x in y = mx + b. Tells you how much y changes for every 1 unit increase in x.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 5x + 1<br>m = 5 → for every +1 in x, y increases 5</div></div></div>
+        <div class="vcard"><div><div class="vtag">8.2</div><div class="vterm">b (y-intercept)</div><div class="vdef">The constant in y = mx + b. The y-value where the line crosses the y-axis (when x = 0).</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 2x + 7<br>b = 7 → line crosses y-axis at (0, 7)</div></div></div>
+        <div class="vcard"><div><div class="vtag">8.2</div><div class="vterm">x-intercept</div><div class="vdef">Where the line crosses the x-axis. Set y = 0 and solve for x.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 2x &minus; 6<br>0 = 2x &minus; 6 → x = 3<br>x-intercept: (3, 0)</div></div></div>
+        <div class="vsec">New in 8.3</div>
+        <div class="vcard"><div><div class="vtag">8.3</div><div class="vterm">Point-Slope Form</div><div class="vdef">y &minus; y&#x2081; = m(x &minus; x&#x2081;). Used to write an equation when you know the slope and one point.</div></div><div><div class="vex-lbl">Example</div><div class="vex">m=2, point (3,5):<br>y &minus; 5 = 2(x &minus; 3)<br>→ y = 2x &minus; 1</div></div></div>
+        <div class="vcard"><div><div class="vtag">8.3</div><div class="vterm">Parallel Lines</div><div class="vdef">Two lines that never intersect. They have the <strong>same slope</strong> but different y-intercepts.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 3x + 1<br>y = 3x &minus; 5<br><span class="chip chip-g">Both have m = 3</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">8.3</div><div class="vterm">Perpendicular Lines</div><div class="vdef">Two lines that intersect at 90°. Their slopes are <strong>negative reciprocals</strong> of each other: m&#x2082; = &minus;1/m&#x2081;.</div></div><div><div class="vex-lbl">Example</div><div class="vex">m = 2 → perpendicular slope: &minus;1/2<br>m = &minus;3 → perpendicular slope: 1/3</div></div></div>
+        <div class="vsec">New in 8.4</div>
+        <div class="vcard"><div><div class="vtag">8.4</div><div class="vterm">Standard Form Ax + By = C</div><div class="vdef">Another form for a linear equation. A, B, C are integers; A must be non-negative. Useful for finding intercepts quickly.</div></div><div><div class="vex-lbl">Example</div><div class="vex">2x + 3y = 12<br>x-int: (6, 0)<br>y-int: (0, 4)</div></div></div>
+        <div class="vcard"><div><div class="vtag">8.4</div><div class="vterm">Horizontal Line y = k</div><div class="vdef">A line where every point has the same y-value. Slope = 0.</div></div><div><div class="vex-lbl">Example</div><div class="vex">y = 5 → horizontal line<br>passes through (0,5), (3,5), (&minus;2,5)<br><span class="chip chip-g">slope = 0</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">8.4</div><div class="vterm">Vertical Line x = h</div><div class="vdef">A line where every point has the same x-value. Slope is undefined.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x = &minus;3 → vertical line<br>passes through (&minus;3,0), (&minus;3,2), (&minus;3,&minus;1)<br><span class="chip chip-a">slope: undefined</span></div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('8.1',this)">8.1</button>
+          <button class="pqf-btn" onclick="setQFilter('8.2',this)">8.2</button>
+          <button class="pqf-btn" onclick="setQFilter('8.3',this)">8.3</button>
+          <button class="pqf-btn" onclick="setQFilter('8.4',this)">8.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('8.1',this)">8.1 &mdash; What is Slope?</button>
+              <button class="tpbtn" onclick="selTopic('8.2',this)">8.2 &mdash; Slope-Intercept Form</button>
+              <button class="tpbtn" onclick="selTopic('8.3',this)">8.3 &mdash; Writing Equations</button>
+              <button class="tpbtn" onclick="selTopic('8.4',this)">8.4 &mdash; Standard Form &amp; Special Lines</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Finding slope from two points or from a graph.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-p" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 8</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-t" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNIT={id:8,name:"Graphing Linear Functions",topics:[
+  {id:"8.1",label:"What is Slope?"},
+  {id:"8.2",label:"Slope-Intercept Form"},
+  {id:"8.3",label:"Writing Equations of Lines"},
+  {id:"8.4",label:"Standard Form & Special Lines"},
+]};
+
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='8'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'8.1':[
+  {q:"Find the slope:",eq:"Points: (1, 3) and (5, 11)",a:"2",fmt:"m = ___",h:"m=(11-3)/(5-1)=8/4=2"},
+  {q:"Find the slope:",eq:"Points: (0, 0) and (4, 8)",a:"2",fmt:"m = ___",h:"m=(8-0)/(4-0)=8/4=2"},
+  {q:"Find the slope:",eq:"Points: (2, 7) and (6, 3)",a:"-1",fmt:"m = ___",h:"m=(3-7)/(6-2)=-4/4=-1"},
+  {q:"Find the slope:",eq:"Points: (-1, 4) and (3, 12)",a:"2",fmt:"m = ___",h:"m=(12-4)/(3-(-1))=8/4=2"},
+  {q:"Find the slope:",eq:"Points: (0, 5) and (3, -1)",a:"-2",fmt:"m = ___",h:"m=(-1-5)/(3-0)=-6/3=-2"},
+  {q:"Find the slope:",eq:"Points: (-2, -3) and (4, 9)",a:"2",fmt:"m = ___",h:"m=(9-(-3))/(4-(-2))=12/6=2"},
+  {q:"Find the slope:",eq:"Points: (1, 1) and (4, 10)",a:"3",fmt:"m = ___",h:"m=(10-1)/(4-1)=9/3=3"},
+  {q:"Find the slope:",eq:"Points: (3, 8) and (7, 8)",a:"0",fmt:"m = ___",h:"m=(8-8)/(7-3)=0/4=0. Horizontal line."},
+  {q:"Find the slope:",eq:"Points: (5, 1) and (5, 9)",a:"undefined",fmt:"m = ___ (use 'undefined' if needed)",h:"m=(9-1)/(5-5)=8/0. Undefined. Vertical line."},
+  {q:"Find the slope:",eq:"Points: (-3, 2) and (1, -6)",a:"-2",fmt:"m = ___",h:"m=(-6-2)/(1-(-3))=-8/4=-2"},
+  {q:"What is the slope of a horizontal line?",eq:"",a:"0",fmt:"m = ___",h:"Horizontal lines have 0 rise."},
+  {q:"What is the slope of a vertical line?",eq:"",a:"undefined",fmt:"m = ___",h:"Vertical lines have 0 run — division by zero."},
+  {q:"Is this slope positive or negative?",eq:"Points: (0, 10) and (5, 0)",a:"negative",fmt:"positive or negative",h:"m=(0-10)/(5-0)=-10/5=-2. Negative."},
+  {q:"Find the slope:",eq:"Points: (2, 3) and (8, 15)",a:"2",fmt:"m = ___",h:"m=(15-3)/(8-2)=12/6=2"},
+  {q:"Find the slope:",eq:"Points: (-4, 6) and (2, 0)",a:"-1",fmt:"m = ___",h:"m=(0-6)/(2-(-4))=-6/6=-1"},
+],
+'8.2':[
+  {q:"Identify slope and y-intercept:",eq:"y = 3x + 5",a:"slope = 3, y-intercept = 5",fmt:"slope = ___, y-intercept = ___",h:"In y=mx+b, m=slope and b=y-intercept."},
+  {q:"Identify slope and y-intercept:",eq:"y = -2x + 7",a:"slope = -2, y-intercept = 7",fmt:"slope = ___, y-intercept = ___",h:"m=-2, b=7"},
+  {q:"Identify slope and y-intercept:",eq:"y = x - 4",a:"slope = 1, y-intercept = -4",fmt:"slope = ___, y-intercept = ___",h:"m=1 (coefficient of x is 1), b=-4"},
+  {q:"Identify slope and y-intercept:",eq:"y = (1/2)x + 3",a:"slope = 1/2, y-intercept = 3",fmt:"slope = ___, y-intercept = ___",h:"m=1/2, b=3"},
+  {q:"Identify slope and y-intercept:",eq:"y = -4x",a:"slope = -4, y-intercept = 0",fmt:"slope = ___, y-intercept = ___",h:"m=-4, b=0 (no constant term)"},
+  {q:"What is the y-intercept of:",eq:"y = 2x + 9",a:"9",fmt:"y-intercept = ___",h:"b=9. Point (0, 9)."},
+  {q:"What is the slope of:",eq:"y = -5x + 1",a:"-5",fmt:"m = ___",h:"Coefficient of x is -5."},
+  {q:"Write the equation in slope-intercept form given:",eq:"slope = 2, y-intercept = -3",a:"y = 2x - 3",fmt:"y = ___",h:"Plug m=2 and b=-3 into y=mx+b."},
+  {q:"Write the equation in slope-intercept form given:",eq:"slope = -1, y-intercept = 6",a:"y = -x + 6",fmt:"y = ___",h:"m=-1, b=6: y=-x+6"},
+  {q:"Write the equation in slope-intercept form given:",eq:"slope = 0, y-intercept = 4",a:"y = 4",fmt:"y = ___",h:"m=0 means horizontal: y=4"},
+  {q:"Does this line have a positive or negative slope?",eq:"y = -3x + 2",a:"negative",fmt:"positive or negative",h:"m=-3, which is negative."},
+  {q:"Identify slope and y-intercept:",eq:"y = (2/3)x - 1",a:"slope = 2/3, y-intercept = -1",fmt:"slope = ___, y-intercept = ___",h:"m=2/3, b=-1"},
+  {q:"What is the starting point (y-intercept) to graph:",eq:"y = 5x - 2",a:"(0, -2)",fmt:"(x, y) coordinate",h:"y-intercept is always at x=0: (0, -2)"},
+  {q:"Identify slope and y-intercept:",eq:"y = -x + 10",a:"slope = -1, y-intercept = 10",fmt:"slope = ___, y-intercept = ___",h:"m=-1, b=10"},
+  {q:"Write the equation given:",eq:"slope = 3, y-intercept = 0",a:"y = 3x",fmt:"y = ___",h:"b=0 so no constant: y=3x"},
+],
+'8.3':[
+  {q:"Write the equation of the line:",eq:"slope = 2, through (3, 7)",a:"y = 2x + 1",fmt:"y = ___",h:"y-7=2(x-3) → y=2x-6+7 → y=2x+1"},
+  {q:"Write the equation of the line:",eq:"slope = -1, through (4, 2)",a:"y = -x + 6",fmt:"y = ___",h:"y-2=-1(x-4) → y=-x+4+2 → y=-x+6"},
+  {q:"Write the equation of the line:",eq:"slope = 3, through (1, 5)",a:"y = 3x + 2",fmt:"y = ___",h:"y-5=3(x-1) → y=3x-3+5 → y=3x+2"},
+  {q:"Write the equation of the line:",eq:"slope = -2, through (0, 4)",a:"y = -2x + 4",fmt:"y = ___",h:"When point is (0,b), b=4 directly: y=-2x+4"},
+  {q:"Write the equation of the line:",eq:"through (0, 3) and (2, 7)",a:"y = 2x + 3",fmt:"y = ___",h:"m=(7-3)/(2-0)=4/2=2. b=3. y=2x+3"},
+  {q:"Write the equation of the line:",eq:"through (1, 4) and (3, 8)",a:"y = 2x + 2",fmt:"y = ___",h:"m=(8-4)/(3-1)=4/2=2. y-4=2(x-1) → y=2x+2"},
+  {q:"Write the equation of the line:",eq:"through (0, -1) and (3, 5)",a:"y = 2x - 1",fmt:"y = ___",h:"m=(5-(-1))/(3-0)=6/3=2. b=-1. y=2x-1"},
+  {q:"Write the equation of the line:",eq:"through (2, 1) and (4, 7)",a:"y = 3x - 5",fmt:"y = ___",h:"m=(7-1)/(4-2)=6/2=3. y-1=3(x-2) → y=3x-5"},
+  {q:"Write the equation of the line:",eq:"slope = 1/2, through (4, 3)",a:"y = (1/2)x + 1",fmt:"y = ___",h:"y-3=(1/2)(x-4) → y=(1/2)x-2+3 → y=(1/2)x+1"},
+  {q:"Are these lines parallel, perpendicular, or neither?",eq:"y = 3x + 1 and y = 3x - 5",a:"parallel",fmt:"parallel, perpendicular, or neither",h:"Same slope (m=3), different y-intercepts."},
+  {q:"Are these lines parallel, perpendicular, or neither?",eq:"y = 2x + 3 and y = -(1/2)x + 1",a:"perpendicular",fmt:"parallel, perpendicular, or neither",h:"2 and -1/2 are negative reciprocals."},
+  {q:"Write the equation of a line parallel to y = 4x - 1 through (0, 3)",eq:"",a:"y = 4x + 3",fmt:"y = ___",h:"Parallel: same slope m=4. New b=3. y=4x+3"},
+  {q:"Write the equation of the line:",eq:"through (-1, 2) and (3, 10)",a:"y = 2x + 4",fmt:"y = ___",h:"m=(10-2)/(3-(-1))=8/4=2. y-2=2(x-(-1)) → y=2x+4"},
+  {q:"Write the equation of the line:",eq:"through (2, 6) and (5, 6)",a:"y = 6",fmt:"y = ___",h:"Same y-values → slope=0 → horizontal line y=6"},
+  {q:"Write the equation of the line:",eq:"slope = -3, through (2, 4)",a:"y = -3x + 10",fmt:"y = ___",h:"y-4=-3(x-2) → y=-3x+6+4 → y=-3x+10"},
+],
+'8.4':[
+  {q:"Find the x-intercept and y-intercept:",eq:"2x + 4y = 8",a:"x-intercept = 4, y-intercept = 2",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: set y=0 → 2x=8 → x=4. y-int: set x=0 → 4y=8 → y=2"},
+  {q:"Find the x-intercept and y-intercept:",eq:"3x + y = 9",a:"x-intercept = 3, y-intercept = 9",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: 3x=9 → x=3. y-int: y=9"},
+  {q:"Find the x-intercept and y-intercept:",eq:"x + 2y = 6",a:"x-intercept = 6, y-intercept = 3",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: x=6. y-int: 2y=6 → y=3"},
+  {q:"Find the x-intercept and y-intercept:",eq:"4x + 2y = 12",a:"x-intercept = 3, y-intercept = 6",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: 4x=12 → x=3. y-int: 2y=12 → y=6"},
+  {q:"Convert to slope-intercept form:",eq:"2x + y = 10",a:"y = -2x + 10",fmt:"y = ___",h:"Subtract 2x from both sides: y=-2x+10"},
+  {q:"Convert to slope-intercept form:",eq:"3x - y = 6",a:"y = 3x - 6",fmt:"y = ___",h:"-y = -3x+6 → multiply by -1: y=3x-6"},
+  {q:"What is the slope and y-intercept?",eq:"4x + 2y = 8",a:"slope = -2, y-intercept = 4",fmt:"slope = ___, y-intercept = ___",h:"2y = -4x+8 → y=-2x+4. m=-2, b=4"},
+  {q:"What is the equation of this special line?",eq:"Horizontal line passing through (0, -3)",a:"y = -3",fmt:"y = ___",h:"Horizontal line: y = k where k is the y-value of the point."},
+  {q:"What is the equation of this special line?",eq:"Vertical line passing through (5, 0)",a:"x = 5",fmt:"x = ___",h:"Vertical line: x = h where h is the x-value of the point."},
+  {q:"What is the slope of y = 7?",eq:"",a:"0",fmt:"m = ___",h:"Horizontal line: slope = 0."},
+  {q:"What is the slope of x = -2?",eq:"",a:"undefined",fmt:"m = ___",h:"Vertical line: slope is undefined."},
+  {q:"Find the x-intercept and y-intercept:",eq:"5x + y = 15",a:"x-intercept = 3, y-intercept = 15",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: 5x=15 → x=3. y-int: y=15"},
+  {q:"Convert to slope-intercept form:",eq:"x + 3y = 12",a:"y = -(1/3)x + 4",fmt:"y = ___",h:"3y = -x+12 → y=(-1/3)x+4"},
+  {q:"Identify the type of line:",eq:"y = -8",a:"horizontal",fmt:"horizontal or vertical",h:"y = constant is always horizontal."},
+  {q:"Find the x-intercept:",eq:"6x + 3y = 18",a:"3",fmt:"x-intercept = ___",h:"Set y=0: 6x=18 → x=3"},
+]};
+
+const T=[
+  {t:"8.1",q:"Find the slope:",eq:"Points: (2, 5) and (6, 13)",a:"2",fmt:"m = ___",h:"m=(13-5)/(6-2)=8/4=2"},
+  {t:"8.1",q:"Find the slope:",eq:"Points: (1, 8) and (4, -1)",a:"-3",fmt:"m = ___",h:"m=(-1-8)/(4-1)=-9/3=-3"},
+  {t:"8.1",q:"Find the slope:",eq:"Points: (-2, 4) and (4, 4)",a:"0",fmt:"m = ___",h:"m=(4-4)/(4-(-2))=0/6=0. Horizontal."},
+  {t:"8.1",q:"Find the slope:",eq:"Points: (3, 1) and (3, 7)",a:"undefined",fmt:"m = ___",h:"m=(7-1)/(3-3)=6/0. Undefined. Vertical."},
+  {t:"8.1",q:"Find the slope:",eq:"Points: (-1, -3) and (5, 9)",a:"2",fmt:"m = ___",h:"m=(9-(-3))/(5-(-1))=12/6=2"},
+  {t:"8.2",q:"Identify slope and y-intercept:",eq:"y = 4x - 7",a:"slope = 4, y-intercept = -7",fmt:"slope = ___, y-intercept = ___",h:"m=4, b=-7"},
+  {t:"8.2",q:"Identify slope and y-intercept:",eq:"y = -(2/3)x + 5",a:"slope = -2/3, y-intercept = 5",fmt:"slope = ___, y-intercept = ___",h:"m=-2/3, b=5"},
+  {t:"8.2",q:"Write the equation:",eq:"slope = -3, y-intercept = 8",a:"y = -3x + 8",fmt:"y = ___",h:"y=mx+b: y=-3x+8"},
+  {t:"8.2",q:"What is the slope?",eq:"y = 7x - 2",a:"7",fmt:"m = ___",h:"Coefficient of x is 7."},
+  {t:"8.2",q:"What is the y-intercept?",eq:"y = x + 11",a:"11",fmt:"y-intercept = ___",h:"b=11. Point (0,11)."},
+  {t:"8.3",q:"Write the equation:",eq:"slope = 2, through (1, 5)",a:"y = 2x + 3",fmt:"y = ___",h:"y-5=2(x-1) → y=2x+3"},
+  {t:"8.3",q:"Write the equation:",eq:"through (0, 4) and (3, 10)",a:"y = 2x + 4",fmt:"y = ___",h:"m=(10-4)/3=6/3=2. b=4. y=2x+4"},
+  {t:"8.3",q:"Are these lines parallel or perpendicular?",eq:"y = 5x + 1 and y = 5x - 3",a:"parallel",fmt:"parallel or perpendicular",h:"Same slope m=5."},
+  {t:"8.3",q:"Write the equation:",eq:"through (2, 3) and (6, 11)",a:"y = 2x - 1",fmt:"y = ___",h:"m=(11-3)/(6-2)=8/4=2. y-3=2(x-2) → y=2x-1"},
+  {t:"8.3",q:"Write the equation:",eq:"slope = -4, through (1, 6)",a:"y = -4x + 10",fmt:"y = ___",h:"y-6=-4(x-1) → y=-4x+4+6 → y=-4x+10"},
+  {t:"8.4",q:"Find the x-intercept and y-intercept:",eq:"2x + y = 8",a:"x-intercept = 4, y-intercept = 8",fmt:"x-intercept = ___, y-intercept = ___",h:"x-int: 2x=8 → x=4. y-int: y=8"},
+  {t:"8.4",q:"Convert to slope-intercept form:",eq:"x + 4y = 12",a:"y = -(1/4)x + 3",fmt:"y = ___",h:"4y=-x+12 → y=(-1/4)x+3"},
+  {t:"8.4",q:"What is the equation of the horizontal line through (2, -5)?",eq:"",a:"y = -5",fmt:"y = ___",h:"Horizontal: y = k. The y-value is -5."},
+  {t:"8.4",q:"What is the slope of x = 4?",eq:"",a:"undefined",fmt:"m = ___",h:"Vertical line: slope is undefined."},
+  {t:"8.4",q:"Find the y-intercept:",eq:"3x + 6y = 24",a:"4",fmt:"y-intercept = ___",h:"Set x=0: 6y=24 → y=4"},
+];
+
+const VQB=[
+  {topic:'8.1',type:'mc',q:'Slope = rise / run. What is the rise?',opts:['Horizontal change','Vertical change','The x-value','The y-intercept'],a:1},
+  {topic:'8.1',type:'mc',q:'A line goes down from left to right. Its slope is...',opts:['Positive','Negative','Zero','Undefined'],a:1},
+  {topic:'8.1',type:'mc',q:'Slope of a horizontal line is...',opts:['1','Undefined','0','-1'],a:2},
+  {topic:'8.1',type:'tf',q:'True or False: A vertical line has undefined slope.',opts:['True','False'],a:0},
+  {topic:'8.2',type:'mc',q:'In y = mx + b, what does b represent?',opts:['Slope','x-intercept','y-intercept','The rate'],a:2},
+  {topic:'8.2',type:'mc',q:'What is the slope of y = -3x + 7?',opts:['7','-3','3','-7'],a:1},
+  {topic:'8.2',type:'mc',q:'What is the y-intercept of y = 2x - 5?',opts:['2','-5','5','-2'],a:1},
+  {topic:'8.2',type:'tf',q:'True or False: y = 4x has a y-intercept of 0.',opts:['True','False'],a:0},
+  {topic:'8.3',type:'mc',q:'Point-slope form is...',opts:['y = mx + b','Ax + By = C','y - y₁ = m(x - x₁)','y = a(x-h)² + k'],a:2},
+  {topic:'8.3',type:'mc',q:'Parallel lines have...',opts:['Same y-intercept','Same slope','Negative reciprocal slopes','No slope'],a:1},
+  {topic:'8.3',type:'mc',q:'If m₁ = 2, the perpendicular slope m₂ is...',opts:['2','-2','1/2','-1/2'],a:3},
+  {topic:'8.3',type:'tf',q:'True or False: Two lines with slopes 3 and -1/3 are perpendicular.',opts:['True','False'],a:0},
+  {topic:'8.4',type:'mc',q:'Standard form Ax + By = C. To find the x-intercept, set...',opts:['x = 0','y = 0','A = 0','C = 0'],a:1},
+  {topic:'8.4',type:'mc',q:'What is the equation of a vertical line through (4, 0)?',opts:['y = 4','x = 4','y = 0','x = 0'],a:1},
+  {topic:'8.4',type:'mc',q:'What is the slope of y = -2?',opts:['Undefined','2','-2','0'],a:3},
+  {topic:'8.4',type:'tf',q:'True or False: The line x = 3 passes through (3, 5) and (3, -1).',opts:['True','False'],a:0},
+];
+
+const DESCS={'8.1':'Finding slope from two points or from a graph.','8.2':'Identifying slope and y-intercept from y = mx + b; graphing lines.','8.3':'Writing equations given slope & point, or two points.','8.4':'Standard form, finding intercepts, horizontal and vertical lines.'};
+let curTopic='8.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/×/g,'*').trim();}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['8.1','8.2','8.3','8.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'8.1':'Topic 8.1','8.2':'Topic 8.2','8.3':'Topic 8.3','8.4':'Topic 8.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0faa6"></script>
+<script>var e=document.getElementById('desmos-calc-p');if(e)Desmos.GraphingCalculator(e);var e2=document.getElementById('desmos-calc-t');if(e2)Desmos.GraphingCalculator(e2);</script>
+</body>
+</html>

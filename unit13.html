@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 13 — Polynomials | Algebra 1 | Niles North D219</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;--vw:#7c3aed;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --success-bg:#eaf3de;--success-text:#27500a;--success-border:#b0d17c;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;--danger-border:#f09595;
+  --radius-sm:6px;--radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text)}
+.shell{max-width:860px;margin:0 auto;padding-bottom:3rem}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.nn-nav{display:flex;gap:4px;padding:.55rem 1.5rem;overflow-x:auto;align-items:center}
+.np{background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);border:none;padding:4px 11px;border-radius:20px;font-size:11px;cursor:pointer;white-space:nowrap;transition:all .15s;text-decoration:none;display:inline-block}
+.np:hover{background:rgba(255,255,255,.18);color:#fff}
+.np.on{background:#fff;color:var(--nnpd);font-weight:700}
+.content{padding:1.1rem 1.5rem 0}
+.tabs,.vstabs,.tpbtns{display:flex;gap:1px;background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:3px;width:fit-content;flex-wrap:wrap}
+.tabs{margin-bottom:1.2rem}
+.vstabs{margin-bottom:1rem}
+.tpbtns{background:var(--bg3)}
+.tab,.vstab,.tpbtn{padding:8px 15px;border:none;background:transparent;color:var(--text2);font-size:13px;cursor:pointer;border-radius:6px;font-weight:500;transition:all .15s;white-space:nowrap}
+.vstab{font-size:12px}
+.tpbtn{font-size:12px;padding:7px 13px}
+.tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
+.tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
+.hidden{display:none}
+.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
+.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
+.thead:hover{background:var(--bg3)}
+.thead.open{border-bottom:0.5px solid var(--border)}
+.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
+.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
+.tchev.open{transform:rotate(180deg)}
+.tbody{padding:1rem 1.3rem;display:none}
+.tbody.open{display:block}
+.note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
+.note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
+.vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
+.kc{background:#ede9f7;border-left:3px solid var(--nnp);border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.kc-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--nnp);margin-bottom:.3rem}
+.kc-body{font-size:13px;color:#1a1a2e;line-height:1.65}
+.tip{background:#eaf3de;border-left:3px solid #3b6d11;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.tip-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#3b6d11;margin-bottom:.3rem}
+.tip-body{font-size:13px;color:#27500a;line-height:1.65}
+.warn{background:#faeeda;border-left:3px solid #854f0b;border-radius:0 var(--radius-md) var(--radius-md) 0;padding:.75rem 1rem;margin:.55rem 0}
+.warn-lbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#854f0b;margin-bottom:.3rem}
+.warn-body{font-size:13px;color:#633806;line-height:1.65}
+.steps{counter-reset:s;padding:0;margin:.55rem 0}
+.steps li{list-style:none;counter-increment:s;display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.45rem;font-size:13px;line-height:1.6;color:var(--text)}
+.steps li::before{content:counter(s);background:var(--nnp);color:#fff;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0}
+.worked{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.75rem 1rem;margin:.6rem 0}
+.wlbl{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.45rem}
+.wsteps{font-size:13px;line-height:2.1;color:var(--text);font-family:'Courier New',monospace}
+.eq{display:block;padding:.05rem 0}
+.eq-note{font-size:11px;color:var(--text2);font-style:italic;font-family:-apple-system,sans-serif;margin-left:.5rem}
+.eq-div{border-top:0.5px solid var(--border);margin:.1rem 0;padding-top:.1rem}
+.joke{background:var(--bg3);border:0.5px dashed var(--border2);border-radius:var(--radius-md);padding:.55rem .85rem;font-size:12px;color:var(--text2);font-style:italic;margin-top:.7rem}
+.joke strong{font-style:normal;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);display:block;margin-bottom:.2rem}
+.vsec{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1rem 0 .4rem;padding-bottom:.3rem;border-bottom:0.5px solid var(--border)}
+.vsec:first-child{margin-top:0}
+.vcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.85rem 1rem;margin-bottom:.55rem;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;align-items:start}
+.vcard.wide{grid-template-columns:1fr}
+.vtag{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.4px;margin-bottom:.3rem}
+.vterm{font-size:14px;font-weight:600;color:var(--text);margin-bottom:.2rem}
+.vdef{font-size:13px;color:var(--text2);line-height:1.6}
+.vex{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.55rem .8rem;font-size:12px;color:var(--text);line-height:1.85}
+.vex-lbl{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:.25rem}
+.chip{display:inline-block;font-size:11px;padding:2px 7px;border-radius:4px;margin:1px 2px;font-weight:600}
+.chip-p{background:#ede9f7;color:#2a1450;border:0.5px solid #c4b5e8}
+.chip-g{background:#eaf3de;color:#27500a;border:0.5px solid #b0d17c}
+.chip-a{background:#faeeda;color:#633806;border:0.5px solid #f0b45a}
+.eq-box{font-family:'Courier New',monospace;background:var(--bg3);border:0.5px solid var(--border2);border-radius:4px;padding:2px 6px;font-size:12px;display:inline-block;color:var(--text)}
+.pq-filter{display:flex;gap:.4rem;margin-bottom:.85rem;flex-wrap:wrap;align-items:center}
+.pq-filter-label{font-size:12px;color:var(--text2);margin-right:.2rem}
+.pqf-btn{padding:5px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text2);transition:all .15s}
+.pqf-btn.on{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.vq-sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.vq-sn{font-size:1.9rem;font-weight:700;color:#fff}
+.vq-sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.vq-sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.vq-tr-row{display:flex;align-items:center;gap:.6rem;margin-top:.5rem}
+.vq-tr-label{font-size:11px;color:rgba(255,255,255,.7);width:55px;flex-shrink:0}
+.vq-tr-wrap{flex:1;background:rgba(255,255,255,.15);border-radius:20px;height:6px;overflow:hidden}
+.vq-tr-bar{height:100%;border-radius:20px}
+.vq-tr-pct{font-size:11px;color:rgba(255,255,255,.7);width:30px;text-align:right;flex-shrink:0}
+.vq-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.75rem}
+.vq-card.ok{border-color:var(--success-border)}
+.vq-card.no{border-color:var(--danger-border)}
+.vq-qnum{display:inline-block;background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;margin-right:.35rem;vertical-align:middle}
+.vq-qtag{display:inline-block;background:var(--bg3);color:var(--text2);font-size:10px;padding:2px 6px;border-radius:3px;border:0.5px solid var(--border);margin-right:.25rem;vertical-align:middle}
+.vq-q{font-size:13px;font-weight:500;margin-bottom:.75rem;line-height:1.5;color:var(--text)}
+.vq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
+.vq-opt{padding:.55rem .8rem;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:12px;cursor:pointer;background:var(--bg3);color:var(--text);text-align:left;transition:all .15s;line-height:1.4}
+.vq-opt:hover:not(:disabled){border-color:var(--nnp);background:#ede9f7;color:var(--nnpd)}
+.vq-opt.sel{background:#ede9f7;border-color:var(--nnp);color:var(--nnpd);font-weight:500}
+.vq-opt.correct{background:var(--success-bg);border-color:var(--success-border);color:var(--success-text);font-weight:500}
+.vq-opt.wrong{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.vq-opt:disabled{cursor:default}
+.vq-tf{display:flex;gap:.4rem;flex-wrap:wrap}
+.vq-fb{font-size:12px;padding:.4rem .65rem;border-radius:var(--radius-md);margin-top:.4rem;display:none;align-items:center;gap:.35rem}
+.vq-fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.vq-fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.vq-sub-bar{display:flex;gap:.55rem;margin-top:.85rem;flex-wrap:wrap}
+.vq-btn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.vq-btn:hover{background:var(--nnpl)}
+.vq-rst{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+.topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
+.topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
+.topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
+.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-problems{min-width:0}
+.pt-calc-col{position:sticky;top:12px}
+.calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
+.calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+.calc-screen{background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--radius-md);padding:.45rem .65rem;margin-bottom:.5rem;text-align:right;min-height:48px}
+.calc-expr{font-size:11px;color:var(--text3);min-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.calc-val{font-size:20px;font-weight:500;color:var(--text);line-height:1.2}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.ckey{border:0.5px solid var(--border);border-radius:var(--radius-md);padding:6px 2px;font-size:12px;font-weight:500;cursor:pointer;background:var(--bg3);color:var(--text);transition:all .1s;text-align:center}
+.ckey:hover{background:var(--bg)}
+.ckey:active{transform:scale(.95)}
+.ckey.op{background:#ede9f7;color:#2a1450;border-color:#c4b5e8}
+.ckey.eq{background:var(--nnp);color:#fff;border-color:var(--nnp)}
+.ckey.eq:hover{background:var(--nnpl)}
+.ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.pmeta-txt{font-size:13px;color:var(--text2)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
+.nbtn:hover{background:var(--bg3)}
+.pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
+.pcard.ok{border-color:var(--success-border)}
+.pcard.no{border-color:var(--danger-border)}
+.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
+.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
+.ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
+.ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
+.ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
+.cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.cbtn:hover{background:var(--nnpl)}
+.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
+.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
+.fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
+.fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
+.fb.hint{background:#ede9f7;color:#1a1a2e;display:flex}
+.results-panel{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.1rem;margin-bottom:.85rem;display:none}
+.results-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);margin-bottom:.65rem}
+.tr-row{display:flex;align-items:center;gap:.65rem;margin-bottom:.4rem}
+.tr-label{font-size:12px;font-weight:500;width:75px;flex-shrink:0;color:var(--text)}
+.tr-bw{flex:1;background:var(--bg3);border-radius:20px;height:7px;overflow:hidden}
+.tr-bar{height:100%;border-radius:20px;transition:width .6s ease}
+.tr-bar.g{background:#3b6d11}.tr-bar.y{background:#b87a00}.tr-bar.r{background:#a32d2d}
+.tr-pct{font-size:11px;color:var(--text2);width:32px;text-align:right;flex-shrink:0}
+.tr-flag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap}
+.tr-flag.g{background:var(--success-bg);color:#3b6d11;border:0.5px solid var(--success-border)}
+.tr-flag.y{background:#faeeda;color:#854f0b;border:0.5px solid #f0b45a}
+.tr-flag.r{background:var(--danger-bg);color:#a32d2d;border:0.5px solid var(--danger-border)}
+.next-cta{background:var(--nnp);color:#fff;border:none;padding:.6rem 1.25rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:.4rem;margin-top:.65rem}
+.next-cta:hover{background:var(--nnpl)}
+.sbar{background:var(--nnpd);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;margin-bottom:.85rem;display:none}
+.sn{font-size:2rem;font-weight:700;color:#fff}
+.sp{font-size:12px;color:rgba(255,255,255,.55);margin-top:.15rem}
+.sm{font-size:12px;color:#fff;margin-top:.25rem;font-weight:500}
+.test-desc{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.8rem 1.1rem;margin-bottom:.85rem;font-size:13px;color:var(--text2);line-height:1.6}
+.test-desc strong{color:var(--text)}
+.subbar{margin-top:.85rem;display:flex;gap:.55rem;flex-wrap:wrap}
+.subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
+.subbtn:hover{background:var(--nnpl)}
+.rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="nn-header">
+    <div class="nn-top">
+      <div class="nn-logo">
+        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+      </div>
+      <div>
+        <div class="nn-school">Niles North High School &middot; D219</div>
+        <div class="nn-name">Algebra 1</div>
+      </div>
+    </div>
+    <div class="nn-nav" id="unit-nav"></div>
+  </div>
+
+  <div class="content">
+    <div class="tabs">
+      <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
+      <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
+      <button class="tab" onclick="sw('practice',this)">&#9999;&#65039; Practice</button>
+      <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
+    </div>
+
+    <!-- NOTES -->
+    <div id="v-notes">
+      <!-- 13.1 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">13.1</span><span class="tlabel">Introduction to Polynomials</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> You&apos;ve been working with expressions that have variables. A <span class="vw">polynomial</span> is just a collection of terms with non-negative integer exponents &mdash; no square roots, no negative exponents, no variables in denominators.</p>
+          <div class="kc"><div class="kc-lbl">Types of Polynomials</div><div class="kc-body">
+            <strong>Monomial:</strong> 1 term &nbsp; (e.g., 5x&#xB2;)<br>
+            <strong>Binomial:</strong> 2 terms &nbsp; (e.g., 3x + 4)<br>
+            <strong>Trinomial:</strong> 3 terms &nbsp; (e.g., x&#xB2; + 2x &minus; 5)<br><br>
+            <strong>Degree:</strong> The highest exponent in the polynomial<br>
+            <strong>Standard form:</strong> Write terms in descending order of degree<br>
+            <strong>Leading coefficient:</strong> Coefficient of the highest-degree term
+          </div></div>
+          <p class="note-h">Worked example &mdash; identify degree and leading coefficient</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">Polynomial: 4x&#xB3; &minus; 7x + 2</span>
+            <span class="eq">Degree: 3 (highest exponent is 3)</span>
+            <span class="eq">Leading coefficient: 4</span>
+            <span class="eq">Standard form: already in order &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; write in standard form</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">5 + 3x&#xB2; &minus; x &rarr; 3x&#xB2; &minus; x + 5</span>
+            <span class="eq">(descending order: degree 2, then 1, then 0)</span>
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> Why can&apos;t you trust a polynomial? Because they always have terms.</div>
+        </div>
+      </div>
+
+      <!-- 13.2 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">13.2</span><span class="tlabel">Adding &amp; Subtracting Polynomials</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Adding and subtracting polynomials is really just combining <span class="vw">like terms</span>. Remember: like terms have the same variable AND the same exponent.</p>
+          <div class="kc"><div class="kc-lbl">Adding Polynomials</div><div class="kc-body">
+            Identify like terms and combine. Like terms: same variable, same exponent.<br>
+            x&#xB2; and 3x&#xB2; are like terms. &nbsp; x&#xB2; and x&#xB3; are NOT.
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Subtracting Polynomials — DANGER ZONE</div><div class="warn-body">When subtracting, distribute the negative sign to EVERY term in the second polynomial. Use parentheses! Say it out loud as you go.</div></div>
+          <p class="note-h">Worked example &mdash; adding</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">(3x&#xB2; + 2x &minus; 1) + (x&#xB2; &minus; 5x + 4)</span>
+            <span class="eq">= (3x&#xB2; + x&#xB2;) + (2x &minus; 5x) + (&minus;1 + 4)</span>
+            <span class="eq eq-div">= 4x&#xB2; &minus; 3x + 3 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; subtracting</p>
+          <div class="worked"><div class="wlbl">Worked example &mdash; distribute the negative!</div><div class="wsteps">
+            <span class="eq">(5x&#xB2; + 3x &minus; 2) &minus; (2x&#xB2; &minus; x + 1)</span>
+            <span class="eq">= 5x&#xB2; + 3x &minus; 2 &minus; 2x&#xB2; + x &minus; 1 <span class="eq-note">&larr; distribute &minus;</span></span>
+            <span class="eq eq-div">= 3x&#xB2; + 4x &minus; 3 &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 13.3 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">13.3</span><span class="tlabel">Multiplying Polynomials (Monomial &times; Polynomial)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> Use the distributive property to multiply a monomial by every term in the polynomial. When multiplying variables, <strong>add exponents</strong> (from Unit 11).</p>
+          <div class="kc"><div class="kc-lbl">Rules for Monomial Multiplication</div><div class="kc-body">
+            <strong>Coefficients:</strong> multiply together<br>
+            <strong>Same-base variables:</strong> add the exponents<br>
+            Example: 3x&#xB2; &times; 4x&#xB3; = 12x&#x2075;
+          </div></div>
+          <p class="note-h">Worked example &mdash; distribute</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">3x(2x&#xB2; &minus; 5x + 4)</span>
+            <span class="eq">= 3x(2x&#xB2;) + 3x(&minus;5x) + 3x(4)</span>
+            <span class="eq eq-div">= 6x&#xB3; &minus; 15x&#xB2; + 12x &checkmark;</span>
+          </div></div>
+          <div class="worked"><div class="wlbl">Worked example 2</div><div class="wsteps">
+            <span class="eq">&minus;2x&#xB2;(3x &minus; 7)</span>
+            <span class="eq">= &minus;2x&#xB2;(3x) + (&minus;2x&#xB2;)(&minus;7)</span>
+            <span class="eq eq-div">= &minus;6x&#xB3; + 14x&#xB2; &checkmark;</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 13.4 -->
+      <div class="tblock">
+        <div class="thead" onclick="tog(this)">
+          <span class="ttag">13.4</span><span class="tlabel">Multiplying Polynomials (Binomial &times; Binomial &mdash; FOIL)</span>
+          <span class="tchev">&#9660;</span>
+        </div>
+        <div class="tbody">
+          <p class="note-p"><em>Connect to prior knowledge:</em> When multiplying two binomials, use <span class="vw">FOIL</span> to make sure you multiply every term by every other term.</p>
+          <div class="kc"><div class="kc-lbl">FOIL = First + Outer + Inner + Last</div><div class="kc-body">
+            (a + b)(c + d):<br>
+            <strong>F</strong>irst: a &times; c<br>
+            <strong>O</strong>uter: a &times; d<br>
+            <strong>I</strong>nner: b &times; c<br>
+            <strong>L</strong>ast: b &times; d<br>
+            Then combine like terms.
+          </div></div>
+          <p class="note-h">Worked example &mdash; (x + 3)(x + 5)</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">F: x &times; x = x&#xB2;</span>
+            <span class="eq">O: x &times; 5 = 5x</span>
+            <span class="eq">I: 3 &times; x = 3x</span>
+            <span class="eq">L: 3 &times; 5 = 15</span>
+            <span class="eq eq-div">= x&#xB2; + 5x + 3x + 15 = x&#xB2; + 8x + 15 &checkmark;</span>
+          </div></div>
+          <p class="note-h">Worked example &mdash; (2x &minus; 3)(x + 4)</p>
+          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
+            <span class="eq">F: 2x &times; x = 2x&#xB2;</span>
+            <span class="eq">O: 2x &times; 4 = 8x</span>
+            <span class="eq">I: &minus;3 &times; x = &minus;3x</span>
+            <span class="eq">L: &minus;3 &times; 4 = &minus;12</span>
+            <span class="eq eq-div">= 2x&#xB2; + 8x &minus; 3x &minus; 12 = 2x&#xB2; + 5x &minus; 12 &checkmark;</span>
+          </div></div>
+          <div class="kc"><div class="kc-lbl">Special Case: Difference of Squares</div><div class="kc-body">
+            (a + b)(a &minus; b) = a&#xB2; &minus; b&#xB2;<br>
+            Example: (x + 4)(x &minus; 4) = x&#xB2; &minus; 16
+          </div></div>
+          <div class="joke"><strong>Joke:</strong> What did the polynomial say to the monomial? You&apos;re just a part of a bigger picture.</div>
+        </div>
+      </div>
+    </div><!-- end notes -->
+
+    <!-- VOCAB -->
+    <div id="v-vocab" class="hidden">
+      <div class="vstabs">
+        <button class="vstab on" onclick="swV('cards',this)">&#128203; Vocab Cards</button>
+        <button class="vstab" onclick="swV('quiz',this)">&#129504; Practice Quiz</button>
+      </div>
+      <div id="v-vc">
+        <div class="vsec">New in 13.1</div>
+        <div class="vcard"><div><div class="vtag">13.1</div><div class="vterm">Polynomial</div><div class="vdef">One or more terms with variables raised to non-negative integer exponents. No square roots of variables, no negative exponents.</div></div><div><div class="vex-lbl">Examples</div><div class="vex"><span class="chip chip-g">Polynomial:</span> 3x&#xB2; + 2x &minus; 1<br><span class="chip chip-a">Not polynomial:</span> x&#x207B;&#xB2; + 1<br><span class="chip chip-a">Not polynomial:</span> &radic;x + 3</div></div></div>
+        <div class="vcard"><div><div class="vtag">13.1</div><div class="vterm">Monomial / Binomial / Trinomial</div><div class="vdef">Classification by number of terms: 1 term = monomial, 2 terms = binomial, 3 terms = trinomial.</div></div><div><div class="vex-lbl">Examples</div><div class="vex">5x&#xB2; → monomial<br>x + 7 → binomial<br>x&#xB2; &minus; 3x + 2 → trinomial</div></div></div>
+        <div class="vcard"><div><div class="vtag">13.1</div><div class="vterm">Degree of a Polynomial</div><div class="vdef">The highest exponent of the variable in the polynomial.</div></div><div><div class="vex-lbl">Example</div><div class="vex">4x&#xB3; &minus; 2x + 1<br>Degree = <span class="chip chip-g">3</span> (highest exponent)</div></div></div>
+        <div class="vcard"><div><div class="vtag">13.1</div><div class="vterm">Leading Coefficient</div><div class="vdef">The coefficient of the term with the highest degree (when written in standard form).</div></div><div><div class="vex-lbl">Example</div><div class="vex">7x&#xB2; + 3x &minus; 5<br>Leading coefficient = <span class="chip chip-g">7</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">13.1</div><div class="vterm">Standard Form</div><div class="vdef">Writing the polynomial with terms in descending order of degree (highest to lowest exponent).</div></div><div><div class="vex-lbl">Example</div><div class="vex">Not standard: 2 + x &minus; 3x&#xB2;<br>Standard: <span class="chip chip-g">&minus;3x&#xB2; + x + 2</span></div></div></div>
+        <div class="vsec">New in 13.2</div>
+        <div class="vcard"><div><div class="vtag">13.2</div><div class="vterm">Like Terms</div><div class="vdef">Terms that have the SAME variable raised to the SAME exponent. You can only add/subtract like terms.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="chip chip-g">Like:</span> 3x&#xB2; and 7x&#xB2;<br><span class="chip chip-a">Not like:</span> 3x&#xB2; and 7x<br><span class="chip chip-a">Not like:</span> 3x&#xB2; and 7x&#xB3;</div></div></div>
+        <div class="vsec">New in 13.4</div>
+        <div class="vcard"><div><div class="vtag">13.4</div><div class="vterm">FOIL</div><div class="vdef">First, Outer, Inner, Last — a method for multiplying two binomials by distributing every term in the first by every term in the second.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(x+2)(x+3):<br>F: x&#xB2;, O: 3x, I: 2x, L: 6<br>= x&#xB2; + 5x + 6</div></div></div>
+      </div>
+      <div id="v-vq" class="hidden">
+        <div class="pq-filter">
+          <span class="pq-filter-label">Filter by topic:</span>
+          <button class="pqf-btn on" onclick="setQFilter('all',this)">All</button>
+          <button class="pqf-btn" onclick="setQFilter('13.1',this)">13.1</button>
+          <button class="pqf-btn" onclick="setQFilter('13.2',this)">13.2</button>
+          <button class="pqf-btn" onclick="setQFilter('13.3',this)">13.3</button>
+          <button class="pqf-btn" onclick="setQFilter('13.4',this)">13.4</button>
+        </div>
+        <div class="vq-sbar" id="vq-sbar">
+          <div class="vq-sn" id="vq-sn"></div>
+          <div class="vq-sp" id="vq-sp"></div>
+          <div class="vq-sm" id="vq-sm"></div>
+          <div id="vq-tr-body"></div>
+        </div>
+        <div id="vq-list"></div>
+        <div class="vq-sub-bar">
+          <button class="vq-btn" id="vq-sbtn" onclick="gradeVQ()">&#10003; Submit Quiz</button>
+          <button class="vq-rst hidden" id="vq-rbtn" onclick="resetVQ()">&#8634; Retake</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRACTICE -->
+    <div id="v-practice" class="hidden">
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="topic-selector">
+            <div class="topic-selector-label">Choose a topic to practice:</div>
+            <div class="tpbtns">
+              <button class="tpbtn on" onclick="selTopic('13.1',this)">13.1 &mdash; Intro to Polynomials</button>
+              <button class="tpbtn" onclick="selTopic('13.2',this)">13.2 &mdash; Add &amp; Subtract</button>
+              <button class="tpbtn" onclick="selTopic('13.3',this)">13.3 &mdash; Monomial &times; Polynomial</button>
+              <button class="tpbtn" onclick="selTopic('13.4',this)">13.4 &mdash; FOIL</button>
+            </div>
+            <div class="topic-desc" id="topic-desc">Identifying degree, leading coefficient, and writing in standard form.</div>
+          </div>
+          <div class="ph"><div class="pmeta-txt" id="pmeta">Showing 5 of 15 problems</div><button class="nbtn" onclick="loadP()">&#8634; New set</button></div>
+          <div class="results-panel" id="p-results">
+            <div class="results-title">Your results</div>
+            <div id="p-results-body"></div>
+            <button class="next-cta" onclick="loadP()">&rarr; Try another set</button>
+          </div>
+          <div id="plist"></div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="cp-expr"></div><div class="calc-val" id="cp-val">0</div></div><div class="calc-grid" id="cp-grid"></div></div></div>
+      </div>
+    </div>
+
+    <!-- TEST -->
+    <div id="v-test" class="hidden">
+      <div class="test-desc"><strong>Practice Test &mdash; Unit 13</strong><br>20 questions &middot; 5 from each topic &middot; No hints &middot; Submit when done to see your topic breakdown.</div>
+      <div class="pt-layout">
+        <div class="pt-problems">
+          <div class="sbar" id="sbar"><div class="sn" id="snum"></div><div class="sp" id="spct"></div><div class="sm" id="smsg"></div></div>
+          <div class="results-panel" id="t-results"><div class="results-title">Performance by topic</div><div id="t-results-body"></div></div>
+          <div id="tlist"></div>
+          <div class="subbar">
+            <button class="subbtn" id="sbtn" onclick="gradeT()">&#10003; Submit test</button>
+            <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
+          </div>
+        </div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#129518; Calculator</div><div class="calc-screen"><div class="calc-expr" id="ct-expr"></div><div class="calc-val" id="ct-val">0</div></div><div class="calc-grid" id="ct-grid"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const UNITS=[
+  {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
+  {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
+  {n:"6",file:"unit6.html",name:"Solving Linear Inequalities"},
+  {n:"7",file:"unit7.html",name:"Functions"},
+  {n:"8",file:"unit8.html",name:"Graphing Linear Functions"},
+  {n:"9",file:"unit9.html",name:"Systems of Equations"},
+  {n:"10",file:"unit10.html",name:"Word Problems"},
+  {n:"11",file:"unit11.html",name:"Exponent Properties"},
+  {n:"12",file:"unit12.html",name:"Exponential Functions"},
+  {n:"13",file:"unit13.html",name:"Polynomials"},
+  {n:"14",file:"unit14.html",name:"Factoring"},
+  {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
+  {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
+];
+(function(){
+  const nav=document.getElementById('unit-nav');
+  UNITS.forEach(u=>{
+    const a=document.createElement('a');
+    a.className='np'+(u.n==='13'?' on':'');
+    a.href=u.file;a.title=u.name;a.textContent=u.n;
+    nav.appendChild(a);
+  });
+})();
+
+const BANKS={
+'13.1':[
+  {q:"Identify the degree:",eq:"4x^3 - 2x + 7",a:"3",fmt:"numerical degree",h:"Highest exponent is 3."},
+  {q:"Identify the degree:",eq:"5x^2 + 3x - 1",a:"2",fmt:"numerical degree",h:"Highest exponent is 2."},
+  {q:"Identify the leading coefficient:",eq:"7x^4 - 3x^2 + x",a:"7",fmt:"numerical answer",h:"Coefficient of the highest-degree term."},
+  {q:"Identify the leading coefficient:",eq:"-2x^3 + 5x - 8",a:"-2",fmt:"numerical answer",h:"Leading term is -2x^3, so coefficient is -2."},
+  {q:"Write in standard form:",eq:"3 + 2x - x^2",a:"-x^2 + 2x + 3",fmt:"simplified polynomial",h:"Descending order: degree 2, then 1, then 0."},
+  {q:"Write in standard form:",eq:"4x - 6 + x^3",a:"x^3 + 4x - 6",fmt:"simplified polynomial",h:"Descending order: degree 3, then 1, then 0."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"3x^2",a:"monomial",fmt:"monomial, binomial, or trinomial",h:"Only 1 term."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"x^2 - 5",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"2x^2 + x - 9",a:"trinomial",fmt:"monomial, binomial, or trinomial",h:"3 terms."},
+  {q:"Identify the degree:",eq:"9",a:"0",fmt:"numerical degree",h:"A constant has degree 0."},
+  {q:"Identify the leading coefficient:",eq:"x^4 - 3x + 2",a:"1",fmt:"numerical answer",h:"x^4 has coefficient 1 (implied)."},
+  {q:"Write in standard form:",eq:"8 - 5x^2 + 2x",a:"-5x^2 + 2x + 8",fmt:"simplified polynomial",h:"Descending: degree 2, then 1, then constant."},
+  {q:"What is the degree of a constant (number with no variable)?",eq:"Example: 12",a:"0",fmt:"numerical degree",h:"No variable means degree 0."},
+  {q:"Identify the degree:",eq:"-3x^5 + x^3 - 4",a:"5",fmt:"numerical degree",h:"Highest exponent is 5."},
+  {q:"Write in standard form:",eq:"x + 7 - 3x^3 + x^2",a:"-3x^3 + x^2 + x + 7",fmt:"simplified polynomial",h:"Descending: degree 3, 2, 1, 0."},
+],
+'13.2':[
+  {q:"Add:",eq:"(3x^2 + 2x - 1) + (x^2 - 5x + 4)",a:"4x^2 - 3x + 3",fmt:"simplified polynomial",h:"Combine like terms: (3+1)x^2 + (2-5)x + (-1+4)"},
+  {q:"Add:",eq:"(5x - 3) + (2x + 7)",a:"7x + 4",fmt:"simplified polynomial",h:"5x+2x=7x, -3+7=4"},
+  {q:"Add:",eq:"(x^2 + 4x) + (3x^2 - x + 2)",a:"4x^2 + 3x + 2",fmt:"simplified polynomial",h:"(1+3)x^2 + (4-1)x + 2"},
+  {q:"Subtract:",eq:"(4x^2 - 3x + 5) - (x^2 + x - 2)",a:"3x^2 - 4x + 7",fmt:"simplified polynomial",h:"Distribute -: 4x^2-3x+5 - x^2-x+2 = 3x^2-4x+7"},
+  {q:"Subtract:",eq:"(6x - 1) - (2x + 5)",a:"4x - 6",fmt:"simplified polynomial",h:"Distribute -: 6x-1-2x-5 = 4x-6"},
+  {q:"Subtract:",eq:"(3x^2 + x - 4) - (x^2 - 2x + 3)",a:"2x^2 + 3x - 7",fmt:"simplified polynomial",h:"3x^2+x-4 - x^2+2x-3 = 2x^2+3x-7"},
+  {q:"Add:",eq:"(2x^3 - x + 6) + (x^3 + 3x - 2)",a:"3x^3 + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x^3 + (-1+3)x + (6-2)"},
+  {q:"Subtract:",eq:"(5x^2 + 8) - (2x^2 - 3)",a:"3x^2 + 11",fmt:"simplified polynomial",h:"5x^2+8-2x^2+3 = 3x^2+11"},
+  {q:"Add:",eq:"(x^2 - 3x + 2) + (-x^2 + 3x - 2)",a:"0",fmt:"simplified polynomial (or 0)",h:"All like terms cancel: 0x^2+0x+0 = 0"},
+  {q:"Subtract:",eq:"(7x - 4) - (-2x + 1)",a:"9x - 5",fmt:"simplified polynomial",h:"7x-4+2x-1 = 9x-5"},
+  {q:"Add:",eq:"(4x^2 - 5) + (3x - 2)",a:"4x^2 + 3x - 7",fmt:"simplified polynomial",h:"No x^2 and x terms to combine: 4x^2+3x-7"},
+  {q:"Subtract:",eq:"(9x^2 + 4x - 1) - (4x^2 + 4x + 3)",a:"5x^2 - 4",fmt:"simplified polynomial",h:"9x^2+4x-1-4x^2-4x-3 = 5x^2-4"},
+  {q:"Add:",eq:"(2x^3 + 3x^2) + (x^3 - 3x^2 + x)",a:"3x^3 + x",fmt:"simplified polynomial",h:"(2+1)x^3+(3-3)x^2+x = 3x^3+x"},
+  {q:"Subtract:",eq:"(6x^2 - 2x + 1) - (6x^2 + 2x - 1)",a:"-4x + 2",fmt:"simplified polynomial",h:"6x^2-2x+1-6x^2-2x+1 = -4x+2"},
+  {q:"Add:",eq:"(-x^2 + 4x - 3) + (x^2 - x + 5)",a:"3x + 2",fmt:"simplified polynomial",h:"(-1+1)x^2+(4-1)x+(-3+5) = 3x+2"},
+],
+'13.3':[
+  {q:"Multiply:",eq:"3x(2x^2 - 5x + 4)",a:"6x^3 - 15x^2 + 12x",fmt:"simplified expression",h:"Distribute 3x: 3x·2x^2=6x^3, 3x·(-5x)=-15x^2, 3x·4=12x"},
+  {q:"Multiply:",eq:"2x(x + 7)",a:"2x^2 + 14x",fmt:"simplified expression",h:"2x·x=2x^2, 2x·7=14x"},
+  {q:"Multiply:",eq:"-4x(3x - 2)",a:"-12x^2 + 8x",fmt:"simplified expression",h:"-4x·3x=-12x^2, -4x·(-2)=8x"},
+  {q:"Multiply:",eq:"5x^2(x - 3)",a:"5x^3 - 15x^2",fmt:"simplified expression",h:"5x^2·x=5x^3, 5x^2·(-3)=-15x^2"},
+  {q:"Multiply:",eq:"x(x^2 + 4x - 1)",a:"x^3 + 4x^2 - x",fmt:"simplified expression",h:"x·x^2=x^3, x·4x=4x^2, x·(-1)=-x"},
+  {q:"Multiply:",eq:"-2x^2(3x + 5)",a:"-6x^3 - 10x^2",fmt:"simplified expression",h:"-2x^2·3x=-6x^3, -2x^2·5=-10x^2"},
+  {q:"Multiply:",eq:"4x(2x^2 + x - 6)",a:"8x^3 + 4x^2 - 24x",fmt:"simplified expression",h:"4x·2x^2=8x^3, 4x·x=4x^2, 4x·(-6)=-24x"},
+  {q:"Multiply:",eq:"3x^3(x^2 - 2x)",a:"3x^5 - 6x^4",fmt:"simplified expression",h:"3x^3·x^2=3x^5, 3x^3·(-2x)=-6x^4"},
+  {q:"Multiply:",eq:"-x(4x - 9)",a:"-4x^2 + 9x",fmt:"simplified expression",h:"-x·4x=-4x^2, -x·(-9)=9x"},
+  {q:"Multiply:",eq:"6x^2(x^2 + 3x - 1)",a:"6x^4 + 18x^3 - 6x^2",fmt:"simplified expression",h:"Distribute 6x^2 to each term."},
+  {q:"Multiply:",eq:"2x(5 - x)",a:"10x - 2x^2",fmt:"simplified expression (or -2x^2+10x)",h:"2x·5=10x, 2x·(-x)=-2x^2"},
+  {q:"Multiply:",eq:"-3x(x^2 + 2x - 4)",a:"-3x^3 - 6x^2 + 12x",fmt:"simplified expression",h:"-3x·x^2=-3x^3, -3x·2x=-6x^2, -3x·(-4)=12x"},
+  {q:"Multiply:",eq:"7x^2(2x - 1)",a:"14x^3 - 7x^2",fmt:"simplified expression",h:"7x^2·2x=14x^3, 7x^2·(-1)=-7x^2"},
+  {q:"Multiply:",eq:"x^2(x^3 - x + 2)",a:"x^5 - x^3 + 2x^2",fmt:"simplified expression",h:"x^2·x^3=x^5, x^2·(-x)=-x^3, x^2·2=2x^2"},
+  {q:"Multiply:",eq:"-5x(x^2 - 3x + 2)",a:"-5x^3 + 15x^2 - 10x",fmt:"simplified expression",h:"-5x·x^2=-5x^3, -5x·(-3x)=15x^2, -5x·2=-10x"},
+],
+'13.4':[
+  {q:"FOIL:",eq:"(x + 3)(x + 5)",a:"x^2 + 8x + 15",fmt:"simplified trinomial",h:"F:x^2, O:5x, I:3x, L:15 → x^2+8x+15"},
+  {q:"FOIL:",eq:"(x - 4)(x + 2)",a:"x^2 - 2x - 8",fmt:"simplified trinomial",h:"F:x^2, O:2x, I:-4x, L:-8 → x^2-2x-8"},
+  {q:"FOIL:",eq:"(x + 6)(x - 6)",a:"x^2 - 36",fmt:"simplified polynomial",h:"Difference of squares: x^2-36"},
+  {q:"FOIL:",eq:"(2x + 1)(x + 4)",a:"2x^2 + 9x + 4",fmt:"simplified trinomial",h:"F:2x^2, O:8x, I:x, L:4 → 2x^2+9x+4"},
+  {q:"FOIL:",eq:"(3x - 2)(x + 5)",a:"3x^2 + 13x - 10",fmt:"simplified trinomial",h:"F:3x^2, O:15x, I:-2x, L:-10 → 3x^2+13x-10"},
+  {q:"FOIL:",eq:"(x - 3)(x - 7)",a:"x^2 - 10x + 21",fmt:"simplified trinomial",h:"F:x^2, O:-7x, I:-3x, L:21 → x^2-10x+21"},
+  {q:"FOIL:",eq:"(2x + 3)(2x - 3)",a:"4x^2 - 9",fmt:"simplified polynomial",h:"Difference of squares: 4x^2-9"},
+  {q:"FOIL:",eq:"(x + 4)^2",a:"x^2 + 8x + 16",fmt:"simplified trinomial",h:"(x+4)(x+4): F:x^2, O:4x, I:4x, L:16 → x^2+8x+16"},
+  {q:"FOIL:",eq:"(3x + 1)(x - 2)",a:"3x^2 - 5x - 2",fmt:"simplified trinomial",h:"F:3x^2, O:-6x, I:x, L:-2 → 3x^2-5x-2"},
+  {q:"FOIL:",eq:"(x - 5)(x - 5)",a:"x^2 - 10x + 25",fmt:"simplified trinomial",h:"(x-5)^2: F:x^2, O:-5x, I:-5x, L:25 → x^2-10x+25"},
+  {q:"FOIL:",eq:"(4x + 3)(x - 1)",a:"4x^2 - x - 3",fmt:"simplified trinomial",h:"F:4x^2, O:-4x, I:3x, L:-3 → 4x^2-x-3"},
+  {q:"FOIL:",eq:"(2x - 5)(x + 3)",a:"2x^2 + x - 15",fmt:"simplified trinomial",h:"F:2x^2, O:6x, I:-5x, L:-15 → 2x^2+x-15"},
+  {q:"FOIL:",eq:"(x + 1)(x - 1)",a:"x^2 - 1",fmt:"simplified polynomial",h:"Difference of squares: x^2-1"},
+  {q:"FOIL:",eq:"(5x - 2)(x + 4)",a:"5x^2 + 18x - 8",fmt:"simplified trinomial",h:"F:5x^2, O:20x, I:-2x, L:-8 → 5x^2+18x-8"},
+  {q:"FOIL:",eq:"(x - 3)(x + 3)",a:"x^2 - 9",fmt:"simplified polynomial",h:"Difference of squares: x^2-9"},
+]};
+
+const T=[
+  {t:"13.1",q:"What is the degree?",eq:"6x^4 - x^2 + 3",a:"4",fmt:"numerical degree",h:"Highest exponent is 4."},
+  {t:"13.1",q:"What is the leading coefficient?",eq:"-5x^3 + 2x",a:"-5",fmt:"numerical answer",h:"Coefficient of x^3 is -5."},
+  {t:"13.1",q:"Write in standard form:",eq:"2x + 5 - 4x^3",a:"-4x^3 + 2x + 5",fmt:"simplified polynomial",h:"Descending: degree 3, 1, 0."},
+  {t:"13.1",q:"Classify as monomial, binomial, or trinomial:",eq:"3x^2 - 7",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
+  {t:"13.1",q:"What is the degree?",eq:"8",a:"0",fmt:"numerical degree",h:"Constant has degree 0."},
+  {t:"13.2",q:"Add:",eq:"(2x^2 + 3x) + (x^2 - x + 4)",a:"3x^2 + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x^2+(3-1)x+4"},
+  {t:"13.2",q:"Subtract:",eq:"(5x^2 + 2x - 3) - (2x^2 - x + 1)",a:"3x^2 + 3x - 4",fmt:"simplified polynomial",h:"5x^2+2x-3-2x^2+x-1=3x^2+3x-4"},
+  {t:"13.2",q:"Add:",eq:"(x^3 - 4) + (2x^3 + 4x)",a:"3x^3 + 4x - 4",fmt:"simplified polynomial",h:"(1+2)x^3+4x-4"},
+  {t:"13.2",q:"Subtract:",eq:"(7x - 5) - (3x + 2)",a:"4x - 7",fmt:"simplified polynomial",h:"7x-5-3x-2=4x-7"},
+  {t:"13.2",q:"Add:",eq:"(x^2 - x + 1) + (-x^2 + x - 1)",a:"0",fmt:"simplified polynomial (or 0)",h:"All terms cancel."},
+  {t:"13.3",q:"Multiply:",eq:"4x(x^2 - 3x + 1)",a:"4x^3 - 12x^2 + 4x",fmt:"simplified expression",h:"4x·x^2=4x^3, 4x·(-3x)=-12x^2, 4x·1=4x"},
+  {t:"13.3",q:"Multiply:",eq:"-2x(5x + 3)",a:"-10x^2 - 6x",fmt:"simplified expression",h:"-2x·5x=-10x^2, -2x·3=-6x"},
+  {t:"13.3",q:"Multiply:",eq:"x^2(3x - 4)",a:"3x^3 - 4x^2",fmt:"simplified expression",h:"x^2·3x=3x^3, x^2·(-4)=-4x^2"},
+  {t:"13.3",q:"Multiply:",eq:"3x^2(2x^2 + x - 5)",a:"6x^4 + 3x^3 - 15x^2",fmt:"simplified expression",h:"Distribute 3x^2 to each term."},
+  {t:"13.3",q:"Multiply:",eq:"-x(x^2 - 6)",a:"-x^3 + 6x",fmt:"simplified expression",h:"-x·x^2=-x^3, -x·(-6)=6x"},
+  {t:"13.4",q:"FOIL:",eq:"(x + 5)(x + 3)",a:"x^2 + 8x + 15",fmt:"simplified trinomial",h:"F:x^2, O:3x, I:5x, L:15 → x^2+8x+15"},
+  {t:"13.4",q:"FOIL:",eq:"(x - 2)(x + 8)",a:"x^2 + 6x - 16",fmt:"simplified trinomial",h:"F:x^2, O:8x, I:-2x, L:-16 → x^2+6x-16"},
+  {t:"13.4",q:"FOIL:",eq:"(2x + 3)(x - 4)",a:"2x^2 - 5x - 12",fmt:"simplified trinomial",h:"F:2x^2, O:-8x, I:3x, L:-12 → 2x^2-5x-12"},
+  {t:"13.4",q:"FOIL:",eq:"(x + 7)(x - 7)",a:"x^2 - 49",fmt:"simplified polynomial",h:"Difference of squares: x^2-49"},
+  {t:"13.4",q:"FOIL:",eq:"(3x - 1)(3x + 1)",a:"9x^2 - 1",fmt:"simplified polynomial",h:"Difference of squares: 9x^2-1"},
+];
+
+const VQB=[
+  {topic:'13.1',type:'mc',q:'A polynomial with exactly 2 terms is called a...',opts:['Monomial','Binomial','Trinomial','Degree-2'],a:1},
+  {topic:'13.1',type:'mc',q:'What is the degree of 4x^5 - 2x + 1?',opts:['1','2','4','5'],a:3},
+  {topic:'13.1',type:'mc',q:'What is the leading coefficient of -3x^4 + x^2 - 7?',opts:['4','-3','1','-7'],a:1},
+  {topic:'13.1',type:'tf',q:'True or False: 3x^(−2) is a polynomial.',opts:['True','False'],a:1},
+  {topic:'13.2',type:'mc',q:'Which are like terms?',opts:['3x^2 and 3x','5x^2 and 7x^2','4x and 4y','x^3 and x^2'],a:1},
+  {topic:'13.2',type:'mc',q:'When subtracting polynomials, what must you do first?',opts:['Multiply by -1','Distribute the negative to every term in the second polynomial','Add the polynomials','Find like terms'],a:1},
+  {topic:'13.2',type:'tf',q:'True or False: (3x + 2) - (x - 5) = 2x - 3',opts:['True','False'],a:1},
+  {topic:'13.3',type:'mc',q:'When multiplying variables with the same base, you...',opts:['Add exponents','Multiply exponents','Subtract exponents','Divide exponents'],a:0},
+  {topic:'13.3',type:'mc',q:'What is 3x^2 × 4x^3?',opts:['7x^5','12x^5','12x^6','7x^6'],a:1},
+  {topic:'13.3',type:'tf',q:'True or False: 2x(x + 3) = 2x^2 + 6x',opts:['True','False'],a:0},
+  {topic:'13.4',type:'mc',q:'FOIL stands for...',opts:['Factor, Outer, Inner, Last','First, Over, In, Last','First, Outer, Inner, Last','Front, Order, Inner, Last'],a:2},
+  {topic:'13.4',type:'mc',q:'(x+a)(x-a) equals...',opts:['x^2 + 2ax + a^2','x^2 - a^2','x^2 - 2ax + a^2','x^2 + a^2'],a:1},
+  {topic:'13.4',type:'tf',q:'True or False: (x+3)(x+4) = x^2 + 7x + 12',opts:['True','False'],a:0},
+  {topic:'13.4',type:'mc',q:'What is (x - 5)^2?',opts:['x^2 - 25','x^2 + 25','x^2 - 10x + 25','x^2 + 10x + 25'],a:2},
+  {topic:'13.1',type:'mc',q:'A monomial is...',opts:['A polynomial with 0 terms','A polynomial with 1 term','A polynomial with 2 terms','A polynomial with 3 terms'],a:1},
+  {topic:'13.3',type:'mc',q:'Which correctly distributes -3x(2x - 4)?',opts:['-6x^2 - 12x','-6x^2 + 12x','6x^2 - 12x','6x^2 + 12x'],a:1},
+];
+
+const DESCS={'13.1':'Identifying degree, leading coefficient, and writing in standard form.','13.2':'Adding and subtracting polynomials by combining like terms.','13.3':'Distributing a monomial across a polynomial.','13.4':'Multiplying two binomials using FOIL.'};
+let curTopic='13.1',vqFilter='all',vqSet=[],vqAnswers={};
+
+const CS={left:undefined,op:undefined,hr:false};
+const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
+  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
+  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
+  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
+  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];
+function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.length)return;KEYS.forEach(k=>{const b=document.createElement('button');b.className='ckey '+(k.c.replace('w','').trim());b.textContent=k.l;if(k.c.includes('w'))b.style.gridColumn='span 2';b.onclick=()=>ck2(vid,eid,k.f);g.appendChild(b);});}
+function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
+
+function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/\^/g,'^').trim();}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
+function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
+function loadVQ(){
+  const pool=vqFilter==='all'?VQB:VQB.filter(q=>q.topic===vqFilter);
+  vqSet=shuffle(pool).slice(0,Math.min(pool.length,12));
+  vqAnswers={};
+  const el=document.getElementById('vq-list');el.innerHTML='';
+  document.getElementById('vq-sbar').style.display='none';
+  document.getElementById('vq-sbtn').classList.remove('hidden');
+  document.getElementById('vq-rbtn').classList.add('hidden');
+  vqSet.forEach((q,i)=>{
+    const d=document.createElement('div');d.className='vq-card';d.id='vqc'+i;
+    let inner='';
+    if(q.type==='tf'){
+      inner='<div class="vq-tf">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    } else {
+      inner='<div class="vq-opts">'+q.opts.map((o,j)=>'<button class="vq-opt" id="vqo'+i+'_'+j+'" onclick="selVQ('+i+','+j+')">'+o+'</button>').join('')+'</div>';
+    }
+    d.innerHTML='<div class="vq-q"><span class="vq-qnum">'+(i+1)+'</span><span class="vq-qtag">'+q.topic+'</span>'+q.q+'</div>'+inner+'<div class="vq-fb" id="vqfb'+i+'"></div>';
+    el.appendChild(d);
+  });
+}
+function selVQ(i,j){if(vqAnswers[i]!==undefined)return;vqAnswers[i]=j;document.querySelectorAll('[id^="vqo'+i+'_"]').forEach(b=>b.classList.toggle('sel',b.id==='vqo'+i+'_'+j));}
+function gradeVQ(){
+  let score=0;const topicMap={};
+  vqSet.forEach((q,i)=>{
+    if(!topicMap[q.topic])topicMap[q.topic]={c:0,n:0};topicMap[q.topic].n++;
+    const sel=vqAnswers[i];const ok=sel===q.a;
+    if(ok){score++;topicMap[q.topic].c++;}
+    q.opts.forEach((_,j)=>{const b=document.getElementById('vqo'+i+'_'+j);if(b){b.disabled=true;b.classList.remove('sel');if(j===q.a)b.classList.add('correct');else if(j===sel)b.classList.add('wrong');}});
+    document.getElementById('vqc'+i).classList.toggle('ok',ok);
+    document.getElementById('vqc'+i).classList.toggle('no',!ok);
+    const fb=document.getElementById('vqfb'+i);
+    fb.className='vq-fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Correct answer: <strong>'+q.opts[q.a]+'</strong>';
+  });
+  const pct=Math.round(score/vqSet.length*100);
+  const msgs=['Keep reviewing the vocab cards!','Getting there — review missed ones.','Good effort!','Nice work!','Perfect!'];
+  document.getElementById('vq-sn').textContent=score+'/'+vqSet.length;
+  document.getElementById('vq-sp').textContent=pct+'%';
+  document.getElementById('vq-sm').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('vq-tr-body').innerHTML=Object.entries(topicMap).map(([t,{c,n}])=>{const p=Math.round(c/n*100);const cl=p>=80?'#3b6d11':p>=50?'#b87a00':'#a32d2d';return'<div class="vq-tr-row"><div class="vq-tr-label">'+t+'</div><div class="vq-tr-wrap"><div class="vq-tr-bar" style="width:'+p+'%;background:'+cl+'"></div></div><div class="vq-tr-pct">'+p+'%</div></div>';}).join('');
+  document.getElementById('vq-sbar').style.display='block';
+  document.getElementById('vq-sbtn').classList.add('hidden');
+  document.getElementById('vq-rbtn').classList.remove('hidden');
+  document.getElementById('vq-sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetVQ(){vqAnswers={};loadVQ();}
+
+let pset=[];
+function selTopic(t,btn){curTopic=t;document.querySelectorAll('.tpbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('topic-desc').textContent=DESCS[t];loadP();}
+function loadP(){
+  const pool=shuffle(BANKS[curTopic]);pset=pool.slice(0,5);
+  const el=document.getElementById('plist');el.innerHTML='';
+  document.getElementById('p-results').style.display='none';
+  document.getElementById('pmeta').textContent='Showing 5 of 15 problems — Topic '+curTopic;
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+}
+function checkAllDone(){
+  const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
+  if(done){
+    const correct=pset.filter((_,i)=>document.getElementById('pc'+i).classList.contains('ok')).length;
+    const pct=Math.round(correct/pset.length*100);
+    const cls=pct>=80?'g':pct>=50?'y':'r';
+    const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';
+    document.getElementById('p-results-body').innerHTML='<div class="tr-row"><div class="tr-label">Topic '+curTopic+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';
+    document.getElementById('p-results').style.display='block';
+    document.getElementById('p-results').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+}
+let tset=[];
+function loadT(){
+  tset=[];
+  const topics=['13.1','13.2','13.3','13.4'];
+  topics.forEach(t=>{
+    const pool=T.filter(p=>p.t===t);
+    tset.push(...shuffle(pool).slice(0,5));
+  });
+  tset=shuffle(tset);
+  const el=document.getElementById('tlist');el.innerHTML='';
+  document.getElementById('sbar').style.display='none';
+  document.getElementById('t-results').style.display='none';
+  document.getElementById('sbtn').classList.remove('hidden');
+  document.getElementById('rbtn').classList.add('hidden');
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+}
+function renderBars(map){const lbl={'13.1':'Topic 13.1','13.2':'Topic 13.2','13.3':'Topic 13.3','13.4':'Topic 13.4'};return Object.entries(map).map(([t,{c,n}])=>{const pct=Math.round(c/n*100);const cls=pct>=80?'g':pct>=50?'y':'r';const flag=pct>=80?'Strong':pct>=50?'Review':'Needs work';return'<div class="tr-row"><div class="tr-label">'+(lbl[t]||t)+'</div><div class="tr-bw"><div class="tr-bar '+cls+'" style="width:'+pct+'%"></div></div><div class="tr-pct">'+pct+'%</div><span class="tr-flag '+cls+'">'+flag+'</span></div>';}).join('');}
+function gradeT(){
+  const map={};
+  tset.forEach((p,i)=>{
+    const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
+    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    const fb=document.getElementById('tfb'+i);
+    const uval=inp?inp.value:'';
+    const ok=norm(uval)===norm(p.a);
+    if(ok)map[p.t].c++;
+    fb.className='fb '+(ok?'ok':'no');
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    document.getElementById('tc'+i).classList.toggle('ok',ok);
+    document.getElementById('tc'+i).classList.toggle('no',!ok);
+  });
+  const total=tset.length,score=Object.values(map).reduce((s,v)=>s+v.c,0);
+  const pct=Math.round(score/total*100);
+  const msgs=['Keep practicing!','Getting there!','Good work!','Nice!','Perfect!'];
+  document.getElementById('snum').textContent=score+'/'+total;
+  document.getElementById('spct').textContent=pct+'%';
+  document.getElementById('smsg').textContent=msgs[pct>=100?4:pct>=80?3:pct>=60?2:pct>=40?1:0];
+  document.getElementById('sbar').style.display='block';
+  document.getElementById('t-results-body').innerHTML=renderBars(map);
+  document.getElementById('t-results').style.display='block';
+  document.getElementById('sbtn').classList.add('hidden');
+  document.getElementById('rbtn').classList.remove('hidden');
+  document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetT(){loadT();}
+
+function mkP(p,i,pfx,topic){
+  const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
+  const isTest=pfx==='t';
+  const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
+  let eq='';
+  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
+    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="afmt">Answer format: '+p.fmt+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
+  return d;
+}
+function check(i,pfx){
+  const inp=document.getElementById(pfx+'a'+i);
+  const p=pfx==='p'?pset[i]:tset[i];
+  const ok=norm(inp.value)===norm(p.a);
+  inp.disabled=true;
+  const fb=document.getElementById(pfx+'fb'+i);
+  fb.className='fb '+(ok?'ok':'no');
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
+  document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
+  if(pfx==='p')checkAllDone();
+}
+function showHint(i,pfx){
+  const p=pfx==='p'?pset[i]:tset[i];
+  const fb=document.getElementById(pfx+'fb'+i);
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+}
+</script>
+</body>
+</html>

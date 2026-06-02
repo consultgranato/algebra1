@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algebra 1 | Niles North High School D219</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --nnp:#4a2c7a;--nnpd:#2a1450;--nnpl:#6b3db8;
+  --bg:#f5f5f7;--bg2:#ffffff;--bg3:#f0f0f2;
+  --text:#1a1a2e;--text2:#555570;--text3:#888899;
+  --border:#e0e0e8;--border2:#d0d0dc;
+  --radius-md:8px;--radius-lg:12px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.nn-header{background:var(--nnpd)}
+.nn-top{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.12)}
+.nn-logo{width:42px;height:42px;flex-shrink:0;border-radius:50%;border:2px solid rgba(255,255,255,.3);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center}
+.nn-logo img{width:130%;height:130%;object-fit:cover;object-position:50% 62%;margin-left:-4px}
+.nn-school{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.7);line-height:1.3}
+.nn-name{font-size:16px;font-weight:600;color:#fff;margin-top:1px}
+.main{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.page-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.page-sub{font-size:13px;color:var(--text2);margin-bottom:1.5rem}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.unit-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem 1rem;text-decoration:none;color:var(--text);display:block;position:relative;transition:box-shadow .15s,transform .15s;cursor:pointer;min-height:110px}
+.unit-card:hover{box-shadow:0 4px 20px rgba(74,44,122,.15);transform:translateY(-2px);border-color:#c4b5e8}
+.u-badge{display:inline-block;background:var(--nnp);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.4px;margin-bottom:.55rem}
+.u-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:.3rem}
+.u-meta{font-size:11px;color:var(--text3);font-weight:500}
+.u-arrow{position:absolute;bottom:.75rem;right:.85rem;font-size:14px;color:#c4b5e8;transition:color .15s}
+.unit-card:hover .u-arrow{color:var(--nnp)}
+.section-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin:1.5rem 0 .65rem;padding-bottom:.35rem;border-bottom:0.5px solid var(--border)}
+footer{background:var(--nnpd);padding:.85rem 1.5rem;text-align:center;font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.5px;text-transform:uppercase;margin-top:auto}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="nn-header">
+  <div class="nn-top">
+    <div class="nn-logo">
+      <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+    </div>
+    <div>
+      <div class="nn-school">Niles North High School &middot; D219</div>
+      <div class="nn-name">Algebra 1</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="page-title">Course Units</div>
+  <div class="page-sub">Select a unit to access notes, vocabulary, practice problems, and a practice test.</div>
+
+  <div class="section-label">Semester 1</div>
+  <div class="grid">
+    <a href="unit1-4.html" class="unit-card">
+      <span class="u-badge">1–4</span>
+      <div class="u-name">Getting the Rust Off</div>
+      <div class="u-meta">13 sections</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit5.html" class="unit-card">
+      <span class="u-badge">5</span>
+      <div class="u-name">Solving Linear Equations</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit6.html" class="unit-card">
+      <span class="u-badge">6</span>
+      <div class="u-name">Solving Linear Inequalities</div>
+      <div class="u-meta">5 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit7.html" class="unit-card">
+      <span class="u-badge">7</span>
+      <div class="u-name">Functions</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit8.html" class="unit-card">
+      <span class="u-badge">8</span>
+      <div class="u-name">Graphing Linear Functions</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit9.html" class="unit-card">
+      <span class="u-badge">9</span>
+      <div class="u-name">Systems of Equations</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit10.html" class="unit-card">
+      <span class="u-badge">10</span>
+      <div class="u-name">Word Problems</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+  </div>
+
+  <div class="section-label">Semester 2</div>
+  <div class="grid">
+    <a href="unit11.html" class="unit-card">
+      <span class="u-badge">11</span>
+      <div class="u-name">Exponent Properties</div>
+      <div class="u-meta">3 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit12.html" class="unit-card">
+      <span class="u-badge">12</span>
+      <div class="u-name">Exponential Functions</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit13.html" class="unit-card">
+      <span class="u-badge">13</span>
+      <div class="u-name">Polynomials</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit14.html" class="unit-card">
+      <span class="u-badge">14</span>
+      <div class="u-name">Factoring</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit15.html" class="unit-card">
+      <span class="u-badge">15</span>
+      <div class="u-name">Graphing Quadratic Functions</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+    <a href="unit16.html" class="unit-card">
+      <span class="u-badge">16</span>
+      <div class="u-name">Solving Quadratic Equations</div>
+      <div class="u-meta">4 topics</div>
+      <span class="u-arrow">&#8594;</span>
+    </a>
+  </div>
+</div>
+
+<footer>Niles North High School &middot; D219 &middot; Algebra 1</footer>
+</body>
+</html>
