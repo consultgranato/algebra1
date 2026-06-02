@@ -268,22 +268,65 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> From Unit 14 you learned to factor polynomials. Now you use factoring to solve equations by applying the <span class="vw">Zero Product Property</span>.</p>
+          <p class="note-p"><em>Connect to prior knowledge:</em> In Unit 14 you learned to factor polynomials. Now you use factoring to solve equations by applying the <span class="vw">Zero Product Property</span>. The key insight: if two things multiply to zero, at least one of them must be zero.</p>
           <div class="kc"><div class="kc-lbl">Zero Product Property (ZPP)</div><div class="kc-body">
-            If A &times; B = 0, then A = 0 OR B = 0<br><br>
-            Steps: (1) Move everything to one side (= 0) &nbsp; (2) Factor &nbsp; (3) Set each factor = 0 &nbsp; (4) Solve each
+            If A &times; B = 0, then <strong>A = 0</strong> OR <strong>B = 0</strong><br><br>
+            <strong>Process for solving by factoring (5 steps):</strong><br>
+            1. Write in <span class="vw">standard form</span>: ax<sup>2</sup> + bx + c = 0<br>
+            2. Find the <strong>factor pair</strong>: two numbers that &times; = c and + = b<br>
+            3. Write the <strong>factored form</strong>: (x + p)(x + q) = 0<br>
+            4. Apply ZPP: set <strong>each factor = 0</strong><br>
+            5. <strong>Solve</strong> each resulting linear equation &mdash; then check!
           </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; + 5x + 6 = 0</div><div class="wsteps">
-            <span class="eq">(x + 2)(x + 3) = 0</span>
-            <span class="eq">x + 2 = 0 &rarr; x = &minus;2</span>
-            <span class="eq eq-div">x + 3 = 0 &rarr; x = &minus;3 &checkmark;</span>
+
+          <p class="note-h">Worked example 1 &mdash; x<sup>2</sup> + 5x + 6 = 0</p>
+          <div class="worked"><div class="wlbl">All 5 steps &mdash; trinomial, a = 1</div><div class="wsteps">
+            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> + 5x + 6 = 0 &nbsp;<span class="eq-note">a = 1, b = 5, c = 6. Already in standard form.</span></span>
+            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair (× = c, + = b):</strong></span>
+            <span class="eq">&nbsp;&nbsp;Need two numbers that &times; = 6 and + = 5</span>
+            <span class="eq">&nbsp;&nbsp;Try 1 &times; 6 = 6 &rarr; 1 + 6 = 7 &cross; &nbsp;|&nbsp; Try 2 &times; 3 = 6 &rarr; 2 + 3 = 5 &checkmark;</span>
+            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;(x + 2)(x + 3) = 0</span>
+            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x + 2 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x + 3 = 0</span>
+            <span class="eq eq-div"><strong>Step 5 &mdash; Solve each factor:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x = &minus;2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = &minus;3</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (&minus;2)<sup>2</sup>+5(&minus;2)+6 = 4&minus;10+6 = 0 &checkmark; &nbsp;|&nbsp; (&minus;3)<sup>2</sup>+5(&minus;3)+6 = 9&minus;15+6 = 0 &checkmark;</span>
           </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; x&#xB2; &minus; 5x = 0</div><div class="wsteps">
-            <span class="eq">x(x &minus; 5) = 0</span>
-            <span class="eq">x = 0 &nbsp; or &nbsp; x = 5 &checkmark;</span>
+
+          <p class="note-h">Worked example 2 &mdash; x<sup>2</sup> &minus; 7x + 12 = 0</p>
+          <div class="worked"><div class="wlbl">All 5 steps &mdash; both factors negative</div><div class="wsteps">
+            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> &minus; 7x + 12 = 0 &nbsp;<span class="eq-note">a = 1, b = &minus;7, c = 12</span></span>
+            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair (× = 12, + = &minus;7):</strong></span>
+            <span class="eq">&nbsp;&nbsp;Try &minus;3 &times; &minus;4 = 12 &rarr; &minus;3 + (&minus;4) = &minus;7 &checkmark;</span>
+            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;(x &minus; 3)(x &minus; 4) = 0</span>
+            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x &minus; 3 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 4 = 0</span>
+            <span class="eq eq-div"><strong>Step 5 &mdash; Solve:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x = 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 4</span>
+            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 3<sup>2</sup>&minus;7(3)+12 = 9&minus;21+12 = 0 &checkmark; &nbsp;|&nbsp; 4<sup>2</sup>&minus;7(4)+12 = 16&minus;28+12 = 0 &checkmark;</span>
           </div></div>
-          <div class="warn"><div class="warn-lbl">Don&apos;t divide by x!</div><div class="warn-body">If x&#xB2; = 5x, don&apos;t divide both sides by x — you&apos;ll lose a solution. Move everything to one side and factor.</div></div>
+
+          <p class="note-h">Worked example 3 &mdash; x<sup>2</sup> &minus; 5x = 0 (GCF case)</p>
+          <div class="worked"><div class="wlbl">All 5 steps &mdash; factor out GCF, not a trinomial</div><div class="wsteps">
+            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> &minus; 5x = 0 &nbsp;<span class="eq-note">c = 0, so there is no constant term</span></span>
+            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair:</strong></span>
+            <span class="eq">&nbsp;&nbsp;GCF of x<sup>2</sup> and &minus;5x is <strong>x</strong>. Factor it out.</span>
+            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x(x &minus; 5) = 0</span>
+            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 5 = 0</span>
+            <span class="eq eq-div"><strong>Step 5 &mdash; Solve:</strong></span>
+            <span class="eq">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 5</span>
+          </div></div>
+          <div class="warn"><div class="warn-lbl">Don&apos;t divide both sides by x!</div><div class="warn-body">
+            If you divide x<sup>2</sup> &minus; 5x = 0 by x, you get x &minus; 5 = 0 and only find x = 5. <strong>You lose x = 0.</strong><br>
+            Rule: Never divide by a variable — always factor it out instead.
+          </div></div>
         </div>
       </div>
 
@@ -359,7 +402,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="vsec">New in 16.2</div>
         <div class="vcard"><div><div class="vtag">16.2</div><div class="vterm">Zero Product Property</div><div class="vdef">If A × B = 0, then A = 0 OR B = 0. Allows you to split a factored equation into two simpler equations.</div></div><div><div class="vex-lbl">Example</div><div class="vex">(x-3)(x+5) = 0<br>x-3=0 → x=3<br>x+5=0 → x=-5</div></div></div>
         <div class="vsec">New in 16.3</div>
-        <div class="vcard wide"><div><div class="vtag">16.3</div><div class="vterm">Quadratic Formula</div><div class="vdef">x = (-b ± √(b²-4ac)) / (2a). Works for any quadratic ax<sup>2</sup>+bx+c=0. Derived by completing the square on the general form.</div></div></div>
+        <div class="vcard"><div><div class="vtag">16.3</div><div class="vterm">Quadratic Formula</div><div class="vdef">x = (&minus;b &plusmn; &radic;(b<sup>2</sup>&minus;4ac)) / (2a). Works for ANY quadratic ax<sup>2</sup>+bx+c=0, including ones that can&apos;t be factored.</div></div><div><div class="vex-lbl">Visual example</div><div class="vex">x<sup>2</sup>&minus;5x+6=0<br>a=1, b=&minus;5, c=6<br>x = (5&plusmn;&radic;(25&minus;24))/2<br>&nbsp;&nbsp; = (5&plusmn;1)/2<br><span class="chip chip-g">x=3</span> or <span class="chip chip-g">x=2</span></div></div></div>
         <div class="vsec">New in 16.4</div>
         <div class="vcard"><div><div class="vtag">16.4</div><div class="vterm">Discriminant</div><div class="vdef">The expression b²-4ac. Determines the number of real solutions without fully solving. D&gt;0: two solutions; D=0: one; D&lt;0: none.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x<sup>2</sup>-6x+9=0<br>D = 36-36 = 0<br><span class="chip chip-g">One real solution</span></div></div></div>
       </div>
