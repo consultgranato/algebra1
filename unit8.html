@@ -196,6 +196,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .frac .fd{padding:0 3px;font-size:.85em;text-align:center}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 </style>
+<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0faa6"></script>
 </head>
 <body>
 <div class="shell">
@@ -606,7 +607,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
           <div id="plist"></div>
         </div>
-        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-p" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-practice" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
       </div>
     </div>
 
@@ -623,7 +624,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
           </div>
         </div>
-        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-calc-t" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
+        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div id="desmos-test" style="width:100%;height:400px;border-radius:8px;overflow:hidden"></div></div></div>
       </div>
     </div>
   </div>
@@ -800,9 +801,19 @@ const DESCS={'8.1':'Finding slope from two points or from a graph.','8.2':'Ident
 let curTopic='8.1',vqFilter='all',vqSet=[],vqAnswers={};
 
 function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/×/g,'*').trim();}
+
+/* ── DESMOS LAZY INIT ─────────────────────────────────────────── */
+let calcP=null,calcT=null;
+function initDesmos(){
+  const elP=document.getElementById('desmos-practice');
+  if(elP&&!calcP){calcP=Desmos.GraphingCalculator(elP,{keypad:true,expressions:true,settingsMenu:false,zoomButtons:true});}
+  const elT=document.getElementById('desmos-test');
+  if(elT&&!calcT){calcT=Desmos.GraphingCalculator(elT,{keypad:true,expressions:true,settingsMenu:false,zoomButtons:true});}
+}
+
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
-function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
+function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();setTimeout(initDesmos,50);}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();setTimeout(initDesmos,50);}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
 function loadVQ(){
@@ -950,7 +961,6 @@ function showHint(i,pfx){
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
 }
 </script>
-<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0faa6"></script>
-<script>var e=document.getElementById('desmos-calc-p');if(e)Desmos.GraphingCalculator(e);var e2=document.getElementById('desmos-calc-t');if(e2)Desmos.GraphingCalculator(e2);</script>
+
 </body>
 </html>
