@@ -190,6 +190,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .subbtn:hover{background:var(--nnpl)}
 .rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
+
+/* V1.1 — Global Patches */
+.tblock{border:1.5px solid #c0c0cc !important}
+.vcard{border:1.5px solid #c0c0cc !important}
+.pcard{border:1.5px solid #c0c0cc !important}
+.calc-box{border:1.5px solid #c0c0cc !important}
+.worked{border:1.5px solid #c0c0cc !important}
+.results-panel{border:1.5px solid #c0c0cc !important}
+.test-desc{border:1.5px solid #c0c0cc !important}
+.topic-selector{border:1.5px solid #c0c0cc !important}
+.vq-card{border:1.5px solid #c0c0cc !important}
+.nn-logo img{width:100%;height:100%;object-fit:cover;object-position:48% 65%;transform:scale(1.15);margin-left:0}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
+.frac .fd{padding:0 3px;font-size:.85em;text-align:center}
+.vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 </style>
 </head>
 <body>
@@ -482,10 +498,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script>
 const UNIT={id:14,name:"Factoring",topics:[
-  {id:"14.1",label:"Introduction to Factoring",videos:[]},
-  {id:"14.2",label:"Factoring Trinomials (Part 1)",videos:[]},
-  {id:"14.3",label:"Factoring Trinomials (Part 2)",videos:[]},
-  {id:"14.4",label:"Solving Equations by Factoring",videos:[]},
+  {id:"14.1",label:"Introduction to Factoring",videos:[{"label": "Watch", "id": "3RJlPvX-3vg"}]},
+  {id:"14.2",label:"Factoring Trinomials (Part 1)",videos:[{"label": "Watch", "id": "QH_hfKeLbbQ"}]},
+  {id:"14.3",label:"Factoring Trinomials (Part 2)",videos:[{"label": "Watch", "id": "1dAvklX9SBs"}]},
+  {id:"14.4",label:"Solving Equations by Factoring",videos:[{"label": "Watch", "id": "qg_Vrfu3F74"}]},
 ]};
 
 const UNITS=[
@@ -503,6 +519,28 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
+// V1.1 — Auto-render video buttons from UNIT.topics[].videos
+document.addEventListener('DOMContentLoaded',function(){
+  var theads=document.querySelectorAll('#v-notes .thead');
+  UNIT.topics.forEach(function(t,i){
+    if(!t.videos||!t.videos.length)return;
+    var h=theads[i];if(!h)return;
+    // Skip if already has vid-btn (unit5 hardcoded)
+    if(h.querySelector('.vid-btn'))return;
+    var chev=h.querySelector('.tchev');
+    t.videos.forEach(function(v,j){
+      var a=document.createElement('a');
+      a.href='https://youtu.be/'+v.id;
+      a.target='_blank';a.rel='noopener noreferrer';
+      a.className='vid-btn';
+      a.innerHTML='&#9654; '+v.label;
+      a.onclick=function(e){e.stopPropagation();};
+      if(j>0)a.style.marginLeft='3px';
+      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
+    });
+  });
+});
+
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{

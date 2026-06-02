@@ -217,6 +217,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .subbtn:hover{background:var(--nnpl)}
 .rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}.match-pairs{grid-template-columns:1fr}}
+
+/* V1.1 — Global Patches */
+.tblock{border:1.5px solid #c0c0cc !important}
+.vcard{border:1.5px solid #c0c0cc !important}
+.pcard{border:1.5px solid #c0c0cc !important}
+.calc-box{border:1.5px solid #c0c0cc !important}
+.worked{border:1.5px solid #c0c0cc !important}
+.results-panel{border:1.5px solid #c0c0cc !important}
+.test-desc{border:1.5px solid #c0c0cc !important}
+.topic-selector{border:1.5px solid #c0c0cc !important}
+.vq-card{border:1.5px solid #c0c0cc !important}
+.nn-logo img{width:100%;height:100%;object-fit:cover;object-position:48% 65%;transform:scale(1.15);margin-left:0}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
+.frac .fd{padding:0 3px;font-size:.85em;text-align:center}
+.vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 </style>
 </head>
 <body>
@@ -524,10 +540,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 /* ── VIDEO DATA PATTERN FOR CLAUDE CODE ── */
 const UNIT={id:5,name:"Solving Linear Equations",topics:[
-  {id:"5.1",label:"Solving Basic Equations",videos:[{label:"Part 1",url:"https://youtu.be/CAsQLnY11pU"},{label:"Part 2",url:"https://youtu.be/-xF5heC4HC0"}]},
-  {id:"5.2",label:"Solving Equations with Fractions",videos:[{label:"Watch",url:"https://youtu.be/jYLxGQKXtN4"}]},
-  {id:"5.3",label:"Solving More Complex Equations",videos:[{label:"Watch",url:"https://youtu.be/rXHHW4PGGP8"}]},
-  {id:"5.4",label:"Special Case Equations",videos:[{label:"Watch",url:"https://youtu.be/47aM5mP2w7Y"}]},
+  {id:"5.1",label:"Solving Basic Equations",videos:[{"label": "Part 1", "id": "CAsQLnY11pU"}, {"label": "Part 2", "id": "-xF5heC4HC0"}]},
+  {id:"5.2",label:"Solving Equations with Fractions",videos:[{"label": "Watch", "id": "jYLxGQKXtN4"}]},
+  {id:"5.3",label:"Solving More Complex Equations",videos:[{"label": "Watch", "id": "rXHHW4PGGP8"}]},
+  {id:"5.4",label:"Special Case Equations",videos:[{"label": "Watch", "id": "47aM5mP2w7Y"}]},
 ]};
 
 /* ── UNIT NAV ── */
@@ -546,6 +562,28 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
+// V1.1 — Auto-render video buttons from UNIT.topics[].videos
+document.addEventListener('DOMContentLoaded',function(){
+  var theads=document.querySelectorAll('#v-notes .thead');
+  UNIT.topics.forEach(function(t,i){
+    if(!t.videos||!t.videos.length)return;
+    var h=theads[i];if(!h)return;
+    // Skip if already has vid-btn (unit5 hardcoded)
+    if(h.querySelector('.vid-btn'))return;
+    var chev=h.querySelector('.tchev');
+    t.videos.forEach(function(v,j){
+      var a=document.createElement('a');
+      a.href='https://youtu.be/'+v.id;
+      a.target='_blank';a.rel='noopener noreferrer';
+      a.className='vid-btn';
+      a.innerHTML='&#9654; '+v.label;
+      a.onclick=function(e){e.stopPropagation();};
+      if(j>0)a.style.marginLeft='3px';
+      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
+    });
+  });
+});
+
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -832,7 +870,7 @@ function chk(i){
 }
 function sh(i,enc,m){const fb=document.getElementById(m+'fb'+i);fb.className='fb hint';fb.innerHTML='\ud83d\udca1 '+decodeURIComponent(enc);}
 
-document.querySelector('.thead').click();
+
 loadVQ();
 </script>
 </body>
