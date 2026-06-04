@@ -123,7 +123,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-selector{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.2rem;margin-bottom:1rem}
 .topic-selector-label{font-size:12px;color:var(--text2);margin-bottom:.55rem}
 .topic-desc{font-size:12px;color:var(--text2);margin-top:.55rem;min-height:15px}
-.pt-layout{display:grid;grid-template-columns:1fr 210px;gap:1rem;align-items:start}
+.pt-layout{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
 .pt-problems{min-width:0}
 .pt-calc-col{position:sticky;top:12px}
 .calc-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius-lg);padding:.75rem}
@@ -204,6 +204,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
 .frac .fd{padding:0 3px;font-size:.85em;text-align:center}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
+
+.desmos-trigger{position:fixed;bottom:24px;right:24px;background:var(--nnp);color:#fff;border:none;padding:12px 20px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(74,44,122,.4);z-index:900;display:flex;align-items:center;gap:8px;transition:all .2s}
+.desmos-trigger:hover{background:var(--nnpl);transform:translateY(-2px);box-shadow:0 6px 20px rgba(74,44,122,.5)}
+.desmos-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.desmos-overlay.open{display:flex}
+.desmos-modal{background:#fff;border-radius:12px;width:100%;max-width:1100px;height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.desmos-modal-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--nnpd);flex-shrink:0}
+.desmos-modal-title{color:#fff;font-size:15px;font-weight:600}
+.desmos-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
+.desmos-close:hover{background:rgba(255,255,255,.3)}
+.desmos-iframe{width:100%;flex:1;border:none;display:block}
 </style>
 </head>
 <body>
@@ -451,8 +462,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
           <div id="plist"></div>
         </div>
-        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div style="resize:both;overflow:hidden;min-width:200px;min-height:250px;width:100%;height:420px;border-radius:8px;"><iframe src="https://www.desmos.com/calculator?lang=en" style="width:100%;height:100%;border:none;border-radius:8px;display:block;" allowfullscreen></iframe></div></div></div>
-</div>
       </div>
     </div>
 
@@ -469,10 +478,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <button class="rstbtn hidden" id="rbtn" onclick="resetT()">&#8634; Retake</button>
           </div>
         </div>
-        <div class="pt-calc-col"><div class="calc-box"><div class="calc-title">&#128202; Graphing Calculator</div><div style="resize:both;overflow:hidden;min-width:200px;min-height:250px;width:100%;height:420px;border-radius:8px;"><iframe src="https://www.desmos.com/calculator?lang=en" style="width:100%;height:100%;border:none;border-radius:8px;display:block;" allowfullscreen></iframe></div></div></div>
-</div>
       </div>
     </div>
+  </div>
+</div>
+
+<button class="desmos-trigger" id="desmos-trigger" onclick="openDesmos()">&#128202; Graphing Calculator</button>
+
+<div class="desmos-overlay" id="desmos-overlay">
+  <div class="desmos-modal">
+    <div class="desmos-modal-header">
+      <span class="desmos-modal-title">&#128202; Graphing Calculator</span>
+      <button class="desmos-close" onclick="closeDesmos()">&#10005; Close</button>
+    </div>
+    <iframe src="https://www.desmos.com/calculator?lang=en" id="desmos-iframe" class="desmos-iframe" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -812,6 +831,10 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos();});
 </script>
 
 </body>
