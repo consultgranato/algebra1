@@ -247,7 +247,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nn-name">Algebra 1</div>
       </div>
     </div>
-    <div class="nn-nav" id="unit-nav"></div>
+    <div class="nn-nav" id="unit-nav"><a class="np" href="index.html" title="All Units" style="padding:4px 10px;font-size:13px;">&#8962;</a><span style="color:rgba(255,255,255,.2);font-size:12px;margin:0 2px;">|</span></div>
   </div>
 
   <div class="content">
@@ -830,7 +830,7 @@ function gradeT(){
     const fb=document.getElementById('tfb'+i),ok=isMatch(inp?inp.value:'',p.a);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
-    fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Answer: <strong>'+p.a+'</strong> \u2014 '+p.h;
+    fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Answer: <strong>'+formatEq(p.a)+'</strong> \u2014 '+formatEq(p.h);
     document.getElementById('tc'+i).classList.toggle('ok',ok);
     document.getElementById('tc'+i).classList.toggle('no',!ok);
   });
@@ -848,12 +848,13 @@ function gradeT(){
   document.getElementById('sbar').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function resetT(){loadT();}
+function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
 function mkP(p,i,m,topic){
   const d=document.createElement('div');d.className='pcard';d.id=m+'c'+i;
   const h=encodeURIComponent(p.h);
   d.innerHTML='<div class="pmeta2"><div class="pnum">'+(i+1)+'</div><span class="ptag">Topic '+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'
-    +'<div class="pmath">'+p.eq+'</div>'
+    +'<div class="pmath">'+formatEq(p.eq)+'</div>'
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
     +'<div class="ar"><input class="ai" type="text" placeholder="Your answer\u2026" id="'+m+'a'+i+'" onkeydown="if(event.key===\'Enter\'&&\''+m+'\'===\'p\')chk('+i+')"\/>'
     +(m==='p'?'<button class="cbtn" onclick="chk('+i+')">Check<\/button><button class="hbtn" onclick="sh('+i+',\''+h+'\',\''+m+'\')">Hint<\/button>':'')
@@ -863,12 +864,12 @@ function mkP(p,i,m,topic){
 function chk(i){
   const inp=document.getElementById('pa'+i),fb=document.getElementById('pfb'+i),p=pset[i],ok=isMatch(inp.value,p.a);
   fb.className='fb '+(ok?'ok':'no');
-  fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Not quite. Answer: <strong>'+p.a+'</strong>';
+  fb.innerHTML=ok?'\u2713 Correct!':'\u2717 Not quite. Answer: <strong>'+formatEq(p.a)+'</strong>';
   document.getElementById('pc'+i).classList.toggle('ok',ok);
   document.getElementById('pc'+i).classList.toggle('no',!ok);
   checkAllDone();
 }
-function sh(i,enc,m){const fb=document.getElementById(m+'fb'+i);fb.className='fb hint';fb.innerHTML='\ud83d\udca1 '+decodeURIComponent(enc);}
+function sh(i,enc,m){const fb=document.getElementById(m+'fb'+i);fb.className='fb hint';fb.innerHTML='\ud83d\udca1 '+formatEq(decodeURIComponent(enc));}
 
 
 loadVQ();

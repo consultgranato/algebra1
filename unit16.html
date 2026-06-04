@@ -218,7 +218,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nn-name">Algebra 1</div>
       </div>
     </div>
-    <div class="nn-nav" id="unit-nav"></div>
+    <div class="nn-nav" id="unit-nav"><a class="np" href="index.html" title="All Units" style="padding:4px 10px;font-size:13px;">&#8962;</a><span style="color:rgba(255,255,255,.2);font-size:12px;margin:0 2px;">|</span></div>
   </div>
 
   <div class="content">
@@ -477,6 +477,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
+const UNIT={id:16,name:"Solving Quadratic Equations",topics:[
+  {id:"16.1",label:"Solving by Square Roots",videos:[{"label":"Watch","id":"OO4j6ESyOiY"}]},
+  {id:"16.2",label:"Solving by Factoring"},
+  {id:"16.3",label:"The Quadratic Formula",videos:[{"label":"Watch","id":"JSwjmTFMDwg"}]},
+  {id:"16.4",label:"Discriminant & Types of Solutions"},
+]};
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -526,55 +532,55 @@ document.addEventListener('DOMContentLoaded',function(){
 
 const BANKS={
 '16.1':[
-  {q:"Solve:",eq:"x^2 = 25",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"x = ±√25 = ±5"},
-  {q:"Solve:",eq:"x^2 = 49",a:"x = 7 or x = -7",fmt:"x = ___ or x = ___",h:"x = ±√49 = ±7"},
-  {q:"Solve:",eq:"x^2 = 100",a:"x = 10 or x = -10",fmt:"x = ___ or x = ___",h:"x = ±√100 = ±10"},
-  {q:"Solve:",eq:"x^2 - 36 = 0",a:"x = 6 or x = -6",fmt:"x = ___ or x = ___",h:"x^2=36 → x=±6"},
-  {q:"Solve:",eq:"3x^2 - 12 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"3x^2=12 → x^2=4 → x=±2"},
-  {q:"Solve:",eq:"2x^2 = 50",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"x^2=25 → x=±5"},
-  {q:"Solve:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"x^2=9 → x=±3"},
-  {q:"Solve:",eq:"4x^2 = 64",a:"x = 4 or x = -4",fmt:"x = ___ or x = ___",h:"x^2=16 → x=±4"},
-  {q:"Solve:",eq:"x^2 + 4 = 0",a:"no real solution",fmt:"x = ___ or 'no real solution'",h:"x^2=-4. Can't take square root of negative."},
-  {q:"Solve:",eq:"5x^2 - 45 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"5x^2=45 → x^2=9 → x=±3"},
-  {q:"Solve:",eq:"x^2 = 1",a:"x = 1 or x = -1",fmt:"x = ___ or x = ___",h:"x=±√1=±1"},
-  {q:"Solve:",eq:"x^2 - 64 = 0",a:"x = 8 or x = -8",fmt:"x = ___ or x = ___",h:"x^2=64 → x=±8"},
-  {q:"Solve:",eq:"2x^2 - 72 = 0",a:"x = 6 or x = -6",fmt:"x = ___ or x = ___",h:"2x^2=72 → x^2=36 → x=±6"},
+  {q:"Solve:",eq:"x^2 = 25",a:"x = 5 or x = -5",fmt:"x = ___, x = ___",h:"x = ±√25 = ±5"},
+  {q:"Solve:",eq:"x^2 = 49",a:"x = 7 or x = -7",fmt:"x = ___, x = ___",h:"x = ±√49 = ±7"},
+  {q:"Solve:",eq:"x^2 = 100",a:"x = 10 or x = -10",fmt:"x = ___, x = ___",h:"x = ±√100 = ±10"},
+  {q:"Solve:",eq:"x^2 - 36 = 0",a:"x = 6 or x = -6",fmt:"x = ___, x = ___",h:"x^2=36 → x=±6"},
+  {q:"Solve:",eq:"3x^2 - 12 = 0",a:"x = 2 or x = -2",fmt:"x = ___, x = ___",h:"3x^2=12 → x^2=4 → x=±2"},
+  {q:"Solve:",eq:"2x^2 = 50",a:"x = 5 or x = -5",fmt:"x = ___, x = ___",h:"x^2=25 → x=±5"},
+  {q:"Solve:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___, x = ___",h:"x^2=9 → x=±3"},
+  {q:"Solve:",eq:"4x^2 = 64",a:"x = 4 or x = -4",fmt:"x = ___, x = ___",h:"x^2=16 → x=±4"},
+  {q:"Solve:",eq:"x^2 + 4 = 0",a:"no real solution",fmt:"x = ___ or 'no real solutions'",h:"x^2=-4. Can't take square root of negative."},
+  {q:"Solve:",eq:"5x^2 - 45 = 0",a:"x = 3 or x = -3",fmt:"x = ___, x = ___",h:"5x^2=45 → x^2=9 → x=±3"},
+  {q:"Solve:",eq:"x^2 = 1",a:"x = 1 or x = -1",fmt:"x = ___, x = ___",h:"x=±√1=±1"},
+  {q:"Solve:",eq:"x^2 - 64 = 0",a:"x = 8 or x = -8",fmt:"x = ___, x = ___",h:"x^2=64 → x=±8"},
+  {q:"Solve:",eq:"2x^2 - 72 = 0",a:"x = 6 or x = -6",fmt:"x = ___, x = ___",h:"2x^2=72 → x^2=36 → x=±6"},
   {q:"Solve:",eq:"x^2 = 0",a:"x = 0",fmt:"x = ___",h:"x=±√0=0. Only one solution."},
-  {q:"Solve:",eq:"(x + 1)^2 = 9",a:"x = 2 or x = -4",fmt:"x = ___ or x = ___",h:"x+1=±3. x+1=3→x=2; x+1=-3→x=-4"},
+  {q:"Solve:",eq:"(x + 1)^2 = 9",a:"x = 2 or x = -4",fmt:"x = ___, x = ___",h:"x+1=±3. x+1=3→x=2; x+1=-3→x=-4"},
 ],
 '16.2':[
-  {q:"Solve by factoring:",eq:"x^2 + 5x + 6 = 0",a:"x = -2 or x = -3",fmt:"x = ___ or x = ___",h:"(x+2)(x+3)=0 → x=-2 or x=-3"},
-  {q:"Solve by factoring:",eq:"x^2 - 7x + 12 = 0",a:"x = 3 or x = 4",fmt:"x = ___ or x = ___",h:"(x-3)(x-4)=0 → x=3 or x=4"},
-  {q:"Solve by factoring:",eq:"x^2 - x - 6 = 0",a:"x = 3 or x = -2",fmt:"x = ___ or x = ___",h:"(x-3)(x+2)=0 → x=3 or x=-2"},
-  {q:"Solve by factoring:",eq:"x^2 + x - 12 = 0",a:"x = 3 or x = -4",fmt:"x = ___ or x = ___",h:"(x+4)(x-3)=0 → x=-4 or x=3"},
-  {q:"Solve by factoring:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___ or x = ___",h:"(x+3)(x-3)=0 → x=±3"},
-  {q:"Solve by factoring:",eq:"x^2 + 6x = 0",a:"x = 0 or x = -6",fmt:"x = ___ or x = ___",h:"x(x+6)=0 → x=0 or x=-6"},
-  {q:"Solve by factoring:",eq:"x^2 - 4x = 0",a:"x = 0 or x = 4",fmt:"x = ___ or x = ___",h:"x(x-4)=0 → x=0 or x=4"},
-  {q:"Solve by factoring:",eq:"x^2 - 4x - 5 = 0",a:"x = 5 or x = -1",fmt:"x = ___ or x = ___",h:"(x-5)(x+1)=0 → x=5 or x=-1"},
-  {q:"Solve by factoring:",eq:"x^2 + 2x - 15 = 0",a:"x = 3 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-3)=0 → x=-5 or x=3"},
-  {q:"Solve by factoring:",eq:"x^2 - 25 = 0",a:"x = 5 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-5)=0 → x=±5"},
-  {q:"Solve by factoring:",eq:"2x^2 + 5x + 3 = 0",a:"x = -1 or x = -3/2",fmt:"x = ___ or x = ___",h:"(2x+3)(x+1)=0 → x=-3/2 or x=-1"},
-  {q:"Solve by factoring:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (may be one solution)",h:"(x-3)^2=0 → x=3 (double root)"},
-  {q:"Solve by factoring:",eq:"x^2 + 8x + 16 = 0",a:"x = -4",fmt:"x = ___ (may be one solution)",h:"(x+4)^2=0 → x=-4 (double root)"},
-  {q:"Solve by factoring:",eq:"x^2 - 10x + 25 = 0",a:"x = 5",fmt:"x = ___ (may be one solution)",h:"(x-5)^2=0 → x=5 (double root)"},
-  {q:"Solve by factoring:",eq:"x^2 - 3x - 18 = 0",a:"x = 6 or x = -3",fmt:"x = ___ or x = ___",h:"(x-6)(x+3)=0 → x=6 or x=-3"},
+  {q:"Solve by factoring:",eq:"x^2 + 5x + 6 = 0",a:"x = -2 or x = -3",fmt:"x = ___, x = ___",h:"(x+2)(x+3)=0 → x=-2 or x=-3"},
+  {q:"Solve by factoring:",eq:"x^2 - 7x + 12 = 0",a:"x = 3 or x = 4",fmt:"x = ___, x = ___",h:"(x-3)(x-4)=0 → x=3 or x=4"},
+  {q:"Solve by factoring:",eq:"x^2 - x - 6 = 0",a:"x = 3 or x = -2",fmt:"x = ___, x = ___",h:"(x-3)(x+2)=0 → x=3 or x=-2"},
+  {q:"Solve by factoring:",eq:"x^2 + x - 12 = 0",a:"x = 3 or x = -4",fmt:"x = ___, x = ___",h:"(x+4)(x-3)=0 → x=-4 or x=3"},
+  {q:"Solve by factoring:",eq:"x^2 - 9 = 0",a:"x = 3 or x = -3",fmt:"x = ___, x = ___",h:"(x+3)(x-3)=0 → x=±3"},
+  {q:"Solve by factoring:",eq:"x^2 + 6x = 0",a:"x = 0 or x = -6",fmt:"x = ___, x = ___",h:"x(x+6)=0 → x=0 or x=-6"},
+  {q:"Solve by factoring:",eq:"x^2 - 4x = 0",a:"x = 0 or x = 4",fmt:"x = ___, x = ___",h:"x(x-4)=0 → x=0 or x=4"},
+  {q:"Solve by factoring:",eq:"x^2 - 4x - 5 = 0",a:"x = 5 or x = -1",fmt:"x = ___, x = ___",h:"(x-5)(x+1)=0 → x=5 or x=-1"},
+  {q:"Solve by factoring:",eq:"x^2 + 2x - 15 = 0",a:"x = 3 or x = -5",fmt:"x = ___, x = ___",h:"(x+5)(x-3)=0 → x=-5 or x=3"},
+  {q:"Solve by factoring:",eq:"x^2 - 25 = 0",a:"x = 5 or x = -5",fmt:"x = ___, x = ___",h:"(x+5)(x-5)=0 → x=±5"},
+  {q:"Solve by factoring:",eq:"2x^2 + 5x + 3 = 0",a:"x = -1 or x = -3/2",fmt:"x = ___, x = ___",h:"(2x+3)(x+1)=0 → x=-3/2 or x=-1"},
+  {q:"Solve by factoring:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (one solution, double root)",h:"(x-3)^2=0 → x=3 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 + 8x + 16 = 0",a:"x = -4",fmt:"x = ___ (one solution, double root)",h:"(x+4)^2=0 → x=-4 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 - 10x + 25 = 0",a:"x = 5",fmt:"x = ___ (one solution, double root)",h:"(x-5)^2=0 → x=5 (double root)"},
+  {q:"Solve by factoring:",eq:"x^2 - 3x - 18 = 0",a:"x = 6 or x = -3",fmt:"x = ___, x = ___",h:"(x-6)(x+3)=0 → x=6 or x=-3"},
 ],
 '16.3':[
-  {q:"Use the quadratic formula to solve:",eq:"x^2 - 5x + 6 = 0",a:"x = 3 or x = 2",fmt:"x = ___ or x = ___",h:"a=1,b=-5,c=6. D=25-24=1. x=(5±1)/2"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 + 2x - 8 = 0",a:"x = 2 or x = -4",fmt:"x = ___ or x = ___",h:"a=1,b=2,c=-8. D=4+32=36. x=(-2±6)/2"},
-  {q:"Use the quadratic formula to solve:",eq:"2x^2 + 3x - 2 = 0",a:"x = 1/2 or x = -2",fmt:"x = ___ or x = ___",h:"a=2,b=3,c=-2. D=9+16=25. x=(-3±5)/4"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 5x + 6 = 0",a:"x = 3 or x = 2",fmt:"x = ___, x = ___",h:"a=1,b=-5,c=6. D=25-24=1. x=(5±1)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 2x - 8 = 0",a:"x = 2 or x = -4",fmt:"x = ___, x = ___",h:"a=1,b=2,c=-8. D=4+32=36. x=(-2±6)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 + 3x - 2 = 0",a:"x = 1/2 or x = -2",fmt:"x = ___, x = ___",h:"a=2,b=3,c=-2. D=9+16=25. x=(-3±5)/4"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 4x + 1 = 0",a:"x = 2+√3 or x = 2-√3",fmt:"exact or decimal form",h:"a=1,b=-4,c=1. D=16-4=12. x=(4±√12)/2=(4±2√3)/2=2±√3"},
-  {q:"Use the quadratic formula to solve:",eq:"3x^2 - 7x + 2 = 0",a:"x = 2 or x = 1/3",fmt:"x = ___ or x = ___",h:"a=3,b=-7,c=2. D=49-24=25. x=(7±5)/6"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 + 6x + 5 = 0",a:"x = -1 or x = -5",fmt:"x = ___ or x = ___",h:"a=1,b=6,c=5. D=36-20=16. x=(-6±4)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"3x^2 - 7x + 2 = 0",a:"x = 2 or x = 1/3",fmt:"x = ___, x = ___",h:"a=3,b=-7,c=2. D=49-24=25. x=(7±5)/6"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 6x + 5 = 0",a:"x = -1 or x = -5",fmt:"x = ___, x = ___",h:"a=1,b=6,c=5. D=36-20=16. x=(-6±4)/2"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 2x - 4 = 0",a:"x = 1+√5 or x = 1-√5",fmt:"exact or decimal form",h:"a=1,b=-2,c=-4. D=4+16=20. x=(2±√20)/2=1±√5"},
-  {q:"Use the quadratic formula to solve:",eq:"2x^2 - 6x + 4 = 0",a:"x = 2 or x = 1",fmt:"x = ___ or x = ___",h:"a=2,b=-6,c=4. D=36-32=4. x=(6±2)/4"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 + 4x - 12 = 0",a:"x = 2 or x = -6",fmt:"x = ___ or x = ___",h:"a=1,b=4,c=-12. D=16+48=64. x=(-4±8)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 - 6x + 4 = 0",a:"x = 2 or x = 1",fmt:"x = ___, x = ___",h:"a=2,b=-6,c=4. D=36-32=4. x=(6±2)/4"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + 4x - 12 = 0",a:"x = 2 or x = -6",fmt:"x = ___, x = ___",h:"a=1,b=4,c=-12. D=16+48=64. x=(-4±8)/2"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (one solution)",h:"a=1,b=-6,c=9. D=36-36=0. x=6/2=3"},
-  {q:"Use the quadratic formula to solve:",eq:"4x^2 - 4x - 3 = 0",a:"x = 3/2 or x = -1/2",fmt:"x = ___ or x = ___",h:"a=4,b=-4,c=-3. D=16+48=64. x=(4±8)/8"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 + x - 2 = 0",a:"x = 1 or x = -2",fmt:"x = ___ or x = ___",h:"a=1,b=1,c=-2. D=1+8=9. x=(-1±3)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"4x^2 - 4x - 3 = 0",a:"x = 3/2 or x = -1/2",fmt:"x = ___, x = ___",h:"a=4,b=-4,c=-3. D=16+48=64. x=(4±8)/8"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 + x - 2 = 0",a:"x = 1 or x = -2",fmt:"x = ___, x = ___",h:"a=1,b=1,c=-2. D=1+8=9. x=(-1±3)/2"},
   {q:"How many solutions does this equation have?",eq:"x^2 + 2x + 5 = 0",a:"no real solutions",fmt:"0, 1, or 2 solutions / 'no real solutions'",h:"D=4-20=-16<0. No real solutions."},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 - 3x - 10 = 0",a:"x = 5 or x = -2",fmt:"x = ___ or x = ___",h:"a=1,b=-3,c=-10. D=9+40=49. x=(3±7)/2"},
-  {q:"Use the quadratic formula to solve:",eq:"2x^2 + x - 6 = 0",a:"x = 3/2 or x = -2",fmt:"x = ___ or x = ___",h:"a=2,b=1,c=-6. D=1+48=49. x=(-1±7)/4"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 3x - 10 = 0",a:"x = 5 or x = -2",fmt:"x = ___, x = ___",h:"a=1,b=-3,c=-10. D=9+40=49. x=(3±7)/2"},
+  {q:"Use the quadratic formula to solve:",eq:"2x^2 + x - 6 = 0",a:"x = 3/2 or x = -2",fmt:"x = ___, x = ___",h:"a=2,b=1,c=-6. D=1+48=49. x=(-1±7)/4"},
 ],
 '16.4':[
   {q:"Find the discriminant:",eq:"x^2 - 5x + 4 = 0",a:"9",fmt:"numerical value",h:"D = (-5)^2 - 4(1)(4) = 25-16 = 9"},
@@ -595,21 +601,21 @@ const BANKS={
 ]};
 
 const T=[
-  {t:"16.1",q:"Solve:",eq:"x^2 = 81",a:"x = 9 or x = -9",fmt:"x = ___ or x = ___",h:"x=±√81=±9"},
-  {t:"16.1",q:"Solve:",eq:"2x^2 - 8 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"2x^2=8 → x^2=4 → x=±2"},
-  {t:"16.1",q:"Solve:",eq:"x^2 - 16 = 0",a:"x = 4 or x = -4",fmt:"x = ___ or x = ___",h:"x^2=16 → x=±4"},
-  {t:"16.1",q:"Solve:",eq:"x^2 + 9 = 0",a:"no real solution",fmt:"x = ___ or 'no real solution'",h:"x^2=-9. No real solution."},
-  {t:"16.1",q:"Solve:",eq:"(x - 2)^2 = 16",a:"x = 6 or x = -2",fmt:"x = ___ or x = ___",h:"x-2=±4. x=6 or x=-2"},
-  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 9x + 20 = 0",a:"x = 4 or x = 5",fmt:"x = ___ or x = ___",h:"(x-4)(x-5)=0"},
-  {t:"16.2",q:"Solve by factoring:",eq:"x^2 + 3x - 10 = 0",a:"x = 2 or x = -5",fmt:"x = ___ or x = ___",h:"(x+5)(x-2)=0"},
-  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 5x = 0",a:"x = 0 or x = 5",fmt:"x = ___ or x = ___",h:"x(x-5)=0"},
-  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 4 = 0",a:"x = 2 or x = -2",fmt:"x = ___ or x = ___",h:"(x+2)(x-2)=0"},
+  {t:"16.1",q:"Solve:",eq:"x^2 = 81",a:"x = 9 or x = -9",fmt:"x = ___, x = ___",h:"x=±√81=±9"},
+  {t:"16.1",q:"Solve:",eq:"2x^2 - 8 = 0",a:"x = 2 or x = -2",fmt:"x = ___, x = ___",h:"2x^2=8 → x^2=4 → x=±2"},
+  {t:"16.1",q:"Solve:",eq:"x^2 - 16 = 0",a:"x = 4 or x = -4",fmt:"x = ___, x = ___",h:"x^2=16 → x=±4"},
+  {t:"16.1",q:"Solve:",eq:"x^2 + 9 = 0",a:"no real solution",fmt:"x = ___ or 'no real solutions'",h:"x^2=-9. No real solution."},
+  {t:"16.1",q:"Solve:",eq:"(x - 2)^2 = 16",a:"x = 6 or x = -2",fmt:"x = ___, x = ___",h:"x-2=±4. x=6 or x=-2"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 9x + 20 = 0",a:"x = 4 or x = 5",fmt:"x = ___, x = ___",h:"(x-4)(x-5)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 + 3x - 10 = 0",a:"x = 2 or x = -5",fmt:"x = ___, x = ___",h:"(x+5)(x-2)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 5x = 0",a:"x = 0 or x = 5",fmt:"x = ___, x = ___",h:"x(x-5)=0"},
+  {t:"16.2",q:"Solve by factoring:",eq:"x^2 - 4 = 0",a:"x = 2 or x = -2",fmt:"x = ___, x = ___",h:"(x+2)(x-2)=0"},
   {t:"16.2",q:"Solve by factoring:",eq:"x^2 + 4x + 4 = 0",a:"x = -2",fmt:"x = ___",h:"(x+2)^2=0 → x=-2"},
-  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 7x + 10 = 0",a:"x = 5 or x = 2",fmt:"x = ___ or x = ___",h:"D=49-40=9. x=(7±3)/2"},
-  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 4x - 5 = 0",a:"x = 1 or x = -5",fmt:"x = ___ or x = ___",h:"D=16+20=36. x=(-4±6)/2"},
-  {t:"16.3",q:"Use the quadratic formula:",eq:"2x^2 - 5x + 2 = 0",a:"x = 2 or x = 1/2",fmt:"x = ___ or x = ___",h:"a=2,b=-5,c=2. D=25-16=9. x=(5±3)/4"},
-  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 2x - 3 = 0",a:"x = 1 or x = -3",fmt:"x = ___ or x = ___",h:"D=4+12=16. x=(-2±4)/2"},
-  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 4x + 3 = 0",a:"x = 3 or x = 1",fmt:"x = ___ or x = ___",h:"D=16-12=4. x=(4±2)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 7x + 10 = 0",a:"x = 5 or x = 2",fmt:"x = ___, x = ___",h:"D=49-40=9. x=(7±3)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 4x - 5 = 0",a:"x = 1 or x = -5",fmt:"x = ___, x = ___",h:"D=16+20=36. x=(-4±6)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"2x^2 - 5x + 2 = 0",a:"x = 2 or x = 1/2",fmt:"x = ___, x = ___",h:"a=2,b=-5,c=2. D=25-16=9. x=(5±3)/4"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 + 2x - 3 = 0",a:"x = 1 or x = -3",fmt:"x = ___, x = ___",h:"D=4+12=16. x=(-2±4)/2"},
+  {t:"16.3",q:"Use the quadratic formula:",eq:"x^2 - 4x + 3 = 0",a:"x = 3 or x = 1",fmt:"x = ___, x = ___",h:"D=16-12=4. x=(4±2)/2"},
   {t:"16.4",q:"Find the discriminant:",eq:"x^2 + 4x + 4 = 0",a:"0",fmt:"numerical value",h:"D=16-16=0"},
   {t:"16.4",q:"How many real solutions?",eq:"x^2 + x + 4 = 0",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D=1-16=-15<0"},
   {t:"16.4",q:"Find the discriminant:",eq:"3x^2 + 2x - 1 = 0",a:"16",fmt:"numerical value",h:"D=4+12=16"},
@@ -756,7 +762,7 @@ function gradeT(){
     const ok=norm(uval)===norm(p.a);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
-    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+    fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
     document.getElementById('tc'+i).classList.toggle('ok',ok);
     document.getElementById('tc'+i).classList.toggle('no',!ok);
   });
@@ -775,12 +781,13 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
+function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
   let eq='';
-  if(p.eq){eq='<div class="pmath">'+p.eq+'</div>';}
+  if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
@@ -795,7 +802,7 @@ function check(i,pfx){
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
-  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+p.a+'</strong> — '+p.h;
+  fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
   document.getElementById(pfx+'c'+i).classList.toggle('ok',ok);
   document.getElementById(pfx+'c'+i).classList.toggle('no',!ok);
   if(pfx==='p')checkAllDone();
@@ -803,7 +810,7 @@ function check(i,pfx){
 function showHint(i,pfx){
   const p=pfx==='p'?pset[i]:tset[i];
   const fb=document.getElementById(pfx+'fb'+i);
-  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+p.h;}
+  if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
 </script>
 
