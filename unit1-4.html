@@ -223,8 +223,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 
-.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
-.vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
+.vid-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:5px;background:#cc0000;color:#ffffff;border:none;text-decoration:none;white-space:nowrap;flex-shrink:0;cursor:pointer;letter-spacing:.2px;transition:background .15s}
+.vid-btn::before{content:'▶';font-size:10px}
+.vid-btn:hover{background:#aa0000;color:#ffffff}
 </style>
 </head>
 <body>
@@ -793,7 +794,7 @@ document.addEventListener('DOMContentLoaded',function(){
       a.href='https://youtu.be/'+v.id;
       a.target='_blank';a.rel='noopener noreferrer';
       a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
+      a.innerHTML=v.label;
       a.onclick=function(e){e.stopPropagation();};
       if(j>0)a.style.marginLeft='3px';
       if(chev)h.insertBefore(a,chev);else h.appendChild(a);
@@ -1111,12 +1112,30 @@ function showHint(i,pfx){
 }
 const TOPIC_TAGS=["1.2","1.3","1.4","2.1","2.3","2.4","2.5","3.1","3.2","3.3","4.1","4.2","4.4"];
 const TOPIC_TITLES=["Adding & Subtracting Integers","Multiplying & Dividing Integers","Order of Operations","Introduction to Fractions","Simplifying Fractions","Adding & Subtracting Fractions","Multiplying & Dividing Fractions","Introduction to Variables","Adding & Subtracting Variables (Like Terms)","Multiplying Variables (Exponents)","The Language of Algebra","Simplifying Expressions","Evaluating Expressions"];
+const TOPIC_VIDEOS=[
+  [{"label":"Part 1","url":"https://youtu.be/LbQdAWIGnvc"},{"label":"Part 2","url":"https://youtu.be/zwjhyZ1ptlE"}],
+  [{"label":"Watch","url":"https://youtu.be/Y5eaaZQ1vLI"}],
+  [{"label":"Watch","url":"https://youtu.be/zx1PvY85dmo"}],
+  [{"label":"Watch","url":"https://youtu.be/J_3BMc9IDDA"}],
+  [{"label":"Watch","url":"https://youtu.be/F-mC5ft4pII"}],
+  [{"label":"Watch","url":"https://youtu.be/5hlV75wTYZg"}],
+  [{"label":"Part 1","url":"https://youtu.be/J6-xnFb1aLc"},{"label":"Part 2","url":"https://youtu.be/rMPEBK0yXHY"}],
+  [{"label":"Watch","url":"https://youtu.be/NQHCse3Y_tU"}],
+  [{"label":"Watch","url":"https://youtu.be/UHIBcdPaAPc"}],
+  [{"label":"Watch","url":"https://youtu.be/wTeOA3qOyak"}],
+  [{"label":"Watch","url":"https://youtu.be/7LVTvmsihKg"}],
+  [{"label":"Part 1","url":"https://youtu.be/rAz4T5z_Od8"},{"label":"Part 2","url":"https://youtu.be/XIm1gTe_-aE"}],
+  [{"label":"Watch","url":"https://youtu.be/k7sAqhTyums"}],
+];
 function openTopic(i){
   var tbodies=document.querySelectorAll('#notes-data .tbody');
   document.getElementById('modal-tag').textContent=TOPIC_TAGS[i];
   document.getElementById('modal-title').innerHTML=TOPIC_TITLES[i];
   document.getElementById('modal-body').innerHTML=tbodies[i]?tbodies[i].innerHTML:'';
-  document.getElementById('modal-vid-btns').innerHTML='';
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(TOPIC_VIDEOS[i]||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">'+v.label+'</a>';
+  }).join('');
   document.getElementById('topic-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
