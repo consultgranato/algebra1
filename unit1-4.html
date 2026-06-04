@@ -223,6 +223,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
+.vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
 </style>
 </head>
 <body>
@@ -934,12 +936,6 @@ const DESCS={
 };
 let curTopic='unit1',vqFilter='all',vqSet=[],vqAnswers={};
 
-const CS={left:undefined,op:undefined,hr:false};
-const KEYS=[{l:'C',c:'clr w',f:'clr'},{l:'⌫',c:'clr',f:'bk'},{l:'÷',c:'op',f:'op(/)'},
-  {l:'7',c:'',f:'n(7)'},{l:'8',c:'',f:'n(8)'},{l:'9',c:'',f:'n(9)'},{l:'×',c:'op',f:'op(*)'},
-  {l:'4',c:'',f:'n(4)'},{l:'5',c:'',f:'n(5)'},{l:'6',c:'',f:'n(6)'},{l:'−',c:'op',f:'op(-)'},
-  {l:'1',c:'',f:'n(1)'},{l:'2',c:'',f:'n(2)'},{l:'3',c:'',f:'n(3)'},{l:'+',c:'op',f:'op(+)'},
-  {l:'±',c:'',f:'ng'},{l:'0',c:'',f:'n(0)'},{l:'.',c:'',f:'dt'},{l:'=',c:'eq',f:'eq'}];);}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
 
 function norm(s){
   return s.toString().toLowerCase()
