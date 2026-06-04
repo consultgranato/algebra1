@@ -140,7 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
+.pmath{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius-md);padding:.65rem 1rem;margin:.3rem 0 .4rem;font-size:15px;line-height:2.2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
@@ -189,9 +189,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-selector{border:1.5px solid #c0c0cc !important}
 .vq-card{border:1.5px solid #c0c0cc !important}
 .nn-logo img{width:100%;height:100%;object-fit:cover;object-position:48% 65%;transform:scale(1.15);margin-left:0}
-.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1}
-.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
-.frac .fd{padding:0 3px;font-size:.85em;text-align:center}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 2px;font-size:.9em;line-height:1.1}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 4px 1px;text-align:center;font-size:1em}
+.frac .fd{padding:1px 4px 0;text-align:center;font-size:1em}
+.math-expr{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:2.2;color:var(--text)}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
@@ -389,114 +390,114 @@ const UNITS=[
 
 const BANKS={
 '13.1':[
-  {q:"Identify the degree:",eq:"4x^3 - 2x + 7",a:"3",fmt:"numerical degree",h:"Highest exponent is 3."},
-  {q:"Identify the degree:",eq:"5x^2 + 3x - 1",a:"2",fmt:"numerical degree",h:"Highest exponent is 2."},
-  {q:"Identify the leading coefficient:",eq:"7x^4 - 3x^2 + x",a:"7",fmt:"numerical answer",h:"Coefficient of the highest-degree term."},
-  {q:"Identify the leading coefficient:",eq:"-2x^3 + 5x - 8",a:"-2",fmt:"numerical answer",h:"Leading term is -2x^3, so coefficient is -2."},
-  {q:"Write in standard form:",eq:"3 + 2x - x^2",a:"-x^2 + 2x + 3",fmt:"simplified polynomial",h:"Descending order: degree 2, then 1, then 0."},
-  {q:"Write in standard form:",eq:"4x - 6 + x^3",a:"x^3 + 4x - 6",fmt:"simplified polynomial",h:"Descending order: degree 3, then 1, then 0."},
-  {q:"Is this a monomial, binomial, or trinomial?",eq:"3x^2",a:"monomial",fmt:"monomial, binomial, or trinomial",h:"Only 1 term."},
-  {q:"Is this a monomial, binomial, or trinomial?",eq:"x^2 - 5",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
-  {q:"Is this a monomial, binomial, or trinomial?",eq:"2x^2 + x - 9",a:"trinomial",fmt:"monomial, binomial, or trinomial",h:"3 terms."},
+  {q:"Identify the degree:",eq:"4x<sup>3</sup> - 2x + 7",a:"3",fmt:"numerical degree",h:"Highest exponent is 3."},
+  {q:"Identify the degree:",eq:"5x<sup>2</sup> + 3x - 1",a:"2",fmt:"numerical degree",h:"Highest exponent is 2."},
+  {q:"Identify the leading coefficient:",eq:"7x<sup>4</sup> - 3x<sup>2</sup> + x",a:"7",fmt:"numerical answer",h:"Coefficient of the highest-degree term."},
+  {q:"Identify the leading coefficient:",eq:"-2x<sup>3</sup> + 5x - 8",a:"-2",fmt:"numerical answer",h:"Leading term is -2x<sup>3</sup>, so coefficient is -2."},
+  {q:"Write in standard form:",eq:"3 + 2x - x<sup>2</sup>",a:"-x<sup>2</sup> + 2x + 3",fmt:"simplified polynomial",h:"Descending order: degree 2, then 1, then 0."},
+  {q:"Write in standard form:",eq:"4x - 6 + x<sup>3</sup>",a:"x<sup>3</sup> + 4x - 6",fmt:"simplified polynomial",h:"Descending order: degree 3, then 1, then 0."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"3x<sup>2</sup>",a:"monomial",fmt:"monomial, binomial, or trinomial",h:"Only 1 term."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"x<sup>2</sup> - 5",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
+  {q:"Is this a monomial, binomial, or trinomial?",eq:"2x<sup>2</sup> + x - 9",a:"trinomial",fmt:"monomial, binomial, or trinomial",h:"3 terms."},
   {q:"Identify the degree:",eq:"9",a:"0",fmt:"numerical degree",h:"A constant has degree 0."},
-  {q:"Identify the leading coefficient:",eq:"x^4 - 3x + 2",a:"1",fmt:"numerical answer",h:"x^4 has coefficient 1 (implied)."},
-  {q:"Write in standard form:",eq:"8 - 5x^2 + 2x",a:"-5x^2 + 2x + 8",fmt:"simplified polynomial",h:"Descending: degree 2, then 1, then constant."},
+  {q:"Identify the leading coefficient:",eq:"x<sup>4</sup> - 3x + 2",a:"1",fmt:"numerical answer",h:"x<sup>4</sup> has coefficient 1 (implied)."},
+  {q:"Write in standard form:",eq:"8 - 5x<sup>2</sup> + 2x",a:"-5x<sup>2</sup> + 2x + 8",fmt:"simplified polynomial",h:"Descending: degree 2, then 1, then constant."},
   {q:"What is the degree of a constant (number with no variable)?",eq:"Example: 12",a:"0",fmt:"numerical degree",h:"No variable means degree 0."},
-  {q:"Identify the degree:",eq:"-3x^5 + x^3 - 4",a:"5",fmt:"numerical degree",h:"Highest exponent is 5."},
-  {q:"Write in standard form:",eq:"x + 7 - 3x^3 + x^2",a:"-3x^3 + x^2 + x + 7",fmt:"simplified polynomial",h:"Descending: degree 3, 2, 1, 0."},
+  {q:"Identify the degree:",eq:"-3x<sup>5</sup> + x<sup>3</sup> - 4",a:"5",fmt:"numerical degree",h:"Highest exponent is 5."},
+  {q:"Write in standard form:",eq:"x + 7 - 3x<sup>3</sup> + x<sup>2</sup>",a:"-3x<sup>3</sup> + x<sup>2</sup> + x + 7",fmt:"simplified polynomial",h:"Descending: degree 3, 2, 1, 0."},
 ],
 '13.2':[
-  {q:"Add:",eq:"(3x^2 + 2x - 1) + (x^2 - 5x + 4)",a:"4x^2 - 3x + 3",fmt:"simplified polynomial",h:"Combine like terms: (3+1)x^2 + (2-5)x + (-1+4)"},
+  {q:"Add:",eq:"(3x<sup>2</sup> + 2x - 1) + (x<sup>2</sup> - 5x + 4)",a:"4x<sup>2</sup> - 3x + 3",fmt:"simplified polynomial",h:"Combine like terms: (3+1)x<sup>2</sup> + (2-5)x + (-1+4)"},
   {q:"Add:",eq:"(5x - 3) + (2x + 7)",a:"7x + 4",fmt:"simplified polynomial",h:"5x+2x=7x, -3+7=4"},
-  {q:"Add:",eq:"(x^2 + 4x) + (3x^2 - x + 2)",a:"4x^2 + 3x + 2",fmt:"simplified polynomial",h:"(1+3)x^2 + (4-1)x + 2"},
-  {q:"Subtract:",eq:"(4x^2 - 3x + 5) - (x^2 + x - 2)",a:"3x^2 - 4x + 7",fmt:"simplified polynomial",h:"Distribute -: 4x^2-3x+5 - x^2-x+2 = 3x^2-4x+7"},
+  {q:"Add:",eq:"(x<sup>2</sup> + 4x) + (3x<sup>2</sup> - x + 2)",a:"4x<sup>2</sup> + 3x + 2",fmt:"simplified polynomial",h:"(1+3)x<sup>2</sup> + (4-1)x + 2"},
+  {q:"Subtract:",eq:"(4x<sup>2</sup> - 3x + 5) - (x<sup>2</sup> + x - 2)",a:"3x<sup>2</sup> - 4x + 7",fmt:"simplified polynomial",h:"Distribute -: 4x<sup>2-3x+5</sup> - x<sup>2-x+2</sup> = 3x<sup>2-4x+7</sup>"},
   {q:"Subtract:",eq:"(6x - 1) - (2x + 5)",a:"4x - 6",fmt:"simplified polynomial",h:"Distribute -: 6x-1-2x-5 = 4x-6"},
-  {q:"Subtract:",eq:"(3x^2 + x - 4) - (x^2 - 2x + 3)",a:"2x^2 + 3x - 7",fmt:"simplified polynomial",h:"3x^2+x-4 - x^2+2x-3 = 2x^2+3x-7"},
-  {q:"Add:",eq:"(2x^3 - x + 6) + (x^3 + 3x - 2)",a:"3x^3 + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x^3 + (-1+3)x + (6-2)"},
-  {q:"Subtract:",eq:"(5x^2 + 8) - (2x^2 - 3)",a:"3x^2 + 11",fmt:"simplified polynomial",h:"5x^2+8-2x^2+3 = 3x^2+11"},
-  {q:"Add:",eq:"(x^2 - 3x + 2) + (-x^2 + 3x - 2)",a:"0",fmt:"simplified polynomial (or 0)",h:"All like terms cancel: 0x^2+0x+0 = 0"},
+  {q:"Subtract:",eq:"(3x<sup>2</sup> + x - 4) - (x<sup>2</sup> - 2x + 3)",a:"2x<sup>2</sup> + 3x - 7",fmt:"simplified polynomial",h:"3x<sup>2+x-4</sup> - x<sup>2+2x-3</sup> = 2x<sup>2+3x-7</sup>"},
+  {q:"Add:",eq:"(2x<sup>3</sup> - x + 6) + (x<sup>3</sup> + 3x - 2)",a:"3x<sup>3</sup> + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x<sup>3</sup> + (-1+3)x + (6-2)"},
+  {q:"Subtract:",eq:"(5x<sup>2</sup> + 8) - (2x<sup>2</sup> - 3)",a:"3x<sup>2</sup> + 11",fmt:"simplified polynomial",h:"5x<sup>2+8-2x</sup><sup>2+3</sup> = 3x<sup>2+11</sup>"},
+  {q:"Add:",eq:"(x<sup>2</sup> - 3x + 2) + (-x<sup>2</sup> + 3x - 2)",a:"0",fmt:"simplified polynomial (or 0)",h:"All like terms cancel: 0x<sup>2+0x+0</sup> = 0"},
   {q:"Subtract:",eq:"(7x - 4) - (-2x + 1)",a:"9x - 5",fmt:"simplified polynomial",h:"7x-4+2x-1 = 9x-5"},
-  {q:"Add:",eq:"(4x^2 - 5) + (3x - 2)",a:"4x^2 + 3x - 7",fmt:"simplified polynomial",h:"No x^2 and x terms to combine: 4x^2+3x-7"},
-  {q:"Subtract:",eq:"(9x^2 + 4x - 1) - (4x^2 + 4x + 3)",a:"5x^2 - 4",fmt:"simplified polynomial",h:"9x^2+4x-1-4x^2-4x-3 = 5x^2-4"},
-  {q:"Add:",eq:"(2x^3 + 3x^2) + (x^3 - 3x^2 + x)",a:"3x^3 + x",fmt:"simplified polynomial",h:"(2+1)x^3+(3-3)x^2+x = 3x^3+x"},
-  {q:"Subtract:",eq:"(6x^2 - 2x + 1) - (6x^2 + 2x - 1)",a:"-4x + 2",fmt:"simplified polynomial",h:"6x^2-2x+1-6x^2-2x+1 = -4x+2"},
-  {q:"Add:",eq:"(-x^2 + 4x - 3) + (x^2 - x + 5)",a:"3x + 2",fmt:"simplified polynomial",h:"(-1+1)x^2+(4-1)x+(-3+5) = 3x+2"},
+  {q:"Add:",eq:"(4x<sup>2</sup> - 5) + (3x - 2)",a:"4x<sup>2</sup> + 3x - 7",fmt:"simplified polynomial",h:"No x<sup>2</sup> and x terms to combine: 4x<sup>2+3x-7</sup>"},
+  {q:"Subtract:",eq:"(9x<sup>2</sup> + 4x - 1) - (4x<sup>2</sup> + 4x + 3)",a:"5x<sup>2</sup> - 4",fmt:"simplified polynomial",h:"9x<sup>2+4x-1-4x</sup><sup>2-4x-3</sup> = 5x<sup>2-4</sup>"},
+  {q:"Add:",eq:"(2x<sup>3</sup> + 3x<sup>2)</sup> + (x<sup>3</sup> - 3x<sup>2</sup> + x)",a:"3x<sup>3</sup> + x",fmt:"simplified polynomial",h:"(2+1)x<sup>3+(3-3)x</sup><sup>2+x</sup> = 3x<sup>3+x</sup>"},
+  {q:"Subtract:",eq:"(6x<sup>2</sup> - 2x + 1) - (6x<sup>2</sup> + 2x - 1)",a:"-4x + 2",fmt:"simplified polynomial",h:"6x<sup>2-2x+1-6x</sup><sup>2-2x+1</sup> = -4x+2"},
+  {q:"Add:",eq:"(-x<sup>2</sup> + 4x - 3) + (x<sup>2</sup> - x + 5)",a:"3x + 2",fmt:"simplified polynomial",h:"(-1+1)x<sup>2+(4-1)x+(-3+5)</sup> = 3x+2"},
 ],
 '13.3':[
-  {q:"Multiply:",eq:"3x(2x^2 - 5x + 4)",a:"6x^3 - 15x^2 + 12x",fmt:"simplified expression",h:"Distribute 3x: 3x·2x^2=6x^3, 3x·(-5x)=-15x^2, 3x·4=12x"},
-  {q:"Multiply:",eq:"2x(x + 7)",a:"2x^2 + 14x",fmt:"simplified expression",h:"2x·x=2x^2, 2x·7=14x"},
-  {q:"Multiply:",eq:"-4x(3x - 2)",a:"-12x^2 + 8x",fmt:"simplified expression",h:"-4x·3x=-12x^2, -4x·(-2)=8x"},
-  {q:"Multiply:",eq:"5x^2(x - 3)",a:"5x^3 - 15x^2",fmt:"simplified expression",h:"5x^2·x=5x^3, 5x^2·(-3)=-15x^2"},
-  {q:"Multiply:",eq:"x(x^2 + 4x - 1)",a:"x^3 + 4x^2 - x",fmt:"simplified expression",h:"x·x^2=x^3, x·4x=4x^2, x·(-1)=-x"},
-  {q:"Multiply:",eq:"-2x^2(3x + 5)",a:"-6x^3 - 10x^2",fmt:"simplified expression",h:"-2x^2·3x=-6x^3, -2x^2·5=-10x^2"},
-  {q:"Multiply:",eq:"4x(2x^2 + x - 6)",a:"8x^3 + 4x^2 - 24x",fmt:"simplified expression",h:"4x·2x^2=8x^3, 4x·x=4x^2, 4x·(-6)=-24x"},
-  {q:"Multiply:",eq:"3x^3(x^2 - 2x)",a:"3x^5 - 6x^4",fmt:"simplified expression",h:"3x^3·x^2=3x^5, 3x^3·(-2x)=-6x^4"},
-  {q:"Multiply:",eq:"-x(4x - 9)",a:"-4x^2 + 9x",fmt:"simplified expression",h:"-x·4x=-4x^2, -x·(-9)=9x"},
-  {q:"Multiply:",eq:"6x^2(x^2 + 3x - 1)",a:"6x^4 + 18x^3 - 6x^2",fmt:"simplified expression",h:"Distribute 6x^2 to each term."},
-  {q:"Multiply:",eq:"2x(5 - x)",a:"10x - 2x^2",fmt:"simplified expression (or -2x^2+10x)",h:"2x·5=10x, 2x·(-x)=-2x^2"},
-  {q:"Multiply:",eq:"-3x(x^2 + 2x - 4)",a:"-3x^3 - 6x^2 + 12x",fmt:"simplified expression",h:"-3x·x^2=-3x^3, -3x·2x=-6x^2, -3x·(-4)=12x"},
-  {q:"Multiply:",eq:"7x^2(2x - 1)",a:"14x^3 - 7x^2",fmt:"simplified expression",h:"7x^2·2x=14x^3, 7x^2·(-1)=-7x^2"},
-  {q:"Multiply:",eq:"x^2(x^3 - x + 2)",a:"x^5 - x^3 + 2x^2",fmt:"simplified expression",h:"x^2·x^3=x^5, x^2·(-x)=-x^3, x^2·2=2x^2"},
-  {q:"Multiply:",eq:"-5x(x^2 - 3x + 2)",a:"-5x^3 + 15x^2 - 10x",fmt:"simplified expression",h:"-5x·x^2=-5x^3, -5x·(-3x)=15x^2, -5x·2=-10x"},
+  {q:"Multiply:",eq:"3x(2x<sup>2</sup> - 5x + 4)",a:"6x<sup>3</sup> - 15x<sup>2</sup> + 12x",fmt:"simplified expression",h:"Distribute 3x: 3x·2x<sup>2</sup>=6x<sup>3</sup>, 3x·(-5x)=-15x<sup>2</sup>, 3x·4=12x"},
+  {q:"Multiply:",eq:"2x(x + 7)",a:"2x<sup>2</sup> + 14x",fmt:"simplified expression",h:"2x·x=2x<sup>2</sup>, 2x·7=14x"},
+  {q:"Multiply:",eq:"-4x(3x - 2)",a:"-12x<sup>2</sup> + 8x",fmt:"simplified expression",h:"-4x·3x=-12x<sup>2</sup>, -4x·(-2)=8x"},
+  {q:"Multiply:",eq:"5x<sup>2(x</sup> - 3)",a:"5x<sup>3</sup> - 15x<sup>2</sup>",fmt:"simplified expression",h:"5x<sup>2</sup>·x=5x<sup>3</sup>, 5x<sup>2</sup>·(-3)=-15x<sup>2</sup>"},
+  {q:"Multiply:",eq:"x(x<sup>2</sup> + 4x - 1)",a:"x<sup>3</sup> + 4x<sup>2</sup> - x",fmt:"simplified expression",h:"x·x<sup>2</sup>=x<sup>3</sup>, x·4x=4x<sup>2</sup>, x·(-1)=-x"},
+  {q:"Multiply:",eq:"-2x<sup>2(3x</sup> + 5)",a:"-6x<sup>3</sup> - 10x<sup>2</sup>",fmt:"simplified expression",h:"-2x<sup>2</sup>·3x=-6x<sup>3</sup>, -2x<sup>2</sup>·5=-10x<sup>2</sup>"},
+  {q:"Multiply:",eq:"4x(2x<sup>2</sup> + x - 6)",a:"8x<sup>3</sup> + 4x<sup>2</sup> - 24x",fmt:"simplified expression",h:"4x·2x<sup>2</sup>=8x<sup>3</sup>, 4x·x=4x<sup>2</sup>, 4x·(-6)=-24x"},
+  {q:"Multiply:",eq:"3x<sup>3(x</sup><sup>2</sup> - 2x)",a:"3x<sup>5</sup> - 6x<sup>4</sup>",fmt:"simplified expression",h:"3x<sup>3</sup>·x<sup>2</sup>=3x<sup>5</sup>, 3x<sup>3</sup>·(-2x)=-6x<sup>4</sup>"},
+  {q:"Multiply:",eq:"-x(4x - 9)",a:"-4x<sup>2</sup> + 9x",fmt:"simplified expression",h:"-x·4x=-4x<sup>2</sup>, -x·(-9)=9x"},
+  {q:"Multiply:",eq:"6x<sup>2(x</sup><sup>2</sup> + 3x - 1)",a:"6x<sup>4</sup> + 18x<sup>3</sup> - 6x<sup>2</sup>",fmt:"simplified expression",h:"Distribute 6x<sup>2</sup> to each term."},
+  {q:"Multiply:",eq:"2x(5 - x)",a:"10x - 2x<sup>2</sup>",fmt:"simplified expression (or -2x<sup>2+10x)</sup>",h:"2x·5=10x, 2x·(-x)=-2x<sup>2</sup>"},
+  {q:"Multiply:",eq:"-3x(x<sup>2</sup> + 2x - 4)",a:"-3x<sup>3</sup> - 6x<sup>2</sup> + 12x",fmt:"simplified expression",h:"-3x·x<sup>2</sup>=-3x<sup>3</sup>, -3x·2x=-6x<sup>2</sup>, -3x·(-4)=12x"},
+  {q:"Multiply:",eq:"7x<sup>2(2x</sup> - 1)",a:"14x<sup>3</sup> - 7x<sup>2</sup>",fmt:"simplified expression",h:"7x<sup>2</sup>·2x=14x<sup>3</sup>, 7x<sup>2</sup>·(-1)=-7x<sup>2</sup>"},
+  {q:"Multiply:",eq:"x<sup>2(x</sup><sup>3</sup> - x + 2)",a:"x<sup>5</sup> - x<sup>3</sup> + 2x<sup>2</sup>",fmt:"simplified expression",h:"x<sup>2</sup>·x<sup>3</sup>=x<sup>5</sup>, x<sup>2</sup>·(-x)=-x<sup>3</sup>, x<sup>2</sup>·2=2x<sup>2</sup>"},
+  {q:"Multiply:",eq:"-5x(x<sup>2</sup> - 3x + 2)",a:"-5x<sup>3</sup> + 15x<sup>2</sup> - 10x",fmt:"simplified expression",h:"-5x·x<sup>2</sup>=-5x<sup>3</sup>, -5x·(-3x)=15x<sup>2</sup>, -5x·2=-10x"},
 ],
 '13.4':[
-  {q:"FOIL:",eq:"(x + 3)(x + 5)",a:"x^2 + 8x + 15",fmt:"simplified trinomial",h:"F:x^2, O:5x, I:3x, L:15 → x^2+8x+15"},
-  {q:"FOIL:",eq:"(x - 4)(x + 2)",a:"x^2 - 2x - 8",fmt:"simplified trinomial",h:"F:x^2, O:2x, I:-4x, L:-8 → x^2-2x-8"},
-  {q:"FOIL:",eq:"(x + 6)(x - 6)",a:"x^2 - 36",fmt:"simplified polynomial",h:"Difference of squares: x^2-36"},
-  {q:"FOIL:",eq:"(2x + 1)(x + 4)",a:"2x^2 + 9x + 4",fmt:"simplified trinomial",h:"F:2x^2, O:8x, I:x, L:4 → 2x^2+9x+4"},
-  {q:"FOIL:",eq:"(3x - 2)(x + 5)",a:"3x^2 + 13x - 10",fmt:"simplified trinomial",h:"F:3x^2, O:15x, I:-2x, L:-10 → 3x^2+13x-10"},
-  {q:"FOIL:",eq:"(x - 3)(x - 7)",a:"x^2 - 10x + 21",fmt:"simplified trinomial",h:"F:x^2, O:-7x, I:-3x, L:21 → x^2-10x+21"},
-  {q:"FOIL:",eq:"(2x + 3)(2x - 3)",a:"4x^2 - 9",fmt:"simplified polynomial",h:"Difference of squares: 4x^2-9"},
-  {q:"FOIL:",eq:"(x + 4)^2",a:"x^2 + 8x + 16",fmt:"simplified trinomial",h:"(x+4)(x+4): F:x^2, O:4x, I:4x, L:16 → x^2+8x+16"},
-  {q:"FOIL:",eq:"(3x + 1)(x - 2)",a:"3x^2 - 5x - 2",fmt:"simplified trinomial",h:"F:3x^2, O:-6x, I:x, L:-2 → 3x^2-5x-2"},
-  {q:"FOIL:",eq:"(x - 5)(x - 5)",a:"x^2 - 10x + 25",fmt:"simplified trinomial",h:"(x-5)^2: F:x^2, O:-5x, I:-5x, L:25 → x^2-10x+25"},
-  {q:"FOIL:",eq:"(4x + 3)(x - 1)",a:"4x^2 - x - 3",fmt:"simplified trinomial",h:"F:4x^2, O:-4x, I:3x, L:-3 → 4x^2-x-3"},
-  {q:"FOIL:",eq:"(2x - 5)(x + 3)",a:"2x^2 + x - 15",fmt:"simplified trinomial",h:"F:2x^2, O:6x, I:-5x, L:-15 → 2x^2+x-15"},
-  {q:"FOIL:",eq:"(x + 1)(x - 1)",a:"x^2 - 1",fmt:"simplified polynomial",h:"Difference of squares: x^2-1"},
-  {q:"FOIL:",eq:"(5x - 2)(x + 4)",a:"5x^2 + 18x - 8",fmt:"simplified trinomial",h:"F:5x^2, O:20x, I:-2x, L:-8 → 5x^2+18x-8"},
-  {q:"FOIL:",eq:"(x - 3)(x + 3)",a:"x^2 - 9",fmt:"simplified polynomial",h:"Difference of squares: x^2-9"},
+  {q:"FOIL:",eq:"(x + 3)(x + 5)",a:"x<sup>2</sup> + 8x + 15",fmt:"simplified trinomial",h:"F:x<sup>2</sup>, O:5x, I:3x, L:15 → x<sup>2+8x+15</sup>"},
+  {q:"FOIL:",eq:"(x - 4)(x + 2)",a:"x<sup>2</sup> - 2x - 8",fmt:"simplified trinomial",h:"F:x<sup>2</sup>, O:2x, I:-4x, L:-8 → x<sup>2-2x-8</sup>"},
+  {q:"FOIL:",eq:"(x + 6)(x - 6)",a:"x<sup>2</sup> - 36",fmt:"simplified polynomial",h:"Difference of squares: x<sup>2-36</sup>"},
+  {q:"FOIL:",eq:"(2x + 1)(x + 4)",a:"2x<sup>2</sup> + 9x + 4",fmt:"simplified trinomial",h:"F:2x<sup>2</sup>, O:8x, I:x, L:4 → 2x<sup>2+9x+4</sup>"},
+  {q:"FOIL:",eq:"(3x - 2)(x + 5)",a:"3x<sup>2</sup> + 13x - 10",fmt:"simplified trinomial",h:"F:3x<sup>2</sup>, O:15x, I:-2x, L:-10 → 3x<sup>2+13x-10</sup>"},
+  {q:"FOIL:",eq:"(x - 3)(x - 7)",a:"x<sup>2</sup> - 10x + 21",fmt:"simplified trinomial",h:"F:x<sup>2</sup>, O:-7x, I:-3x, L:21 → x<sup>2-10x+21</sup>"},
+  {q:"FOIL:",eq:"(2x + 3)(2x - 3)",a:"4x<sup>2</sup> - 9",fmt:"simplified polynomial",h:"Difference of squares: 4x<sup>2-9</sup>"},
+  {q:"FOIL:",eq:"(x + 4)<sup>2</sup>",a:"x<sup>2</sup> + 8x + 16",fmt:"simplified trinomial",h:"(x+4)(x+4): F:x<sup>2</sup>, O:4x, I:4x, L:16 → x<sup>2+8x+16</sup>"},
+  {q:"FOIL:",eq:"(3x + 1)(x - 2)",a:"3x<sup>2</sup> - 5x - 2",fmt:"simplified trinomial",h:"F:3x<sup>2</sup>, O:-6x, I:x, L:-2 → 3x<sup>2-5x-2</sup>"},
+  {q:"FOIL:",eq:"(x - 5)(x - 5)",a:"x<sup>2</sup> - 10x + 25",fmt:"simplified trinomial",h:"(x-5)<sup>2</sup>: F:x<sup>2</sup>, O:-5x, I:-5x, L:25 → x<sup>2-10x+25</sup>"},
+  {q:"FOIL:",eq:"(4x + 3)(x - 1)",a:"4x<sup>2</sup> - x - 3",fmt:"simplified trinomial",h:"F:4x<sup>2</sup>, O:-4x, I:3x, L:-3 → 4x<sup>2-x-3</sup>"},
+  {q:"FOIL:",eq:"(2x - 5)(x + 3)",a:"2x<sup>2</sup> + x - 15",fmt:"simplified trinomial",h:"F:2x<sup>2</sup>, O:6x, I:-5x, L:-15 → 2x<sup>2+x-15</sup>"},
+  {q:"FOIL:",eq:"(x + 1)(x - 1)",a:"x<sup>2</sup> - 1",fmt:"simplified polynomial",h:"Difference of squares: x<sup>2-1</sup>"},
+  {q:"FOIL:",eq:"(5x - 2)(x + 4)",a:"5x<sup>2</sup> + 18x - 8",fmt:"simplified trinomial",h:"F:5x<sup>2</sup>, O:20x, I:-2x, L:-8 → 5x<sup>2+18x-8</sup>"},
+  {q:"FOIL:",eq:"(x - 3)(x + 3)",a:"x<sup>2</sup> - 9",fmt:"simplified polynomial",h:"Difference of squares: x<sup>2-9</sup>"},
 ]};
 
 const T=[
-  {t:"13.1",q:"What is the degree?",eq:"6x^4 - x^2 + 3",a:"4",fmt:"numerical degree",h:"Highest exponent is 4."},
-  {t:"13.1",q:"What is the leading coefficient?",eq:"-5x^3 + 2x",a:"-5",fmt:"numerical answer",h:"Coefficient of x^3 is -5."},
-  {t:"13.1",q:"Write in standard form:",eq:"2x + 5 - 4x^3",a:"-4x^3 + 2x + 5",fmt:"simplified polynomial",h:"Descending: degree 3, 1, 0."},
-  {t:"13.1",q:"Classify as monomial, binomial, or trinomial:",eq:"3x^2 - 7",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
+  {t:"13.1",q:"What is the degree?",eq:"6x<sup>4</sup> - x<sup>2</sup> + 3",a:"4",fmt:"numerical degree",h:"Highest exponent is 4."},
+  {t:"13.1",q:"What is the leading coefficient?",eq:"-5x<sup>3</sup> + 2x",a:"-5",fmt:"numerical answer",h:"Coefficient of x<sup>3</sup> is -5."},
+  {t:"13.1",q:"Write in standard form:",eq:"2x + 5 - 4x<sup>3</sup>",a:"-4x<sup>3</sup> + 2x + 5",fmt:"simplified polynomial",h:"Descending: degree 3, 1, 0."},
+  {t:"13.1",q:"Classify as monomial, binomial, or trinomial:",eq:"3x<sup>2</sup> - 7",a:"binomial",fmt:"monomial, binomial, or trinomial",h:"2 terms."},
   {t:"13.1",q:"What is the degree?",eq:"8",a:"0",fmt:"numerical degree",h:"Constant has degree 0."},
-  {t:"13.2",q:"Add:",eq:"(2x^2 + 3x) + (x^2 - x + 4)",a:"3x^2 + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x^2+(3-1)x+4"},
-  {t:"13.2",q:"Subtract:",eq:"(5x^2 + 2x - 3) - (2x^2 - x + 1)",a:"3x^2 + 3x - 4",fmt:"simplified polynomial",h:"5x^2+2x-3-2x^2+x-1=3x^2+3x-4"},
-  {t:"13.2",q:"Add:",eq:"(x^3 - 4) + (2x^3 + 4x)",a:"3x^3 + 4x - 4",fmt:"simplified polynomial",h:"(1+2)x^3+4x-4"},
+  {t:"13.2",q:"Add:",eq:"(2x<sup>2</sup> + 3x) + (x<sup>2</sup> - x + 4)",a:"3x<sup>2</sup> + 2x + 4",fmt:"simplified polynomial",h:"(2+1)x<sup>2+(3-1)x+4</sup>"},
+  {t:"13.2",q:"Subtract:",eq:"(5x<sup>2</sup> + 2x - 3) - (2x<sup>2</sup> - x + 1)",a:"3x<sup>2</sup> + 3x - 4",fmt:"simplified polynomial",h:"5x<sup>2+2x-3-2x</sup><sup>2+x-1</sup>=3x<sup>2+3x-4</sup>"},
+  {t:"13.2",q:"Add:",eq:"(x<sup>3</sup> - 4) + (2x<sup>3</sup> + 4x)",a:"3x<sup>3</sup> + 4x - 4",fmt:"simplified polynomial",h:"(1+2)x<sup>3+4x-4</sup>"},
   {t:"13.2",q:"Subtract:",eq:"(7x - 5) - (3x + 2)",a:"4x - 7",fmt:"simplified polynomial",h:"7x-5-3x-2=4x-7"},
-  {t:"13.2",q:"Add:",eq:"(x^2 - x + 1) + (-x^2 + x - 1)",a:"0",fmt:"simplified polynomial (or 0)",h:"All terms cancel."},
-  {t:"13.3",q:"Multiply:",eq:"4x(x^2 - 3x + 1)",a:"4x^3 - 12x^2 + 4x",fmt:"simplified expression",h:"4x·x^2=4x^3, 4x·(-3x)=-12x^2, 4x·1=4x"},
-  {t:"13.3",q:"Multiply:",eq:"-2x(5x + 3)",a:"-10x^2 - 6x",fmt:"simplified expression",h:"-2x·5x=-10x^2, -2x·3=-6x"},
-  {t:"13.3",q:"Multiply:",eq:"x^2(3x - 4)",a:"3x^3 - 4x^2",fmt:"simplified expression",h:"x^2·3x=3x^3, x^2·(-4)=-4x^2"},
-  {t:"13.3",q:"Multiply:",eq:"3x^2(2x^2 + x - 5)",a:"6x^4 + 3x^3 - 15x^2",fmt:"simplified expression",h:"Distribute 3x^2 to each term."},
-  {t:"13.3",q:"Multiply:",eq:"-x(x^2 - 6)",a:"-x^3 + 6x",fmt:"simplified expression",h:"-x·x^2=-x^3, -x·(-6)=6x"},
-  {t:"13.4",q:"FOIL:",eq:"(x + 5)(x + 3)",a:"x^2 + 8x + 15",fmt:"simplified trinomial",h:"F:x^2, O:3x, I:5x, L:15 → x^2+8x+15"},
-  {t:"13.4",q:"FOIL:",eq:"(x - 2)(x + 8)",a:"x^2 + 6x - 16",fmt:"simplified trinomial",h:"F:x^2, O:8x, I:-2x, L:-16 → x^2+6x-16"},
-  {t:"13.4",q:"FOIL:",eq:"(2x + 3)(x - 4)",a:"2x^2 - 5x - 12",fmt:"simplified trinomial",h:"F:2x^2, O:-8x, I:3x, L:-12 → 2x^2-5x-12"},
-  {t:"13.4",q:"FOIL:",eq:"(x + 7)(x - 7)",a:"x^2 - 49",fmt:"simplified polynomial",h:"Difference of squares: x^2-49"},
-  {t:"13.4",q:"FOIL:",eq:"(3x - 1)(3x + 1)",a:"9x^2 - 1",fmt:"simplified polynomial",h:"Difference of squares: 9x^2-1"},
+  {t:"13.2",q:"Add:",eq:"(x<sup>2</sup> - x + 1) + (-x<sup>2</sup> + x - 1)",a:"0",fmt:"simplified polynomial (or 0)",h:"All terms cancel."},
+  {t:"13.3",q:"Multiply:",eq:"4x(x<sup>2</sup> - 3x + 1)",a:"4x<sup>3</sup> - 12x<sup>2</sup> + 4x",fmt:"simplified expression",h:"4x·x<sup>2</sup>=4x<sup>3</sup>, 4x·(-3x)=-12x<sup>2</sup>, 4x·1=4x"},
+  {t:"13.3",q:"Multiply:",eq:"-2x(5x + 3)",a:"-10x<sup>2</sup> - 6x",fmt:"simplified expression",h:"-2x·5x=-10x<sup>2</sup>, -2x·3=-6x"},
+  {t:"13.3",q:"Multiply:",eq:"x<sup>2(3x</sup> - 4)",a:"3x<sup>3</sup> - 4x<sup>2</sup>",fmt:"simplified expression",h:"x<sup>2</sup>·3x=3x<sup>3</sup>, x<sup>2</sup>·(-4)=-4x<sup>2</sup>"},
+  {t:"13.3",q:"Multiply:",eq:"3x<sup>2(2x</sup><sup>2</sup> + x - 5)",a:"6x<sup>4</sup> + 3x<sup>3</sup> - 15x<sup>2</sup>",fmt:"simplified expression",h:"Distribute 3x<sup>2</sup> to each term."},
+  {t:"13.3",q:"Multiply:",eq:"-x(x<sup>2</sup> - 6)",a:"-x<sup>3</sup> + 6x",fmt:"simplified expression",h:"-x·x<sup>2</sup>=-x<sup>3</sup>, -x·(-6)=6x"},
+  {t:"13.4",q:"FOIL:",eq:"(x + 5)(x + 3)",a:"x<sup>2</sup> + 8x + 15",fmt:"simplified trinomial",h:"F:x<sup>2</sup>, O:3x, I:5x, L:15 → x<sup>2+8x+15</sup>"},
+  {t:"13.4",q:"FOIL:",eq:"(x - 2)(x + 8)",a:"x<sup>2</sup> + 6x - 16",fmt:"simplified trinomial",h:"F:x<sup>2</sup>, O:8x, I:-2x, L:-16 → x<sup>2+6x-16</sup>"},
+  {t:"13.4",q:"FOIL:",eq:"(2x + 3)(x - 4)",a:"2x<sup>2</sup> - 5x - 12",fmt:"simplified trinomial",h:"F:2x<sup>2</sup>, O:-8x, I:3x, L:-12 → 2x<sup>2-5x-12</sup>"},
+  {t:"13.4",q:"FOIL:",eq:"(x + 7)(x - 7)",a:"x<sup>2</sup> - 49",fmt:"simplified polynomial",h:"Difference of squares: x<sup>2-49</sup>"},
+  {t:"13.4",q:"FOIL:",eq:"(3x - 1)(3x + 1)",a:"9x<sup>2</sup> - 1",fmt:"simplified polynomial",h:"Difference of squares: 9x<sup>2-1</sup>"},
 ];
 
 const VQB=[
   {topic:'13.1',type:'mc',q:'A polynomial with exactly 2 terms is called a...',opts:['Monomial','Binomial','Trinomial','Degree-2'],a:1},
-  {topic:'13.1',type:'mc',q:'What is the degree of 4x^5 - 2x + 1?',opts:['1','2','4','5'],a:3},
-  {topic:'13.1',type:'mc',q:'What is the leading coefficient of -3x^4 + x^2 - 7?',opts:['4','-3','1','-7'],a:1},
-  {topic:'13.1',type:'tf',q:'True or False: 3x^(−2) is a polynomial.',opts:['True','False'],a:1},
-  {topic:'13.2',type:'mc',q:'Which are like terms?',opts:['3x^2 and 3x','5x^2 and 7x^2','4x and 4y','x^3 and x^2'],a:1},
+  {topic:'13.1',type:'mc',q:'What is the degree of 4x<sup>5</sup> - 2x + 1?',opts:['1','2','4','5'],a:3},
+  {topic:'13.1',type:'mc',q:'What is the leading coefficient of -3x<sup>4</sup> + x<sup>2</sup> - 7?',opts:['4','-3','1','-7'],a:1},
+  {topic:'13.1',type:'tf',q:'True or False: 3x<sup>(</sup>−2) is a polynomial.',opts:['True','False'],a:1},
+  {topic:'13.2',type:'mc',q:'Which are like terms?',opts:['3x<sup>2</sup> and 3x','5x<sup>2</sup> and 7x<sup>2</sup>','4x and 4y','x<sup>3</sup> and x<sup>2</sup>'],a:1},
   {topic:'13.2',type:'mc',q:'When subtracting polynomials, what must you do first?',opts:['Multiply by -1','Distribute the negative to every term in the second polynomial','Add the polynomials','Find like terms'],a:1},
   {topic:'13.2',type:'tf',q:'True or False: (3x + 2) - (x - 5) = 2x - 3',opts:['True','False'],a:1},
   {topic:'13.3',type:'mc',q:'When multiplying variables with the same base, you...',opts:['Add exponents','Multiply exponents','Subtract exponents','Divide exponents'],a:0},
-  {topic:'13.3',type:'mc',q:'What is 3x^2 × 4x^3?',opts:['7x^5','12x^5','12x^6','7x^6'],a:1},
-  {topic:'13.3',type:'tf',q:'True or False: 2x(x + 3) = 2x^2 + 6x',opts:['True','False'],a:0},
+  {topic:'13.3',type:'mc',q:'What is 3x<sup>2</sup> × 4x<sup>3</sup>?',opts:['7x<sup>5</sup>','12x<sup>5</sup>','12x<sup>6</sup>','7x<sup>6</sup>'],a:1},
+  {topic:'13.3',type:'tf',q:'True or False: 2x(x + 3) = 2x<sup>2</sup> + 6x',opts:['True','False'],a:0},
   {topic:'13.4',type:'mc',q:'FOIL stands for...',opts:['Factor, Outer, Inner, Last','First, Over, In, Last','First, Outer, Inner, Last','Front, Order, Inner, Last'],a:2},
-  {topic:'13.4',type:'mc',q:'(x+a)(x-a) equals...',opts:['x^2 + 2ax + a^2','x^2 - a^2','x^2 - 2ax + a^2','x^2 + a^2'],a:1},
-  {topic:'13.4',type:'tf',q:'True or False: (x+3)(x+4) = x^2 + 7x + 12',opts:['True','False'],a:0},
-  {topic:'13.4',type:'mc',q:'What is (x - 5)^2?',opts:['x^2 - 25','x^2 + 25','x^2 - 10x + 25','x^2 + 10x + 25'],a:2},
+  {topic:'13.4',type:'mc',q:'(x+a)(x-a) equals...',opts:['x<sup>2</sup> + 2ax + a<sup>2</sup>','x<sup>2</sup> - a<sup>2</sup>','x<sup>2</sup> - 2ax + a<sup>2</sup>','x<sup>2</sup> + a<sup>2</sup>'],a:1},
+  {topic:'13.4',type:'tf',q:'True or False: (x+3)(x+4) = x<sup>2</sup> + 7x + 12',opts:['True','False'],a:0},
+  {topic:'13.4',type:'mc',q:'What is (x - 5)<sup>2</sup>?',opts:['x<sup>2</sup> - 25','x<sup>2</sup> + 25','x<sup>2</sup> - 10x + 25','x<sup>2</sup> + 10x + 25'],a:2},
   {topic:'13.1',type:'mc',q:'A monomial is...',opts:['A polynomial with 0 terms','A polynomial with 1 term','A polynomial with 2 terms','A polynomial with 3 terms'],a:1},
-  {topic:'13.3',type:'mc',q:'Which correctly distributes -3x(2x - 4)?',opts:['-6x^2 - 12x','-6x^2 + 12x','6x^2 - 12x','6x^2 + 12x'],a:1},
+  {topic:'13.3',type:'mc',q:'Which correctly distributes -3x(2x - 4)?',opts:['-6x<sup>2</sup> - 12x','-6x<sup>2</sup> + 12x','6x<sup>2</sup> - 12x','6x<sup>2</sup> + 12x'],a:1},
 ];
 
 const DESCS={'13.1':'Identifying degree, leading coefficient, and writing in standard form.','13.2':'Adding and subtracting polynomials by combining like terms.','13.3':'Distributing a monomial across a polynomial.','13.4':'Multiplying two binomials using FOIL.'};
@@ -630,7 +631,30 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
+function formatEq(str){if(!str)return str;let s=str;function mkF(n,d){return'<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>';}
+// (num)/(den) - both parenthesized
+s=s.replace(/\(([^()]+)\)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (num)/scalar - paren over digit(s)
+s=s.replace(/\(([^()]+)\)\/(\d+)/g,function(_,n,d){return mkF(n,d);});
+// scalar/(den) - number or variable over paren group
+s=s.replace(/(-?[a-zA-Z0-9\^\.]+)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (m/n) simple fraction in parens
+s=s.replace(/\((-?\d+)\/(-?\d+)\)/g,function(_,n,d){return mkF(n,d);});
+// expr / expr - spaced division e.g. x^9 / x^3
+s=s.replace(/([a-zA-Z0-9\^\-\.]+)\s+\/\s+([a-zA-Z0-9\^\-\.]+)/g,function(m,n,d){if(/^[a-zA-Z]{2,}$/.test(d))return m;return mkF(n.trim(),d.trim());});
+// n/x^exp - number over variable-with-exponent
+s=s.replace(/(-?\d+)\/([a-zA-Z0-9]\^(?:\([^)]+\)|-?\d+))/g,function(_,n,d){return mkF(n,d);});
+// n/letter (single letter denom) - e.g. 12/x
+s=s.replace(/(-?\d+)\/([a-zA-Z])(?![a-zA-Z])/g,function(_,n,d){return mkF(n,d);});
+// letter/n - variable over number
+s=s.replace(/([a-zA-Z])\/(-?\d+)/g,function(_,v,d){return mkF(v,d);});
+// standalone m/n surrounded by non-alphanumerics
+s=s.replace(/(^|[^a-zA-Z0-9])(-?\d+)\/(\d+)(?![a-zA-Z0-9])/g,function(_,pre,n,d){return pre+mkF(n,d);});
+// Exponents: ^(expr), ^n, ^-n, ^letter
+s=s.replace(/\^\(([^)]+)\)/g,'<sup>$1</sup>');
+s=s.replace(/\^(-?\d+)/g,'<sup>$1</sup>');
+s=s.replace(/\^([a-zA-Z])/g,'<sup>$1</sup>');
+return s;}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';

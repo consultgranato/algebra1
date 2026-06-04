@@ -150,7 +150,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
+.pmath{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius-md);padding:.65rem 1rem;margin:.3rem 0 .4rem;font-size:15px;line-height:2.2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
@@ -200,9 +200,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-selector{border:1.5px solid #c0c0cc !important}
 .vq-card{border:1.5px solid #c0c0cc !important}
 .nn-logo img{width:100%;height:100%;object-fit:cover;object-position:48% 65%;transform:scale(1.15);margin-left:0}
-.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1}
-.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
-.frac .fd{padding:0 3px;font-size:.85em;text-align:center}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 2px;font-size:.9em;line-height:1.1}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 4px 1px;text-align:center;font-size:1em}
+.frac .fd{padding:1px 4px 0;text-align:center;font-size:1em}
+.math-expr{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:2.2;color:var(--text)}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
@@ -378,7 +379,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <span class="eq">3/4 means: 3 out of 4 equal parts</span>
           </div></div>
           <div class="worked"><div class="wlbl">Example 2 &mdash; Equivalent fractions</div><div class="wsteps">
-            <span class="eq">1/2 = 2/4 = 3/6 = 4/8 (all the same value)</span>
+            <span class="eq"><span class="frac"><span class="fn">1</span><span class="fd">2</span></span> = <span class="frac"><span class="fn">2</span><span class="fd">4</span></span> = <span class="frac"><span class="fn">3</span><span class="fd">6</span></span> = <span class="frac"><span class="fn">4</span><span class="fd">8</span></span> (all the same value)</span>
           </div></div>
           <div class="worked"><div class="wlbl">Example 3 &mdash; Negative fraction</div><div class="wsteps">
             <span class="eq">&minus;3/4 = 3/(&minus;4) = &minus;(3/4) <span class="eq-note">&larr; all equivalent; use &minus;3/4</span></span>
@@ -529,7 +530,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             Multiply coefficients separately: (2x&sup3;)(4x&sup2;) = 8x&sup5;
           </div></div>
           <div class="worked"><div class="wlbl">Example 1</div><div class="wsteps">
-            <span class="eq">x&sup2; &middot; x&sup3; = x^(2+3) = x&sup5;</span>
+            <span class="eq">x&sup2; &middot; x&sup3; = x<sup>(2+3)</sup> = x&sup5;</span>
           </div></div>
           <div class="worked"><div class="wlbl">Example 2</div><div class="wsteps">
             <span class="eq">(3x&sup2;)(5x&sup3;) = 15x&sup5; <span class="eq-note">&larr; multiply coefficients, add exponents</span></span>
@@ -651,16 +652,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="vcard"><div><div class="vtag">1.4</div><div class="vterm">Evaluate</div><div class="vdef">Find the numerical value of an expression by performing the operations.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Evaluate 3 + 4 &times; 2 = <span class="chip chip-g">11</span></div></div></div>
         <div class="vcard wide"><div><div class="vtag">1.4</div><div class="vterm">PEMDAS — Order of Operations</div><div class="vdef">Parentheses, Exponents, Multiply/Divide (left to right), Add/Subtract (left to right). Memory: "Please Excuse My Dear Aunt Sally."</div></div></div>
         <div class="vsec">Unit 2.1 — Fractions</div>
-        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Fraction</div><div class="vdef">Represents part of a whole. Written as numerator over denominator.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3/4 = 3 parts out of 4 equal parts</div></div></div>
-        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Numerator</div><div class="vdef">The TOP number of a fraction. Tells how many parts you have.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3/4 &rarr; <span class="chip chip-p">3</span> is the numerator</div></div></div>
-        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Denominator</div><div class="vdef">The BOTTOM number of a fraction. Tells how many equal parts the whole is split into.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3/4 &rarr; <span class="chip chip-a">4</span> is the denominator</div></div></div>
-        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Equivalent fractions</div><div class="vdef">Fractions that have the same value but different numerators and denominators.</div></div><div><div class="vex-lbl">Example</div><div class="vex">1/2 = 2/4 = 3/6 = 4/8</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Fraction</div><div class="vdef">Represents part of a whole. Written as numerator over denominator.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="frac"><span class="fn">3</span><span class="fd">4</span></span> = 3 parts out of 4 equal parts</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Numerator</div><div class="vdef">The TOP number of a fraction. Tells how many parts you have.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In <span class="frac"><span class="fn">3</span><span class="fd">4</span></span> &rarr; <span class="chip chip-p">3</span> is the numerator</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Denominator</div><div class="vdef">The BOTTOM number of a fraction. Tells how many equal parts the whole is split into.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In <span class="frac"><span class="fn">3</span><span class="fd">4</span></span> &rarr; <span class="chip chip-a">4</span> is the denominator</div></div></div>
+        <div class="vcard"><div><div class="vtag">2.1</div><div class="vterm">Equivalent fractions</div><div class="vdef">Fractions that have the same value but different numerators and denominators.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="frac"><span class="fn">1</span><span class="fd">2</span></span> = <span class="frac"><span class="fn">2</span><span class="fd">4</span></span> = <span class="frac"><span class="fn">3</span><span class="fd">6</span></span> = <span class="frac"><span class="fn">4</span><span class="fd">8</span></span></div></div></div>
         <div class="vsec">Unit 2.3 — Simplifying</div>
-        <div class="vcard"><div><div class="vtag">2.3</div><div class="vterm">Simplify (a fraction)</div><div class="vdef">Divide numerator and denominator by their GCF to get an equivalent fraction in lowest terms.</div></div><div><div class="vex-lbl">Example</div><div class="vex">8/12 &rarr; GCF = 4 &rarr; <span class="chip chip-g">2/3</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">2.3</div><div class="vterm">Simplify (a fraction)</div><div class="vdef">Divide numerator and denominator by their GCF to get an equivalent fraction in lowest terms.</div></div><div><div class="vex-lbl">Example</div><div class="vex"><span class="frac"><span class="fn">8</span><span class="fd">12</span></span> &rarr; GCF = 4 &rarr; <span class="chip chip-g"><span class="frac"><span class="fn">2</span><span class="fd">3</span></span></span></div></div></div>
         <div class="vsec">Unit 2.4 — Adding &amp; Subtracting Fractions</div>
         <div class="vcard"><div><div class="vtag">2.4</div><div class="vterm">Least Common Denominator (LCD)</div><div class="vdef">The smallest number that is a multiple of both denominators. Used to add or subtract fractions with different denominators.</div></div><div><div class="vex-lbl">Example</div><div class="vex">LCD of 4 and 6 = 12</div></div></div>
         <div class="vsec">Unit 2.5 — Multiplying &amp; Dividing Fractions</div>
-        <div class="vcard"><div><div class="vtag">2.5</div><div class="vterm">Reciprocal</div><div class="vdef">The flipped version of a fraction. Multiply a fraction by its reciprocal to get 1.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Reciprocal of 3/4 = <span class="chip chip-p">4/3</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">2.5</div><div class="vterm">Reciprocal</div><div class="vdef">The flipped version of a fraction. Multiply a fraction by its reciprocal to get 1.</div></div><div><div class="vex-lbl">Example</div><div class="vex">Reciprocal of <span class="frac"><span class="fn">3</span><span class="fd">4</span></span> = <span class="chip chip-p"><span class="frac"><span class="fn">4</span><span class="fd">3</span></span></span></div></div></div>
         <div class="vcard wide"><div><div class="vtag">2.5</div><div class="vterm">Keep-Change-Flip (KCF)</div><div class="vdef">The rule for dividing fractions: Keep the first fraction, Change ÷ to ×, Flip the second fraction. Then multiply.</div></div></div>
         <div class="vsec">Unit 3.1 — Variables</div>
         <div class="vcard"><div><div class="vtag">3.1</div><div class="vterm">Variable</div><div class="vdef">A symbol (usually x or y) that represents an unknown number.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x, y, n, t are all variables<br>x + 5 means "some number plus 5"</div></div></div>
@@ -670,7 +671,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="vcard"><div><div class="vtag">3.2</div><div class="vterm">Combining like terms</div><div class="vdef">Adding or subtracting the coefficients of like terms. The variable part stays the same.</div></div><div><div class="vex-lbl">Example</div><div class="vex">3x + 5x = <span class="chip chip-g">8x</span><br>7y &minus; 2y = <span class="chip chip-g">5y</span></div></div></div>
         <div class="vsec">Unit 3.3 — Exponents</div>
         <div class="vcard"><div><div class="vtag">3.3</div><div class="vterm">Exponent</div><div class="vdef">A number written above and to the right of the base, telling how many times to multiply the base by itself.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup3; = x &middot; x &middot; x (3 times)</div></div></div>
-        <div class="vcard"><div><div class="vtag">3.3</div><div class="vterm">Multiplying same-base variables</div><div class="vdef">When multiplying powers with the same base, add the exponents. x^a · x^b = x^(a+b).</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup2; &middot; x&sup3; = <span class="chip chip-g">x&sup5;</span></div></div></div>
+        <div class="vcard"><div><div class="vtag">3.3</div><div class="vterm">Multiplying same-base variables</div><div class="vdef">When multiplying powers with the same base, add the exponents. x<sup>a</sup> · x<sup>b</sup> = x<sup>(a+b)</sup>.</div></div><div><div class="vex-lbl">Example</div><div class="vex">x&sup2; &middot; x&sup3; = <span class="chip chip-g">x&sup5;</span></div></div></div>
         <div class="vsec">Unit 4.1 — Language of Algebra</div>
         <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Term</div><div class="vdef">A single number, variable, or product of numbers and variables separated by + or −.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3x + 5: terms are <span class="chip chip-p">3x</span> and <span class="chip chip-p">5</span></div></div></div>
         <div class="vcard"><div><div class="vtag">4.1</div><div class="vterm">Coefficient</div><div class="vdef">The number multiplied by the variable in a term.</div></div><div><div class="vex-lbl">Example</div><div class="vex">In 3x: coefficient = <span class="chip chip-p">3</span><br>In &minus;7y: coefficient = &minus;7</div></div></div>
@@ -852,14 +853,14 @@ const BANKS={
   {q:"Simplify:",eq:"7y - 3y",a:"4y",fmt:"simplified expression",h:"Like terms: 7-3=4."},
   {q:"Simplify:",eq:"2x + 4x - x",a:"5x",fmt:"simplified expression",h:"2+4-1=5."},
   {q:"Can this be simplified? Why or why not:",eq:"3x + 5",a:"no",fmt:"yes or no",h:"3x and 5 are unlike terms (variable vs. constant)."},
-  {q:"Multiply:",eq:"x² · x³",a:"x^5",fmt:"x^n form",h:"Same base: add exponents 2+3=5."},
-  {q:"Multiply:",eq:"(3x²)(5x³)",a:"15x^5",fmt:"simplified expression",h:"Multiply coefficients: 3×5=15. Add exponents: 2+3=5."},
-  {q:"Multiply:",eq:"(2x³)(4x²)",a:"8x^5",fmt:"simplified expression",h:"2×4=8, 3+2=5."},
+  {q:"Multiply:",eq:"x² · x³",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"Same base: add exponents 2+3=5."},
+  {q:"Multiply:",eq:"(3x²)(5x³)",a:"15x<sup>5</sup>",fmt:"simplified expression",h:"Multiply coefficients: 3×5=15. Add exponents: 2+3=5."},
+  {q:"Multiply:",eq:"(2x³)(4x²)",a:"8x<sup>5</sup>",fmt:"simplified expression",h:"2×4=8, 3+2=5."},
   {q:"Simplify:",eq:"4a + 2b - a",a:"3a+2b",fmt:"simplified expression",h:"Combine a terms: 4a-a=3a. 2b stays."},
-  {q:"Multiply:",eq:"(x⁴)(x)",a:"x^5",fmt:"x^n form",h:"x has exponent 1. Add: 4+1=5."},
+  {q:"Multiply:",eq:"(x⁴)(x)",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"x has exponent 1. Add: 4+1=5."},
   {q:"Simplify:",eq:"6x - 2x + x",a:"5x",fmt:"simplified expression",h:"6-2+1=5."},
   {q:"Can this be simplified?",eq:"5x² + 3x",a:"no",fmt:"yes or no",h:"x² and x terms are unlike (different exponents)."},
-  {q:"Multiply:",eq:"(-2x²)(3x⁴)",a:"-6x^6",fmt:"simplified expression",h:"-2×3=-6, 2+4=6."},
+  {q:"Multiply:",eq:"(-2x²)(3x⁴)",a:"-6x<sup>6</sup>",fmt:"simplified expression",h:"-2×3=-6, 2+4=6."},
   {q:"Simplify:",eq:"8m - 3m + 2m",a:"7m",fmt:"simplified expression",h:"8-3+2=7."},
   {q:"Multiply:",eq:"(5x)(2x)",a:"10x²",fmt:"simplified expression",h:"5×2=10, 1+1=2."},
   {q:"Simplify:",eq:"x + x + x",a:"3x",fmt:"simplified expression",h:"Each x has coefficient 1. 1+1+1=3."},
@@ -894,10 +895,10 @@ const T=[
   {t:"unit2",q:"Multiply:",eq:"2/3 × 9/4",a:"3/2",fmt:"fraction (improper ok)",h:"2×9=18, 3×4=12. 18/12=3/2."},
   {t:"unit2",q:"Divide:",eq:"1/2 ÷ 3/4",a:"2/3",fmt:"fraction in simplest form",h:"KCF: 1/2 × 4/3 = 4/6 = 2/3."},
   {t:"unit3",q:"Simplify:",eq:"4x + 9x",a:"13x",fmt:"simplified expression",h:"Like terms: 4+9=13."},
-  {t:"unit3",q:"Multiply:",eq:"(2x²)(6x³)",a:"12x^5",fmt:"simplified expression",h:"2×6=12, 2+3=5."},
+  {t:"unit3",q:"Multiply:",eq:"(2x²)(6x³)",a:"12x<sup>5</sup>",fmt:"simplified expression",h:"2×6=12, 2+3=5."},
   {t:"unit3",q:"Simplify:",eq:"10y - 3y + y",a:"8y",fmt:"simplified expression",h:"10-3+1=8."},
   {t:"unit3",q:"Can 4x + 2 be simplified further?",eq:"",a:"no",fmt:"yes or no",h:"4x and 2 are unlike terms."},
-  {t:"unit3",q:"Multiply:",eq:"(x³)(x⁴)",a:"x^7",fmt:"x^n form",h:"Add exponents: 3+4=7."},
+  {t:"unit3",q:"Multiply:",eq:"(x³)(x⁴)",a:"x<sup>7</sup>",fmt:"x<sup>n</sup> form",h:"Add exponents: 3+4=7."},
   {t:"unit4",q:"Simplify:",eq:"3(x + 2) - x",a:"2x+6",fmt:"simplified expression",h:"Distribute: 3x+6-x. Combine: 2x+6."},
   {t:"unit4",q:"Evaluate 2x - 3 when x = 5",eq:"",a:"7",fmt:"numerical answer",h:"2(5)-3 = 10-3 = 7."},
   {t:"unit4",q:"Simplify:",eq:"-(2x - 4) + x",a:"-x+4",fmt:"simplified expression",h:"Distribute -1: -2x+4+x. Combine: -x+4."},
@@ -1079,7 +1080,30 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
+function formatEq(str){if(!str)return str;let s=str;function mkF(n,d){return'<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>';}
+// (num)/(den) - both parenthesized
+s=s.replace(/\(([^()]+)\)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (num)/scalar - paren over digit(s)
+s=s.replace(/\(([^()]+)\)\/(\d+)/g,function(_,n,d){return mkF(n,d);});
+// scalar/(den) - number or variable over paren group
+s=s.replace(/(-?[a-zA-Z0-9\^\.]+)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (m/n) simple fraction in parens
+s=s.replace(/\((-?\d+)\/(-?\d+)\)/g,function(_,n,d){return mkF(n,d);});
+// expr / expr - spaced division e.g. x^9 / x^3
+s=s.replace(/([a-zA-Z0-9\^\-\.]+)\s+\/\s+([a-zA-Z0-9\^\-\.]+)/g,function(m,n,d){if(/^[a-zA-Z]{2,}$/.test(d))return m;return mkF(n.trim(),d.trim());});
+// n/x^exp - number over variable-with-exponent
+s=s.replace(/(-?\d+)\/([a-zA-Z0-9]\^(?:\([^)]+\)|-?\d+))/g,function(_,n,d){return mkF(n,d);});
+// n/letter (single letter denom) - e.g. 12/x
+s=s.replace(/(-?\d+)\/([a-zA-Z])(?![a-zA-Z])/g,function(_,n,d){return mkF(n,d);});
+// letter/n - variable over number
+s=s.replace(/([a-zA-Z])\/(-?\d+)/g,function(_,v,d){return mkF(v,d);});
+// standalone m/n surrounded by non-alphanumerics
+s=s.replace(/(^|[^a-zA-Z0-9])(-?\d+)\/(\d+)(?![a-zA-Z0-9])/g,function(_,pre,n,d){return pre+mkF(n,d);});
+// Exponents: ^(expr), ^n, ^-n, ^letter
+s=s.replace(/\^\(([^)]+)\)/g,'<sup>$1</sup>');
+s=s.replace(/\^(-?\d+)/g,'<sup>$1</sup>');
+s=s.replace(/\^([a-zA-Z])/g,'<sup>$1</sup>');
+return s;}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';

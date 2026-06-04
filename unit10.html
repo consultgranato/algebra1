@@ -140,7 +140,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
+.pmath{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius-md);padding:.65rem 1rem;margin:.3rem 0 .4rem;font-size:15px;line-height:2.2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
@@ -189,9 +189,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .topic-selector{border:1.5px solid #c0c0cc !important}
 .vq-card{border:1.5px solid #c0c0cc !important}
 .nn-logo img{width:100%;height:100%;object-fit:cover;object-position:48% 65%;transform:scale(1.15);margin-left:0}
-.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.1}
-.frac .fn{border-bottom:1.5px solid currentColor;padding:0 3px;font-size:.85em;text-align:center}
-.frac .fd{padding:0 3px;font-size:.85em;text-align:center}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 2px;font-size:.9em;line-height:1.1}
+.frac .fn{border-bottom:1.5px solid currentColor;padding:0 4px 1px;text-align:center;font-size:1em}
+.frac .fd{padding:1px 4px 0;text-align:center;font-size:1em}
+.math-expr{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:2.2;color:var(--text)}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
@@ -629,7 +630,30 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
+function formatEq(str){if(!str)return str;let s=str;function mkF(n,d){return'<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>';}
+// (num)/(den) - both parenthesized
+s=s.replace(/\(([^()]+)\)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (num)/scalar - paren over digit(s)
+s=s.replace(/\(([^()]+)\)\/(\d+)/g,function(_,n,d){return mkF(n,d);});
+// scalar/(den) - number or variable over paren group
+s=s.replace(/(-?[a-zA-Z0-9\^\.]+)\/\(([^()]+)\)/g,function(_,n,d){return mkF(n,d);});
+// (m/n) simple fraction in parens
+s=s.replace(/\((-?\d+)\/(-?\d+)\)/g,function(_,n,d){return mkF(n,d);});
+// expr / expr - spaced division e.g. x^9 / x^3
+s=s.replace(/([a-zA-Z0-9\^\-\.]+)\s+\/\s+([a-zA-Z0-9\^\-\.]+)/g,function(m,n,d){if(/^[a-zA-Z]{2,}$/.test(d))return m;return mkF(n.trim(),d.trim());});
+// n/x^exp - number over variable-with-exponent
+s=s.replace(/(-?\d+)\/([a-zA-Z0-9]\^(?:\([^)]+\)|-?\d+))/g,function(_,n,d){return mkF(n,d);});
+// n/letter (single letter denom) - e.g. 12/x
+s=s.replace(/(-?\d+)\/([a-zA-Z])(?![a-zA-Z])/g,function(_,n,d){return mkF(n,d);});
+// letter/n - variable over number
+s=s.replace(/([a-zA-Z])\/(-?\d+)/g,function(_,v,d){return mkF(v,d);});
+// standalone m/n surrounded by non-alphanumerics
+s=s.replace(/(^|[^a-zA-Z0-9])(-?\d+)\/(\d+)(?![a-zA-Z0-9])/g,function(_,pre,n,d){return pre+mkF(n,d);});
+// Exponents: ^(expr), ^n, ^-n, ^letter
+s=s.replace(/\^\(([^)]+)\)/g,'<sup>$1</sup>');
+s=s.replace(/\^(-?\d+)/g,'<sup>$1</sup>');
+s=s.replace(/\^([a-zA-Z])/g,'<sup>$1</sup>');
+return s;}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
