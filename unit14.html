@@ -743,11 +743,33 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function renderTopicHTML(html) {
+  if (!html) return html;
+  let s = html;
+  s = s.replace(/\((-?\d+)\/(-?\d+)\)/g, function(m,n,d) {
+    return '<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>';
+  });
+  s = s.replace(/\b([a-zA-Z])\/(\d+)\b/g, function(m,v,d) {
+    return '<span class="frac"><span class="fn">'+v+'</span><span class="fd">'+d+'</span></span>';
+  });
+  s = s.replace(/\brise\s*\/\s*run\b/gi,
+    '<span class="frac"><span class="fn">rise</span><span class="fd">run</span></span>');
+  s = s.replace(/\(([^)]+)\)\s*\/\s*\(([^)]+)\)/g, function(m,n,d) {
+    return '<span class="frac"><span class="fn">('+n+')</span><span class="fd">('+d+')</span></span>';
+  });
+  s = s.replace(/([\s=])(-?\d+)\/(-?\d+)([\s\.,<>])/g, function(m,pre,n,d,post) {
+    return pre+'<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>'+post;
+  });
+  s = s.replace(/([\s=])(-?\d+)\/(\d+)([\s=\.,])/g, function(m,pre,n,d,post) {
+    return pre+'<span class="frac"><span class="fn">'+n+'</span><span class="fd">'+d+'</span></span>'+post;
+  });
+  return s;
+}
 function openTopic(i){
   var t=TOPICS[i];
   document.getElementById('modal-tag').innerHTML=t.tag;
   document.getElementById('modal-title').innerHTML=t.title;
-  document.getElementById('modal-body').innerHTML=t.html;
+  document.getElementById('modal-body').innerHTML=renderTopicHTML(t.html);
   var vb=document.getElementById('modal-vid-btns');
   vb.innerHTML=(t.videos||[]).map(function(v){
     return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">'+v.label+'</a>';
