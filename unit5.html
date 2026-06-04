@@ -46,18 +46,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hidden{display:none}
 
 /* NOTES */
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -219,7 +209,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}.match-pairs{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -235,6 +224,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -260,184 +264,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="tab" onclick="sw('test',this)">&#128203; Practice Test</button>
     </div>
 
-    <div id="v-notes">
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">5.1</span><span class="tlabel">Solving Basic Equations</span>
-          <a href="https://youtu.be/CAsQLnY11pU" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Part 1</a>
-          <a href="https://youtu.be/-xF5heC4HC0" target="_blank" rel="noopener" class="vid-btn" style="margin-left:3px" onclick="event.stopPropagation()">&#9654; Part 2</a>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> An <span class="vw">equation</span> is a statement that two <span class="vw">algebraic expressions</span> are equal &mdash; think of it like a <strong>scale</strong>. Both sides are balanced. Whatever you do to one side you must do to the other. Always. A <span class="vw">variable</span> is just a number we don&apos;t know yet &mdash; don&apos;t let it freak you out!</p>
-          <div class="kc"><div class="kc-lbl">Key concept &mdash; solution</div><div class="kc-body">A <span class="vw">solution</span> to an <span class="vw">equation</span> is a number that, when you plug it in for x, makes the <span class="vw">equation</span> true. That&apos;s the magic number we&apos;re solving for.</div></div>
-          <p class="note-h">5 key principles for organizing your work</p>
-          <ol class="steps">
-            <li>Work <strong>vertically &mdash; top down</strong>. Do not work left to right. Do not erase.</li>
-            <li><strong>Line up your equal signs.</strong> Draw a vertical line through the equal sign to stay organized.</li>
-            <li><strong>Whatever you do to one side, you do to the other.</strong> Always. This keeps the <span class="vw">equation</span> balanced.</li>
-            <li>Keep going until <strong>x is by itself</strong>. Circle it. That&apos;s the goal.</li>
-            <li>Write <strong>&ldquo;Check&rdquo;</strong> and substitute your answer back in. Use &checkmark; if it works, &cross; if it doesn&apos;t.</li>
-          </ol>
-          <p class="note-h">The &ldquo;Undo&rdquo; table &mdash; your most important tool</p>
-          <p class="note-p" style="margin-bottom:.35rem">Ask: what is happening to x? List it top-to-bottom following PEMDAS. Then undo in <strong>reverse order</strong> bottom-to-top.</p>
-          <div class="undo-wrap">
-            <div class="undo-dir"><span>&darr; fill in top to bottom</span><span>undo bottom to top &uarr;</span></div>
-            <table class="undo-tbl">
-              <tr><th class="uh">What&apos;s happening to x</th><th class="uh" style="width:28px"></th><th class="uh">How to undo it</th></tr>
-              <tr><td class="ul">Adding a number &nbsp;(x + 5)</td><td class="ua">&rarr;</td><td class="ul">Subtract from both sides</td></tr>
-              <tr><td class="ul">Subtracting a number &nbsp;(x &minus; 5)</td><td class="ua">&rarr;</td><td class="ul">Add to both sides</td></tr>
-              <tr><td class="ul">Multiplying by a number &nbsp;(3x)</td><td class="ua">&rarr;</td><td class="ul">Divide both sides by that number</td></tr>
-              <tr><td class="ul">Dividing by a number &nbsp;(x &divide; 4)</td><td class="ua">&rarr;</td><td class="ul">Multiply both sides by that number</td></tr>
-            </table>
-          </div>
-          <div class="warn"><div class="warn-lbl">Gotcha &mdash; the invisible <span class="vw">coefficient</span></div><div class="warn-body">When you see <strong>&minus;x</strong>, there is a <strong>&minus;1</strong> right there &mdash; it&apos;s invisible. So &minus;x is really &minus;1&middot;x. Watch your signs!</div></div>
-          <p class="note-h">Worked example 1 &mdash; basic two-step: solve 3x &minus; 7 = 14</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; undo table + check</div>
-          <div class="undo-wrap" style="margin-bottom:.5rem">
-            <div class="undo-dir"><span>&darr; x is &times;3, then &minus;7</span><span>undo: +7 first, then &divide;3 &uarr;</span></div>
-            <table class="undo-tbl">
-              <tr><th class="uh">What&apos;s happening to x</th><th class="uh" style="width:28px"></th><th class="uh">Undo</th></tr>
-              <tr><td class="ul">Multiply by 3</td><td class="ua">&rarr;</td><td class="ul">Divide both sides by 3</td></tr>
-              <tr><td class="ul">Subtract 7</td><td class="ua">&rarr;</td><td class="ul">Add 7 to both sides <span style="font-size:10px;color:#854f0b">(do this FIRST &mdash; reverse!)</span></td></tr>
-            </table>
-          </div>
-          <div class="wsteps">
-            <span class="eq">3x &minus; 7 &nbsp;=&nbsp; 14</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+7 &nbsp;&nbsp;&nbsp;&nbsp;+7 <span class="eq-note">&larr; add 7 first (bottom of undo table)</span></span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 21</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7 &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 3(7) &minus; 7 = 21 &minus; 7 = 14 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example 2 &mdash; fraction result: solve 2x + 5 = 12</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; fraction answer is fine!</div><div class="wsteps">
-            <span class="eq">2x + 5 &nbsp;=&nbsp; 12</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;5 &nbsp;&nbsp;&nbsp;&nbsp;&minus;5</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2x &nbsp;=&nbsp; 7</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;2 &nbsp;&nbsp;&nbsp;&nbsp;&divide;2</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7/2 &nbsp;&checkmark; <span class="eq-note">&larr; a fraction is just a number. Don&apos;t panic!</span></span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 2(7/2) + 5 = 7 + 5 = 12 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example 3 &mdash; the gotcha: solve 6 &minus; x = 13</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; invisible &minus;1! Your radar should be up.</div><div class="wsteps">
-            <span class="eq">6 &minus; x &nbsp;=&nbsp; 13 <span class="eq-note">&larr; &minus;x means &minus;1&middot;x. The coefficient is &minus;1!</span></span>
-            <span class="eq">&nbsp;&nbsp;&minus;6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;6</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;x &nbsp;=&nbsp; 7</span>
-            <span class="eq">&nbsp;&divide;(&minus;1) &nbsp;&nbsp;&divide;(&minus;1)</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; &minus;7 &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 6 &minus; (&minus;7) = 6 + 7 = 13 &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> &ldquo;Hey, you knew x was 7 the whole time. Why didn&apos;t you say something?&rdquo;</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">5.1</div><div class="tg-title">Solving Basic Equations</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">5.2</div><div class="tg-title">Solving Equations with Fractions</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">5.3</div><div class="tg-title">Solving More Complex Equations</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">5.4</div><div class="tg-title">Special Case Equations</div><div class="tg-arrow">&#8594;</div></div>
       </div>
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">5.2</span><span class="tlabel">Solving Equations with Fractions</span>
-          <a href="https://youtu.be/jYLxGQKXtN4" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p">Good news and bad news. Bad news: fractions show up in <span class="vw">equations</span>. Ugghh!!! Good news: we can use the exact same technique from 5.1. Same undo table &mdash; no new tools needed.</p>
-          <p class="note-h">Case 1 &mdash; x divided by a number: solve x/4 + 3 = 8</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; Case 1</div><div class="wsteps">
-            <span class="eq">x/4 + 3 &nbsp;=&nbsp; 8 <span class="eq-note">&larr; x is &divide;4, then +3. Undo: &minus;3 first, then &times;4</span></span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;3 &nbsp;&nbsp;&nbsp;&nbsp;&minus;3</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x/4 &nbsp;=&nbsp; 5</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 20 &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 20/4 + 3 = 5 + 3 = 8 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Case 2 &mdash; x multiplied by a fraction: solve (2/3)x = 10</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; Case 2 &mdash; multiply by the reciprocal</div><div class="wsteps">
-            <span class="eq">(2/3)x &nbsp;=&nbsp; 10 <span class="eq-note">&larr; x is &times;(2/3). Undo: multiply by the reciprocal 3/2</span></span>
-            <span class="eq">(3/2)&middot;(2/3)x &nbsp;=&nbsp; 10&middot;(3/2) <span class="eq-note">&larr; the 2s and 3s cancel</span></span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 15 &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (2/3)(15) = 10 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Case 3 &mdash; compound fraction: solve (3x + 1)/4 = 5</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; Case 3 &mdash; watch the implicit parentheses!</div><div class="wsteps">
-            <span class="eq">(3x + 1)/4 &nbsp;=&nbsp; 5 <span class="eq-note">&larr; think: (3x + 1) &divide; 4 = 5. Undo &divide;4 first</span></span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x + 1 &nbsp;=&nbsp; 20</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;1 &nbsp;&nbsp;&nbsp;&nbsp;&minus;1</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 19</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 19/3 &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (3(19/3)+1)/4 = 20/4 = 5 &checkmark;</span>
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Sign errors in numerators</div><div class="warn-body">When you see (6 &minus; 3x)/5, think (6 &minus; 3x) &divide; 5. The &minus;3 stays with x. Say it out loud: &ldquo;negative three times x.&rdquo;</div></div>
-          <div class="joke"><strong>Joke:</strong> 4 out of 3 people struggle with fractions.</div>
-        </div>
-      </div>
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">5.3</span><span class="tlabel">Solving More Complex Equations</span>
-          <a href="https://youtu.be/rXHHW4PGGP8" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p">What if an <span class="vw">equation</span> has parentheses, multiple <span class="vw">terms</span> on each side, or x on <strong>both sides</strong>? Double underline that. We have a process &mdash; and we already know most of it.</p>
-          <div class="kc"><div class="kc-lbl">Process for solving equations (4 steps)</div><div class="kc-body">
-            <strong>Step 1 &mdash; <span class="vw">Simplify each side</span> completely:</strong><br>
-            &nbsp;&nbsp;&bull; Distribute to remove parentheses &mdash; circle negative signs first<br>
-            &nbsp;&nbsp;&bull; Combine like terms on each side<br>
-            &nbsp;&nbsp;&bull; Cover up the right side and deal with the left. Then switch.<br><br>
-            <strong>Step 2 &mdash; <span class="vw">Get x on one side</span>.</strong> Move the x <span class="vw">term</span> with the smaller <span class="vw">coefficient</span> &mdash; fewer negatives means fewer mistakes.<br><br>
-            <strong>Step 3 &mdash; Undo</strong> using the table from 5.1<br><br>
-            <strong>Step 4 &mdash; Check</strong> your <span class="vw">solution</span>
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Negative sign before parentheses</div><div class="warn-body">When you see &minus;(2x + 7), write a 1: &minus;1(2x + 7). Circle that &minus;1. It multiplies every <span class="vw">term</span> inside. Say it out loud as you go.</div></div>
-          <p class="note-h">Worked example &mdash; solve: 2(x + 4) = 3x &minus; 1</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">2(x + 4) &nbsp;=&nbsp; 3x &minus; 1</span>
-            <span class="eq">2x + 8 &nbsp;=&nbsp; 3x &minus; 1 <span class="eq-note">&larr; distribute</span></span>
-            <span class="eq">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x <span class="eq-note">&larr; move smaller coefficient (2 &lt; 3)</span></span>
-            <span class="eq eq-div">8 &nbsp;=&nbsp; x &minus; 1</span>
-            <span class="eq">+1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+1</span>
-            <span class="eq eq-div">9 &nbsp;=&nbsp; x &nbsp;&checkmark;</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 2(9+4) = 26; 3(9)&minus;1 = 26 &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> &ldquo;Dear Algebra, please stop asking me to find your x. She&apos;s not coming back and don&apos;t ask y.&rdquo;</div>
-        </div>
-      </div>
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">5.4</span><span class="tlabel">Special Case Equations</span>
-          <a href="https://youtu.be/47aM5mP2w7Y" target="_blank" rel="noopener" class="vid-btn" onclick="event.stopPropagation()">&#9654; Watch</a>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p">Important: we <strong><span class="vw">solve</span></strong> <span class="vw">equations</span>. We <strong>simplify</strong> and <strong>evaluate</strong> <span class="vw">algebraic expressions</span>. An <span class="vw">equation</span> has an equal sign. An expression does not. You cannot <span class="vw">solve</span> an expression.</p>
-          <div class="worked"><div class="wlbl">Common sense first &mdash; try numbers in: x + 1 = x + 2</div><div class="wsteps">
-            <span class="eq">x = 7: &nbsp;7+1=8 &nbsp;vs&nbsp; 7+2=9 &nbsp;&rarr;&nbsp; 8&ne;9. No.</span>
-            <span class="eq">x = 0: &nbsp;0+1=1 &nbsp;vs&nbsp; 0+2=2 &nbsp;&rarr;&nbsp; 1&ne;2. No.</span>
-            <span class="eq" style="font-style:italic;font-size:12px;color:var(--text2);font-family:sans-serif">How could any number +1 equal the same number +2? It just can&apos;t.</span>
-          </div></div>
-          <div class="kc"><div class="kc-lbl">The rule &mdash; when x disappears in Step 2</div><div class="kc-body">
-            <strong>FALSE statement</strong> (like 3 = 7) &rarr; <strong>No <span class="vw">Solution</span></strong><br>
-            Would you rather have $1 or $2? Not equal. No value of x works.<br><br>
-            <strong>TRUE statement</strong> (like 6 = 6) &rarr; <strong>All Real Numbers</strong><br>
-            Every number makes the <span class="vw">equation</span> true.
-          </div></div>
-          <p class="note-h">No Solution &mdash; solve: 2x + 3 = 2x + 9</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">2x + 3 &nbsp;=&nbsp; 2x + 9</span>
-            <span class="eq">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x</span>
-            <span class="eq eq-div">3 &nbsp;=&nbsp; 9 &nbsp;&larr; FALSE &rarr; <strong>No <span class="vw">Solution</span></strong></span>
-          </div></div>
-          <p class="note-h">All Real Numbers &mdash; solve: 12x &minus; 3(x &minus; 2) = 9x + 6</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">12x &minus; 3(x &minus; 2) &nbsp;=&nbsp; 9x + 6</span>
-            <span class="eq">9x + 6 &nbsp;=&nbsp; 9x + 6 <span class="eq-note">&larr; distribute, combine</span></span>
-            <span class="eq">&minus;9x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;9x</span>
-            <span class="eq eq-div">6 &nbsp;=&nbsp; 6 &nbsp;&larr; TRUE &rarr; <strong>All Real Numbers</strong></span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: pick any number &mdash; they all work.</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> &ldquo;Just another thing I hate about algebra&hellip; when the <span class="vw">solution</span> is &lsquo;no <span class="vw">solution</span>&rsquo;. Ugghh!!!&rdquo;</div>
-        </div>
-      </div>
-    </div>
+    </div><!-- end notes -->
 
     <div id="v-vocab" class="hidden">
       <div class="vstabs">
@@ -539,6 +373,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 /* ── VIDEO DATA PATTERN FOR CLAUDE CODE ── */
 const UNIT={id:5,name:"Solving Linear Equations",topics:[
@@ -549,6 +398,12 @@ const UNIT={id:5,name:"Solving Linear Equations",topics:[
 ]};
 
 /* ── UNIT NAV ── */
+const TOPICS=[
+  {tag:"5.1",title:"Solving Basic Equations",videos:[{"label": "Part 1", "url": "https://youtu.be/CAsQLnY11pU"}, {"label": "Part 2", "url": "https://youtu.be/-xF5heC4HC0"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> An <span class=\"vw\">equation<\/span> is a statement that two <span class=\"vw\">algebraic expressions<\/span> are equal &mdash; think of it like a <strong>scale<\/strong>. Both sides are balanced. Whatever you do to one side you must do to the other. Always. A <span class=\"vw\">variable<\/span> is just a number we don&apos;t know yet &mdash; don&apos;t let it freak you out!<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Key concept &mdash; solution<\/div><div class=\"kc-body\">A <span class=\"vw\">solution<\/span> to an <span class=\"vw\">equation<\/span> is a number that, when you plug it in for x, makes the <span class=\"vw\">equation<\/span> true. That&apos;s the magic number we&apos;re solving for.<\/div><\/div>\n          <p class=\"note-h\">5 key principles for organizing your work<\/p>\n          <ol class=\"steps\">\n            <li>Work <strong>vertically &mdash; top down<\/strong>. Do not work left to right. Do not erase.<\/li>\n            <li><strong>Line up your equal signs.<\/strong> Draw a vertical line through the equal sign to stay organized.<\/li>\n            <li><strong>Whatever you do to one side, you do to the other.<\/strong> Always. This keeps the <span class=\"vw\">equation<\/span> balanced.<\/li>\n            <li>Keep going until <strong>x is by itself<\/strong>. Circle it. That&apos;s the goal.<\/li>\n            <li>Write <strong>&ldquo;Check&rdquo;<\/strong> and substitute your answer back in. Use &checkmark; if it works, &cross; if it doesn&apos;t.<\/li>\n          <\/ol>\n          <p class=\"note-h\">The &ldquo;Undo&rdquo; table &mdash; your most important tool<\/p>\n          <p class=\"note-p\" style=\"margin-bottom:.35rem\">Ask: what is happening to x? List it top-to-bottom following PEMDAS. Then undo in <strong>reverse order<\/strong> bottom-to-top.<\/p>\n          <div class=\"undo-wrap\">\n            <div class=\"undo-dir\"><span>&darr; fill in top to bottom<\/span><span>undo bottom to top &uarr;<\/span><\/div>\n            <table class=\"undo-tbl\">\n              <tr><th class=\"uh\">What&apos;s happening to x<\/th><th class=\"uh\" style=\"width:28px\"><\/th><th class=\"uh\">How to undo it<\/th><\/tr>\n              <tr><td class=\"ul\">Adding a number &nbsp;(x + 5)<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Subtract from both sides<\/td><\/tr>\n              <tr><td class=\"ul\">Subtracting a number &nbsp;(x &minus; 5)<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Add to both sides<\/td><\/tr>\n              <tr><td class=\"ul\">Multiplying by a number &nbsp;(3x)<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Divide both sides by that number<\/td><\/tr>\n              <tr><td class=\"ul\">Dividing by a number &nbsp;(x &divide; 4)<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Multiply both sides by that number<\/td><\/tr>\n            <\/table>\n          <\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Gotcha &mdash; the invisible <span class=\"vw\">coefficient<\/span><\/div><div class=\"warn-body\">When you see <strong>&minus;x<\/strong>, there is a <strong>&minus;1<\/strong> right there &mdash; it&apos;s invisible. So &minus;x is really &minus;1&middot;x. Watch your signs!<\/div><\/div>\n          <p class=\"note-h\">Worked example 1 &mdash; basic two-step: solve 3x &minus; 7 = 14<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; undo table + check<\/div>\n          <div class=\"undo-wrap\" style=\"margin-bottom:.5rem\">\n            <div class=\"undo-dir\"><span>&darr; x is &times;3, then &minus;7<\/span><span>undo: +7 first, then &divide;3 &uarr;<\/span><\/div>\n            <table class=\"undo-tbl\">\n              <tr><th class=\"uh\">What&apos;s happening to x<\/th><th class=\"uh\" style=\"width:28px\"><\/th><th class=\"uh\">Undo<\/th><\/tr>\n              <tr><td class=\"ul\">Multiply by 3<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Divide both sides by 3<\/td><\/tr>\n              <tr><td class=\"ul\">Subtract 7<\/td><td class=\"ua\">&rarr;<\/td><td class=\"ul\">Add 7 to both sides <span style=\"font-size:10px;color:#854f0b\">(do this FIRST &mdash; reverse!)<\/span><\/td><\/tr>\n            <\/table>\n          <\/div>\n          <div class=\"wsteps\">\n            <span class=\"eq\">3x &minus; 7 &nbsp;=&nbsp; 14<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+7 &nbsp;&nbsp;&nbsp;&nbsp;+7 <span class=\"eq-note\">&larr; add 7 first (bottom of undo table)<\/span><\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 21<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7 &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 3(7) &minus; 7 = 21 &minus; 7 = 14 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example 2 &mdash; fraction result: solve 2x + 5 = 12<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; fraction answer is fine!<\/div><div class=\"wsteps\">\n            <span class=\"eq\">2x + 5 &nbsp;=&nbsp; 12<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;5 &nbsp;&nbsp;&nbsp;&nbsp;&minus;5<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2x &nbsp;=&nbsp; 7<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;2 &nbsp;&nbsp;&nbsp;&nbsp;&divide;2<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 7/2 &nbsp;&checkmark; <span class=\"eq-note\">&larr; a fraction is just a number. Don&apos;t panic!<\/span><\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 2(7/2) + 5 = 7 + 5 = 12 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example 3 &mdash; the gotcha: solve 6 &minus; x = 13<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; invisible &minus;1! Your radar should be up.<\/div><div class=\"wsteps\">\n            <span class=\"eq\">6 &minus; x &nbsp;=&nbsp; 13 <span class=\"eq-note\">&larr; &minus;x means &minus;1&middot;x. The coefficient is &minus;1!<\/span><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&minus;6 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;6<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;x &nbsp;=&nbsp; 7<\/span>\n            <span class=\"eq\">&nbsp;&divide;(&minus;1) &nbsp;&nbsp;&divide;(&minus;1)<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; &minus;7 &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 6 &minus; (&minus;7) = 6 + 7 = 13 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> &ldquo;Hey, you knew x was 7 the whole time. Why didn&apos;t you say something?&rdquo;<\/div>"},
+  {tag:"5.2",title:"Solving Equations with Fractions",videos:[{"label": "Watch", "url": "https://youtu.be/jYLxGQKXtN4"}],html:"<p class=\"note-p\">Good news and bad news. Bad news: fractions show up in <span class=\"vw\">equations<\/span>. Ugghh!!! Good news: we can use the exact same technique from 5.1. Same undo table &mdash; no new tools needed.<\/p>\n          <p class=\"note-h\">Case 1 &mdash; x divided by a number: solve x/4 + 3 = 8<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; Case 1<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x/4 + 3 &nbsp;=&nbsp; 8 <span class=\"eq-note\">&larr; x is &divide;4, then +3. Undo: &minus;3 first, then &times;4<\/span><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;3 &nbsp;&nbsp;&nbsp;&nbsp;&minus;3<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x/4 &nbsp;=&nbsp; 5<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 20 &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 20/4 + 3 = 5 + 3 = 8 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Case 2 &mdash; x multiplied by a fraction: solve (2/3)x = 10<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; Case 2 &mdash; multiply by the reciprocal<\/div><div class=\"wsteps\">\n            <span class=\"eq\">(2/3)x &nbsp;=&nbsp; 10 <span class=\"eq-note\">&larr; x is &times;(2/3). Undo: multiply by the reciprocal 3/2<\/span><\/span>\n            <span class=\"eq\">(3/2)&middot;(2/3)x &nbsp;=&nbsp; 10&middot;(3/2) <span class=\"eq-note\">&larr; the 2s and 3s cancel<\/span><\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 15 &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: (2/3)(15) = 10 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Case 3 &mdash; compound fraction: solve (3x + 1)/4 = 5<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; Case 3 &mdash; watch the implicit parentheses!<\/div><div class=\"wsteps\">\n            <span class=\"eq\">(3x + 1)/4 &nbsp;=&nbsp; 5 <span class=\"eq-note\">&larr; think: (3x + 1) &divide; 4 = 5. Undo &divide;4 first<\/span><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&times;4 &nbsp;&nbsp;&nbsp;&nbsp;&times;4<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x + 1 &nbsp;=&nbsp; 20<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;1 &nbsp;&nbsp;&nbsp;&nbsp;&minus;1<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x &nbsp;=&nbsp; 19<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&nbsp;&nbsp;&nbsp;&divide;3<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x &nbsp;=&nbsp; 19/3 &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: (3(19/3)+1)/4 = 20/4 = 5 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Sign errors in numerators<\/div><div class=\"warn-body\">When you see (6 &minus; 3x)/5, think (6 &minus; 3x) &divide; 5. The &minus;3 stays with x. Say it out loud: &ldquo;negative three times x.&rdquo;<\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> 4 out of 3 people struggle with fractions.<\/div>"},
+  {tag:"5.3",title:"Solving More Complex Equations",videos:[{"label": "Watch", "url": "https://youtu.be/rXHHW4PGGP8"}],html:"<p class=\"note-p\">What if an <span class=\"vw\">equation<\/span> has parentheses, multiple <span class=\"vw\">terms<\/span> on each side, or x on <strong>both sides<\/strong>? Double underline that. We have a process &mdash; and we already know most of it.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Process for solving equations (4 steps)<\/div><div class=\"kc-body\">\n            <strong>Step 1 &mdash; <span class=\"vw\">Simplify each side<\/span> completely:<\/strong><br>\n            &nbsp;&nbsp;&bull; Distribute to remove parentheses &mdash; circle negative signs first<br>\n            &nbsp;&nbsp;&bull; Combine like terms on each side<br>\n            &nbsp;&nbsp;&bull; Cover up the right side and deal with the left. Then switch.<br><br>\n            <strong>Step 2 &mdash; <span class=\"vw\">Get x on one side<\/span>.<\/strong> Move the x <span class=\"vw\">term<\/span> with the smaller <span class=\"vw\">coefficient<\/span> &mdash; fewer negatives means fewer mistakes.<br><br>\n            <strong>Step 3 &mdash; Undo<\/strong> using the table from 5.1<br><br>\n            <strong>Step 4 &mdash; Check<\/strong> your <span class=\"vw\">solution<\/span>\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Negative sign before parentheses<\/div><div class=\"warn-body\">When you see &minus;(2x + 7), write a 1: &minus;1(2x + 7). Circle that &minus;1. It multiplies every <span class=\"vw\">term<\/span> inside. Say it out loud as you go.<\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; solve: 2(x + 4) = 3x &minus; 1<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">2(x + 4) &nbsp;=&nbsp; 3x &minus; 1<\/span>\n            <span class=\"eq\">2x + 8 &nbsp;=&nbsp; 3x &minus; 1 <span class=\"eq-note\">&larr; distribute<\/span><\/span>\n            <span class=\"eq\">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x <span class=\"eq-note\">&larr; move smaller coefficient (2 &lt; 3)<\/span><\/span>\n            <span class=\"eq eq-div\">8 &nbsp;=&nbsp; x &minus; 1<\/span>\n            <span class=\"eq\">+1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+1<\/span>\n            <span class=\"eq eq-div\">9 &nbsp;=&nbsp; x &nbsp;&checkmark;<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 2(9+4) = 26; 3(9)&minus;1 = 26 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> &ldquo;Dear Algebra, please stop asking me to find your x. She&apos;s not coming back and don&apos;t ask y.&rdquo;<\/div>"},
+  {tag:"5.4",title:"Special Case Equations",videos:[{"label": "Watch", "url": "https://youtu.be/47aM5mP2w7Y"}],html:"<p class=\"note-p\">Important: we <strong><span class=\"vw\">solve<\/span><\/strong> <span class=\"vw\">equations<\/span>. We <strong>simplify<\/strong> and <strong>evaluate<\/strong> <span class=\"vw\">algebraic expressions<\/span>. An <span class=\"vw\">equation<\/span> has an equal sign. An expression does not. You cannot <span class=\"vw\">solve<\/span> an expression.<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Common sense first &mdash; try numbers in: x + 1 = x + 2<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x = 7: &nbsp;7+1=8 &nbsp;vs&nbsp; 7+2=9 &nbsp;&rarr;&nbsp; 8&ne;9. No.<\/span>\n            <span class=\"eq\">x = 0: &nbsp;0+1=1 &nbsp;vs&nbsp; 0+2=2 &nbsp;&rarr;&nbsp; 1&ne;2. No.<\/span>\n            <span class=\"eq\" style=\"font-style:italic;font-size:12px;color:var(--text2);font-family:sans-serif\">How could any number +1 equal the same number +2? It just can&apos;t.<\/span>\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">The rule &mdash; when x disappears in Step 2<\/div><div class=\"kc-body\">\n            <strong>FALSE statement<\/strong> (like 3 = 7) &rarr; <strong>No <span class=\"vw\">Solution<\/span><\/strong><br>\n            Would you rather have $1 or $2? Not equal. No value of x works.<br><br>\n            <strong>TRUE statement<\/strong> (like 6 = 6) &rarr; <strong>All Real Numbers<\/strong><br>\n            Every number makes the <span class=\"vw\">equation<\/span> true.\n          <\/div><\/div>\n          <p class=\"note-h\">No Solution &mdash; solve: 2x + 3 = 2x + 9<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">2x + 3 &nbsp;=&nbsp; 2x + 9<\/span>\n            <span class=\"eq\">&minus;2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;2x<\/span>\n            <span class=\"eq eq-div\">3 &nbsp;=&nbsp; 9 &nbsp;&larr; FALSE &rarr; <strong>No <span class=\"vw\">Solution<\/span><\/strong><\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">All Real Numbers &mdash; solve: 12x &minus; 3(x &minus; 2) = 9x + 6<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">12x &minus; 3(x &minus; 2) &nbsp;=&nbsp; 9x + 6<\/span>\n            <span class=\"eq\">9x + 6 &nbsp;=&nbsp; 9x + 6 <span class=\"eq-note\">&larr; distribute, combine<\/span><\/span>\n            <span class=\"eq\">&minus;9x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;9x<\/span>\n            <span class=\"eq eq-div\">6 &nbsp;=&nbsp; 6 &nbsp;&larr; TRUE &rarr; <strong>All Real Numbers<\/strong><\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: pick any number &mdash; they all work.<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> &ldquo;Just another thing I hate about algebra&hellip; when the <span class=\"vw\">solution<\/span> is &lsquo;no <span class=\"vw\">solution<\/span>&rsquo;. Ugghh!!!&rdquo;<\/div>"}
+];
 const UNITS=[
   {n:"1\u20134",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -564,28 +419,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -733,7 +566,6 @@ function isMatch(u,c){
   return false;
 }
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -875,6 +707,23 @@ function sh(i,enc,m){const fb=document.getElementById(m+'fb'+i);fb.className='fb
 
 
 loadVQ();
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 </body>
 </html>

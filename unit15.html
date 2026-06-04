@@ -39,16 +39,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -179,7 +169,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -211,6 +200,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .graph-it-btn:hover{background:#d4ebbb}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -237,235 +241,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-      <!-- 15.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.1</span><span class="tlabel">Introduction to Quadratic Functions</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Linear functions make straight lines. <span class="vw">Quadratic functions</span> make U-shaped curves called <span class="vw">parabolas</span>. The parent function is y = x&#xB2;.</p>
-          <div class="kc"><div class="kc-lbl">Standard Form of a Quadratic</div><div class="kc-body">
-            <strong>y = ax&#xB2; + bx + c</strong><br><br>
-            <strong>a &gt; 0:</strong> <span class="vw">parabola</span> opens UP (makes a U)<br>
-            <strong>a &lt; 0:</strong> <span class="vw">parabola</span> opens DOWN (makes an upside-down U)<br>
-            <strong>|a| &gt; 1:</strong> narrower than parent<br>
-            <strong>|a| &lt; 1:</strong> wider than parent<br>
-            <strong>y-intercept:</strong> always the value of c (set x = 0)
-          </div></div>
-<div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0">
-  <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem">Parent Function: y = x²</div>
-  <table style="width:100%;border-collapse:collapse;font-size:12px">
-    <tr><th style="background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a">x</th>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">&minus;3</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">&minus;2</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">&minus;1</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #ede9f7;background:#ede9f7;font-weight:700">0</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">1</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">2</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">3</td></tr>
-    <tr><th style="background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a">y</th>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">9</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">4</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">1</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #ede9f7;background:#ede9f7;font-weight:700">0</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">1</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">4</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">9</td></tr>
-  </table>
-  <div style="font-size:11px;color:#555570;margin-top:.4rem">Notice: symmetric around x = 0 (the axis of symmetry). The vertex is at (0, 0).</div>
-</div>
-<div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0"><div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem">Direction of Opening</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem"><svg width="120" height="100" viewBox="0 0 120 100" style="border:1px solid #e0e0e8;border-radius:6px" xmlns="http://www.w3.org/2000/svg">
-<line x1="0" y1="55" x2="120" y2="55" stroke="#ccc" stroke-width="1"/>
-<line x1="60" y1="0" x2="60" y2="100" stroke="#ccc" stroke-width="1"/>
-<polyline points="0.0,-65.0 3.8,-50.5 7.5,-36.9 11.2,-24.2 15.0,-12.5 18.8,-1.7 22.5,8.1 26.2,17.0 30.0,25.0 33.8,32.0 37.5,38.1 41.2,43.3 45.0,47.5 48.8,50.8 52.5,53.1 56.2,54.5 60.0,55.0 63.8,54.5 67.5,53.1 71.2,50.8 75.0,47.5 78.8,43.3 82.5,38.1 86.2,32.0 90.0,25.0 93.8,17.0 97.5,8.1 101.2,-1.7 105.0,-12.5 108.8,-24.2 112.5,-36.9 116.2,-50.5 120.0,-65.0" fill="none" stroke="#2d7a3b" stroke-width="2.5" stroke-linejoin="round"/>
-<circle cx="60.0" cy="55.0" r="4" fill="#2d7a3b" stroke="white" stroke-width="2"/>
-<text x="60" y="95" text-anchor="middle" font-size="9" fill="#2d7a3b" font-weight="700">a > 0 → opens UP</text>
-</svg><svg width="120" height="100" viewBox="0 0 120 100" style="border:1px solid #e0e0e8;border-radius:6px" xmlns="http://www.w3.org/2000/svg">
-<line x1="0" y1="55" x2="120" y2="55" stroke="#ccc" stroke-width="1"/>
-<line x1="60" y1="0" x2="60" y2="100" stroke="#ccc" stroke-width="1"/>
-<polyline points="0.0,175.0 3.8,160.5 7.5,146.9 11.2,134.2 15.0,122.5 18.8,111.7 22.5,101.9 26.2,93.0 30.0,85.0 33.8,78.0 37.5,71.9 41.2,66.7 45.0,62.5 48.8,59.2 52.5,56.9 56.2,55.5 60.0,55.0 63.8,55.5 67.5,56.9 71.2,59.2 75.0,62.5 78.8,66.7 82.5,71.9 86.2,78.0 90.0,85.0 93.8,93.0 97.5,101.9 101.2,111.7 105.0,122.5 108.8,134.2 112.5,146.9 116.2,160.5 120.0,175.0" fill="none" stroke="#a32d2d" stroke-width="2.5" stroke-linejoin="round"/>
-<circle cx="60.0" cy="55.0" r="4" fill="#a32d2d" stroke="white" stroke-width="2"/>
-<text x="60" y="95" text-anchor="middle" font-size="9" fill="#a32d2d" font-weight="700">a < 0 → opens DOWN</text>
-</svg></div></div>
-          <div class="worked"><div class="wlbl">Worked example &mdash; identify attributes of y = 2x&#xB2; &minus; 3x + 5</div><div class="wsteps">
-            <span class="eq"><strong>Identify a, b, c:</strong> a = 2, b = &minus;3, c = 5</span>
-            <span class="eq"><strong>Direction:</strong> a = 2 &gt; 0 &rarr; opens <strong>UP</strong> (minimum vertex)</span>
-            <span class="eq"><strong>Width:</strong> |a| = 2 &gt; 1 &rarr; <strong>narrower</strong> than parent y = x&#xB2;</span>
-            <span class="eq eq-div"><strong>y-intercept:</strong> set x = 0 &rarr; y = 5 &rarr; point (0, 5)</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Why was the math book sad? Because it had too many problems.</div>
-        </div>
-      </div>
-
-      <!-- 15.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.2</span><span class="tlabel">Vertex &amp; Axis of Symmetry</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Every <span class="vw">parabola</span> has a <span class="vw">vertex</span> (the highest or lowest point) and a <span class="vw">axis of symmetry</span> (a vertical line through the <span class="vw">vertex</span>).</p>
-          <div class="kc"><div class="kc-lbl">Finding Axis of Symmetry and Vertex</div><div class="kc-body">
-            <strong><span class="vw">Axis of symmetry</span>: x = <span class="frac"><span class="fn">&minus;b</span><span class="fd">2a</span></span></strong><br>
-            <strong><span class="vw">Vertex</span>:</strong> plug AOS x-value back into the equation to find y<br><br>
-            If a &gt; 0: <span class="vw">vertex</span> is the <strong>minimum</strong><br>
-            If a &lt; 0: <span class="vw">vertex</span> is the <strong>maximum</strong>
-          </div></div>
-          <p class="note-h">Worked example &mdash; y = x&#xB2; + 4x + 3</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">a = 1, b = 4, c = 3</span>
-            <span class="eq">AOS: x = &minus;4 / (2&times;1) = &minus;4/2 = &minus;2</span>
-            <span class="eq"><span class="vw">Vertex</span> y: y = (&minus;2)&#xB2; + 4(&minus;2) + 3 = 4 &minus; 8 + 3 = &minus;1</span>
-            <span class="eq eq-div"><span class="vw">Vertex</span>: (&minus;2, &minus;1). Minimum (a &gt; 0) &checkmark;</span>
-          </div></div>
-<div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0"><div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem">Parabola with Vertex and Axis of Symmetry</div><svg width="300" height="240" viewBox="0 0 300 240" style="display:block;max-width:100%;margin:.4rem 0" xmlns="http://www.w3.org/2000/svg">
-<line x1="0" y1="0" x2="0" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="30" y1="0" x2="30" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="60" y1="0" x2="60" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="90" y1="0" x2="90" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="120" y1="0" x2="120" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="150" y1="0" x2="150" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="180" y1="0" x2="180" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="210" y1="0" x2="210" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="240" y1="0" x2="240" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="270" y1="0" x2="270" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="300" y1="0" x2="300" y2="240" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="230" x2="300" y2="230" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="200" x2="300" y2="200" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="170" x2="300" y2="170" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="140" x2="300" y2="140" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="110" x2="300" y2="110" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="80" x2="300" y2="80" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="50" x2="300" y2="50" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="20" x2="300" y2="20" stroke="#ebebf4" stroke-width="1"/>
-<line x1="0" y1="170" x2="300" y2="170" stroke="#999" stroke-width="1.5"/>
-<line x1="180" y1="0" x2="180" y2="240" stroke="#999" stroke-width="1.5"/>
-<line x1="30" y1="166" x2="30" y2="174" stroke="#aaa" stroke-width="1"/>
-<line x1="60" y1="166" x2="60" y2="174" stroke="#aaa" stroke-width="1"/>
-<text x="60" y="185" text-anchor="middle" font-size="10" fill="#777">-4</text>
-<line x1="90" y1="166" x2="90" y2="174" stroke="#aaa" stroke-width="1"/>
-<line x1="120" y1="166" x2="120" y2="174" stroke="#aaa" stroke-width="1"/>
-<text x="120" y="185" text-anchor="middle" font-size="10" fill="#777">-2</text>
-<line x1="150" y1="166" x2="150" y2="174" stroke="#aaa" stroke-width="1"/>
-<line x1="210" y1="166" x2="210" y2="174" stroke="#aaa" stroke-width="1"/>
-<line x1="240" y1="166" x2="240" y2="174" stroke="#aaa" stroke-width="1"/>
-<text x="240" y="185" text-anchor="middle" font-size="10" fill="#777">2</text>
-<line x1="270" y1="166" x2="270" y2="174" stroke="#aaa" stroke-width="1"/>
-<line x1="176" y1="230" x2="184" y2="230" stroke="#aaa" stroke-width="1"/>
-<text x="172" y="234" text-anchor="end" font-size="10" fill="#777">-2</text>
-<line x1="176" y1="200" x2="184" y2="200" stroke="#aaa" stroke-width="1"/>
-<line x1="176" y1="140" x2="184" y2="140" stroke="#aaa" stroke-width="1"/>
-<line x1="176" y1="110" x2="184" y2="110" stroke="#aaa" stroke-width="1"/>
-<text x="172" y="114" text-anchor="end" font-size="10" fill="#777">2</text>
-<line x1="176" y1="80" x2="184" y2="80" stroke="#aaa" stroke-width="1"/>
-<line x1="176" y1="50" x2="184" y2="50" stroke="#aaa" stroke-width="1"/>
-<text x="172" y="54" text-anchor="end" font-size="10" fill="#777">4</text>
-<line x1="176" y1="20" x2="184" y2="20" stroke="#aaa" stroke-width="1"/>
-<line x1="120.0" y1="4" x2="120.0" y2="236" stroke="#854f0b" stroke-width="1.5" stroke-dasharray="5,3"/>
-<text x="124.0" y="14.0" text-anchor="start" font-size="9" fill="#854f0b" font-weight="600">x = −2 (AOS)</text>
-<polyline points="45.0,12.5 48.8,30.8 52.5,48.1 56.2,64.5 60.0,80.0 63.8,94.5 67.5,108.1 71.2,120.8 75.0,132.5 78.8,143.3 82.5,153.1 86.2,162.0 90.0,170.0 93.8,177.0 97.5,183.1 101.2,188.3 105.0,192.5 108.8,195.8 112.5,198.1 116.2,199.5 120.0,200.0 123.8,199.5 127.5,198.1 131.2,195.8 135.0,192.5 138.8,188.3 142.5,183.1 146.2,177.0 150.0,170.0 153.8,162.0 157.5,153.1 161.2,143.3 165.0,132.5 168.8,120.8 172.5,108.1 176.2,94.5 180.0,80.0 183.8,64.5 187.5,48.1 191.2,30.8 195.0,12.5" fill="none" stroke="#4a2c7a" stroke-width="2.5" stroke-linejoin="round"/>
-<circle cx="120.0" cy="200.0" r="6" fill="#4a2c7a" stroke="white" stroke-width="2"/>
-<text x="130.0" y="190.0" text-anchor="start" font-size="10" fill="#4a2c7a" font-weight="700">Vertex (−2,−1)</text>
-<circle cx="180.0" cy="80.0" r="5" fill="#2d7a3b" stroke="white" stroke-width="2"/>
-<text x="188.0" y="72.0" text-anchor="start" font-size="10" fill="#2d7a3b" font-weight="600">(0,3)</text>
-<circle cx="60.0" cy="80.0" r="5" fill="#2d7a3b" stroke="white" stroke-width="2"/>
-<text x="52.0" y="72.0" text-anchor="end" font-size="10" fill="#2d7a3b" font-weight="600">(−4,3)</text>
-<text x="165.0" y="20.0" text-anchor="end" font-size="11" fill="#4a2c7a" font-weight="700">y = x²+4x+3</text>
-</svg></div>
-        </div>
-      </div>
-
-      <!-- 15.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.3</span><span class="tlabel">Graphing in Standard Form</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> To graph a quadratic from standard form, you follow a systematic 5-step process. Use Desmos to check your work!</p>
-          <div class="kc"><div class="kc-lbl">5-Step Graphing Process (Standard Form)</div><div class="kc-body">
-            <strong>Step 1:</strong> Find <span class="vw">axis of symmetry</span>: x = <span class="frac"><span class="fn">&minus;b</span><span class="fd">2a</span></span><br>
-            <strong>Step 2:</strong> Find <span class="vw">vertex</span> (plug AOS into equation)<br>
-            <strong>Step 3:</strong> Find y-intercept (set x = 0 &rarr; y = c)<br>
-            <strong>Step 4:</strong> Find symmetric points (reflect y-intercept)<br>
-            <strong>Step 5:</strong> Draw smooth <span class="vw">parabola</span> through all points
-          </div></div>
-          <p class="note-h">Worked example &mdash; y = x&#xB2; &minus; 6x + 8</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; all 5 steps</div><div class="wsteps">
-            <span class="eq"><strong>a=1, b=&minus;6, c=8</strong></span>
-            <span class="eq"><strong>Step 1 &mdash; AOS:</strong> x = <span class="frac"><span class="fn">&minus;b</span><span class="fd">2a</span></span> = &minus;(&minus;6)/(2&times;1) = 6/2 = <strong>3</strong></span>
-            <span class="eq"><strong>Step 2 &mdash; Vertex:</strong> y = 3&#xB2;&minus;6(3)+8 = 9&minus;18+8 = <strong>&minus;1</strong> &rarr; vertex: (3, &minus;1) &larr; minimum</span>
-            <span class="eq"><strong>Step 3 &mdash; y-intercept:</strong> x=0 &rarr; y=8 &rarr; point (0, 8)</span>
-            <span class="eq"><strong>Step 4 &mdash; Symmetric point:</strong> (0,8) is 3 units left of AOS &rarr; mirror: (6, 8)</span>
-            <span class="eq eq-div"><strong>Step 5:</strong> Draw upward <span class="vw">parabola</span> through (0,8), (2,0), (3,&minus;1), (4,0), (6,8) &checkmark;</span>
-          </div></div>
-<div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0">
-  <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem">Key Points for y = x²&minus;6x+8</div>
-  <table style="width:100%;border-collapse:collapse;font-size:12px">
-    <tr><th style="background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a">x</th>
-        <th style="background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a">y = x²&minus;6x+8</th>
-        <th style="background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a">Point</th></tr>
-    <tr><td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">0</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">8</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">(0, 8) ← y-int</td></tr>
-    <tr><td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">2</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">0</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">(2, 0) ← x-int</td></tr>
-    <tr style="background:#ede9f7"><td style="padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700">3</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700">&minus;1</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700">(3, &minus;1) ← vertex</td></tr>
-    <tr><td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">4</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">0</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff">(4, 0) ← x-int</td></tr>
-    <tr><td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">6</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">8</td>
-        <td style="padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff">(6, 8) ← symmetric to (0,8)</td></tr>
-  </table>
-</div>
-        </div>
-      </div>
-
-      <!-- 15.4 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.4</span><span class="tlabel">Graphing in Vertex Form</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> <span class="vw">Vertex form</span> makes graphing even easier because the <span class="vw">vertex</span> is visible right in the equation.</p>
-          <div class="kc"><div class="kc-lbl">Vertex Form</div><div class="kc-body">
-            <strong>y = a(x &minus; h)&#xB2; + k</strong><br><br>
-            <strong><span class="vw">Vertex</span>:</strong> (h, k) — read directly from equation<br>
-            <strong>h:</strong> horizontal shift (opposite sign from what you see!)<br>
-            <strong>k:</strong> vertical shift<br>
-            <strong>a:</strong> determines direction and width (same as standard form)
-          </div></div>
-          <div class="tip"><div class="tip-lbl">Step-by-step from vertex form</div><div class="tip-body">
-            <strong>Step 1:</strong> Read (h, k) directly from y = a(x &minus; h)&#xB2; + k &rarr; that&apos;s your <span class="vw">vertex</span><br>
-            <strong>Step 2:</strong> Check a: positive = opens up, negative = opens down<br>
-            <strong>Step 3:</strong> Plot the <span class="vw">vertex</span> (h, k)<br>
-            <strong>Step 4:</strong> Go 1 unit left and right from the vertex; go up (or down) |a| units<br>
-            <strong>Step 5:</strong> Draw the smooth <span class="vw">parabola</span> through all three points
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Watch the sign of h!</div><div class="warn-body">y = (x &minus; 3)&#xB2; + 1 &rarr; <span class="vw">vertex</span> is (3, 1) NOT (&minus;3, 1). The h value is whatever makes (x &minus; h) = 0.</div></div>
-          <p class="note-h">Worked example &mdash; y = 2(x &minus; 3)&#xB2; + 1</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">a = 2, h = 3, k = 1</span>
-            <span class="eq"><span class="vw">Vertex</span>: (3, 1). Opens up. Narrow (a=2).</span>
-            <span class="eq">Graph: start at (3,1). Go right 1 &rarr; up 2: (4, 3). Go left 1 &rarr; up 2: (2, 3).</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; y = &minus;(x + 2)&#xB2; + 4</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; y = &minus;(x+2)&#xB2; + 4</div><div class="wsteps">
-            <span class="eq">Rewrite: y = &minus;1(x &minus; (&minus;2))&#xB2; + 4</span>
-            <span class="eq"><strong>Step 1 &mdash; Read vertex:</strong> h = &minus;2, k = 4 &rarr; <strong>Vertex: (&minus;2, 4)</strong></span>
-            <span class="eq"><strong>Step 2 &mdash; Direction:</strong> a = &minus;1 &lt; 0 &rarr; opens <strong>DOWN</strong> (maximum)</span>
-            <span class="eq"><strong>Step 3 &mdash; Points:</strong> 1 right &rarr; (&minus;1, 3); 1 left &rarr; (&minus;3, 3)</span>
-            <span class="eq eq-div"><strong>Step 4 &mdash; Draw</strong> downward <span class="vw">parabola</span> through (&minus;3,3), (&minus;2,4), (&minus;1,3) &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> I told an algebra joke. No response. I guess x didn&apos;t care.</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">15.1</div><div class="tg-title">Introduction to Quadratic Functions</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">15.2</div><div class="tg-title">Vertex &amp; Axis of Symmetry</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">15.3</div><div class="tg-title">Graphing in Standard Form</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">15.4</div><div class="tg-title">Graphing in Vertex Form</div><div class="tg-arrow">&#8594;</div></div>
       </div>
     </div><!-- end notes -->
 
@@ -564,6 +345,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:15,name:"Graphing Quadratic Functions",topics:[
   {id:"15.1",label:"Introduction to Quadratic Functions",videos:[{"label":"Watch","id":"QV4ZgKFXbzE"}]},
@@ -571,6 +367,12 @@ const UNIT={id:15,name:"Graphing Quadratic Functions",topics:[
   {id:"15.3",label:"Graphing in Standard Form"},
   {id:"15.4",label:"Graphing in Vertex Form",videos:[{"label":"Watch","id":"1I0sbYmF0og"}]},
 ]};
+const TOPICS=[
+  {tag:"15.1",title:"Introduction to Quadratic Functions",videos:[{"label": "Watch", "url": "https://youtu.be/QV4ZgKFXbzE"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Linear functions make straight lines. <span class=\"vw\">Quadratic functions<\/span> make U-shaped curves called <span class=\"vw\">parabolas<\/span>. The parent function is y = x&#xB2;.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Standard Form of a Quadratic<\/div><div class=\"kc-body\">\n            <strong>y = ax&#xB2; + bx + c<\/strong><br><br>\n            <strong>a &gt; 0:<\/strong> <span class=\"vw\">parabola<\/span> opens UP (makes a U)<br>\n            <strong>a &lt; 0:<\/strong> <span class=\"vw\">parabola<\/span> opens DOWN (makes an upside-down U)<br>\n            <strong>|a| &gt; 1:<\/strong> narrower than parent<br>\n            <strong>|a| &lt; 1:<\/strong> wider than parent<br>\n            <strong>y-intercept:<\/strong> always the value of c (set x = 0)\n          <\/div><\/div>\n<div style=\"background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0\">\n  <div style=\"font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem\">Parent Function: y = x\u00b2<\/div>\n  <table style=\"width:100%;border-collapse:collapse;font-size:12px\">\n    <tr><th style=\"background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a\">x<\/th>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">&minus;3<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">&minus;2<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">&minus;1<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #ede9f7;background:#ede9f7;font-weight:700\">0<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">1<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">2<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">3<\/td><\/tr>\n    <tr><th style=\"background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a\">y<\/th>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">9<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">4<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">1<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #ede9f7;background:#ede9f7;font-weight:700\">0<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">1<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">4<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">9<\/td><\/tr>\n  <\/table>\n  <div style=\"font-size:11px;color:#555570;margin-top:.4rem\">Notice: symmetric around x = 0 (the axis of symmetry). The vertex is at (0, 0).<\/div>\n<\/div>\n<div style=\"background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0\"><div style=\"font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem\">Direction of Opening<\/div><div style=\"display:grid;grid-template-columns:1fr 1fr;gap:.5rem\"><svg width=\"120\" height=\"100\" viewBox=\"0 0 120 100\" style=\"border:1px solid #e0e0e8;border-radius:6px\" xmlns=\"http://www.w3.org/2000/svg\">\n<line x1=\"0\" y1=\"55\" x2=\"120\" y2=\"55\" stroke=\"#ccc\" stroke-width=\"1\"/>\n<line x1=\"60\" y1=\"0\" x2=\"60\" y2=\"100\" stroke=\"#ccc\" stroke-width=\"1\"/>\n<polyline points=\"0.0,-65.0 3.8,-50.5 7.5,-36.9 11.2,-24.2 15.0,-12.5 18.8,-1.7 22.5,8.1 26.2,17.0 30.0,25.0 33.8,32.0 37.5,38.1 41.2,43.3 45.0,47.5 48.8,50.8 52.5,53.1 56.2,54.5 60.0,55.0 63.8,54.5 67.5,53.1 71.2,50.8 75.0,47.5 78.8,43.3 82.5,38.1 86.2,32.0 90.0,25.0 93.8,17.0 97.5,8.1 101.2,-1.7 105.0,-12.5 108.8,-24.2 112.5,-36.9 116.2,-50.5 120.0,-65.0\" fill=\"none\" stroke=\"#2d7a3b\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n<circle cx=\"60.0\" cy=\"55.0\" r=\"4\" fill=\"#2d7a3b\" stroke=\"white\" stroke-width=\"2\"/>\n<text x=\"60\" y=\"95\" text-anchor=\"middle\" font-size=\"9\" fill=\"#2d7a3b\" font-weight=\"700\">a > 0 \u2192 opens UP<\/text>\n<\/svg><svg width=\"120\" height=\"100\" viewBox=\"0 0 120 100\" style=\"border:1px solid #e0e0e8;border-radius:6px\" xmlns=\"http://www.w3.org/2000/svg\">\n<line x1=\"0\" y1=\"55\" x2=\"120\" y2=\"55\" stroke=\"#ccc\" stroke-width=\"1\"/>\n<line x1=\"60\" y1=\"0\" x2=\"60\" y2=\"100\" stroke=\"#ccc\" stroke-width=\"1\"/>\n<polyline points=\"0.0,175.0 3.8,160.5 7.5,146.9 11.2,134.2 15.0,122.5 18.8,111.7 22.5,101.9 26.2,93.0 30.0,85.0 33.8,78.0 37.5,71.9 41.2,66.7 45.0,62.5 48.8,59.2 52.5,56.9 56.2,55.5 60.0,55.0 63.8,55.5 67.5,56.9 71.2,59.2 75.0,62.5 78.8,66.7 82.5,71.9 86.2,78.0 90.0,85.0 93.8,93.0 97.5,101.9 101.2,111.7 105.0,122.5 108.8,134.2 112.5,146.9 116.2,160.5 120.0,175.0\" fill=\"none\" stroke=\"#a32d2d\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n<circle cx=\"60.0\" cy=\"55.0\" r=\"4\" fill=\"#a32d2d\" stroke=\"white\" stroke-width=\"2\"/>\n<text x=\"60\" y=\"95\" text-anchor=\"middle\" font-size=\"9\" fill=\"#a32d2d\" font-weight=\"700\">a < 0 \u2192 opens DOWN<\/text>\n<\/svg><\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; identify attributes of y = 2x&#xB2; &minus; 3x + 5<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><strong>Identify a, b, c:<\/strong> a = 2, b = &minus;3, c = 5<\/span>\n            <span class=\"eq\"><strong>Direction:<\/strong> a = 2 &gt; 0 &rarr; opens <strong>UP<\/strong> (minimum vertex)<\/span>\n            <span class=\"eq\"><strong>Width:<\/strong> |a| = 2 &gt; 1 &rarr; <strong>narrower<\/strong> than parent y = x&#xB2;<\/span>\n            <span class=\"eq eq-div\"><strong>y-intercept:<\/strong> set x = 0 &rarr; y = 5 &rarr; point (0, 5)<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Why was the math book sad? Because it had too many problems.<\/div>"},
+  {tag:"15.2",title:"Vertex &amp; Axis of Symmetry",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Every <span class=\"vw\">parabola<\/span> has a <span class=\"vw\">vertex<\/span> (the highest or lowest point) and a <span class=\"vw\">axis of symmetry<\/span> (a vertical line through the <span class=\"vw\">vertex<\/span>).<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Finding Axis of Symmetry and Vertex<\/div><div class=\"kc-body\">\n            <strong><span class=\"vw\">Axis of symmetry<\/span>: x = <span class=\"frac\"><span class=\"fn\">&minus;b<\/span><span class=\"fd\">2a<\/span><\/span><\/strong><br>\n            <strong><span class=\"vw\">Vertex<\/span>:<\/strong> plug AOS x-value back into the equation to find y<br><br>\n            If a &gt; 0: <span class=\"vw\">vertex<\/span> is the <strong>minimum<\/strong><br>\n            If a &lt; 0: <span class=\"vw\">vertex<\/span> is the <strong>maximum<\/strong>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; y = x&#xB2; + 4x + 3<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">a = 1, b = 4, c = 3<\/span>\n            <span class=\"eq\">AOS: x = &minus;4 / (2&times;1) = &minus;4/2 = &minus;2<\/span>\n            <span class=\"eq\"><span class=\"vw\">Vertex<\/span> y: y = (&minus;2)&#xB2; + 4(&minus;2) + 3 = 4 &minus; 8 + 3 = &minus;1<\/span>\n            <span class=\"eq eq-div\"><span class=\"vw\">Vertex<\/span>: (&minus;2, &minus;1). Minimum (a &gt; 0) &checkmark;<\/span>\n          <\/div><\/div>\n<div style=\"background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0\"><div style=\"font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem\">Parabola with Vertex and Axis of Symmetry<\/div><svg width=\"300\" height=\"240\" viewBox=\"0 0 300 240\" style=\"display:block;max-width:100%;margin:.4rem 0\" xmlns=\"http://www.w3.org/2000/svg\">\n<line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"30\" y1=\"0\" x2=\"30\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"60\" y1=\"0\" x2=\"60\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"90\" y1=\"0\" x2=\"90\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"120\" y1=\"0\" x2=\"120\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"150\" y1=\"0\" x2=\"150\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"180\" y1=\"0\" x2=\"180\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"210\" y1=\"0\" x2=\"210\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"240\" y1=\"0\" x2=\"240\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"270\" y1=\"0\" x2=\"270\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"300\" y1=\"0\" x2=\"300\" y2=\"240\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"230\" x2=\"300\" y2=\"230\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"200\" x2=\"300\" y2=\"200\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"140\" x2=\"300\" y2=\"140\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"110\" x2=\"300\" y2=\"110\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"80\" x2=\"300\" y2=\"80\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"50\" x2=\"300\" y2=\"50\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"20\" x2=\"300\" y2=\"20\" stroke=\"#ebebf4\" stroke-width=\"1\"/>\n<line x1=\"0\" y1=\"170\" x2=\"300\" y2=\"170\" stroke=\"#999\" stroke-width=\"1.5\"/>\n<line x1=\"180\" y1=\"0\" x2=\"180\" y2=\"240\" stroke=\"#999\" stroke-width=\"1.5\"/>\n<line x1=\"30\" y1=\"166\" x2=\"30\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"60\" y1=\"166\" x2=\"60\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"60\" y=\"185\" text-anchor=\"middle\" font-size=\"10\" fill=\"#777\">-4<\/text>\n<line x1=\"90\" y1=\"166\" x2=\"90\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"120\" y1=\"166\" x2=\"120\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"120\" y=\"185\" text-anchor=\"middle\" font-size=\"10\" fill=\"#777\">-2<\/text>\n<line x1=\"150\" y1=\"166\" x2=\"150\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"210\" y1=\"166\" x2=\"210\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"240\" y1=\"166\" x2=\"240\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"240\" y=\"185\" text-anchor=\"middle\" font-size=\"10\" fill=\"#777\">2<\/text>\n<line x1=\"270\" y1=\"166\" x2=\"270\" y2=\"174\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"176\" y1=\"230\" x2=\"184\" y2=\"230\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"172\" y=\"234\" text-anchor=\"end\" font-size=\"10\" fill=\"#777\">-2<\/text>\n<line x1=\"176\" y1=\"200\" x2=\"184\" y2=\"200\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"176\" y1=\"140\" x2=\"184\" y2=\"140\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"176\" y1=\"110\" x2=\"184\" y2=\"110\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"172\" y=\"114\" text-anchor=\"end\" font-size=\"10\" fill=\"#777\">2<\/text>\n<line x1=\"176\" y1=\"80\" x2=\"184\" y2=\"80\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"176\" y1=\"50\" x2=\"184\" y2=\"50\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<text x=\"172\" y=\"54\" text-anchor=\"end\" font-size=\"10\" fill=\"#777\">4<\/text>\n<line x1=\"176\" y1=\"20\" x2=\"184\" y2=\"20\" stroke=\"#aaa\" stroke-width=\"1\"/>\n<line x1=\"120.0\" y1=\"4\" x2=\"120.0\" y2=\"236\" stroke=\"#854f0b\" stroke-width=\"1.5\" stroke-dasharray=\"5,3\"/>\n<text x=\"124.0\" y=\"14.0\" text-anchor=\"start\" font-size=\"9\" fill=\"#854f0b\" font-weight=\"600\">x = \u22122 (AOS)<\/text>\n<polyline points=\"45.0,12.5 48.8,30.8 52.5,48.1 56.2,64.5 60.0,80.0 63.8,94.5 67.5,108.1 71.2,120.8 75.0,132.5 78.8,143.3 82.5,153.1 86.2,162.0 90.0,170.0 93.8,177.0 97.5,183.1 101.2,188.3 105.0,192.5 108.8,195.8 112.5,198.1 116.2,199.5 120.0,200.0 123.8,199.5 127.5,198.1 131.2,195.8 135.0,192.5 138.8,188.3 142.5,183.1 146.2,177.0 150.0,170.0 153.8,162.0 157.5,153.1 161.2,143.3 165.0,132.5 168.8,120.8 172.5,108.1 176.2,94.5 180.0,80.0 183.8,64.5 187.5,48.1 191.2,30.8 195.0,12.5\" fill=\"none\" stroke=\"#4a2c7a\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/>\n<circle cx=\"120.0\" cy=\"200.0\" r=\"6\" fill=\"#4a2c7a\" stroke=\"white\" stroke-width=\"2\"/>\n<text x=\"130.0\" y=\"190.0\" text-anchor=\"start\" font-size=\"10\" fill=\"#4a2c7a\" font-weight=\"700\">Vertex (\u22122,\u22121)<\/text>\n<circle cx=\"180.0\" cy=\"80.0\" r=\"5\" fill=\"#2d7a3b\" stroke=\"white\" stroke-width=\"2\"/>\n<text x=\"188.0\" y=\"72.0\" text-anchor=\"start\" font-size=\"10\" fill=\"#2d7a3b\" font-weight=\"600\">(0,3)<\/text>\n<circle cx=\"60.0\" cy=\"80.0\" r=\"5\" fill=\"#2d7a3b\" stroke=\"white\" stroke-width=\"2\"/>\n<text x=\"52.0\" y=\"72.0\" text-anchor=\"end\" font-size=\"10\" fill=\"#2d7a3b\" font-weight=\"600\">(\u22124,3)<\/text>\n<text x=\"165.0\" y=\"20.0\" text-anchor=\"end\" font-size=\"11\" fill=\"#4a2c7a\" font-weight=\"700\">y = x\u00b2+4x+3<\/text>\n<\/svg><\/div>"},
+  {tag:"15.3",title:"Graphing in Standard Form",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> To graph a quadratic from standard form, you follow a systematic 5-step process. Use Desmos to check your work!<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">5-Step Graphing Process (Standard Form)<\/div><div class=\"kc-body\">\n            <strong>Step 1:<\/strong> Find <span class=\"vw\">axis of symmetry<\/span>: x = <span class=\"frac\"><span class=\"fn\">&minus;b<\/span><span class=\"fd\">2a<\/span><\/span><br>\n            <strong>Step 2:<\/strong> Find <span class=\"vw\">vertex<\/span> (plug AOS into equation)<br>\n            <strong>Step 3:<\/strong> Find y-intercept (set x = 0 &rarr; y = c)<br>\n            <strong>Step 4:<\/strong> Find symmetric points (reflect y-intercept)<br>\n            <strong>Step 5:<\/strong> Draw smooth <span class=\"vw\">parabola<\/span> through all points\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; y = x&#xB2; &minus; 6x + 8<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; all 5 steps<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><strong>a=1, b=&minus;6, c=8<\/strong><\/span>\n            <span class=\"eq\"><strong>Step 1 &mdash; AOS:<\/strong> x = <span class=\"frac\"><span class=\"fn\">&minus;b<\/span><span class=\"fd\">2a<\/span><\/span> = &minus;(&minus;6)/(2&times;1) = 6/2 = <strong>3<\/strong><\/span>\n            <span class=\"eq\"><strong>Step 2 &mdash; Vertex:<\/strong> y = 3&#xB2;&minus;6(3)+8 = 9&minus;18+8 = <strong>&minus;1<\/strong> &rarr; vertex: (3, &minus;1) &larr; minimum<\/span>\n            <span class=\"eq\"><strong>Step 3 &mdash; y-intercept:<\/strong> x=0 &rarr; y=8 &rarr; point (0, 8)<\/span>\n            <span class=\"eq\"><strong>Step 4 &mdash; Symmetric point:<\/strong> (0,8) is 3 units left of AOS &rarr; mirror: (6, 8)<\/span>\n            <span class=\"eq eq-div\"><strong>Step 5:<\/strong> Draw upward <span class=\"vw\">parabola<\/span> through (0,8), (2,0), (3,&minus;1), (4,0), (6,8) &checkmark;<\/span>\n          <\/div><\/div>\n<div style=\"background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.5rem 0\">\n  <div style=\"font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem\">Key Points for y = x\u00b2&minus;6x+8<\/div>\n  <table style=\"width:100%;border-collapse:collapse;font-size:12px\">\n    <tr><th style=\"background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a\">x<\/th>\n        <th style=\"background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a\">y = x\u00b2&minus;6x+8<\/th>\n        <th style=\"background:#4a2c7a;color:#fff;padding:5px 8px;text-align:center;border:1px solid #3a1c6a\">Point<\/th><\/tr>\n    <tr><td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">0<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">8<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">(0, 8) \u2190 y-int<\/td><\/tr>\n    <tr><td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">2<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">0<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">(2, 0) \u2190 x-int<\/td><\/tr>\n    <tr style=\"background:#ede9f7\"><td style=\"padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700\">3<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700\">&minus;1<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #c4b5e8;font-weight:700\">(3, &minus;1) \u2190 vertex<\/td><\/tr>\n    <tr><td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">4<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">0<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#f8f8ff\">(4, 0) \u2190 x-int<\/td><\/tr>\n    <tr><td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">6<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">8<\/td>\n        <td style=\"padding:4px 8px;text-align:center;border:1px solid #d0d0dc;background:#fff\">(6, 8) \u2190 symmetric to (0,8)<\/td><\/tr>\n  <\/table>\n<\/div>"},
+  {tag:"15.4",title:"Graphing in Vertex Form",videos:[{"label": "Watch", "url": "https://youtu.be/1I0sbYmF0og"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> <span class=\"vw\">Vertex form<\/span> makes graphing even easier because the <span class=\"vw\">vertex<\/span> is visible right in the equation.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Vertex Form<\/div><div class=\"kc-body\">\n            <strong>y = a(x &minus; h)&#xB2; + k<\/strong><br><br>\n            <strong><span class=\"vw\">Vertex<\/span>:<\/strong> (h, k) \u2014 read directly from equation<br>\n            <strong>h:<\/strong> horizontal shift (opposite sign from what you see!)<br>\n            <strong>k:<\/strong> vertical shift<br>\n            <strong>a:<\/strong> determines direction and width (same as standard form)\n          <\/div><\/div>\n          <div class=\"tip\"><div class=\"tip-lbl\">Step-by-step from vertex form<\/div><div class=\"tip-body\">\n            <strong>Step 1:<\/strong> Read (h, k) directly from y = a(x &minus; h)&#xB2; + k &rarr; that&apos;s your <span class=\"vw\">vertex<\/span><br>\n            <strong>Step 2:<\/strong> Check a: positive = opens up, negative = opens down<br>\n            <strong>Step 3:<\/strong> Plot the <span class=\"vw\">vertex<\/span> (h, k)<br>\n            <strong>Step 4:<\/strong> Go 1 unit left and right from the vertex; go up (or down) |a| units<br>\n            <strong>Step 5:<\/strong> Draw the smooth <span class=\"vw\">parabola<\/span> through all three points\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Watch the sign of h!<\/div><div class=\"warn-body\">y = (x &minus; 3)&#xB2; + 1 &rarr; <span class=\"vw\">vertex<\/span> is (3, 1) NOT (&minus;3, 1). The h value is whatever makes (x &minus; h) = 0.<\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; y = 2(x &minus; 3)&#xB2; + 1<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">a = 2, h = 3, k = 1<\/span>\n            <span class=\"eq\"><span class=\"vw\">Vertex<\/span>: (3, 1). Opens up. Narrow (a=2).<\/span>\n            <span class=\"eq\">Graph: start at (3,1). Go right 1 &rarr; up 2: (4, 3). Go left 1 &rarr; up 2: (2, 3).<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; y = &minus;(x + 2)&#xB2; + 4<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; y = &minus;(x+2)&#xB2; + 4<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Rewrite: y = &minus;1(x &minus; (&minus;2))&#xB2; + 4<\/span>\n            <span class=\"eq\"><strong>Step 1 &mdash; Read vertex:<\/strong> h = &minus;2, k = 4 &rarr; <strong>Vertex: (&minus;2, 4)<\/strong><\/span>\n            <span class=\"eq\"><strong>Step 2 &mdash; Direction:<\/strong> a = &minus;1 &lt; 0 &rarr; opens <strong>DOWN<\/strong> (maximum)<\/span>\n            <span class=\"eq\"><strong>Step 3 &mdash; Points:<\/strong> 1 right &rarr; (&minus;1, 3); 1 left &rarr; (&minus;3, 3)<\/span>\n            <span class=\"eq eq-div\"><strong>Step 4 &mdash; Draw<\/strong> downward <span class=\"vw\">parabola<\/span> through (&minus;3,3), (&minus;2,4), (&minus;1,3) &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> I told an algebra joke. No response. I guess x didn&apos;t care.<\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -586,28 +388,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -736,7 +516,6 @@ let curTopic='15.1',vqFilter='all',vqSet=[],vqAnswers={};
 function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').trim();}
 
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -894,6 +673,24 @@ function openDesmos(){document.getElementById('desmos-overlay').classList.add('o
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos();});
+
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 
 </body>

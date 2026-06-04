@@ -39,16 +39,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -190,7 +180,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -208,6 +197,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nn-logo{cursor:pointer}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -234,132 +238,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-      <!-- 13.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">13.1</span><span class="tlabel">Introduction to Polynomials</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> You&apos;ve been working with expressions that have variables. A <span class="vw">polynomial</span> is just a collection of terms with non-negative integer exponents &mdash; no square roots, no negative exponents, no variables in denominators.</p>
-          <div class="kc"><div class="kc-lbl">Types of Polynomials</div><div class="kc-body">
-            <strong>Monomial:</strong> 1 term &nbsp; (e.g., 5x&#xB2;)<br>
-            <strong>Binomial:</strong> 2 terms &nbsp; (e.g., 3x + 4)<br>
-            <strong>Trinomial:</strong> 3 terms &nbsp; (e.g., x&#xB2; + 2x &minus; 5)<br><br>
-            <strong>Degree:</strong> The highest exponent in the <span class="vw">polynomial</span><br>
-            <strong><span class="vw">Standard form</span>:</strong> Write terms in descending order of degree<br>
-            <strong><span class="vw">Leading coefficient</span>:</strong> Coefficient of the highest-degree term
-          </div></div>
-          <p class="note-h">Worked example &mdash; identify degree and leading coefficient</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq"><span class="vw">Polynomial</span>: 4x&#xB3; &minus; 7x + 2</span>
-            <span class="eq">Degree: 3 (highest exponent is 3)</span>
-            <span class="eq"><span class="vw">Leading coefficient</span>: 4</span>
-            <span class="eq"><span class="vw">Standard form</span>: already in order &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; write in standard form</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">5 + 3x&#xB2; &minus; x &rarr; 3x&#xB2; &minus; x + 5</span>
-            <span class="eq">(descending order: degree 2, then 1, then 0)</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Why can&apos;t you trust a <span class="vw">polynomial</span>? Because they always have terms.</div>
-        </div>
-      </div>
-
-      <!-- 13.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">13.2</span><span class="tlabel">Adding &amp; Subtracting Polynomials</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Adding and subtracting polynomials is really just combining <span class="vw">like terms</span>. Remember: <span class="vw">like terms</span> have the same variable AND the same exponent.</p>
-          <div class="kc"><div class="kc-lbl">Adding Polynomials</div><div class="kc-body">
-            Identify <span class="vw">like terms</span> and combine. <span class="vw">Like terms</span>: same variable, same exponent.<br>
-            x&#xB2; and 3x&#xB2; are <span class="vw">like terms</span>. &nbsp; x&#xB2; and x&#xB3; are NOT.
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Subtracting Polynomials — DANGER ZONE</div><div class="warn-body">When subtracting, distribute the negative sign to EVERY term in the second <span class="vw">polynomial</span>. Use parentheses! Say it out loud as you go.</div></div>
-          <p class="note-h">Worked example &mdash; adding</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">(3x&#xB2; + 2x &minus; 1) + (x&#xB2; &minus; 5x + 4)</span>
-            <span class="eq">= (3x&#xB2; + x&#xB2;) + (2x &minus; 5x) + (&minus;1 + 4)</span>
-            <span class="eq eq-div">= 4x&#xB2; &minus; 3x + 3 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; subtracting</p>
-          <div class="worked"><div class="wlbl">Worked example &mdash; distribute the negative!</div><div class="wsteps">
-            <span class="eq">(5x&#xB2; + 3x &minus; 2) &minus; (2x&#xB2; &minus; x + 1)</span>
-            <span class="eq">= 5x&#xB2; + 3x &minus; 2 &minus; 2x&#xB2; + x &minus; 1 <span class="eq-note">&larr; distribute &minus;</span></span>
-            <span class="eq eq-div">= 3x&#xB2; + 4x &minus; 3 &checkmark;</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 13.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">13.3</span><span class="tlabel">Multiplying Polynomials (Monomial &times; Polynomial)</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Use the distributive property to multiply a monomial by every term in the <span class="vw">polynomial</span>. When multiplying variables, <strong>add exponents</strong> (from Unit 11).</p>
-          <div class="kc"><div class="kc-lbl">Rules for Monomial Multiplication</div><div class="kc-body">
-            <strong>Coefficients:</strong> multiply together<br>
-            <strong>Same-base variables:</strong> add the exponents<br>
-            Example: 3x&#xB2; &times; 4x&#xB3; = 12x&#x2075;
-          </div></div>
-          <p class="note-h">Worked example &mdash; distribute</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">3x(2x&#xB2; &minus; 5x + 4)</span>
-            <span class="eq">= 3x(2x&#xB2;) + 3x(&minus;5x) + 3x(4)</span>
-            <span class="eq eq-div">= 6x&#xB3; &minus; 15x&#xB2; + 12x &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Worked example 2</div><div class="wsteps">
-            <span class="eq">&minus;2x&#xB2;(3x &minus; 7)</span>
-            <span class="eq">= &minus;2x&#xB2;(3x) + (&minus;2x&#xB2;)(&minus;7)</span>
-            <span class="eq eq-div">= &minus;6x&#xB3; + 14x&#xB2; &checkmark;</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 13.4 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">13.4</span><span class="tlabel">Multiplying Polynomials (Binomial &times; Binomial &mdash; FOIL)</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> When multiplying two binomials, use <span class="vw">FOIL</span> to make sure you multiply every term by every other term.</p>
-          <div class="kc"><div class="kc-lbl">FOIL = First + Outer + Inner + Last</div><div class="kc-body">
-            (a + b)(c + d):<br>
-            <strong>F</strong>irst: a &times; c<br>
-            <strong>O</strong>uter: a &times; d<br>
-            <strong>I</strong>nner: b &times; c<br>
-            <strong>L</strong>ast: b &times; d<br>
-            Then combine <span class="vw">like terms</span>.
-          </div></div>
-          <p class="note-h">Worked example &mdash; (x + 3)(x + 5)</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">F: x &times; x = x&#xB2;</span>
-            <span class="eq">O: x &times; 5 = 5x</span>
-            <span class="eq">I: 3 &times; x = 3x</span>
-            <span class="eq">L: 3 &times; 5 = 15</span>
-            <span class="eq eq-div">= x&#xB2; + 5x + 3x + 15 = x&#xB2; + 8x + 15 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; (2x &minus; 3)(x + 4)</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">F: 2x &times; x = 2x&#xB2;</span>
-            <span class="eq">O: 2x &times; 4 = 8x</span>
-            <span class="eq">I: &minus;3 &times; x = &minus;3x</span>
-            <span class="eq">L: &minus;3 &times; 4 = &minus;12</span>
-            <span class="eq eq-div">= 2x&#xB2; + 8x &minus; 3x &minus; 12 = 2x&#xB2; + 5x &minus; 12 &checkmark;</span>
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Special Case: Difference of Squares</div><div class="kc-body">
-            (a + b)(a &minus; b) = a&#xB2; &minus; b&#xB2;<br>
-            Example: (x + 4)(x &minus; 4) = x&#xB2; &minus; 16
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> What did the <span class="vw">polynomial</span> say to the monomial? You&apos;re just a part of a bigger picture.</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">13.1</div><div class="tg-title">Introduction to Polynomials</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">13.2</div><div class="tg-title">Adding &amp; Subtracting Polynomials</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">13.3</div><div class="tg-title">Multiplying Polynomials (Monomial &times; Polynomial)</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">13.4</div><div class="tg-title">Multiplying Polynomials (Binomial &times; Binomial &mdash; FOIL)</div><div class="tg-arrow">&#8594;</div></div>
       </div>
     </div><!-- end notes -->
 
@@ -449,6 +333,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:13,name:"Polynomials",topics:[
   {id:"13.1",label:"Introduction to Polynomials",videos:[{"label":"Watch","id":"MRUhx-LHXDM"}]},
@@ -456,6 +355,12 @@ const UNIT={id:13,name:"Polynomials",topics:[
   {id:"13.3",label:"Multiplying Polynomials (Monomial × Polynomial)",videos:[{"label":"Watch","id":"VFowmwWGQfY"}]},
   {id:"13.4",label:"Multiplying Polynomials (Binomial × Binomial — FOIL)",videos:[{"label":"Watch","id":"3OvHmKjVTGU"}]},
 ]};
+const TOPICS=[
+  {tag:"13.1",title:"Introduction to Polynomials",videos:[{"label": "Watch", "url": "https://youtu.be/MRUhx-LHXDM"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> You&apos;ve been working with expressions that have variables. A <span class=\"vw\">polynomial<\/span> is just a collection of terms with non-negative integer exponents &mdash; no square roots, no negative exponents, no variables in denominators.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Types of Polynomials<\/div><div class=\"kc-body\">\n            <strong>Monomial:<\/strong> 1 term &nbsp; (e.g., 5x&#xB2;)<br>\n            <strong>Binomial:<\/strong> 2 terms &nbsp; (e.g., 3x + 4)<br>\n            <strong>Trinomial:<\/strong> 3 terms &nbsp; (e.g., x&#xB2; + 2x &minus; 5)<br><br>\n            <strong>Degree:<\/strong> The highest exponent in the <span class=\"vw\">polynomial<\/span><br>\n            <strong><span class=\"vw\">Standard form<\/span>:<\/strong> Write terms in descending order of degree<br>\n            <strong><span class=\"vw\">Leading coefficient<\/span>:<\/strong> Coefficient of the highest-degree term\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; identify degree and leading coefficient<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><span class=\"vw\">Polynomial<\/span>: 4x&#xB3; &minus; 7x + 2<\/span>\n            <span class=\"eq\">Degree: 3 (highest exponent is 3)<\/span>\n            <span class=\"eq\"><span class=\"vw\">Leading coefficient<\/span>: 4<\/span>\n            <span class=\"eq\"><span class=\"vw\">Standard form<\/span>: already in order &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; write in standard form<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">5 + 3x&#xB2; &minus; x &rarr; 3x&#xB2; &minus; x + 5<\/span>\n            <span class=\"eq\">(descending order: degree 2, then 1, then 0)<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Why can&apos;t you trust a <span class=\"vw\">polynomial<\/span>? Because they always have terms.<\/div>"},
+  {tag:"13.2",title:"Adding &amp; Subtracting Polynomials",videos:[{"label": "Watch", "url": "https://youtu.be/jiq3toC7wGM"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Adding and subtracting polynomials is really just combining <span class=\"vw\">like terms<\/span>. Remember: <span class=\"vw\">like terms<\/span> have the same variable AND the same exponent.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Adding Polynomials<\/div><div class=\"kc-body\">\n            Identify <span class=\"vw\">like terms<\/span> and combine. <span class=\"vw\">Like terms<\/span>: same variable, same exponent.<br>\n            x&#xB2; and 3x&#xB2; are <span class=\"vw\">like terms<\/span>. &nbsp; x&#xB2; and x&#xB3; are NOT.\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Subtracting Polynomials \u2014 DANGER ZONE<\/div><div class=\"warn-body\">When subtracting, distribute the negative sign to EVERY term in the second <span class=\"vw\">polynomial<\/span>. Use parentheses! Say it out loud as you go.<\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; adding<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">(3x&#xB2; + 2x &minus; 1) + (x&#xB2; &minus; 5x + 4)<\/span>\n            <span class=\"eq\">= (3x&#xB2; + x&#xB2;) + (2x &minus; 5x) + (&minus;1 + 4)<\/span>\n            <span class=\"eq eq-div\">= 4x&#xB2; &minus; 3x + 3 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; subtracting<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example &mdash; distribute the negative!<\/div><div class=\"wsteps\">\n            <span class=\"eq\">(5x&#xB2; + 3x &minus; 2) &minus; (2x&#xB2; &minus; x + 1)<\/span>\n            <span class=\"eq\">= 5x&#xB2; + 3x &minus; 2 &minus; 2x&#xB2; + x &minus; 1 <span class=\"eq-note\">&larr; distribute &minus;<\/span><\/span>\n            <span class=\"eq eq-div\">= 3x&#xB2; + 4x &minus; 3 &checkmark;<\/span>\n          <\/div><\/div>"},
+  {tag:"13.3",title:"Multiplying Polynomials (Monomial &times; Polynomial)",videos:[{"label": "Watch", "url": "https://youtu.be/VFowmwWGQfY"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Use the distributive property to multiply a monomial by every term in the <span class=\"vw\">polynomial<\/span>. When multiplying variables, <strong>add exponents<\/strong> (from Unit 11).<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Rules for Monomial Multiplication<\/div><div class=\"kc-body\">\n            <strong>Coefficients:<\/strong> multiply together<br>\n            <strong>Same-base variables:<\/strong> add the exponents<br>\n            Example: 3x&#xB2; &times; 4x&#xB3; = 12x&#x2075;\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; distribute<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">3x(2x&#xB2; &minus; 5x + 4)<\/span>\n            <span class=\"eq\">= 3x(2x&#xB2;) + 3x(&minus;5x) + 3x(4)<\/span>\n            <span class=\"eq eq-div\">= 6x&#xB3; &minus; 15x&#xB2; + 12x &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example 2<\/div><div class=\"wsteps\">\n            <span class=\"eq\">&minus;2x&#xB2;(3x &minus; 7)<\/span>\n            <span class=\"eq\">= &minus;2x&#xB2;(3x) + (&minus;2x&#xB2;)(&minus;7)<\/span>\n            <span class=\"eq eq-div\">= &minus;6x&#xB3; + 14x&#xB2; &checkmark;<\/span>\n          <\/div><\/div>"},
+  {tag:"13.4",title:"Multiplying Polynomials (Binomial &times; Binomial &mdash; FOIL)",videos:[{"label": "Watch", "url": "https://youtu.be/3OvHmKjVTGU"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> When multiplying two binomials, use <span class=\"vw\">FOIL<\/span> to make sure you multiply every term by every other term.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">FOIL = First + Outer + Inner + Last<\/div><div class=\"kc-body\">\n            (a + b)(c + d):<br>\n            <strong>F<\/strong>irst: a &times; c<br>\n            <strong>O<\/strong>uter: a &times; d<br>\n            <strong>I<\/strong>nner: b &times; c<br>\n            <strong>L<\/strong>ast: b &times; d<br>\n            Then combine <span class=\"vw\">like terms<\/span>.\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; (x + 3)(x + 5)<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">F: x &times; x = x&#xB2;<\/span>\n            <span class=\"eq\">O: x &times; 5 = 5x<\/span>\n            <span class=\"eq\">I: 3 &times; x = 3x<\/span>\n            <span class=\"eq\">L: 3 &times; 5 = 15<\/span>\n            <span class=\"eq eq-div\">= x&#xB2; + 5x + 3x + 15 = x&#xB2; + 8x + 15 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; (2x &minus; 3)(x + 4)<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">F: 2x &times; x = 2x&#xB2;<\/span>\n            <span class=\"eq\">O: 2x &times; 4 = 8x<\/span>\n            <span class=\"eq\">I: &minus;3 &times; x = &minus;3x<\/span>\n            <span class=\"eq\">L: &minus;3 &times; 4 = &minus;12<\/span>\n            <span class=\"eq eq-div\">= 2x&#xB2; + 8x &minus; 3x &minus; 12 = 2x&#xB2; + 5x &minus; 12 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Special Case: Difference of Squares<\/div><div class=\"kc-body\">\n            (a + b)(a &minus; b) = a&#xB2; &minus; b&#xB2;<br>\n            Example: (x + 4)(x &minus; 4) = x&#xB2; &minus; 16\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> What did the <span class=\"vw\">polynomial<\/span> say to the monomial? You&apos;re just a part of a bigger picture.<\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -471,28 +376,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -629,7 +512,6 @@ function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getEle
 
 function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/\^/g,'^').trim();}
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -778,6 +660,23 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 </body>
 </html>

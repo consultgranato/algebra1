@@ -39,16 +39,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -190,7 +180,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -222,6 +211,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .graph-it-btn:hover{background:#d4ebbb}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -248,163 +252,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-      <!-- 16.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.1</span><span class="tlabel">Solving by Square Roots</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> When a quadratic has no x term (just x&#xB2; and a constant), you can solve it directly by taking square roots. Remember: every positive number has TWO square roots!</p>
-          <div class="kc"><div class="kc-lbl">Square Root Method</div><div class="kc-body">
-            Works when: <strong>no x term</strong> (b = 0 in ax&#xB2; + bx + c = 0)<br><br>
-            Steps: (1) Get x&#xB2; alone &nbsp; (2) Take &#xB1;&radic; of both sides &nbsp; (3) Simplify<br><br>
-            Always write <strong>&plusmn;</strong> — there are two solutions unless the right side is 0!
-          </div></div>
-          <div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.55rem 0"><div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.5rem">Three Possible Cases</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="4.6,18.9 10.9,41.0 17.2,60.1 23.5,76.2 29.8,89.5 80.2,89.5 86.5,76.2 92.8,60.1 99.1,41.0 105.4,18.9" fill="none" stroke="#4a2c7a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="19" cy="65" r="4" fill="#4a2c7a"/><circle cx="91" cy="65" r="4" fill="#4a2c7a"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D &gt; 0: two roots</text></svg></div><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="17.2,12.1 23.5,28.2 29.8,41.5 36.1,51.8 42.4,59.1 48.7,63.5 55.0,65.0 61.3,63.5 67.6,59.1 73.9,51.8 80.2,41.5 86.5,28.2 92.8,12.1" fill="none" stroke="#2d7a3b" stroke-width="2.5" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="#2d7a3b"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D = 0: one root</text></svg></div><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="29.8,5.5 36.1,15.8 42.4,23.1 48.7,27.5 55.0,29.0 61.3,27.5 67.6,23.1 73.9,15.8 80.2,5.5" fill="none" stroke="#a32d2d" stroke-width="2.5" stroke-linejoin="round"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D &lt; 0: no real roots</text></svg></div></div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; = 25</div><div class="wsteps">
-            <span class="eq">x = &plusmn;&radic;25 = &plusmn;5</span>
-            <span class="eq">x = 5 &nbsp; or &nbsp; x = &minus;5 &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; 3x&#xB2; &minus; 12 = 0</div><div class="wsteps">
-            <span class="eq">3x&#xB2; = 12</span>
-            <span class="eq">x&#xB2; = 4</span>
-            <span class="eq eq-div">x = &plusmn;2 &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; x&#xB2; + 16 = 0</div><div class="wsteps">
-            <span class="eq">x&#xB2; = &minus;16 &rarr; no real solution (&radic; of negative)</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Why did the quadratic equation feel so lonely? Because it didn&apos;t know where its roots were.</div>
-        </div>
-      </div>
-
-      <!-- 16.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.2</span><span class="tlabel">Solving by Factoring</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> In Unit 14 you learned to factor polynomials. Now you use factoring to solve equations by applying the <span class="vw">Zero Product Property</span>. The key insight: if two things multiply to zero, at least one of them must be zero.</p>
-          <div class="kc"><div class="kc-lbl">Zero Product Property (ZPP)</div><div class="kc-body">
-            If A &times; B = 0, then <strong>A = 0</strong> OR <strong>B = 0</strong><br><br>
-            <strong>Process for solving by factoring (5 steps):</strong><br>
-            1. Write in <span class="vw">standard form</span>: ax<sup>2</sup> + bx + c = 0<br>
-            2. Find the <strong>factor pair</strong>: two numbers that &times; = c and + = b<br>
-            3. Write the <strong>factored form</strong>: (x + p)(x + q) = 0<br>
-            4. Apply ZPP: set <strong>each factor = 0</strong><br>
-            5. <strong>Solve</strong> each resulting linear equation &mdash; then check!
-          </div></div>
-
-          <p class="note-h">Worked example 1 &mdash; x<sup>2</sup> + 5x + 6 = 0</p>
-          <div class="worked"><div class="wlbl">All 5 steps &mdash; trinomial, a = 1</div><div class="wsteps">
-            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> + 5x + 6 = 0 &nbsp;<span class="eq-note">a = 1, b = 5, c = 6. Already in standard form.</span></span>
-            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair (× = c, + = b):</strong></span>
-            <span class="eq">&nbsp;&nbsp;Need two numbers that &times; = 6 and + = 5</span>
-            <span class="eq">&nbsp;&nbsp;Try 1 &times; 6 = 6 &rarr; 1 + 6 = 7 &cross; &nbsp;|&nbsp; Try 2 &times; 3 = 6 &rarr; 2 + 3 = 5 &checkmark;</span>
-            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;(x + 2)(x + 3) = 0</span>
-            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x + 2 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x + 3 = 0</span>
-            <span class="eq eq-div"><strong>Step 5 &mdash; Solve each factor:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x = &minus;2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = &minus;3</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: (&minus;2)<sup>2</sup>+5(&minus;2)+6 = 4&minus;10+6 = 0 &checkmark; &nbsp;|&nbsp; (&minus;3)<sup>2</sup>+5(&minus;3)+6 = 9&minus;15+6 = 0 &checkmark;</span>
-          </div></div>
-
-          <p class="note-h">Worked example 2 &mdash; x<sup>2</sup> &minus; 7x + 12 = 0</p>
-          <div class="worked"><div class="wlbl">All 5 steps &mdash; both factors negative</div><div class="wsteps">
-            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> &minus; 7x + 12 = 0 &nbsp;<span class="eq-note">a = 1, b = &minus;7, c = 12</span></span>
-            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair (× = 12, + = &minus;7):</strong></span>
-            <span class="eq">&nbsp;&nbsp;Try &minus;3 &times; &minus;4 = 12 &rarr; &minus;3 + (&minus;4) = &minus;7 &checkmark;</span>
-            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;(x &minus; 3)(x &minus; 4) = 0</span>
-            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x &minus; 3 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 4 = 0</span>
-            <span class="eq eq-div"><strong>Step 5 &mdash; Solve:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x = 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 4</span>
-            <span class="eq" style="font-size:11px;color:var(--text2)">Check: 3<sup>2</sup>&minus;7(3)+12 = 9&minus;21+12 = 0 &checkmark; &nbsp;|&nbsp; 4<sup>2</sup>&minus;7(4)+12 = 16&minus;28+12 = 0 &checkmark;</span>
-          </div></div>
-
-          <p class="note-h">Worked example 3 &mdash; x<sup>2</sup> &minus; 5x = 0 (GCF case)</p>
-          <div class="worked"><div class="wlbl">All 5 steps &mdash; factor out GCF, not a trinomial</div><div class="wsteps">
-            <span class="eq"><strong>Step 1 &mdash; Standard form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x<sup>2</sup> &minus; 5x = 0 &nbsp;<span class="eq-note">c = 0, so there is no constant term</span></span>
-            <span class="eq eq-div"><strong>Step 2 &mdash; Find factor pair:</strong></span>
-            <span class="eq">&nbsp;&nbsp;GCF of x<sup>2</sup> and &minus;5x is <strong>x</strong>. Factor it out.</span>
-            <span class="eq eq-div"><strong>Step 3 &mdash; Factored form:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x(x &minus; 5) = 0</span>
-            <span class="eq eq-div"><strong>Step 4 &mdash; Apply ZPP:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 5 = 0</span>
-            <span class="eq eq-div"><strong>Step 5 &mdash; Solve:</strong></span>
-            <span class="eq">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 5</span>
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Don&apos;t divide both sides by x!</div><div class="warn-body">
-            If you divide x<sup>2</sup> &minus; 5x = 0 by x, you get x &minus; 5 = 0 and only find x = 5. <strong>You lose x = 0.</strong><br>
-            Rule: Never divide by a variable — always factor it out instead.
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 16.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.3</span><span class="tlabel">The Quadratic Formula</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> The <span class="vw">quadratic formula</span> works for ANY quadratic equation &mdash; even ones that can&apos;t be factored easily. It comes from completing the square on the general form.</p>
-          <div class="kc"><div class="kc-lbl">The Quadratic Formula</div><div class="kc-body">
-            For ax&#xB2; + bx + c = 0:<br>
-            <strong>x = (&minus;b &plusmn; &radic;(b&#xB2; &minus; 4ac)) / (2a)</strong><br><br>
-            Steps: (1) Write in standard form ax&#xB2;+bx+c=0 &nbsp; (2) Identify a, b, c &nbsp; (3) Plug in &nbsp; (4) Simplify both solutions
-          </div></div>
-          <p class="note-h">Worked example &mdash; x&#xB2; &minus; 5x + 6 = 0</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">a=1, b=&minus;5, c=6</span>
-            <span class="eq">x = (5 &plusmn; &radic;(25 &minus; 24)) / 2 = (5 &plusmn; &radic;1) / 2 = (5 &plusmn; 1) / 2</span>
-            <span class="eq">x = (5+1)/2 = 3 &nbsp;&nbsp; or &nbsp;&nbsp; x = (5&minus;1)/2 = 2 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; 2x&#xB2; + 3x &minus; 2 = 0</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">a=2, b=3, c=&minus;2</span>
-            <span class="eq">x = (&minus;3 &plusmn; &radic;(9 + 16)) / 4 = (&minus;3 &plusmn; &radic;25) / 4 = (&minus;3 &plusmn; 5) / 4</span>
-            <span class="eq">x = 2/4 = 1/2 &nbsp;&nbsp; or &nbsp;&nbsp; x = &minus;8/4 = &minus;2 &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> I tried to factor x&#xB2;&minus;4 but it fell apart into (x+2)(x&minus;2).</div>
-        </div>
-      </div>
-
-      <!-- 16.4 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.4</span><span class="tlabel">Discriminant &amp; Types of Solutions</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> The expression under the radical in the <span class="vw">quadratic formula</span> is called the <span class="vw">discriminant</span>. It tells you how many real solutions exist WITHOUT solving the full equation.</p>
-          <div class="kc"><div class="kc-lbl">Discriminant = b&#xB2; &minus; 4ac</div><div class="kc-body">
-            <strong>D &gt; 0:</strong> TWO distinct real solutions (parabola crosses x-axis twice)<br>
-            <strong>D = 0:</strong> ONE real solution (parabola touches x-axis at vertex)<br>
-            <strong>D &lt; 0:</strong> NO real solutions (parabola doesn&apos;t cross x-axis)
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; &minus; 5x + 4</div><div class="wsteps">
-            <span class="eq">D = (&minus;5)&#xB2; &minus; 4(1)(4) = 25 &minus; 16 = 9</span>
-            <span class="eq">D = 9 &gt; 0 &rarr; two real solutions &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; x&#xB2; &minus; 4x + 4</div><div class="wsteps">
-            <span class="eq">D = 16 &minus; 16 = 0</span>
-            <span class="eq">D = 0 &rarr; one real solution (double root) &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; x&#xB2; + 2x + 5</div><div class="wsteps">
-            <span class="eq">D = 4 &minus; 20 = &minus;16</span>
-            <span class="eq">D = &minus;16 &lt; 0 &rarr; no real solutions &checkmark;</span>
-          </div></div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">16.1</div><div class="tg-title">Solving by Square Roots</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">16.2</div><div class="tg-title">Solving by Factoring</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">16.3</div><div class="tg-title">The Quadratic Formula</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">16.4</div><div class="tg-title">Discriminant &amp; Types of Solutions</div><div class="tg-arrow">&#8594;</div></div>
       </div>
     </div><!-- end notes -->
 
@@ -503,6 +356,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:16,name:"Solving Quadratic Equations",topics:[
   {id:"16.1",label:"Solving by Square Roots",videos:[{"label":"Watch","id":"OO4j6ESyOiY"}]},
@@ -510,6 +378,12 @@ const UNIT={id:16,name:"Solving Quadratic Equations",topics:[
   {id:"16.3",label:"The Quadratic Formula",videos:[{"label":"Watch","id":"JSwjmTFMDwg"}]},
   {id:"16.4",label:"Discriminant & Types of Solutions"},
 ]};
+const TOPICS=[
+  {tag:"16.1",title:"Solving by Square Roots",videos:[{"label": "Watch", "url": "https://youtu.be/OO4j6ESyOiY"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> When a quadratic has no x term (just x&#xB2; and a constant), you can solve it directly by taking square roots. Remember: every positive number has TWO square roots!<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Square Root Method<\/div><div class=\"kc-body\">\n            Works when: <strong>no x term<\/strong> (b = 0 in ax&#xB2; + bx + c = 0)<br><br>\n            Steps: (1) Get x&#xB2; alone &nbsp; (2) Take &#xB1;&radic; of both sides &nbsp; (3) Simplify<br><br>\n            Always write <strong>&plusmn;<\/strong> \u2014 there are two solutions unless the right side is 0!\n          <\/div><\/div>\n          <div style=\"background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.55rem 0\"><div style=\"font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.5rem\">Three Possible Cases<\/div><div style=\"display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem\"><div><svg width=\"110\" height=\"90\" viewBox=\"0 0 110 90\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto\"><line x1=\"0\" y1=\"65\" x2=\"110\" y2=\"65\" stroke=\"#ccc\" stroke-width=\"1.5\"/><line x1=\"55\" y1=\"0\" x2=\"55\" y2=\"90\" stroke=\"#ccc\" stroke-width=\"1.5\"/><polyline points=\"4.6,18.9 10.9,41.0 17.2,60.1 23.5,76.2 29.8,89.5 80.2,89.5 86.5,76.2 92.8,60.1 99.1,41.0 105.4,18.9\" fill=\"none\" stroke=\"#4a2c7a\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><circle cx=\"19\" cy=\"65\" r=\"4\" fill=\"#4a2c7a\"/><circle cx=\"91\" cy=\"65\" r=\"4\" fill=\"#4a2c7a\"/><text x=\"55\" y=\"85\" text-anchor=\"middle\" font-size=\"9\" fill=\"#333\" font-weight=\"600\">D &gt; 0: two roots<\/text><\/svg><\/div><div><svg width=\"110\" height=\"90\" viewBox=\"0 0 110 90\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto\"><line x1=\"0\" y1=\"65\" x2=\"110\" y2=\"65\" stroke=\"#ccc\" stroke-width=\"1.5\"/><line x1=\"55\" y1=\"0\" x2=\"55\" y2=\"90\" stroke=\"#ccc\" stroke-width=\"1.5\"/><polyline points=\"17.2,12.1 23.5,28.2 29.8,41.5 36.1,51.8 42.4,59.1 48.7,63.5 55.0,65.0 61.3,63.5 67.6,59.1 73.9,51.8 80.2,41.5 86.5,28.2 92.8,12.1\" fill=\"none\" stroke=\"#2d7a3b\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><circle cx=\"55\" cy=\"65\" r=\"4\" fill=\"#2d7a3b\"/><text x=\"55\" y=\"85\" text-anchor=\"middle\" font-size=\"9\" fill=\"#333\" font-weight=\"600\">D = 0: one root<\/text><\/svg><\/div><div><svg width=\"110\" height=\"90\" viewBox=\"0 0 110 90\" xmlns=\"http://www.w3.org/2000/svg\" style=\"display:block;margin:0 auto\"><line x1=\"0\" y1=\"65\" x2=\"110\" y2=\"65\" stroke=\"#ccc\" stroke-width=\"1.5\"/><line x1=\"55\" y1=\"0\" x2=\"55\" y2=\"90\" stroke=\"#ccc\" stroke-width=\"1.5\"/><polyline points=\"29.8,5.5 36.1,15.8 42.4,23.1 48.7,27.5 55.0,29.0 61.3,27.5 67.6,23.1 73.9,15.8 80.2,5.5\" fill=\"none\" stroke=\"#a32d2d\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/><text x=\"55\" y=\"85\" text-anchor=\"middle\" font-size=\"9\" fill=\"#333\" font-weight=\"600\">D &lt; 0: no real roots<\/text><\/svg><\/div><\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; x&#xB2; = 25<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x = &plusmn;&radic;25 = &plusmn;5<\/span>\n            <span class=\"eq\">x = 5 &nbsp; or &nbsp; x = &minus;5 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; 3x&#xB2; &minus; 12 = 0<\/div><div class=\"wsteps\">\n            <span class=\"eq\">3x&#xB2; = 12<\/span>\n            <span class=\"eq\">x&#xB2; = 4<\/span>\n            <span class=\"eq eq-div\">x = &plusmn;2 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; x&#xB2; + 16 = 0<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x&#xB2; = &minus;16 &rarr; no real solution (&radic; of negative)<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Why did the quadratic equation feel so lonely? Because it didn&apos;t know where its roots were.<\/div>"},
+  {tag:"16.2",title:"Solving by Factoring",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> In Unit 14 you learned to factor polynomials. Now you use factoring to solve equations by applying the <span class=\"vw\">Zero Product Property<\/span>. The key insight: if two things multiply to zero, at least one of them must be zero.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Zero Product Property (ZPP)<\/div><div class=\"kc-body\">\n            If A &times; B = 0, then <strong>A = 0<\/strong> OR <strong>B = 0<\/strong><br><br>\n            <strong>Process for solving by factoring (5 steps):<\/strong><br>\n            1. Write in <span class=\"vw\">standard form<\/span>: ax<sup>2<\/sup> + bx + c = 0<br>\n            2. Find the <strong>factor pair<\/strong>: two numbers that &times; = c and + = b<br>\n            3. Write the <strong>factored form<\/strong>: (x + p)(x + q) = 0<br>\n            4. Apply ZPP: set <strong>each factor = 0<\/strong><br>\n            5. <strong>Solve<\/strong> each resulting linear equation &mdash; then check!\n          <\/div><\/div>\n\n          <p class=\"note-h\">Worked example 1 &mdash; x<sup>2<\/sup> + 5x + 6 = 0<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">All 5 steps &mdash; trinomial, a = 1<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><strong>Step 1 &mdash; Standard form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x<sup>2<\/sup> + 5x + 6 = 0 &nbsp;<span class=\"eq-note\">a = 1, b = 5, c = 6. Already in standard form.<\/span><\/span>\n            <span class=\"eq eq-div\"><strong>Step 2 &mdash; Find factor pair (\u00d7 = c, + = b):<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;Need two numbers that &times; = 6 and + = 5<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;Try 1 &times; 6 = 6 &rarr; 1 + 6 = 7 &cross; &nbsp;|&nbsp; Try 2 &times; 3 = 6 &rarr; 2 + 3 = 5 &checkmark;<\/span>\n            <span class=\"eq eq-div\"><strong>Step 3 &mdash; Factored form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;(x + 2)(x + 3) = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 4 &mdash; Apply ZPP:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x + 2 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x + 3 = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 5 &mdash; Solve each factor:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x = &minus;2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = &minus;3<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: (&minus;2)<sup>2<\/sup>+5(&minus;2)+6 = 4&minus;10+6 = 0 &checkmark; &nbsp;|&nbsp; (&minus;3)<sup>2<\/sup>+5(&minus;3)+6 = 9&minus;15+6 = 0 &checkmark;<\/span>\n          <\/div><\/div>\n\n          <p class=\"note-h\">Worked example 2 &mdash; x<sup>2<\/sup> &minus; 7x + 12 = 0<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">All 5 steps &mdash; both factors negative<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><strong>Step 1 &mdash; Standard form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x<sup>2<\/sup> &minus; 7x + 12 = 0 &nbsp;<span class=\"eq-note\">a = 1, b = &minus;7, c = 12<\/span><\/span>\n            <span class=\"eq eq-div\"><strong>Step 2 &mdash; Find factor pair (\u00d7 = 12, + = &minus;7):<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;Try &minus;3 &times; &minus;4 = 12 &rarr; &minus;3 + (&minus;4) = &minus;7 &checkmark;<\/span>\n            <span class=\"eq eq-div\"><strong>Step 3 &mdash; Factored form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;(x &minus; 3)(x &minus; 4) = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 4 &mdash; Apply ZPP:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x &minus; 3 = 0 &nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 4 = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 5 &mdash; Solve:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x = 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 4<\/span>\n            <span class=\"eq\" style=\"font-size:11px;color:var(--text2)\">Check: 3<sup>2<\/sup>&minus;7(3)+12 = 9&minus;21+12 = 0 &checkmark; &nbsp;|&nbsp; 4<sup>2<\/sup>&minus;7(4)+12 = 16&minus;28+12 = 0 &checkmark;<\/span>\n          <\/div><\/div>\n\n          <p class=\"note-h\">Worked example 3 &mdash; x<sup>2<\/sup> &minus; 5x = 0 (GCF case)<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">All 5 steps &mdash; factor out GCF, not a trinomial<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><strong>Step 1 &mdash; Standard form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x<sup>2<\/sup> &minus; 5x = 0 &nbsp;<span class=\"eq-note\">c = 0, so there is no constant term<\/span><\/span>\n            <span class=\"eq eq-div\"><strong>Step 2 &mdash; Find factor pair:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;GCF of x<sup>2<\/sup> and &minus;5x is <strong>x<\/strong>. Factor it out.<\/span>\n            <span class=\"eq eq-div\"><strong>Step 3 &mdash; Factored form:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x(x &minus; 5) = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 4 &mdash; Apply ZPP:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OR &nbsp;&nbsp;&nbsp;&nbsp; x &minus; 5 = 0<\/span>\n            <span class=\"eq eq-div\"><strong>Step 5 &mdash; Solve:<\/strong><\/span>\n            <span class=\"eq\">&nbsp;&nbsp;x = 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x = 5<\/span>\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Don&apos;t divide both sides by x!<\/div><div class=\"warn-body\">\n            If you divide x<sup>2<\/sup> &minus; 5x = 0 by x, you get x &minus; 5 = 0 and only find x = 5. <strong>You lose x = 0.<\/strong><br>\n            Rule: Never divide by a variable \u2014 always factor it out instead.\n          <\/div><\/div>"},
+  {tag:"16.3",title:"The Quadratic Formula",videos:[{"label": "Watch", "url": "https://youtu.be/JSwjmTFMDwg"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> The <span class=\"vw\">quadratic formula<\/span> works for ANY quadratic equation &mdash; even ones that can&apos;t be factored easily. It comes from completing the square on the general form.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">The Quadratic Formula<\/div><div class=\"kc-body\">\n            For ax&#xB2; + bx + c = 0:<br>\n            <strong>x = (&minus;b &plusmn; &radic;(b&#xB2; &minus; 4ac)) / (2a)<\/strong><br><br>\n            Steps: (1) Write in standard form ax&#xB2;+bx+c=0 &nbsp; (2) Identify a, b, c &nbsp; (3) Plug in &nbsp; (4) Simplify both solutions\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; x&#xB2; &minus; 5x + 6 = 0<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">a=1, b=&minus;5, c=6<\/span>\n            <span class=\"eq\">x = (5 &plusmn; &radic;(25 &minus; 24)) / 2 = (5 &plusmn; &radic;1) / 2 = (5 &plusmn; 1) / 2<\/span>\n            <span class=\"eq\">x = (5+1)/2 = 3 &nbsp;&nbsp; or &nbsp;&nbsp; x = (5&minus;1)/2 = 2 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; 2x&#xB2; + 3x &minus; 2 = 0<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">a=2, b=3, c=&minus;2<\/span>\n            <span class=\"eq\">x = (&minus;3 &plusmn; &radic;(9 + 16)) / 4 = (&minus;3 &plusmn; &radic;25) / 4 = (&minus;3 &plusmn; 5) / 4<\/span>\n            <span class=\"eq\">x = 2/4 = 1/2 &nbsp;&nbsp; or &nbsp;&nbsp; x = &minus;8/4 = &minus;2 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> I tried to factor x&#xB2;&minus;4 but it fell apart into (x+2)(x&minus;2).<\/div>"},
+  {tag:"16.4",title:"Discriminant &amp; Types of Solutions",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> The expression under the radical in the <span class=\"vw\">quadratic formula<\/span> is called the <span class=\"vw\">discriminant<\/span>. It tells you how many real solutions exist WITHOUT solving the full equation.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Discriminant = b&#xB2; &minus; 4ac<\/div><div class=\"kc-body\">\n            <strong>D &gt; 0:<\/strong> TWO distinct real solutions (parabola crosses x-axis twice)<br>\n            <strong>D = 0:<\/strong> ONE real solution (parabola touches x-axis at vertex)<br>\n            <strong>D &lt; 0:<\/strong> NO real solutions (parabola doesn&apos;t cross x-axis)\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; x&#xB2; &minus; 5x + 4<\/div><div class=\"wsteps\">\n            <span class=\"eq\">D = (&minus;5)&#xB2; &minus; 4(1)(4) = 25 &minus; 16 = 9<\/span>\n            <span class=\"eq\">D = 9 &gt; 0 &rarr; two real solutions &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; x&#xB2; &minus; 4x + 4<\/div><div class=\"wsteps\">\n            <span class=\"eq\">D = 16 &minus; 16 = 0<\/span>\n            <span class=\"eq\">D = 0 &rarr; one real solution (double root) &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; x&#xB2; + 2x + 5<\/div><div class=\"wsteps\">\n            <span class=\"eq\">D = 4 &minus; 20 = &minus;16<\/span>\n            <span class=\"eq\">D = &minus;16 &lt; 0 &rarr; no real solutions &checkmark;<\/span>\n          <\/div><\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -525,28 +399,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -690,7 +542,6 @@ function norm(s){
 }
 
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -848,6 +699,24 @@ function openDesmos(){document.getElementById('desmos-overlay').classList.add('o
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos();});
+
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 
 </body>

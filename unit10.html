@@ -39,16 +39,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -190,7 +180,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -208,6 +197,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nn-logo{cursor:pointer}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -234,135 +238,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-      <!-- 10.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">10.1</span><span class="tlabel">Translating Words to Algebra</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Algebra is just a language. Before you can solve a word problem, you must translate the English into math. Certain key words always map to the same operations.</p>
-          <div class="kc"><div class="kc-lbl">Key Words &rarr; Operations</div><div class="kc-body">
-            <strong>Sum, plus, more than, increased by, added to:</strong> &nbsp;+<br>
-            <strong>Difference, less than, decreased by, subtracted from:</strong> &nbsp;&minus;<br>
-            <strong>Product, times, twice (2&times;), double:</strong> &nbsp;&times;<br>
-            <strong>Quotient, divided by, ratio of:</strong> &nbsp;&divide;<br>
-            <strong>Is, equals, gives, results in:</strong> &nbsp;=<br>
-            <strong>A number, some number, an unknown:</strong> &nbsp;x (or any variable)
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Watch out: "less than" reverses order!</div><div class="warn-body">"5 less than a number" means x &minus; 5, NOT 5 &minus; x. The phrase names what comes first in the subtraction.</div></div>
-          <div class="kc"><div class="kc-lbl">4-Step Problem-Solving Process</div><div class="kc-body">
-            <strong>Step 1 — Define variable:</strong> Let x = ...<br>
-            <strong>Step 2 — Write equation</strong> from the words<br>
-            <strong>Step 3 — Solve</strong> the equation<br>
-            <strong>Step 4 — Answer</strong> the question in context (with units!)
-          </div></div>
-          <p class="note-h">Worked example &mdash; "The difference of five times a number and two is 13. Find the number."</p>
-          <div class="worked"><div class="wlbl">Worked example (from Semester 1 Final)</div><div class="wsteps">
-            <span class="eq">Let x = the number</span>
-            <span class="eq">5x &minus; 2 = 13</span>
-            <span class="eq">5x = 15</span>
-            <span class="eq eq-div">x = 3 &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Why was the math book sad? Because it had too many problems.</div>
-        </div>
-      </div>
-
-      <!-- 10.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">10.2</span><span class="tlabel">One-Variable Word Problems</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Now you apply the 4-step process to number problems, age problems, and consecutive integer problems. Always define your variable first!</p>
-          <div class="kc"><div class="kc-lbl">Types of problems in 10.2</div><div class="kc-body">
-            <strong>Number problems:</strong> "Two more than three times a number is 11."<br>
-            <strong>Age problems:</strong> "In 5 years, Maria will be twice as old as Tom."<br>
-            <strong>Consecutive integers:</strong> n, n+1, n+2 (consecutive) or n, n+2, n+4 (consecutive odd/even)
-          </div></div>
-          <p class="note-h">Worked example &mdash; consecutive integers</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">Find 3 consecutive integers that sum to 48.</span>
-            <span class="eq">Let n = first integer</span>
-            <span class="eq">n + (n+1) + (n+2) = 48</span>
-            <span class="eq">3n + 3 = 48</span>
-            <span class="eq">3n = 45</span>
-            <span class="eq eq-div">n = 15 &rarr; integers: 15, 16, 17 &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; from Semester 1 Final</p>
-          <div class="worked"><div class="wlbl">Worked example (Gary's Garage)</div><div class="wsteps">
-            <span class="eq">Total cost $1060. Labor $140/hr. Parts $500.</span>
-            <span class="eq">Let x = number of hours</span>
-            <span class="eq">140x + 500 = 1060</span>
-            <span class="eq">140x = 560</span>
-            <span class="eq eq-div">x = 4 hours &checkmark;</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 10.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">10.3</span><span class="tlabel">Rate, Time &amp; Distance Problems</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> These problems involve movement. The key formula connects distance, <span class="vw">rate</span> (speed), and time.</p>
-          <div class="kc"><div class="kc-lbl">The d = r &times; t Formula</div><div class="kc-body">
-            <strong>d = r &times; t</strong> &nbsp; distance = <span class="vw">rate</span> &times; time<br><br>
-            Rearranged: &nbsp; r = d/t &nbsp;&nbsp; t = d/r
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Three Situations</div><div class="kc-body">
-            <strong>Same direction:</strong> difference in distances<br>
-            <strong>Opposite directions:</strong> distances add up to total<br>
-            <strong>Toward each other:</strong> distances add up; sum = total distance
-          </div></div>
-          <p class="note-h">Worked example &mdash; opposite directions</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">Two cars leave at same time in opposite directions.</span>
-            <span class="eq">Car A: 60 mph. Car B: 45 mph.</span>
-            <span class="eq">After how many hours are they 315 miles apart?</span>
-            <span class="eq">Let t = time</span>
-            <span class="eq">60t + 45t = 315</span>
-            <span class="eq">105t = 315</span>
-            <span class="eq eq-div">t = 3 hours &checkmark;</span>
-          </div></div>
-          <p class="note-h">Worked example &mdash; one object</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">A train travels 240 miles in 4 hours. What is its speed?</span>
-            <span class="eq">r = d/t = 240/4 = 60 mph &checkmark;</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 10.4 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">10.4</span><span class="tlabel">Mixture &amp; Multi-Step Problems</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Mixture problems combine two things (quantities, concentrations, prices) to find an unknown. They use the idea of weighted averages.</p>
-          <div class="kc"><div class="kc-lbl">System approach for mixture problems</div><div class="kc-body">
-            Let x = quantity of item A<br>
-            Then total &minus; x = quantity of item B<br>
-            Set up: (value of A) + (value of B) = (total value)
-          </div></div>
-          <p class="note-h">Worked example &mdash; from Semester 1 Final (shopping problem)</p>
-          <div class="worked"><div class="wlbl">Worked example</div><div class="wsteps">
-            <span class="eq">Jeans cost $42 each. Shirts cost $12 each.</span>
-            <span class="eq">Bought 5 items. Spent $126.</span>
-            <span class="eq">Let j = jeans. Then 5 &minus; j = shirts.</span>
-            <span class="eq">42j + 12(5 &minus; j) = 126</span>
-            <span class="eq">42j + 60 &minus; 12j = 126</span>
-            <span class="eq">30j = 66</span>
-            <span class="eq eq-div">j = 2.2... &rarr; j = 2 jeans, 3 shirts &checkmark;</span>
-          </div></div>
-          <div class="tip"><div class="tip-lbl">Multi-Step Strategy</div><div class="tip-body">Break the problem into parts. Identify what is unknown, what relationships exist, and what equation captures those relationships. Don&apos;t rush &mdash; read twice.</div></div>
-          <div class="joke"><strong>Joke:</strong> I told an algebra joke. No response. I guess x didn&apos;t care.</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">10.1</div><div class="tg-title">Translating Words to Algebra</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">10.2</div><div class="tg-title">One-Variable Word Problems</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">10.3</div><div class="tg-title">Rate, Time &amp; Distance Problems</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">10.4</div><div class="tg-title">Mixture &amp; Multi-Step Problems</div><div class="tg-arrow">&#8594;</div></div>
       </div>
     </div><!-- end notes -->
 
@@ -451,6 +332,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:10,name:"Word Problems",topics:[
   {id:"10.1",label:"Translating Words to Algebra"},
@@ -458,6 +354,12 @@ const UNIT={id:10,name:"Word Problems",topics:[
   {id:"10.3",label:"Rate, Time & Distance Problems"},
   {id:"10.4",label:"Mixture & Multi-Step Problems"},
 ]};
+const TOPICS=[
+  {tag:"10.1",title:"Translating Words to Algebra",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Algebra is just a language. Before you can solve a word problem, you must translate the English into math. Certain key words always map to the same operations.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Key Words &rarr; Operations<\/div><div class=\"kc-body\">\n            <strong>Sum, plus, more than, increased by, added to:<\/strong> &nbsp;+<br>\n            <strong>Difference, less than, decreased by, subtracted from:<\/strong> &nbsp;&minus;<br>\n            <strong>Product, times, twice (2&times;), double:<\/strong> &nbsp;&times;<br>\n            <strong>Quotient, divided by, ratio of:<\/strong> &nbsp;&divide;<br>\n            <strong>Is, equals, gives, results in:<\/strong> &nbsp;=<br>\n            <strong>A number, some number, an unknown:<\/strong> &nbsp;x (or any variable)\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Watch out: \"less than\" reverses order!<\/div><div class=\"warn-body\">\"5 less than a number\" means x &minus; 5, NOT 5 &minus; x. The phrase names what comes first in the subtraction.<\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">4-Step Problem-Solving Process<\/div><div class=\"kc-body\">\n            <strong>Step 1 \u2014 Define variable:<\/strong> Let x = ...<br>\n            <strong>Step 2 \u2014 Write equation<\/strong> from the words<br>\n            <strong>Step 3 \u2014 Solve<\/strong> the equation<br>\n            <strong>Step 4 \u2014 Answer<\/strong> the question in context (with units!)\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; \"The difference of five times a number and two is 13. Find the number.\"<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example (from Semester 1 Final)<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Let x = the number<\/span>\n            <span class=\"eq\">5x &minus; 2 = 13<\/span>\n            <span class=\"eq\">5x = 15<\/span>\n            <span class=\"eq eq-div\">x = 3 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Why was the math book sad? Because it had too many problems.<\/div>"},
+  {tag:"10.2",title:"One-Variable Word Problems",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Now you apply the 4-step process to number problems, age problems, and consecutive integer problems. Always define your variable first!<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Types of problems in 10.2<\/div><div class=\"kc-body\">\n            <strong>Number problems:<\/strong> \"Two more than three times a number is 11.\"<br>\n            <strong>Age problems:<\/strong> \"In 5 years, Maria will be twice as old as Tom.\"<br>\n            <strong>Consecutive integers:<\/strong> n, n+1, n+2 (consecutive) or n, n+2, n+4 (consecutive odd/even)\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; consecutive integers<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Find 3 consecutive integers that sum to 48.<\/span>\n            <span class=\"eq\">Let n = first integer<\/span>\n            <span class=\"eq\">n + (n+1) + (n+2) = 48<\/span>\n            <span class=\"eq\">3n + 3 = 48<\/span>\n            <span class=\"eq\">3n = 45<\/span>\n            <span class=\"eq eq-div\">n = 15 &rarr; integers: 15, 16, 17 &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; from Semester 1 Final<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example (Gary's Garage)<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Total cost $1060. Labor $140/hr. Parts $500.<\/span>\n            <span class=\"eq\">Let x = number of hours<\/span>\n            <span class=\"eq\">140x + 500 = 1060<\/span>\n            <span class=\"eq\">140x = 560<\/span>\n            <span class=\"eq eq-div\">x = 4 hours &checkmark;<\/span>\n          <\/div><\/div>"},
+  {tag:"10.3",title:"Rate, Time &amp; Distance Problems",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> These problems involve movement. The key formula connects distance, <span class=\"vw\">rate<\/span> (speed), and time.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">The d = r &times; t Formula<\/div><div class=\"kc-body\">\n            <strong>d = r &times; t<\/strong> &nbsp; distance = <span class=\"vw\">rate<\/span> &times; time<br><br>\n            Rearranged: &nbsp; r = d/t &nbsp;&nbsp; t = d/r\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Three Situations<\/div><div class=\"kc-body\">\n            <strong>Same direction:<\/strong> difference in distances<br>\n            <strong>Opposite directions:<\/strong> distances add up to total<br>\n            <strong>Toward each other:<\/strong> distances add up; sum = total distance\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; opposite directions<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Two cars leave at same time in opposite directions.<\/span>\n            <span class=\"eq\">Car A: 60 mph. Car B: 45 mph.<\/span>\n            <span class=\"eq\">After how many hours are they 315 miles apart?<\/span>\n            <span class=\"eq\">Let t = time<\/span>\n            <span class=\"eq\">60t + 45t = 315<\/span>\n            <span class=\"eq\">105t = 315<\/span>\n            <span class=\"eq eq-div\">t = 3 hours &checkmark;<\/span>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; one object<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">A train travels 240 miles in 4 hours. What is its speed?<\/span>\n            <span class=\"eq\">r = d/t = 240/4 = 60 mph &checkmark;<\/span>\n          <\/div><\/div>"},
+  {tag:"10.4",title:"Mixture &amp; Multi-Step Problems",videos:[],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Mixture problems combine two things (quantities, concentrations, prices) to find an unknown. They use the idea of weighted averages.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">System approach for mixture problems<\/div><div class=\"kc-body\">\n            Let x = quantity of item A<br>\n            Then total &minus; x = quantity of item B<br>\n            Set up: (value of A) + (value of B) = (total value)\n          <\/div><\/div>\n          <p class=\"note-h\">Worked example &mdash; from Semester 1 Final (shopping problem)<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Worked example<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Jeans cost $42 each. Shirts cost $12 each.<\/span>\n            <span class=\"eq\">Bought 5 items. Spent $126.<\/span>\n            <span class=\"eq\">Let j = jeans. Then 5 &minus; j = shirts.<\/span>\n            <span class=\"eq\">42j + 12(5 &minus; j) = 126<\/span>\n            <span class=\"eq\">42j + 60 &minus; 12j = 126<\/span>\n            <span class=\"eq\">30j = 66<\/span>\n            <span class=\"eq eq-div\">j = 2.2... &rarr; j = 2 jeans, 3 shirts &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"tip\"><div class=\"tip-lbl\">Multi-Step Strategy<\/div><div class=\"tip-body\">Break the problem into parts. Identify what is unknown, what relationships exist, and what equation captures those relationships. Don&apos;t rush &mdash; read twice.<\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> I told an algebra joke. No response. I guess x didn&apos;t care.<\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -473,28 +375,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -631,7 +511,6 @@ function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getEle
 
 function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').trim();}
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -780,6 +659,23 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 </body>
 </html>

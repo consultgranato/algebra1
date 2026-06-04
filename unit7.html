@@ -39,18 +39,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -192,7 +182,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -208,6 +197,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -234,172 +238,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-
-      <!-- 7.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">7.1</span><span class="tlabel">Relations &amp; Functions</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> You have been working with x- and y-values all year. A <span class="vw">relation</span> is simply any pairing of x-values (inputs) with y-values (outputs). A <span class="vw">function</span> is a special kind of <span class="vw">relation</span> with one extra rule.</p>
-          <div class="kc"><div class="kc-lbl">What is a Relation?</div><div class="kc-body">
-            A <strong><span class="vw">relation</span></strong> is any set of ordered pairs (x, y). It can be shown as:<br>
-            &bull; A <strong><span class="vw">mapping</span> diagram</strong> — bubbles on the left map to bubbles on the right<br>
-            &bull; A <strong><span class="vw">table</span></strong> — two columns, x and y<br>
-            &bull; A set of <strong>ordered pairs</strong> — e.g., {(1,2), (3,4)}<br>
-            &bull; A <strong>graph</strong> — points or curves on the coordinate plane
-          </div></div>
-          <div class="kc"><div class="kc-lbl">What is a Function?</div><div class="kc-body">
-            A <strong><span class="vw">function</span></strong> is a <span class="vw">relation</span> where each x-value is paired with <strong>EXACTLY ONE</strong> y-value.<br><br>
-            Think of it like a vending machine: each button (x) gives you exactly one item (y). If pressing button B3 sometimes gives chips and sometimes gives candy, it&apos;s not a <span class="vw">function</span>!<br><br>
-            <strong>The one rule:</strong> No x-value can repeat with a different y-value.
-          </div></div>
-          <p class="note-h">Vertical Line Test (VLT)</p>
-          <div class="kc"><div class="kc-lbl">Vertical Line Test</div><div class="kc-body">
-            If you can draw a vertical line anywhere on a graph and it crosses the graph <strong>more than once</strong>, it is <strong>NOT a <span class="vw">function</span></strong>.<br>
-            If every vertical line crosses at most once &rarr; <strong>IS a <span class="vw">function</span></strong>.
-          </div></div>
-          <p class="note-h">Discrete vs. Continuous</p>
-          <div class="kc"><div class="kc-lbl">Discrete vs. Continuous Graphs</div><div class="kc-body">
-            <strong>Discrete:</strong> Individual, unconnected dots. The values are separate (e.g., number of students).<br>
-            <strong>Continuous:</strong> A connected curve or line. The values flow without gaps (e.g., temperature over time).
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; Is {(1,3),(2,5),(3,3)} a function?</div><div class="wsteps">
-            <span class="eq">x-values: 1, 2, 3 &mdash; all different &checkmark;</span>
-            <span class="eq">Each x pairs with exactly one y.</span>
-            <span class="eq eq-div">&rarr; YES, it is a <span class="vw">function</span>.</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; Is {(2,4),(3,7),(2,9)} a function?</div><div class="wsteps">
-            <span class="eq">x = 2 appears twice (paired with 4 and 9).</span>
-            <span class="eq">One x goes to TWO different y-values!</span>
-            <span class="eq eq-div">&rarr; NO, NOT a <span class="vw">function</span>.</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; VLT on a circle vs. a line</div><div class="wsteps">
-            <span class="eq">Circle: a vertical line in the middle crosses at 2 points &rarr; NOT a <span class="vw">function</span>.</span>
-            <span class="eq">A straight diagonal line: any vertical line crosses once &rarr; IS a <span class="vw">function</span>.</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Math teachers have been putting the &ldquo;fun&rdquo; in functions since time t = 0.</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">7.1</div><div class="tg-title">Relations &amp; Functions</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">7.2</div><div class="tg-title">Domain &amp; Range</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">7.3</div><div class="tg-title">Linear Functions</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(3)"><div class="tg-tag">7.4</div><div class="tg-title">Function Notation</div><div class="tg-arrow">&#8594;</div></div>
       </div>
-
-      <!-- 7.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">7.2</span><span class="tlabel">Domain &amp; Range</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Now that we know what a <span class="vw">relation</span> is, we need vocabulary for describing all the inputs and outputs it uses.</p>
-          <div class="kc"><div class="kc-lbl">Domain &amp; Range</div><div class="kc-body">
-            <strong><span class="vw">Domain</span></strong> = the set of all x-values (inputs). <span class="vw">Domain</span> comes before <span class="vw">Range</span> &mdash; just like X comes before Y in the alphabet!<br>
-            <strong><span class="vw">Range</span></strong> = the set of all y-values (outputs).<br><br>
-            <strong>Memory trick:</strong> &ldquo;D comes before R, X comes before Y.&rdquo;
-          </div></div>
-          <div class="tip"><div class="tip-lbl">Shadow Technique</div><div class="tip-body">
-            <strong><span class="vw">Domain</span> (x-values):</strong> Imagine a flashlight shining straight down onto the <span class="vw">x-axis</span>. The shadow shows which x-values are used.<br>
-            <strong><span class="vw">Range</span> (y-values):</strong> Imagine a flashlight shining sideways onto the <span class="vw">y-axis</span>. The shadow shows which y-values are used.
-          </div></div>
-          <p class="note-h">Other names for the coordinate plane</p>
-          <div class="kc"><div class="kc-lbl">Names for the x-y plane</div><div class="kc-body">
-            The coordinate plane has several names:<br>
-            &bull; <strong>Cartesian plane</strong> (named after mathematician Ren&eacute; Descartes)<br>
-            &bull; <strong>xy-plane</strong><br>
-            &bull; <strong>Coordinate plane</strong>
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; Table: find domain &amp; range</div><div class="wsteps">
-            <span class="eq">x: 1, 3, 5, 7 &nbsp;&nbsp;|&nbsp;&nbsp; y: 2, 6, 10, 14</span>
-            <span class="eq"><span class="vw">Domain</span> = {1, 3, 5, 7}</span>
-            <span class="eq eq-div"><span class="vw">Range</span> = {2, 6, 10, 14}</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; Ordered pairs: {(2,5),(4,7),(-1,3)}</div><div class="wsteps">
-            <span class="eq"><span class="vw">Domain</span> = {-1, 2, 4}  (all x-values, list in order)</span>
-            <span class="eq eq-div"><span class="vw">Range</span> = {3, 5, 7}  (all y-values, list in order)</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; Discrete graph with 4 points</div><div class="wsteps">
-            <span class="eq">Points: (0,1), (2,3), (4,5), (-2,1)</span>
-            <span class="eq"><span class="vw">Domain</span> = {-2, 0, 2, 4}</span>
-            <span class="eq eq-div"><span class="vw">Range</span> = {1, 3, 5} (don&apos;t list 1 twice!)</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> I love math puns. They are right in my <span class="vw">domain</span>.</div>
-        </div>
-      </div>
-
-      <!-- 7.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">7.3</span><span class="tlabel">Linear Functions</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> You have graphed lines before. Now we identify which functions are <span class="vw">linear</span> &mdash; meaning they form a straight line when graphed &mdash; and which are not.</p>
-          <div class="kc"><div class="kc-lbl">What makes a function linear?</div><div class="kc-body">
-            A <strong>linear <span class="vw">function</span></strong> has a <strong><span class="vw">CONSTANT RATE OF CHANGE</span></strong> (the slope is always the same).<br><br>
-            Three ways to identify:<br>
-            &bull; <strong>Graph:</strong> forms a straight line<br>
-            &bull; <strong><span class="vw">Table</span>:</strong> y-values change by the same amount each step (constant differences)<br>
-            &bull; <strong>Ordered pairs:</strong> slope between any two points is constant<br><br>
-            General form: y = mx + b (slope-intercept form, coming up in Unit 8!)
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Non-linear clue</div><div class="warn-body">If the differences in y-values are NOT constant in a <span class="vw">table</span>, or if the graph is a curve, it is NOT linear.</div></div>
-          <p class="note-h">Worked examples &mdash; tables</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; Linear table</div><div class="wsteps">
-            <span class="eq">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 3, 5, 7, 9</span>
-            <span class="eq">Differences in y: 5-3=2, 7-5=2, 9-7=2 &rarr; constant!</span>
-            <span class="eq eq-div">&rarr; LINEAR <span class="vw">function</span> &checkmark;</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; Non-linear table</div><div class="wsteps">
-            <span class="eq">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 1, 4, 9, 16</span>
-            <span class="eq">Differences in y: 3, 5, 7 &rarr; NOT constant!</span>
-            <span class="eq eq-div">&rarr; NOT linear (this is y = x&sup2;, a parabola)</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; Linear from equation</div><div class="wsteps">
-            <span class="eq">Is y = 2x + 1 linear? &rarr; YES (it&apos;s in y = mx + b form)</span>
-            <span class="eq">Is y = x&sup2; + 3 linear? &rarr; NO (there is an exponent on x)</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 7.4 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">7.4</span><span class="tlabel">Function Notation</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> We have been writing functions as y = expression. <span class="vw">Function notation</span> is a new way to write the same thing, and it makes it crystal clear what the input and output are.</p>
-          <div class="kc"><div class="kc-lbl">Reading f(x)</div><div class="kc-body">
-            <strong>f(x)</strong> is read &ldquo;f of x&rdquo; &mdash; where f is the <em>name</em> of the <span class="vw">function</span> and x is the <em>input</em>.<br>
-            f(x) replaces y. So y = 3x &minus; 2 becomes f(x) = 3x &minus; 2.<br><br>
-            You can use other letters too: g(x), h(x), k(x).<br><br>
-            <strong>f(x) does NOT mean f times x!</strong>
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Forward vs. Backward Problems</div><div class="kc-body">
-            <strong>Forward problems:</strong> Given an x-value, find f(x). Just substitute and simplify.<br>
-            &nbsp;&nbsp;Example: &ldquo;Find f(4)&rdquo; &rarr; plug in x = 4.<br><br>
-            <strong>Backward problems:</strong> Given f(x) = some number, find x. Solve like an equation.<br>
-            &nbsp;&nbsp;Example: &ldquo;If f(x) = 10, find x&rdquo; &rarr; set expression = 10 and solve.
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Forward: f(x) = 3x &minus; 2</div><div class="wsteps">
-            <span class="eq">f(4)  = 3(4) &minus; 2 = 12 &minus; 2 = 10</span>
-            <span class="eq">f(-1) = 3(-1) &minus; 2 = -3 &minus; 2 = -5</span>
-            <span class="eq">f(0)  = 3(0) &minus; 2 = 0 &minus; 2 = -2</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Backward: f(x) = 3x &minus; 2, find x when f(x) = 10</div><div class="wsteps">
-            <span class="eq">3x &minus; 2 = 10</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+2 &nbsp; +2</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x = 12</span>
-            <span class="eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&divide;3</span>
-            <span class="eq eq-div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = 4 &checkmark;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> What did one algebra student say to another? Don&apos;t bother me. I have my own problems.</div>
-        </div>
-      </div>
-
     </div><!-- end notes -->
 
     <!-- VOCAB -->
@@ -504,6 +349,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:7,name:"Functions",topics:[
   {id:"7.1",label:"Relations & Functions",videos:[{"label": "Watch", "id": "2qfqfXvMl1M"}]},
@@ -512,6 +372,12 @@ const UNIT={id:7,name:"Functions",topics:[
   {id:"7.4",label:"Function Notation",videos:[{"label": "Part 1", "id": "SYuGs7sLLDw"}, {"label": "Part 2", "id": "F_YrHCGiAK0"}]},
 ]};
 
+const TOPICS=[
+  {tag:"7.1",title:"Relations &amp; Functions",videos:[{"label": "Watch", "url": "https://youtu.be/2qfqfXvMl1M"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> You have been working with x- and y-values all year. A <span class=\"vw\">relation<\/span> is simply any pairing of x-values (inputs) with y-values (outputs). A <span class=\"vw\">function<\/span> is a special kind of <span class=\"vw\">relation<\/span> with one extra rule.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">What is a Relation?<\/div><div class=\"kc-body\">\n            A <strong><span class=\"vw\">relation<\/span><\/strong> is any set of ordered pairs (x, y). It can be shown as:<br>\n            &bull; A <strong><span class=\"vw\">mapping<\/span> diagram<\/strong> \u2014 bubbles on the left map to bubbles on the right<br>\n            &bull; A <strong><span class=\"vw\">table<\/span><\/strong> \u2014 two columns, x and y<br>\n            &bull; A set of <strong>ordered pairs<\/strong> \u2014 e.g., {(1,2), (3,4)}<br>\n            &bull; A <strong>graph<\/strong> \u2014 points or curves on the coordinate plane\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">What is a Function?<\/div><div class=\"kc-body\">\n            A <strong><span class=\"vw\">function<\/span><\/strong> is a <span class=\"vw\">relation<\/span> where each x-value is paired with <strong>EXACTLY ONE<\/strong> y-value.<br><br>\n            Think of it like a vending machine: each button (x) gives you exactly one item (y). If pressing button B3 sometimes gives chips and sometimes gives candy, it&apos;s not a <span class=\"vw\">function<\/span>!<br><br>\n            <strong>The one rule:<\/strong> No x-value can repeat with a different y-value.\n          <\/div><\/div>\n          <p class=\"note-h\">Vertical Line Test (VLT)<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Vertical Line Test<\/div><div class=\"kc-body\">\n            If you can draw a vertical line anywhere on a graph and it crosses the graph <strong>more than once<\/strong>, it is <strong>NOT a <span class=\"vw\">function<\/span><\/strong>.<br>\n            If every vertical line crosses at most once &rarr; <strong>IS a <span class=\"vw\">function<\/span><\/strong>.\n          <\/div><\/div>\n          <p class=\"note-h\">Discrete vs. Continuous<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Discrete vs. Continuous Graphs<\/div><div class=\"kc-body\">\n            <strong>Discrete:<\/strong> Individual, unconnected dots. The values are separate (e.g., number of students).<br>\n            <strong>Continuous:<\/strong> A connected curve or line. The values flow without gaps (e.g., temperature over time).\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; Is {(1,3),(2,5),(3,3)} a function?<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x-values: 1, 2, 3 &mdash; all different &checkmark;<\/span>\n            <span class=\"eq\">Each x pairs with exactly one y.<\/span>\n            <span class=\"eq eq-div\">&rarr; YES, it is a <span class=\"vw\">function<\/span>.<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; Is {(2,4),(3,7),(2,9)} a function?<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x = 2 appears twice (paired with 4 and 9).<\/span>\n            <span class=\"eq\">One x goes to TWO different y-values!<\/span>\n            <span class=\"eq eq-div\">&rarr; NO, NOT a <span class=\"vw\">function<\/span>.<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; VLT on a circle vs. a line<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Circle: a vertical line in the middle crosses at 2 points &rarr; NOT a <span class=\"vw\">function<\/span>.<\/span>\n            <span class=\"eq\">A straight diagonal line: any vertical line crosses once &rarr; IS a <span class=\"vw\">function<\/span>.<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Math teachers have been putting the &ldquo;fun&rdquo; in functions since time t = 0.<\/div>"},
+  {tag:"7.2",title:"Domain &amp; Range",videos:[{"label": "Part 1", "url": "https://youtu.be/zy_HYxIICqg"}, {"label": "Part 2", "url": "https://youtu.be/L6ACgPCDz6M"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Now that we know what a <span class=\"vw\">relation<\/span> is, we need vocabulary for describing all the inputs and outputs it uses.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Domain &amp; Range<\/div><div class=\"kc-body\">\n            <strong><span class=\"vw\">Domain<\/span><\/strong> = the set of all x-values (inputs). <span class=\"vw\">Domain<\/span> comes before <span class=\"vw\">Range<\/span> &mdash; just like X comes before Y in the alphabet!<br>\n            <strong><span class=\"vw\">Range<\/span><\/strong> = the set of all y-values (outputs).<br><br>\n            <strong>Memory trick:<\/strong> &ldquo;D comes before R, X comes before Y.&rdquo;\n          <\/div><\/div>\n          <div class=\"tip\"><div class=\"tip-lbl\">Shadow Technique<\/div><div class=\"tip-body\">\n            <strong><span class=\"vw\">Domain<\/span> (x-values):<\/strong> Imagine a flashlight shining straight down onto the <span class=\"vw\">x-axis<\/span>. The shadow shows which x-values are used.<br>\n            <strong><span class=\"vw\">Range<\/span> (y-values):<\/strong> Imagine a flashlight shining sideways onto the <span class=\"vw\">y-axis<\/span>. The shadow shows which y-values are used.\n          <\/div><\/div>\n          <p class=\"note-h\">Other names for the coordinate plane<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Names for the x-y plane<\/div><div class=\"kc-body\">\n            The coordinate plane has several names:<br>\n            &bull; <strong>Cartesian plane<\/strong> (named after mathematician Ren&eacute; Descartes)<br>\n            &bull; <strong>xy-plane<\/strong><br>\n            &bull; <strong>Coordinate plane<\/strong>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; Table: find domain &amp; range<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x: 1, 3, 5, 7 &nbsp;&nbsp;|&nbsp;&nbsp; y: 2, 6, 10, 14<\/span>\n            <span class=\"eq\"><span class=\"vw\">Domain<\/span> = {1, 3, 5, 7}<\/span>\n            <span class=\"eq eq-div\"><span class=\"vw\">Range<\/span> = {2, 6, 10, 14}<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; Ordered pairs: {(2,5),(4,7),(-1,3)}<\/div><div class=\"wsteps\">\n            <span class=\"eq\"><span class=\"vw\">Domain<\/span> = {-1, 2, 4}  (all x-values, list in order)<\/span>\n            <span class=\"eq eq-div\"><span class=\"vw\">Range<\/span> = {3, 5, 7}  (all y-values, list in order)<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; Discrete graph with 4 points<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Points: (0,1), (2,3), (4,5), (-2,1)<\/span>\n            <span class=\"eq\"><span class=\"vw\">Domain<\/span> = {-2, 0, 2, 4}<\/span>\n            <span class=\"eq eq-div\"><span class=\"vw\">Range<\/span> = {1, 3, 5} (don&apos;t list 1 twice!)<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> I love math puns. They are right in my <span class=\"vw\">domain<\/span>.<\/div>"},
+  {tag:"7.3",title:"Linear Functions",videos:[{"label": "Watch", "url": "https://youtu.be/Nmrt8Crgstw"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> You have graphed lines before. Now we identify which functions are <span class=\"vw\">linear<\/span> &mdash; meaning they form a straight line when graphed &mdash; and which are not.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">What makes a function linear?<\/div><div class=\"kc-body\">\n            A <strong>linear <span class=\"vw\">function<\/span><\/strong> has a <strong><span class=\"vw\">CONSTANT RATE OF CHANGE<\/span><\/strong> (the slope is always the same).<br><br>\n            Three ways to identify:<br>\n            &bull; <strong>Graph:<\/strong> forms a straight line<br>\n            &bull; <strong><span class=\"vw\">Table<\/span>:<\/strong> y-values change by the same amount each step (constant differences)<br>\n            &bull; <strong>Ordered pairs:<\/strong> slope between any two points is constant<br><br>\n            General form: y = mx + b (slope-intercept form, coming up in Unit 8!)\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Non-linear clue<\/div><div class=\"warn-body\">If the differences in y-values are NOT constant in a <span class=\"vw\">table<\/span>, or if the graph is a curve, it is NOT linear.<\/div><\/div>\n          <p class=\"note-h\">Worked examples &mdash; tables<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; Linear table<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 3, 5, 7, 9<\/span>\n            <span class=\"eq\">Differences in y: 5-3=2, 7-5=2, 9-7=2 &rarr; constant!<\/span>\n            <span class=\"eq eq-div\">&rarr; LINEAR <span class=\"vw\">function<\/span> &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; Non-linear table<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x: 1, 2, 3, 4 &nbsp;&nbsp;|&nbsp;&nbsp; y: 1, 4, 9, 16<\/span>\n            <span class=\"eq\">Differences in y: 3, 5, 7 &rarr; NOT constant!<\/span>\n            <span class=\"eq eq-div\">&rarr; NOT linear (this is y = x&sup2;, a parabola)<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; Linear from equation<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Is y = 2x + 1 linear? &rarr; YES (it&apos;s in y = mx + b form)<\/span>\n            <span class=\"eq\">Is y = x&sup2; + 3 linear? &rarr; NO (there is an exponent on x)<\/span>\n          <\/div><\/div>"},
+  {tag:"7.4",title:"Function Notation",videos:[{"label": "Part 1", "url": "https://youtu.be/SYuGs7sLLDw"}, {"label": "Part 2", "url": "https://youtu.be/F_YrHCGiAK0"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> We have been writing functions as y = expression. <span class=\"vw\">Function notation<\/span> is a new way to write the same thing, and it makes it crystal clear what the input and output are.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Reading f(x)<\/div><div class=\"kc-body\">\n            <strong>f(x)<\/strong> is read &ldquo;f of x&rdquo; &mdash; where f is the <em>name<\/em> of the <span class=\"vw\">function<\/span> and x is the <em>input<\/em>.<br>\n            f(x) replaces y. So y = 3x &minus; 2 becomes f(x) = 3x &minus; 2.<br><br>\n            You can use other letters too: g(x), h(x), k(x).<br><br>\n            <strong>f(x) does NOT mean f times x!<\/strong>\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Forward vs. Backward Problems<\/div><div class=\"kc-body\">\n            <strong>Forward problems:<\/strong> Given an x-value, find f(x). Just substitute and simplify.<br>\n            &nbsp;&nbsp;Example: &ldquo;Find f(4)&rdquo; &rarr; plug in x = 4.<br><br>\n            <strong>Backward problems:<\/strong> Given f(x) = some number, find x. Solve like an equation.<br>\n            &nbsp;&nbsp;Example: &ldquo;If f(x) = 10, find x&rdquo; &rarr; set expression = 10 and solve.\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Forward: f(x) = 3x &minus; 2<\/div><div class=\"wsteps\">\n            <span class=\"eq\">f(4)  = 3(4) &minus; 2 = 12 &minus; 2 = 10<\/span>\n            <span class=\"eq\">f(-1) = 3(-1) &minus; 2 = -3 &minus; 2 = -5<\/span>\n            <span class=\"eq\">f(0)  = 3(0) &minus; 2 = 0 &minus; 2 = -2<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Backward: f(x) = 3x &minus; 2, find x when f(x) = 10<\/div><div class=\"wsteps\">\n            <span class=\"eq\">3x &minus; 2 = 10<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+2 &nbsp; +2<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3x = 12<\/span>\n            <span class=\"eq\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&divide;3 &nbsp;&divide;3<\/span>\n            <span class=\"eq eq-div\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = 4 &checkmark;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> What did one algebra student say to another? Don&apos;t bother me. I have my own problems.<\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -527,28 +393,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -696,7 +540,6 @@ function isMatch(u,c){
   return un===cn.replace(/≤/g,'<=').replace(/≥/g,'>=');
 }
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -845,6 +688,23 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 </body>
 </html>

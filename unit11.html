@@ -39,18 +39,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tab:hover,.vstab:hover,.tpbtn:hover{background:var(--bg3);color:var(--text)}
 .tab.on,.vstab.on,.tpbtn.on{background:var(--bg2);color:var(--nnp);font-weight:700;box-shadow:inset 0 2px 0 var(--nnp),0 0 0 0.5px var(--border2)}
 .hidden{display:none}
-.tblock{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:.85rem;overflow:hidden}
-.thead{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;flex-wrap:wrap}
-.thead:hover{background:var(--bg3)}
-.thead.open{border-bottom:0.5px solid var(--border)}
-.ttag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
-.tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
-.tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
-.tchev.open{transform:rotate(180deg)}
 .vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:var(--nnp);border:1px solid rgba(74,44,122,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
 .vid-btn:hover{background:rgba(74,44,122,.08);color:var(--nnpd);border-color:var(--nnp)}
-.tbody{padding:1rem 1.3rem;display:none}
-.tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
 .note-h{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:.85rem 0 .4rem}
 .vw{color:var(--vw);font-weight:600;border-bottom:1px dotted var(--vw)}
@@ -192,7 +182,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
-.tblock{border:1.5px solid #c0c0cc !important}
 .vcard{border:1.5px solid #c0c0cc !important}
 .pcard{border:1.5px solid #c0c0cc !important}
 .calc-box{border:1.5px solid #c0c0cc !important}
@@ -208,6 +197,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
+.tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
+.tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
+.tg-title{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.tg-arrow{font-size:13px;color:var(--nnp);margin-top:.15rem}
+.topic-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:16px}
+.topic-modal-overlay.open{display:flex}
+.topic-modal{background:var(--bg2);border-radius:var(--radius-lg);width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.topic-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--nnpd);flex-shrink:0;gap:.75rem;flex-wrap:wrap}
+.topic-modal-tag{background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px}
+.topic-modal-title{color:#fff;font-size:15px;font-weight:600}
+.topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+.topic-modal-close:hover{background:rgba(255,255,255,.28)}
+.topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
 </head>
 <body>
@@ -234,149 +238,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- NOTES -->
-    <div id="v-notes">
-
-      <!-- 11.1 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">11.1</span><span class="tlabel">Zero &amp; Negative Exponents</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> You already know that 2<sup>3</sup> = 2 &times; 2 &times; 2 = 8. That&apos;s repeated multiplication. Now we extend this idea to <span class="vw">zero exponents</span> and <span class="vw">negative exponents</span>.</p>
-          <div class="kc"><div class="kc-lbl">Base, Exponent, Power</div><div class="kc-body">
-            In the expression <strong>b<sup>n</sup></strong>:<br>
-            &bull; <strong>b</strong> is the <em>base</em> &mdash; the number being multiplied<br>
-            &bull; <strong>n</strong> is the <em>exponent</em> &mdash; how many times to multiply<br>
-            &bull; The whole thing (b<sup>n</sup>) is a <em>power</em><br><br>
-            Example: 5<sup>3</sup> = 5 &times; 5 &times; 5 = 125 &nbsp;(base=5, exponent=3, power=125)
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Zero Exponent Rule</div><div class="kc-body">
-            <strong>Anything raised to the zero power equals 1.</strong><br>
-            b<sup>0</sup> = 1 &nbsp;(for any b &ne; 0)<br><br>
-            Examples: 5<sup>0</sup> = 1 &nbsp;&bull;&nbsp; x<sup>0</sup> = 1 &nbsp;&bull;&nbsp; (&#8722;3)<sup>0</sup> = 1 &nbsp;&bull;&nbsp; 100<sup>0</sup> = 1
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Watch the parentheses!</div><div class="warn-body">
-            <strong>(&minus;3)<sup>0</sup> = 1</strong> &nbsp;&larr; the negative is inside, so the whole thing is raised to 0.<br>
-            <strong>&minus;3<sup>0</sup> = &minus;(3<sup>0</sup>) = &minus;1</strong> &nbsp;&larr; only 3 is raised to 0, then we negate.<br><br>
-            Parentheses matter!
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Negative Exponent Rule</div><div class="kc-body">
-            A negative exponent means <strong>reciprocal</strong> (flip it):<br>
-            <strong>a<sup>&minus;n</sup> = 1 / a<sup>n</sup></strong><br><br>
-            &bull; Negative exponent <strong>on top</strong> of a fraction: move it to the <strong>bottom</strong>, make the exponent positive.<br>
-            &bull; Negative exponent <strong>on bottom</strong> of a fraction: move it to the <strong>top</strong>, make the exponent positive.<br><br>
-            Examples:<br>
-            x<sup>&minus;3</sup> = 1/x<sup>3</sup><br>
-            1/x<sup>&minus;4</sup> = x<sup>4</sup><br>
-            2<sup>&minus;3</sup> = 1/2<sup>3</sup> = 1/8
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; Simplify: 4<sup>&minus;2</sup></div><div class="wsteps">
-            <span class="eq">4<sup>&minus;2</sup> = 1/4&sup2; = 1/16</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; Simplify: x<sup>&minus;1</sup> &middot; y&sup2;</div><div class="wsteps">
-            <span class="eq">x<sup>&minus;1</sup> = 1/x</span>
-            <span class="eq eq-div">= y&sup2; / x</span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; Simplify: 3 / x<sup>&minus;2</sup></div><div class="wsteps">
-            <span class="eq">x<sup>&minus;2</sup> is on the bottom with a negative exponent</span>
-            <span class="eq">Move x&sup2; to the top (exponent becomes positive)</span>
-            <span class="eq eq-div">= 3x&sup2;</span>
-          </div></div>
-          <div class="joke"><strong>Joke:</strong> Mr. Behling: &ldquo;I love all of algebra, but I have to be honest. Exponents are number 4<sup>0</sup> in my heart.&rdquo; (4<sup>0</sup> = 1, so they&apos;re #1!)</div>
-        </div>
+        <div id="v-notes">
+      <div class="topic-grid">
+      <div class="tg-card" onclick="openTopic(0)"><div class="tg-tag">11.1</div><div class="tg-title">Zero &amp; Negative Exponents</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(1)"><div class="tg-tag">11.2</div><div class="tg-title">Multiplying &amp; Dividing Powers</div><div class="tg-arrow">&#8594;</div></div>
+      <div class="tg-card" onclick="openTopic(2)"><div class="tg-tag">11.3</div><div class="tg-title">Raising a Power to a Power</div><div class="tg-arrow">&#8594;</div></div>
       </div>
-
-      <!-- 11.2 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">11.2</span><span class="tlabel">Multiplying &amp; Dividing Powers</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> When you multiply or divide two powers with the same base, there are shortcuts so you don&apos;t have to expand everything.</p>
-          <div class="kc"><div class="kc-lbl">Multiplying Powers — Same Base</div><div class="kc-body">
-            <strong>a<sup>m</sup> &times; a<sup>n</sup> = a<sup>m+n</sup></strong><br>
-            When multiplying powers with the same base, <strong>ADD</strong> the exponents.<br><br>
-            Why? x<sup>3</sup> &middot; x<sup>5</sup> = (x&middot;x&middot;x)(x&middot;x&middot;x&middot;x&middot;x) = x<sup>8</sup> &nbsp;&checkmark;
-          </div></div>
-          <div class="kc"><div class="kc-lbl">Dividing Powers — Same Base</div><div class="kc-body">
-            <strong>a<sup>m</sup> / a<sup>n</sup> = a<sup>m&minus;n</sup></strong><br>
-            When dividing powers with the same base, <strong>SUBTRACT</strong> the exponents.<br><br>
-            <span class="vw">Top-heavy-bottom-heavy approach</span>: bring the larger exponent to its side and subtract.<br><br>
-            Example: x<sup>7</sup> / x<sup>3</sup> = x<sup>7&minus;3</sup> = x<sup>4</sup>
-          </div></div>
-          <div class="tip"><div class="tip-lbl">Coefficients are separate!</div><div class="tip-body">
-            Handle coefficients (numbers out front) separately from the variable exponents.<br>
-            (2x<sup>3</sup>)(5x<sup>2</sup>) = (2&times;5)(x<sup>3+2</sup>) = 10x<sup>5</sup>
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Multiply: x<sup>3</sup> &middot; x<sup>5</sup></div><div class="wsteps">
-            <span class="eq">Same base (x) &rarr; ADD exponents</span>
-            <span class="eq eq-div">= x<sup>3+5</sup> = x<sup>8</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Multiply: (2x<sup>3</sup>)(5x&sup2;)</div><div class="wsteps">
-            <span class="eq">Coefficients: 2 &times; 5 = 10</span>
-            <span class="eq">Variables: x&sup3; &middot; x&sup2; = x<sup>3+2</sup> = x<sup>5</sup></span>
-            <span class="eq eq-div">= 10x<sup>5</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Multiply: (4x&sup2;)(3x<sup>4</sup>)</div><div class="wsteps">
-            <span class="eq">Coefficients: 4 &times; 3 = 12</span>
-            <span class="eq">Variables: x&sup2; &middot; x&#8308; = x<sup>2+4</sup> = x<sup>6</sup></span>
-            <span class="eq eq-div">= 12x<sup>6</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Divide: x<sup>9</sup> / x<sup>3</sup></div><div class="wsteps">
-            <span class="eq">Same base (x) &rarr; SUBTRACT exponents</span>
-            <span class="eq eq-div">= x<sup>9&minus;3</sup> = x<sup>6</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Divide: 12x<sup>7</sup> / 4x<sup>2</sup></div><div class="wsteps">
-            <span class="eq">Coefficients: 12 &divide; 4 = 3</span>
-            <span class="eq">Variables: x<sup>7&minus;2</sup> = x<sup>5</sup></span>
-            <span class="eq eq-div">= 3x<sup>5</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Divide: x<sup>5</sup> / x<sup>8</sup></div><div class="wsteps">
-            <span class="eq">5 &minus; 8 = &minus;3</span>
-            <span class="eq eq-div">= x<sup>&minus;3</sup> = 1/x&sup3; (apply negative exponent rule)</span>
-          </div></div>
-        </div>
-      </div>
-
-      <!-- 11.3 -->
-      <div class="tblock">
-        <div class="thead" onclick="tog(this)">
-          <span class="ttag">11.3</span><span class="tlabel">Raising a Power to a Power</span>
-          <span class="tchev">&#9660;</span>
-        </div>
-        <div class="tbody">
-          <p class="note-p"><em>Connect to prior knowledge:</em> Now we look at what happens when an entire power is raised to another power &mdash; like (x<sup>3</sup>)<sup>4</sup>.</p>
-          <div class="kc"><div class="kc-lbl">Power to a Power Rule</div><div class="kc-body">
-            <strong>(a<sup>m</sup>)<sup>n</sup> = a<sup>m &times; n</sup></strong><br>
-            When a power is raised to a power, <strong>MULTIPLY</strong> the exponents.<br><br>
-            Why? (x<sup>3</sup>)<sup>4</sup> means x<sup>3</sup> multiplied 4 times = x<sup>3+3+3+3</sup> = x<sup>12</sup> &nbsp;&checkmark;
-          </div></div>
-          <div class="warn"><div class="warn-lbl">Distribute to ALL factors!</div><div class="warn-body">
-            When you raise a product inside parentheses to a power, the outer exponent applies to <strong>every factor</strong> inside &mdash; coefficient AND variable(s).<br><br>
-            (2x&sup2;)&sup3; = 2&sup3; &middot; (x&sup2;)&sup3; = 8x<sup>6</sup> &nbsp;&larr; don&apos;t forget to cube the 2!
-          </div></div>
-          <p class="note-h">Worked examples</p>
-          <div class="worked"><div class="wlbl">Example 1 &mdash; (x&sup2;)<sup>5</sup></div><div class="wsteps">
-            <span class="eq">Multiply the exponents: 2 &times; 5 = 10</span>
-            <span class="eq eq-div">= x<sup>10</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 2 &mdash; (3x<sup>4</sup>)&sup2;</div><div class="wsteps">
-            <span class="eq">Apply exponent to each factor:</span>
-            <span class="eq">3&sup2; = 9 &nbsp;&nbsp;and&nbsp;&nbsp; (x<sup>4</sup>)&sup2; = x<sup>4&times;2</sup> = x<sup>8</sup></span>
-            <span class="eq eq-div">= 9x<sup>8</sup></span>
-          </div></div>
-          <div class="worked"><div class="wlbl">Example 3 &mdash; (2x&sup3;y)&sup3;</div><div class="wsteps">
-            <span class="eq">Apply exponent to each factor:</span>
-            <span class="eq">2&sup3; = 8 &nbsp;&nbsp;and&nbsp;&nbsp; (x&sup3;)&sup3; = x<sup>9</sup> &nbsp;&nbsp;and&nbsp;&nbsp; y&sup3; = y&sup3;</span>
-            <span class="eq eq-div">= 8x<sup>9</sup>y&sup3;</span>
-          </div></div>
-        </div>
-      </div>
-
     </div><!-- end notes -->
 
     <!-- VOCAB -->
@@ -464,6 +331,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
+<div class="topic-modal-overlay" id="topic-overlay" onclick="if(event.target===this)closeTopic()">
+  <div class="topic-modal">
+    <div class="topic-modal-header">
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+        <span class="topic-modal-tag" id="modal-tag"></span>
+        <span class="topic-modal-title" id="modal-title"></span>
+      </div>
+      <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
+        <div id="modal-vid-btns"></div>
+        <button class="topic-modal-close" onclick="closeTopic()">&#10005; Close</button>
+      </div>
+    </div>
+    <div class="topic-modal-body" id="modal-body"></div>
+  </div>
+</div>
 <script>
 const UNIT={id:11,name:"Exponent Properties",topics:[
   {id:"11.1",label:"Zero & Negative Exponents",videos:[{"label": "Zero Exp.", "id": "1MIU3ZYJJsg"}, {"label": "Neg. Exp.", "id": "BBgQFUWraj0"}]},
@@ -471,6 +353,11 @@ const UNIT={id:11,name:"Exponent Properties",topics:[
   {id:"11.3",label:"Raising a Power to a Power",videos:[{"label": "Watch", "id": "CNHVv1Q2RnQ"}]},
 ]};
 
+const TOPICS=[
+  {tag:"11.1",title:"Zero &amp; Negative Exponents",videos:[{"label": "Zero Exp.", "url": "https://youtu.be/1MIU3ZYJJsg"}, {"label": "Neg. Exp.", "url": "https://youtu.be/BBgQFUWraj0"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> You already know that 2<sup>3<\/sup> = 2 &times; 2 &times; 2 = 8. That&apos;s repeated multiplication. Now we extend this idea to <span class=\"vw\">zero exponents<\/span> and <span class=\"vw\">negative exponents<\/span>.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Base, Exponent, Power<\/div><div class=\"kc-body\">\n            In the expression <strong>b<sup>n<\/sup><\/strong>:<br>\n            &bull; <strong>b<\/strong> is the <em>base<\/em> &mdash; the number being multiplied<br>\n            &bull; <strong>n<\/strong> is the <em>exponent<\/em> &mdash; how many times to multiply<br>\n            &bull; The whole thing (b<sup>n<\/sup>) is a <em>power<\/em><br><br>\n            Example: 5<sup>3<\/sup> = 5 &times; 5 &times; 5 = 125 &nbsp;(base=5, exponent=3, power=125)\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Zero Exponent Rule<\/div><div class=\"kc-body\">\n            <strong>Anything raised to the zero power equals 1.<\/strong><br>\n            b<sup>0<\/sup> = 1 &nbsp;(for any b &ne; 0)<br><br>\n            Examples: 5<sup>0<\/sup> = 1 &nbsp;&bull;&nbsp; x<sup>0<\/sup> = 1 &nbsp;&bull;&nbsp; (&#8722;3)<sup>0<\/sup> = 1 &nbsp;&bull;&nbsp; 100<sup>0<\/sup> = 1\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Watch the parentheses!<\/div><div class=\"warn-body\">\n            <strong>(&minus;3)<sup>0<\/sup> = 1<\/strong> &nbsp;&larr; the negative is inside, so the whole thing is raised to 0.<br>\n            <strong>&minus;3<sup>0<\/sup> = &minus;(3<sup>0<\/sup>) = &minus;1<\/strong> &nbsp;&larr; only 3 is raised to 0, then we negate.<br><br>\n            Parentheses matter!\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Negative Exponent Rule<\/div><div class=\"kc-body\">\n            A negative exponent means <strong>reciprocal<\/strong> (flip it):<br>\n            <strong>a<sup>&minus;n<\/sup> = 1 / a<sup>n<\/sup><\/strong><br><br>\n            &bull; Negative exponent <strong>on top<\/strong> of a fraction: move it to the <strong>bottom<\/strong>, make the exponent positive.<br>\n            &bull; Negative exponent <strong>on bottom<\/strong> of a fraction: move it to the <strong>top<\/strong>, make the exponent positive.<br><br>\n            Examples:<br>\n            x<sup>&minus;3<\/sup> = 1/x<sup>3<\/sup><br>\n            1/x<sup>&minus;4<\/sup> = x<sup>4<\/sup><br>\n            2<sup>&minus;3<\/sup> = 1/2<sup>3<\/sup> = 1/8\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; Simplify: 4<sup>&minus;2<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">4<sup>&minus;2<\/sup> = 1/4&sup2; = 1/16<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; Simplify: x<sup>&minus;1<\/sup> &middot; y&sup2;<\/div><div class=\"wsteps\">\n            <span class=\"eq\">x<sup>&minus;1<\/sup> = 1/x<\/span>\n            <span class=\"eq eq-div\">= y&sup2; / x<\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; Simplify: 3 / x<sup>&minus;2<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">x<sup>&minus;2<\/sup> is on the bottom with a negative exponent<\/span>\n            <span class=\"eq\">Move x&sup2; to the top (exponent becomes positive)<\/span>\n            <span class=\"eq eq-div\">= 3x&sup2;<\/span>\n          <\/div><\/div>\n          <div class=\"joke\"><strong>Joke:<\/strong> Mr. Behling: &ldquo;I love all of algebra, but I have to be honest. Exponents are number 4<sup>0<\/sup> in my heart.&rdquo; (4<sup>0<\/sup> = 1, so they&apos;re #1!)<\/div>"},
+  {tag:"11.2",title:"Multiplying &amp; Dividing Powers",videos:[{"label": "Multiply", "url": "https://youtu.be/H4moEg-KRCg"}, {"label": "Divide", "url": "https://youtu.be/R6JVl7NeRHU"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> When you multiply or divide two powers with the same base, there are shortcuts so you don&apos;t have to expand everything.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Multiplying Powers \u2014 Same Base<\/div><div class=\"kc-body\">\n            <strong>a<sup>m<\/sup> &times; a<sup>n<\/sup> = a<sup>m+n<\/sup><\/strong><br>\n            When multiplying powers with the same base, <strong>ADD<\/strong> the exponents.<br><br>\n            Why? x<sup>3<\/sup> &middot; x<sup>5<\/sup> = (x&middot;x&middot;x)(x&middot;x&middot;x&middot;x&middot;x) = x<sup>8<\/sup> &nbsp;&checkmark;\n          <\/div><\/div>\n          <div class=\"kc\"><div class=\"kc-lbl\">Dividing Powers \u2014 Same Base<\/div><div class=\"kc-body\">\n            <strong>a<sup>m<\/sup> / a<sup>n<\/sup> = a<sup>m&minus;n<\/sup><\/strong><br>\n            When dividing powers with the same base, <strong>SUBTRACT<\/strong> the exponents.<br><br>\n            <span class=\"vw\">Top-heavy-bottom-heavy approach<\/span>: bring the larger exponent to its side and subtract.<br><br>\n            Example: x<sup>7<\/sup> / x<sup>3<\/sup> = x<sup>7&minus;3<\/sup> = x<sup>4<\/sup>\n          <\/div><\/div>\n          <div class=\"tip\"><div class=\"tip-lbl\">Coefficients are separate!<\/div><div class=\"tip-body\">\n            Handle coefficients (numbers out front) separately from the variable exponents.<br>\n            (2x<sup>3<\/sup>)(5x<sup>2<\/sup>) = (2&times;5)(x<sup>3+2<\/sup>) = 10x<sup>5<\/sup>\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Multiply: x<sup>3<\/sup> &middot; x<sup>5<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">Same base (x) &rarr; ADD exponents<\/span>\n            <span class=\"eq eq-div\">= x<sup>3+5<\/sup> = x<sup>8<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Multiply: (2x<sup>3<\/sup>)(5x&sup2;)<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Coefficients: 2 &times; 5 = 10<\/span>\n            <span class=\"eq\">Variables: x&sup3; &middot; x&sup2; = x<sup>3+2<\/sup> = x<sup>5<\/sup><\/span>\n            <span class=\"eq eq-div\">= 10x<sup>5<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Multiply: (4x&sup2;)(3x<sup>4<\/sup>)<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Coefficients: 4 &times; 3 = 12<\/span>\n            <span class=\"eq\">Variables: x&sup2; &middot; x&#8308; = x<sup>2+4<\/sup> = x<sup>6<\/sup><\/span>\n            <span class=\"eq eq-div\">= 12x<sup>6<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Divide: x<sup>9<\/sup> / x<sup>3<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">Same base (x) &rarr; SUBTRACT exponents<\/span>\n            <span class=\"eq eq-div\">= x<sup>9&minus;3<\/sup> = x<sup>6<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Divide: 12x<sup>7<\/sup> / 4x<sup>2<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">Coefficients: 12 &divide; 4 = 3<\/span>\n            <span class=\"eq\">Variables: x<sup>7&minus;2<\/sup> = x<sup>5<\/sup><\/span>\n            <span class=\"eq eq-div\">= 3x<sup>5<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Divide: x<sup>5<\/sup> / x<sup>8<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">5 &minus; 8 = &minus;3<\/span>\n            <span class=\"eq eq-div\">= x<sup>&minus;3<\/sup> = 1/x&sup3; (apply negative exponent rule)<\/span>\n          <\/div><\/div>"},
+  {tag:"11.3",title:"Raising a Power to a Power",videos:[{"label": "Watch", "url": "https://youtu.be/CNHVv1Q2RnQ"}],html:"<p class=\"note-p\"><em>Connect to prior knowledge:<\/em> Now we look at what happens when an entire power is raised to another power &mdash; like (x<sup>3<\/sup>)<sup>4<\/sup>.<\/p>\n          <div class=\"kc\"><div class=\"kc-lbl\">Power to a Power Rule<\/div><div class=\"kc-body\">\n            <strong>(a<sup>m<\/sup>)<sup>n<\/sup> = a<sup>m &times; n<\/sup><\/strong><br>\n            When a power is raised to a power, <strong>MULTIPLY<\/strong> the exponents.<br><br>\n            Why? (x<sup>3<\/sup>)<sup>4<\/sup> means x<sup>3<\/sup> multiplied 4 times = x<sup>3+3+3+3<\/sup> = x<sup>12<\/sup> &nbsp;&checkmark;\n          <\/div><\/div>\n          <div class=\"warn\"><div class=\"warn-lbl\">Distribute to ALL factors!<\/div><div class=\"warn-body\">\n            When you raise a product inside parentheses to a power, the outer exponent applies to <strong>every factor<\/strong> inside &mdash; coefficient AND variable(s).<br><br>\n            (2x&sup2;)&sup3; = 2&sup3; &middot; (x&sup2;)&sup3; = 8x<sup>6<\/sup> &nbsp;&larr; don&apos;t forget to cube the 2!\n          <\/div><\/div>\n          <p class=\"note-h\">Worked examples<\/p>\n          <div class=\"worked\"><div class=\"wlbl\">Example 1 &mdash; (x&sup2;)<sup>5<\/sup><\/div><div class=\"wsteps\">\n            <span class=\"eq\">Multiply the exponents: 2 &times; 5 = 10<\/span>\n            <span class=\"eq eq-div\">= x<sup>10<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 2 &mdash; (3x<sup>4<\/sup>)&sup2;<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Apply exponent to each factor:<\/span>\n            <span class=\"eq\">3&sup2; = 9 &nbsp;&nbsp;and&nbsp;&nbsp; (x<sup>4<\/sup>)&sup2; = x<sup>4&times;2<\/sup> = x<sup>8<\/sup><\/span>\n            <span class=\"eq eq-div\">= 9x<sup>8<\/sup><\/span>\n          <\/div><\/div>\n          <div class=\"worked\"><div class=\"wlbl\">Example 3 &mdash; (2x&sup3;y)&sup3;<\/div><div class=\"wsteps\">\n            <span class=\"eq\">Apply exponent to each factor:<\/span>\n            <span class=\"eq\">2&sup3; = 8 &nbsp;&nbsp;and&nbsp;&nbsp; (x&sup3;)&sup3; = x<sup>9<\/sup> &nbsp;&nbsp;and&nbsp;&nbsp; y&sup3; = y&sup3;<\/span>\n            <span class=\"eq eq-div\">= 8x<sup>9<\/sup>y&sup3;<\/span>\n          <\/div><\/div>"}
+];
 const UNITS=[
   {n:"1–4",file:"unit1-4.html",name:"Getting the Rust Off"},
   {n:"5",file:"unit5.html",name:"Solving Linear Equations"},
@@ -486,28 +373,6 @@ const UNITS=[
   {n:"15",file:"unit15.html",name:"Graphing Quadratic Functions"},
   {n:"16",file:"unit16.html",name:"Solving Quadratic Equations"},
 ];
-// V1.1 — Auto-render video buttons from UNIT.topics[].videos
-document.addEventListener('DOMContentLoaded',function(){
-  var theads=document.querySelectorAll('#v-notes .thead');
-  UNIT.topics.forEach(function(t,i){
-    if(!t.videos||!t.videos.length)return;
-    var h=theads[i];if(!h)return;
-    // Skip if already has vid-btn (unit5 hardcoded)
-    if(h.querySelector('.vid-btn'))return;
-    var chev=h.querySelector('.tchev');
-    t.videos.forEach(function(v,j){
-      var a=document.createElement('a');
-      a.href='https://youtu.be/'+v.id;
-      a.target='_blank';a.rel='noopener noreferrer';
-      a.className='vid-btn';
-      a.innerHTML='&#9654; '+v.label;
-      a.onclick=function(e){e.stopPropagation();};
-      if(j>0)a.style.marginLeft='3px';
-      if(chev)h.insertBefore(a,chev);else h.appendChild(a);
-    });
-  });
-});
-
 (function(){
   const nav=document.getElementById('unit-nav');
   UNITS.forEach(u=>{
@@ -626,7 +491,6 @@ function isMatch(u,c){
   return false;
 }
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
-function tog(h){const b=h.nextElementSibling,ch=h.querySelector('.tchev'),o=b.classList.contains('open');b.classList.toggle('open',!o);h.classList.toggle('open',!o);ch.classList.toggle('open',!o);}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
 function setQFilter(f,btn){vqFilter=f;document.querySelectorAll('.pqf-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');loadVQ();}
@@ -775,6 +639,23 @@ function showHint(i,pfx){
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
+function openTopic(i){
+  var t=TOPICS[i];
+  document.getElementById('modal-tag').innerHTML=t.tag;
+  document.getElementById('modal-title').innerHTML=t.title;
+  document.getElementById('modal-body').innerHTML=t.html;
+  var vb=document.getElementById('modal-vid-btns');
+  vb.innerHTML=(t.videos||[]).map(function(v){
+    return '<a class="vid-btn" href="'+v.url+'" target="_blank" rel="noopener">&#9654; '+v.label+'</a>';
+  }).join('');
+  document.getElementById('topic-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeTopic(){
+  document.getElementById('topic-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 </body>
 </html>
