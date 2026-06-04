@@ -1017,7 +1017,7 @@ function loadP(){
   const el=document.getElementById('plist');el.innerHTML='';
   document.getElementById('p-results').style.display='none';
   document.getElementById('pmeta').textContent='Showing 5 of 15 problems — '+curTopic;
-  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic.replace('unit','Unit '))));
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic.replace('unit','Topic '))));
 }
 function checkAllDone(){
   const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
@@ -1045,7 +1045,7 @@ function loadT(){
   document.getElementById('t-results').style.display='none';
   document.getElementById('sbtn').classList.remove('hidden');
   document.getElementById('rbtn').classList.add('hidden');
-  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t.replace('unit','Unit '))));
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t.replace('unit','Topic '))));
 }
 function renderBars(map){
   const lbl={'unit1':'Unit 1','unit2':'Unit 2','unit3':'Unit 3','unit4':'Unit 4'};

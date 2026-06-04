@@ -711,7 +711,7 @@ return s;}
 function mkP(p,i,m,topic){
   const d=document.createElement('div');d.className='pcard';d.id=m+'c'+i;
   const h=encodeURIComponent(p.h);
-  d.innerHTML='<div class="pmeta2"><div class="pnum">'+(i+1)+'</div><span class="ptag">Topic '+topic+'</span></div>'
+  d.innerHTML='<div class="pmeta2"><div class="pnum">'+(i+1)+'</div><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'
     +'<div class="pmath">'+formatEq(p.eq)+'</div>'
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
