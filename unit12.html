@@ -532,8 +532,8 @@ function isMatch(u,c){
   const un=norm(u),cn=norm(c);
   if(un===cn)return true;
   // handle "x = 5" vs "5"
-  const ux=un.replace(/<sup>x</sup>=/,'');
-  const cx=cn.replace(/<sup>x</sup>=/,'');
+  const ux=un.replace(/<sup>x<\/sup>=/,'');
+  const cx=cn.replace(/<sup>x<\/sup>=/,'');
   if(ux===cx)return true;
   // handle fraction answers like 3/2
   return un===cn;
