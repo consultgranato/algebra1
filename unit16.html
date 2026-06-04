@@ -141,8 +141,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ckey.clr{background:#faeeda;color:#633806;border-color:#f0b45a}
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .pmeta-txt{font-size:13px;color:var(--text2)}
-.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
-.nbtn:hover{background:var(--bg3)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:6px 14px;border:1.5px solid var(--nnp);border-radius:var(--radius-md);background:transparent;color:var(--nnp);font-weight:600;cursor:pointer;transition:all .15s}
+.nbtn:hover{background:var(--nnp);color:#fff}
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
 .pcard.ok{border-color:var(--success-border)}
 .pcard.no{border-color:var(--danger-border)}
@@ -150,15 +150,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
 .ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
 .cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
 .cbtn:hover{background:var(--nnpl)}
-.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
-.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.hbtn{background:#faeeda;border:1px solid #f0b45a;color:#854f0b;padding:6px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hbtn:hover{background:#f5d9a0}
 .fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
 .fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
 .fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
@@ -215,15 +215,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .desmos-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
 .desmos-close:hover{background:rgba(255,255,255,.3)}
 .desmos-iframe{width:100%;flex:1;border:none;display:block}
+.nn-logo-link{text-decoration:none;display:inline-flex}
+.nn-logo{cursor:pointer}
+
+.graph-it-btn{display:inline-flex;align-items:center;gap:4px;background:#eaf3de;border:1px solid #b0d17c;color:#27500a;padding:5px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;margin-top:.25rem;transition:all .15s}
+.graph-it-btn:hover{background:#d4ebbb}
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="nn-header">
     <div class="nn-top">
-      <div class="nn-logo">
+      <a href="index.html" class="nn-logo-link"><div class="nn-logo">
         <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
-      </div>
+      </div></a>
       <div>
         <div class="nn-school">Niles North High School &middot; D219</div>
         <div class="nn-name">Algebra 1</div>
@@ -255,6 +260,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             Steps: (1) Get x&#xB2; alone &nbsp; (2) Take &#xB1;&radic; of both sides &nbsp; (3) Simplify<br><br>
             Always write <strong>&plusmn;</strong> — there are two solutions unless the right side is 0!
           </div></div>
+          <div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.55rem 0"><div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.5rem">Three Possible Cases</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem"><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="4.6,18.9 10.9,41.0 17.2,60.1 23.5,76.2 29.8,89.5 80.2,89.5 86.5,76.2 92.8,60.1 99.1,41.0 105.4,18.9" fill="none" stroke="#4a2c7a" stroke-width="2.5" stroke-linejoin="round"/><circle cx="19" cy="65" r="4" fill="#4a2c7a"/><circle cx="91" cy="65" r="4" fill="#4a2c7a"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D &gt; 0: two roots</text></svg></div><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="17.2,12.1 23.5,28.2 29.8,41.5 36.1,51.8 42.4,59.1 48.7,63.5 55.0,65.0 61.3,63.5 67.6,59.1 73.9,51.8 80.2,41.5 86.5,28.2 92.8,12.1" fill="none" stroke="#2d7a3b" stroke-width="2.5" stroke-linejoin="round"/><circle cx="55" cy="65" r="4" fill="#2d7a3b"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D = 0: one root</text></svg></div><div><svg width="110" height="90" viewBox="0 0 110 90" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto"><line x1="0" y1="65" x2="110" y2="65" stroke="#ccc" stroke-width="1.5"/><line x1="55" y1="0" x2="55" y2="90" stroke="#ccc" stroke-width="1.5"/><polyline points="29.8,5.5 36.1,15.8 42.4,23.1 48.7,27.5 55.0,29.0 61.3,27.5 67.6,23.1 73.9,15.8 80.2,5.5" fill="none" stroke="#a32d2d" stroke-width="2.5" stroke-linejoin="round"/><text x="55" y="85" text-anchor="middle" font-size="9" fill="#333" font-weight="600">D &lt; 0: no real roots</text></svg></div></div></div>
           <p class="note-h">Worked examples</p>
           <div class="worked"><div class="wlbl">Example 1 &mdash; x&#xB2; = 25</div><div class="wsteps">
             <span class="eq">x = &plusmn;&radic;25 = &plusmn;5</span>
@@ -344,7 +350,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 16.3 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.3</span><span class="tlabel">The <span class="vw">Quadratic Formula</span></span>
+          <span class="ttag">16.3</span><span class="tlabel">The Quadratic Formula</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -373,7 +379,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 16.4 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">16.4</span><span class="tlabel"><span class="vw">Discriminant</span> &amp; Types of Solutions</span>
+          <span class="ttag">16.4</span><span class="tlabel">Discriminant &amp; Types of Solutions</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -597,21 +603,21 @@ const BANKS={
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (one solution)",h:"a=1,b=-6,c=9. D=36-36=0. x=6/2=3"},
   {q:"Use the quadratic formula to solve:",eq:"4x^2 - 4x - 3 = 0",a:"x = 3/2 or x = -1/2",fmt:"x = ___, x = ___",h:"a=4,b=-4,c=-3. D=16+48=64. x=(4±8)/8"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 + x - 2 = 0",a:"x = 1 or x = -2",fmt:"x = ___, x = ___",h:"a=1,b=1,c=-2. D=1+8=9. x=(-1±3)/2"},
-  {q:"How many solutions does this equation have?",eq:"x^2 + 2x + 5 = 0",a:"no real solutions",fmt:"0, 1, or 2 solutions / 'no real solutions'",h:"D=4-20=-16<0. No real solutions."},
+  {q:"How many solutions does this equation have?",eq:"x^2 + 2x + 5 = 0",graphIt:"y=x^2+2x+5",a:"no real solutions",fmt:"0, 1, or 2 solutions / 'no real solutions'",h:"D=4-20=-16<0. No real solutions."},
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 3x - 10 = 0",a:"x = 5 or x = -2",fmt:"x = ___, x = ___",h:"a=1,b=-3,c=-10. D=9+40=49. x=(3±7)/2"},
   {q:"Use the quadratic formula to solve:",eq:"2x^2 + x - 6 = 0",a:"x = 3/2 or x = -2",fmt:"x = ___, x = ___",h:"a=2,b=1,c=-6. D=1+48=49. x=(-1±7)/4"},
 ],
 '16.4':[
-  {q:"Find the discriminant:",eq:"x^2 - 5x + 4 = 0",a:"9",fmt:"numerical value",h:"D = (-5)^2 - 4(1)(4) = 25-16 = 9"},
-  {q:"Find the discriminant:",eq:"x^2 - 4x + 4 = 0",a:"0",fmt:"numerical value",h:"D = 16 - 16 = 0"},
+  {q:"Find the discriminant:",eq:"x^2 - 5x + 4 = 0",graphIt:"y=x^2-5x+4",a:"9",fmt:"numerical value",h:"D = (-5)^2 - 4(1)(4) = 25-16 = 9"},
+  {q:"Find the discriminant:",eq:"x^2 - 4x + 4 = 0",graphIt:"y=x^2-4x+4",a:"0",fmt:"numerical value",h:"D = 16 - 16 = 0"},
   {q:"Find the discriminant:",eq:"x^2 + 2x + 5 = 0",a:"-16",fmt:"numerical value",h:"D = 4 - 20 = -16"},
   {q:"How many real solutions?",eq:"D = 25",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"D > 0 → two distinct real solutions."},
   {q:"How many real solutions?",eq:"D = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D = 0 → one real solution (double root)."},
   {q:"How many real solutions?",eq:"D = -4",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D < 0 → no real solutions."},
-  {q:"Find the discriminant and number of solutions:",eq:"x^2 + 6x + 9 = 0",a:"D=0, one solution",fmt:"D=___, one/two/no solutions",h:"D=36-36=0. One solution."},
+  {q:"Find the discriminant and number of solutions:",eq:"x^2 + 6x + 9 = 0",graphIt:"y=x^2+6x+9",a:"D=0, one solution",fmt:"D=___, one/two/no solutions",h:"D=36-36=0. One solution."},
   {q:"Find the discriminant:",eq:"2x^2 - 3x + 1 = 0",a:"1",fmt:"numerical value",h:"D = 9 - 4(2)(1) = 9-8 = 1"},
   {q:"How many real solutions?",eq:"x^2 - 2x + 3 = 0",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D = 4-12 = -8 < 0"},
-  {q:"Find the discriminant:",eq:"x^2 - 6x + 5 = 0",a:"16",fmt:"numerical value",h:"D = 36 - 20 = 16"},
+  {q:"Find the discriminant:",eq:"x^2 - 6x + 5 = 0",graphIt:"y=x^2-6x+5",a:"16",fmt:"numerical value",h:"D = 36 - 20 = 16"},
   {q:"How many real solutions?",eq:"4x^2 + 4x + 1 = 0",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"D = 16-16 = 0"},
   {q:"Find the discriminant:",eq:"x^2 + x + 1 = 0",a:"-3",fmt:"numerical value",h:"D = 1 - 4 = -3"},
   {q:"How many real solutions?",eq:"3x^2 - 5x - 2 = 0",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"D = 25+24 = 49 > 0"},
@@ -800,17 +806,18 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
+function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='';
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +graphBtn+'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
@@ -830,6 +837,10 @@ function showHint(i,pfx){
   const p=pfx==='p'?pset[i]:tset[i];
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
+}
+
+function openDesmosWithEq(enc){
+  openDesmos();
 }
 function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}

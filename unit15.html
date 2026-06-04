@@ -130,8 +130,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .pmeta-txt{font-size:13px;color:var(--text2)}
-.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
-.nbtn:hover{background:var(--bg3)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:6px 14px;border:1.5px solid var(--nnp);border-radius:var(--radius-md);background:transparent;color:var(--nnp);font-weight:600;cursor:pointer;transition:all .15s}
+.nbtn:hover{background:var(--nnp);color:#fff}
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
 .pcard.ok{border-color:var(--success-border)}
 .pcard.no{border-color:var(--danger-border)}
@@ -139,15 +139,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
 .ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
 .cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
 .cbtn:hover{background:var(--nnpl)}
-.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
-.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.hbtn{background:#faeeda;border:1px solid #f0b45a;color:#854f0b;padding:6px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hbtn:hover{background:#f5d9a0}
 .fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
 .fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
 .fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
@@ -204,15 +204,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .desmos-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
 .desmos-close:hover{background:rgba(255,255,255,.3)}
 .desmos-iframe{width:100%;flex:1;border:none;display:block}
+.nn-logo-link{text-decoration:none;display:inline-flex}
+.nn-logo{cursor:pointer}
+
+.graph-it-btn{display:inline-flex;align-items:center;gap:4px;background:#eaf3de;border:1px solid #b0d17c;color:#27500a;padding:5px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;margin-top:.25rem;transition:all .15s}
+.graph-it-btn:hover{background:#d4ebbb}
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="nn-header">
     <div class="nn-top">
-      <div class="nn-logo">
+      <a href="index.html" class="nn-logo-link"><div class="nn-logo">
         <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
-      </div>
+      </div></a>
       <div>
         <div class="nn-school">Niles North High School &middot; D219</div>
         <div class="nn-name">Algebra 1</div>
@@ -295,7 +300,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 15.2 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.2</span><span class="tlabel"><span class="vw">Vertex</span> &amp; <span class="vw">Axis of Symmetry</span></span>
+          <span class="ttag">15.2</span><span class="tlabel">Vertex &amp; Axis of Symmetry</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -423,7 +428,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 15.4 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">15.4</span><span class="tlabel">Graphing in <span class="vw">Vertex</span> Form</span>
+          <span class="ttag">15.4</span><span class="tlabel">Graphing in Vertex Form</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -615,7 +620,7 @@ const BANKS={
 '15.1':[
   {q:"Identify a, b, and c:",eq:"y = 2x^2 + 3x - 5",a:"a=2, b=3, c=-5",fmt:"a=___, b=___, c=___",h:"In y=ax^2+bx+c: a=2, b=3, c=-5"},
   {q:"Does the parabola open up or down?",eq:"y = -3x^2 + x + 1",a:"down",fmt:"up or down",h:"a=-3 < 0, so opens down."},
-  {q:"Does the parabola open up or down?",eq:"y = x^2 - 4",a:"up",fmt:"up or down",h:"a=1 > 0, so opens up."},
+  {q:"Does the parabola open up or down?",eq:"y = x^2 - 4",graphIt:"y=x^2-4",a:"up",fmt:"up or down",h:"a=1 > 0, so opens up."},
   {q:"What is the y-intercept?",eq:"y = x^2 + 5x + 6",a:"6",fmt:"numerical value (or coordinate (0,___))",h:"y-intercept: set x=0 → y=c=6"},
   {q:"What is the y-intercept?",eq:"y = -2x^2 + 3x - 1",a:"-1",fmt:"numerical value",h:"y-intercept = c = -1"},
   {q:"Is the parabola narrower or wider than y = x^2?",eq:"y = 4x^2 + 1",a:"narrower",fmt:"narrower or wider",h:"|a|=4 > 1, so narrower."},
@@ -630,11 +635,11 @@ const BANKS={
   {q:"Identify a, b, and c:",eq:"y = 4x^2 - x + 0",a:"a=4, b=-1, c=0",fmt:"a=___, b=___, c=___",h:"a=4, b=-1, c=0"},
 ],
 '15.2':[
-  {q:"Find the axis of symmetry:",eq:"y = x^2 + 4x + 3",a:"x = -2",fmt:"x = ___",h:"AOS = -b/(2a) = -4/(2·1) = -2"},
-  {q:"Find the axis of symmetry:",eq:"y = x^2 - 6x + 8",a:"x = 3",fmt:"x = ___",h:"AOS = -(-6)/(2·1) = 6/2 = 3"},
-  {q:"Find the axis of symmetry:",eq:"y = 2x^2 + 4x - 1",a:"x = -1",fmt:"x = ___",h:"AOS = -4/(2·2) = -4/4 = -1"},
-  {q:"Find the vertex:",eq:"y = x^2 - 4x + 1",a:"(2, -3)",fmt:"(x, y)",h:"AOS: x=-(-4)/(2)=2. y=4-8+1=-3. Vertex: (2,-3)"},
-  {q:"Find the vertex:",eq:"y = x^2 + 2x + 5",a:"(-1, 4)",fmt:"(x, y)",h:"AOS: x=-2/2=-1. y=1-2+5=4. Vertex: (-1,4)"},
+  {q:"Find the axis of symmetry:",eq:"y = x^2 + 4x + 3",graphIt:"y=x^2+4x+3",a:"x = -2",fmt:"x = ___",h:"AOS = -b/(2a) = -4/(2·1) = -2"},
+  {q:"Find the axis of symmetry:",eq:"y = x^2 - 6x + 8",graphIt:"y=x^2-6x+8",a:"x = 3",fmt:"x = ___",h:"AOS = -(-6)/(2·1) = 6/2 = 3"},
+  {q:"Find the axis of symmetry:",eq:"y = 2x^2 + 4x - 1",graphIt:"y=2x^2+4x-1",a:"x = -1",fmt:"x = ___",h:"AOS = -4/(2·2) = -4/4 = -1"},
+  {q:"Find the vertex:",eq:"y = x^2 - 4x + 1",graphIt:"y=x^2-4x+1",a:"(2, -3)",fmt:"(x, y)",h:"AOS: x=-(-4)/(2)=2. y=4-8+1=-3. Vertex: (2,-3)"},
+  {q:"Find the vertex:",eq:"y = x^2 + 2x + 5",graphIt:"y=x^2+2x+5",a:"(-1, 4)",fmt:"(x, y)",h:"AOS: x=-2/2=-1. y=1-2+5=4. Vertex: (-1,4)"},
   {q:"Find the axis of symmetry:",eq:"y = -x^2 + 6x - 2",a:"x = 3",fmt:"x = ___",h:"AOS = -6/(2·(-1)) = -6/-2 = 3"},
   {q:"Find the vertex:",eq:"y = 2x^2 - 8x + 3",a:"(2, -5)",fmt:"(x, y)",h:"AOS: x=8/4=2. y=2(4)-8(2)+3=8-16+3=-5"},
   {q:"Is the vertex a minimum or maximum?",eq:"y = -2x^2 + 4x + 1",a:"maximum",fmt:"minimum or maximum",h:"a=-2 < 0, so vertex is a maximum."},
@@ -647,9 +652,9 @@ const BANKS={
   {q:"Find the axis of symmetry:",eq:"y = 4x^2 + 8x + 1",a:"x = -1",fmt:"x = ___",h:"AOS = -8/(2·4) = -8/8 = -1"},
 ],
 '15.3':[
-  {q:"Find the axis of symmetry and vertex:",eq:"y = x^2 - 8x + 12",a:"x=4, vertex=(4,-4)",fmt:"x=___, vertex=(_,_)",h:"AOS: x=8/2=4. y=16-32+12=-4. Vertex: (4,-4)"},
+  {q:"Find the axis of symmetry and vertex:",eq:"y = x^2 - 8x + 12",graphIt:"y=x^2-8x+12",a:"x=4, vertex=(4,-4)",fmt:"x=___, vertex=(_,_)",h:"AOS: x=8/2=4. y=16-32+12=-4. Vertex: (4,-4)"},
   {q:"What is the y-intercept?",eq:"y = x^2 - 5x + 4",a:"4",fmt:"numerical value",h:"Set x=0: y=c=4"},
-  {q:"Find the vertex:",eq:"y = x^2 + 2x - 3",a:"(-1, -4)",fmt:"(x, y)",h:"AOS: x=-1. y=1-2-3=-4. Vertex: (-1,-4)"},
+  {q:"Find the vertex:",eq:"y = x^2 + 2x - 3",graphIt:"y=x^2+2x-3",a:"(-1, -4)",fmt:"(x, y)",h:"AOS: x=-1. y=1-2-3=-4. Vertex: (-1,-4)"},
   {q:"Identify: AOS, vertex, y-intercept, opens up or down:",eq:"y = 2x^2 - 4x + 1",a:"x=1, vertex=(1,-1), y-int=1, up",fmt:"AOS x=___, vertex=(_,_), y-int=___, up or down",h:"AOS: x=4/4=1. y=2-4+1=-1. c=1 (y-int). a=2>0 (up)."},
   {q:"Does this parabola have x-intercepts?",eq:"y = x^2 + 1",a:"no",fmt:"yes or no",h:"Vertex is (0,1), opens up. Minimum y-value is 1, never crosses x-axis."},
   {q:"Find the y-intercept and vertex:",eq:"y = -x^2 + 4x - 3",a:"y-intercept=-3, vertex=(2,1)",fmt:"y-int=___, vertex=(_,_)",h:"y-int=c=-3. AOS: x=-4/-2=2. y=-4+8-3=1."},
@@ -664,12 +669,12 @@ const BANKS={
   {q:"Find the vertex:",eq:"y = 2x^2 + 8x + 6",a:"(-2, -2)",fmt:"(x, y)",h:"AOS: x=-8/4=-2. y=2(4)+8(-2)+6=8-16+6=-2."},
 ],
 '15.4':[
-  {q:"Identify the vertex:",eq:"y = (x - 3)^2 + 5",a:"(3, 5)",fmt:"(x, y)",h:"h=3, k=5. Vertex: (3,5)"},
-  {q:"Identify the vertex:",eq:"y = (x + 2)^2 - 1",a:"(-2, -1)",fmt:"(x, y)",h:"y=(x-(-2))^2-1. h=-2, k=-1. Vertex: (-2,-1)"},
-  {q:"Identify the vertex:",eq:"y = 2(x - 4)^2 + 3",a:"(4, 3)",fmt:"(x, y)",h:"h=4, k=3. Vertex: (4,3)"},
-  {q:"Does this parabola open up or down?",eq:"y = -3(x + 1)^2 + 5",a:"down",fmt:"up or down",h:"a=-3 < 0, opens down."},
+  {q:"Identify the vertex:",eq:"y = (x - 3)^2 + 5",graphIt:"y=(x-3)^2+5",a:"(3, 5)",fmt:"(x, y)",h:"h=3, k=5. Vertex: (3,5)"},
+  {q:"Identify the vertex:",eq:"y = (x + 2)^2 - 1",graphIt:"y=(x+2)^2-1",a:"(-2, -1)",fmt:"(x, y)",h:"y=(x-(-2))^2-1. h=-2, k=-1. Vertex: (-2,-1)"},
+  {q:"Identify the vertex:",eq:"y = 2(x - 4)^2 + 3",graphIt:"y=2*(x-4)^2+3",a:"(4, 3)",fmt:"(x, y)",h:"h=4, k=3. Vertex: (4,3)"},
+  {q:"Does this parabola open up or down?",eq:"y = -3(x + 1)^2 + 5",graphIt:"y=-3*(x+1)^2+5",a:"down",fmt:"up or down",h:"a=-3 < 0, opens down."},
   {q:"Write the vertex form equation:",eq:"vertex = (2, -1), a = 3",a:"y = 3(x - 2)^2 - 1",fmt:"y = ___",h:"y = a(x-h)^2+k = 3(x-2)^2-1"},
-  {q:"Identify the vertex:",eq:"y = -(x - 5)^2 + 2",a:"(5, 2)",fmt:"(x, y)",h:"h=5, k=2. Vertex: (5,2)"},
+  {q:"Identify the vertex:",eq:"y = -(x - 5)^2 + 2",graphIt:"y=-(x-5)^2+2",a:"(5, 2)",fmt:"(x, y)",h:"h=5, k=2. Vertex: (5,2)"},
   {q:"Write the vertex form equation:",eq:"vertex = (-3, 4), a = 1",a:"y = (x + 3)^2 + 4",fmt:"y = ___",h:"y=(x-(-3))^2+4 = (x+3)^2+4"},
   {q:"Identify the vertex:",eq:"y = (x + 6)^2",a:"(-6, 0)",fmt:"(x, y)",h:"h=-6, k=0. Vertex: (-6,0)"},
   {q:"Does this have a minimum or maximum?",eq:"y = 4(x - 1)^2 - 2",a:"minimum",fmt:"minimum or maximum",h:"a=4 > 0, vertex is minimum."},
@@ -847,17 +852,18 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
+function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='';
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +graphBtn+'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
@@ -877,6 +883,10 @@ function showHint(i,pfx){
   const p=pfx==='p'?pset[i]:tset[i];
   const fb=document.getElementById(pfx+'fb'+i);
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
+}
+
+function openDesmosWithEq(enc){
+  openDesmos();
 }
 function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}

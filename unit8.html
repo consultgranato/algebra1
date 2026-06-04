@@ -47,8 +47,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
 .tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
 .tchev.open{transform:rotate(180deg)}
-.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
-.vid-btn:hover{background:var(--nnp);color:#fff}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
+.vid-btn:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.6)}
 .tbody{padding:1rem 1.3rem;display:none}
 .tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
@@ -132,8 +132,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .pmeta-txt{font-size:13px;color:var(--text2)}
-.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
-.nbtn:hover{background:var(--bg3)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:6px 14px;border:1.5px solid var(--nnp);border-radius:var(--radius-md);background:transparent;color:var(--nnp);font-weight:600;cursor:pointer;transition:all .15s}
+.nbtn:hover{background:var(--nnp);color:#fff}
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
 .pcard.ok{border-color:var(--success-border)}
 .pcard.no{border-color:var(--danger-border)}
@@ -141,15 +141,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
 .ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
 .cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
 .cbtn:hover{background:var(--nnpl)}
-.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
-.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.hbtn{background:#faeeda;border:1px solid #f0b45a;color:#854f0b;padding:6px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hbtn:hover{background:#f5d9a0}
 .fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
 .fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
 .fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
@@ -206,15 +206,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .desmos-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
 .desmos-close:hover{background:rgba(255,255,255,.3)}
 .desmos-iframe{width:100%;flex:1;border:none;display:block}
+.nn-logo-link{text-decoration:none;display:inline-flex}
+.nn-logo{cursor:pointer}
+
+.graph-it-btn{display:inline-flex;align-items:center;gap:4px;background:#eaf3de;border:1px solid #b0d17c;color:#27500a;padding:5px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;margin-top:.25rem;transition:all .15s}
+.graph-it-btn:hover{background:#d4ebbb}
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="nn-header">
     <div class="nn-top">
-      <div class="nn-logo">
+      <a href="index.html" class="nn-logo-link"><div class="nn-logo">
         <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
-      </div>
+      </div></a>
       <div>
         <div class="nn-school">Niles North High School &middot; D219</div>
         <div class="nn-name">Algebra 1</div>
@@ -236,7 +241,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 8.1 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">8.1</span><span class="tlabel">What is <span class="vw">Slope</span>?</span>
+          <span class="ttag">8.1</span><span class="tlabel">What is Slope?</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -348,7 +353,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 8.2 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">8.2</span><span class="tlabel"><span class="vw">Slope</span>-Intercept Form</span>
+          <span class="ttag">8.2</span><span class="tlabel">Slope-Intercept Form</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -724,11 +729,11 @@ const BANKS={
   {q:"Find the slope:",eq:"Points: (-4, 6) and (2, 0)",a:"-1",fmt:"m = ___",h:"m=(0-6)/(2-(-4))=-6/6=-1"},
 ],
 '8.2':[
-  {q:"Identify slope and y-intercept:",eq:"y = 3x + 5",a:"slope = 3, y-intercept = 5",fmt:"slope = ___, y-intercept = ___",h:"In y=mx+b, m=slope and b=y-intercept."},
-  {q:"Identify slope and y-intercept:",eq:"y = -2x + 7",a:"slope = -2, y-intercept = 7",fmt:"slope = ___, y-intercept = ___",h:"m=-2, b=7"},
-  {q:"Identify slope and y-intercept:",eq:"y = x - 4",a:"slope = 1, y-intercept = -4",fmt:"slope = ___, y-intercept = ___",h:"m=1 (coefficient of x is 1), b=-4"},
-  {q:"Identify slope and y-intercept:",eq:"y = (1/2)x + 3",a:"slope = 1/2, y-intercept = 3",fmt:"slope = ___, y-intercept = ___",h:"m=1/2, b=3"},
-  {q:"Identify slope and y-intercept:",eq:"y = -4x",a:"slope = -4, y-intercept = 0",fmt:"slope = ___, y-intercept = ___",h:"m=-4, b=0 (no constant term)"},
+  {q:"Identify slope and y-intercept:",eq:"y = 3x + 5",graphIt:"y=3x+5",a:"slope = 3, y-intercept = 5",fmt:"slope = ___, y-intercept = ___",h:"In y=mx+b, m=slope and b=y-intercept."},
+  {q:"Identify slope and y-intercept:",eq:"y = -2x + 7",graphIt:"y=-2x+7",a:"slope = -2, y-intercept = 7",fmt:"slope = ___, y-intercept = ___",h:"m=-2, b=7"},
+  {q:"Identify slope and y-intercept:",eq:"y = x - 4",graphIt:"y=x-4",a:"slope = 1, y-intercept = -4",fmt:"slope = ___, y-intercept = ___",h:"m=1 (coefficient of x is 1), b=-4"},
+  {q:"Identify slope and y-intercept:",eq:"y = (1/2)x + 3",graphIt:"y=(1/2)x+3",a:"slope = 1/2, y-intercept = 3",fmt:"slope = ___, y-intercept = ___",h:"m=1/2, b=3"},
+  {q:"Identify slope and y-intercept:",eq:"y = -4x",graphIt:"y=-4x",a:"slope = -4, y-intercept = 0",fmt:"slope = ___, y-intercept = ___",h:"m=-4, b=0 (no constant term)"},
   {q:"What is the y-intercept of:",eq:"y = 2x + 9",a:"9",fmt:"y-intercept = ___",h:"b=9. Point (0, 9)."},
   {q:"What is the slope of:",eq:"y = -5x + 1",a:"-5",fmt:"m = ___",h:"Coefficient of x is -5."},
   {q:"Write the equation in slope-intercept form given:",eq:"slope = 2, y-intercept = -3",a:"y = 2x - 3",fmt:"y = ___",h:"Plug m=2 and b=-3 into y=mx+b."},
@@ -741,11 +746,11 @@ const BANKS={
   {q:"Write the equation given:",eq:"slope = 3, y-intercept = 0",a:"y = 3x",fmt:"y = ___",h:"b=0 so no constant: y=3x"},
 ],
 '8.3':[
-  {q:"Write the equation of the line:",eq:"slope = 2, through (3, 7)",a:"y = 2x + 1",fmt:"y = ___",h:"y-7=2(x-3) → y=2x-6+7 → y=2x+1"},
-  {q:"Write the equation of the line:",eq:"slope = -1, through (4, 2)",a:"y = -x + 6",fmt:"y = ___",h:"y-2=-1(x-4) → y=-x+4+2 → y=-x+6"},
-  {q:"Write the equation of the line:",eq:"slope = 3, through (1, 5)",a:"y = 3x + 2",fmt:"y = ___",h:"y-5=3(x-1) → y=3x-3+5 → y=3x+2"},
-  {q:"Write the equation of the line:",eq:"slope = -2, through (0, 4)",a:"y = -2x + 4",fmt:"y = ___",h:"When point is (0,b), b=4 directly: y=-2x+4"},
-  {q:"Write the equation of the line:",eq:"through (0, 3) and (2, 7)",a:"y = 2x + 3",fmt:"y = ___",h:"m=(7-3)/(2-0)=4/2=2. b=3. y=2x+3"},
+  {q:"Write the equation of the line:",eq:"slope = 2, through (3, 7)",a:"y = 2x + 1",graphIt:"y=2x+1",fmt:"y = ___",h:"y-7=2(x-3) → y=2x-6+7 → y=2x+1"},
+  {q:"Write the equation of the line:",eq:"slope = -1, through (4, 2)",a:"y = -x + 6",graphIt:"y=-x+6",fmt:"y = ___",h:"y-2=-1(x-4) → y=-x+4+2 → y=-x+6"},
+  {q:"Write the equation of the line:",eq:"slope = 3, through (1, 5)",a:"y = 3x + 2",graphIt:"y=3x+2",fmt:"y = ___",h:"y-5=3(x-1) → y=3x-3+5 → y=3x+2"},
+  {q:"Write the equation of the line:",eq:"slope = -2, through (0, 4)",a:"y = -2x + 4",graphIt:"y=-2x+4",fmt:"y = ___",h:"When point is (0,b), b=4 directly: y=-2x+4"},
+  {q:"Write the equation of the line:",eq:"through (0, 3) and (2, 7)",a:"y = 2x + 3",graphIt:"y=2x+3",fmt:"y = ___",h:"m=(7-3)/(2-0)=4/2=2. b=3. y=2x+3"},
   {q:"Write the equation of the line:",eq:"through (1, 4) and (3, 8)",a:"y = 2x + 2",fmt:"y = ___",h:"m=(8-4)/(3-1)=4/2=2. y-4=2(x-1) → y=2x+2"},
   {q:"Write the equation of the line:",eq:"through (0, -1) and (3, 5)",a:"y = 2x - 1",fmt:"y = ___",h:"m=(5-(-1))/(3-0)=6/3=2. b=-1. y=2x-1"},
   {q:"Write the equation of the line:",eq:"through (2, 1) and (4, 7)",a:"y = 3x - 5",fmt:"y = ___",h:"m=(7-1)/(4-2)=6/2=3. y-1=3(x-2) → y=3x-5"},
@@ -941,17 +946,18 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
+function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='';
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +graphBtn+'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
@@ -973,6 +979,10 @@ function showHint(i,pfx){
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
 
+
+function openDesmosWithEq(enc){
+  openDesmos();
+}
 function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});

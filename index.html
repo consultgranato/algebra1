@@ -24,8 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .page-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:.3rem}
 .page-sub{font-size:13px;color:var(--text2);margin-bottom:1.5rem}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
-.unit-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem 1rem;text-decoration:none;color:var(--text);display:block;position:relative;transition:box-shadow .15s,transform .15s;cursor:pointer;min-height:110px}
-.unit-card:hover{box-shadow:0 4px 20px rgba(74,44,122,.15);transform:translateY(-2px);border-color:#c4b5e8}
+.unit-card{background:var(--bg2);border:0.5px solid var(--border);border-left:3px solid var(--nnp);border-radius:var(--radius-lg);padding:1.1rem 1rem;text-decoration:none;color:var(--text);display:block;position:relative;transition:box-shadow .15s,transform .15s,border-color .15s;cursor:pointer;min-height:110px}
+.unit-card:hover{box-shadow:0 4px 12px rgba(74,44,122,.12);transform:translateY(-1px);border-left-color:var(--nnpl)}
 .u-badge{display:inline-block;background:var(--nnp);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:4px;letter-spacing:.4px;margin-bottom:.55rem}
 .u-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:.3rem}
 .u-meta{font-size:11px;color:var(--text3);font-weight:500}
@@ -75,7 +75,7 @@ footer{background:var(--nnpd);padding:.85rem 1.5rem;text-align:center;font-size:
     <a href="unit1-4.html" class="unit-card">
       <span class="u-badge">1–4</span>
       <div class="u-name">Getting the Rust Off</div>
-      <div class="u-meta">13 sections</div>
+      <div class="u-meta">13 topics</div>
       <span class="u-arrow">&#8594;</span>
     </a>
     <a href="unit5.html" class="unit-card">

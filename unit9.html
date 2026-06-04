@@ -47,8 +47,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tlabel{font-size:14px;font-weight:500;flex:1;min-width:120px}
 .tchev{font-size:12px;color:var(--text3);transition:transform .2s;margin-left:auto;flex-shrink:0}
 .tchev.open{transform:rotate(180deg)}
-.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 9px;border-radius:20px;background:#ede9f7;color:var(--nnp);border:0.5px solid #c4b5e8;text-decoration:none;font-weight:600;white-space:nowrap;flex-shrink:0}
-.vid-btn:hover{background:var(--nnp);color:#fff}
+.vid-btn{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:20px;background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.35);text-decoration:none;font-weight:500;white-space:nowrap;flex-shrink:0;cursor:pointer;transition:all .15s}
+.vid-btn:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.6)}
 .tbody{padding:1rem 1.3rem;display:none}
 .tbody.open{display:block}
 .note-p{font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:.8rem}
@@ -132,8 +132,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .calc-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
 .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
 .pmeta-txt{font-size:13px;color:var(--text2)}
-.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:5px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-md);background:var(--bg2);color:var(--text);cursor:pointer}
-.nbtn:hover{background:var(--bg3)}
+.nbtn{display:flex;align-items:center;gap:4px;font-size:12px;padding:6px 14px;border:1.5px solid var(--nnp);border-radius:var(--radius-md);background:transparent;color:var(--nnp);font-weight:600;cursor:pointer;transition:all .15s}
+.nbtn:hover{background:var(--nnp);color:#fff}
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
 .pcard.ok{border-color:var(--success-border)}
 .pcard.no{border-color:var(--danger-border)}
@@ -141,15 +141,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
 .ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
-.pmath{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--radius-md);padding:.45rem .8rem;margin:.25rem 0 .35rem;font-size:14px;line-height:2.2;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;color:var(--text);min-height:40px;font-family:'Courier New',monospace}
+.pmath{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-md);padding:.55rem 1rem;margin:.25rem 0 .35rem;font-size:15px;line-height:2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:40px}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
 .ar{display:flex;gap:.35rem;align-items:center;flex-wrap:wrap}
 .ai{flex:1;min-width:90px;padding:6px 9px;border:0.5px solid var(--border2);border-radius:var(--radius-md);font-size:13px;background:var(--bg2);color:var(--text)}
 .ai:focus{outline:none;border-color:var(--nnpl);box-shadow:0 0 0 2px rgba(74,44,122,.1)}
 .cbtn{background:var(--nnp);color:#fff;border:none;padding:6px 11px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
 .cbtn:hover{background:var(--nnpl)}
-.hbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:6px 8px;border-radius:var(--radius-md);font-size:11px;cursor:pointer;white-space:nowrap}
-.hbtn:hover{border-color:var(--nnpl);color:var(--nnpl)}
+.hbtn{background:#faeeda;border:1px solid #f0b45a;color:#854f0b;padding:6px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap}
+.hbtn:hover{background:#f5d9a0}
 .fb{font-size:12px;padding:.38rem .65rem;border-radius:var(--radius-md);margin-top:.3rem;display:none;align-items:center;gap:.35rem}
 .fb.ok{background:var(--success-bg);color:var(--success-text);display:flex}
 .fb.no{background:var(--danger-bg);color:var(--danger-text);display:flex}
@@ -206,15 +206,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .desmos-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
 .desmos-close:hover{background:rgba(255,255,255,.3)}
 .desmos-iframe{width:100%;flex:1;border:none;display:block}
+.nn-logo-link{text-decoration:none;display:inline-flex}
+.nn-logo{cursor:pointer}
+
+.graph-it-btn{display:inline-flex;align-items:center;gap:4px;background:#eaf3de;border:1px solid #b0d17c;color:#27500a;padding:5px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;margin-top:.25rem;transition:all .15s}
+.graph-it-btn:hover{background:#d4ebbb}
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="nn-header">
     <div class="nn-top">
-      <div class="nn-logo">
+      <a href="index.html" class="nn-logo-link"><div class="nn-logo">
         <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
-      </div>
+      </div></a>
       <div>
         <div class="nn-school">Niles North High School &middot; D219</div>
         <div class="nn-name">Algebra 1</div>
@@ -236,7 +241,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- 9.1 -->
       <div class="tblock">
         <div class="thead" onclick="tog(this)">
-          <span class="ttag">9.1</span><span class="tlabel">What is a <span class="vw">System of Equations</span>?</span>
+          <span class="ttag">9.1</span><span class="tlabel">What is a System of Equations?</span>
           <span class="tchev">&#9660;</span>
         </div>
         <div class="tbody">
@@ -293,6 +298,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <span class="chip chip-p">Infinite solutions:</span> Lines are the <strong>same line</strong> (coincident) &mdash; same slope and same y-intercept &rarr; every point works
           </div></div>
           <p class="note-h">Worked example &mdash; solve by graphing</p>
+          <div style="background:#f8f5ff;border-radius:8px;padding:.65rem .85rem;margin:.55rem 0"><div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#888899;margin-bottom:.4rem">Graphing y = 2x − 1 and y = −x + 5 → intersection at (2, 3)</div><svg width="200" height="150" viewBox="0 0 200 150" style="display:block;max-width:100%;margin:.3rem 0" xmlns="http://www.w3.org/2000/svg">
+<line x1="20" y1="0" x2="20" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="50" y1="0" x2="50" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="80" y1="0" x2="80" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="110" y1="0" x2="110" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="140" y1="0" x2="140" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="170" y1="0" x2="170" y2="150" stroke="#ebebf4" stroke-width="1"/><line x1="0" y1="25" x2="200" y2="25" stroke="#ebebf4" stroke-width="1"/><line x1="0" y1="55" x2="200" y2="55" stroke="#ebebf4" stroke-width="1"/><line x1="0" y1="85" x2="200" y2="85" stroke="#ebebf4" stroke-width="1"/><line x1="0" y1="115" x2="200" y2="115" stroke="#ebebf4" stroke-width="1"/><line x1="0" y1="145" x2="200" y2="145" stroke="#ebebf4" stroke-width="1"/>
+<line x1="10" y1="85" x2="195" y2="85" stroke="#999" stroke-width="1.5"/><line x1="50" y1="5" x2="50" y2="145" stroke="#999" stroke-width="1.5"/>
+<text x="53" y="97" font-size="9" fill="#666">0</text><text x="78" y="97" font-size="9" fill="#666">1</text><text x="108" y="97" font-size="9" fill="#666">2</text><text x="138" y="97" font-size="9" fill="#666">3</text><text x="22" y="97" font-size="9" fill="#666">-1</text><text x="42" y="57" font-size="9" fill="#666">2</text><text x="42" y="27" font-size="9" fill="#666">3</text><text x="42" y="87" font-size="9" fill="#666">1</text><text x="42" y="117" font-size="9" fill="#666">-1</text>
+<!-- scale: 30px/unit, origin (50,85). (x,y)→(50+30x, 85-30y) -->
+<!-- y=2x-1: (-1,-3)→(20,175)off, (0,-1)→(50,115), (1,1)→(80,55), (2,3)→(110,−5)off -->
+<!-- visible range approx: draw from (0,-1) to (1.5,2): (50,115) to (95,25) -->
+<!-- y=-x+5: (0,5)→(50,−65)off, (1,4)→(80,−35)off, (2,3)→(110,−5)off ... too high -->
+<!-- y values too large with 30px scale for range 0-5 -->
+<!-- Let's use 20px/unit, origin (50,105): (x,y)→(50+20x, 105-20y) -->
+<!-- y=2x-1: (-0.5,-2)→(40,145), (0,-1)→(50,125), (1,1)→(70,85), (2,3)→(90,45), (3,5)→(110,5) -->
+<!-- y=-x+5: (0,5)→(50,5), (1,4)→(70,25), (2,3)→(90,45), (3,2)→(110,65), (4,1)→(130,85), (5,0)→(150,105) -->
+<!-- x-axis: y=0 → y_px=105. Origin (50,105). -->
+<!-- Axis labels: 0→(50,105), 1→(70,105), 2→(90,105), 3→(110,105) -->
+<line x1="10" y1="105" x2="195" y2="105" stroke="#999" stroke-width="1.5"/>
+<line x1="50" y1="5" x2="50" y2="145" stroke="#999" stroke-width="1.5"/>
+<text x="53" y="117" font-size="9" fill="#666">0</text><text x="68" y="117" font-size="9" fill="#666">1</text><text x="88" y="117" font-size="9" fill="#666">2</text><text x="108" y="117" font-size="9" fill="#666">3</text><text x="128" y="117" font-size="9" fill="#666">4</text><text x="40" y="87" font-size="9" fill="#666">2</text><text x="40" y="47" font-size="9" fill="#666">4</text><text x="40" y="7" font-size="9" fill="#666">5</text><text x="40" y="107" font-size="9" fill="#666">0</text>
+<line x1="40" y1="145" x2="110" y2="5" stroke="#4a2c7a" stroke-width="2" stroke-linecap="round"/>
+<text x="108" y="14" font-size="9" fill="#4a2c7a" font-weight="600">y=2x−1</text>
+<line x1="50" y1="5" x2="155" y2="110" stroke="#854f0b" stroke-width="2" stroke-linecap="round"/>
+<text x="148" y="107" font-size="9" fill="#854f0b" font-weight="600">y=−x+5</text>
+<circle cx="90" cy="45" r="5" fill="#2d7a3b" stroke="white" stroke-width="2"/>
+<text x="94" y="38" font-size="10" fill="#2d7a3b" font-weight="700">(2, 3)</text>
+</svg><div style="font-size:11px;color:#555570;margin-top:.3rem">The two lines intersect at <strong>(2, 3)</strong> — this is the solution to the system.</div></div>
           <div class="worked"><div class="wlbl">Solve: y = 2x &minus; 1 and y = &minus;x + 5</div><div class="wsteps">
             <span class="eq"><strong>Step 1 &mdash; Identify slope &amp; y-intercept for each line:</strong></span>
             <span class="eq">&nbsp;&nbsp;Line 1: y = 2x &minus; 1 &rarr; m = 2, b = &minus;1 &rarr; plot (0,&minus;1), go up 2 right 1</span>
@@ -625,13 +654,13 @@ const BANKS={
   {q:"Is (−3, 1) a solution to the system?",eq:"y = x + 4  and  2x + 3y = −3",a:"yes",fmt:"yes or no",h:"Eq1: 1=−3+4=1 ✓. Eq2: −6+3=−3 ✓."},
 ],
 '9.2':[
-  {q:"Solve the system by graphing:",eq:"y = x + 1  and  y = −2x + 4",a:"(1, 2)",fmt:"(x, y)",h:"Set equal: x+1=−2x+4 → 3x=3 → x=1, y=2."},
-  {q:"Solve the system by graphing:",eq:"y = 2x − 1  and  y = x + 1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: 2x−1=x+1 → x=2, y=3."},
-  {q:"Solve the system by graphing:",eq:"y = x  and  y = −x + 4",a:"(2, 2)",fmt:"(x, y)",h:"Set equal: x=−x+4 → 2x=4 → x=2, y=2."},
-  {q:"Solve the system by graphing:",eq:"y = 3x − 2  and  y = x + 2",a:"(2, 4)",fmt:"(x, y)",h:"Set equal: 3x−2=x+2 → 2x=4 → x=2, y=4."},
-  {q:"Solve the system by graphing:",eq:"y = −x + 5  and  y = 2x − 1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: −x+5=2x−1 → 6=3x → x=2, y=3."},
-  {q:"Solve the system by graphing:",eq:"y = x − 3  and  y = −x + 1",a:"(2, −1)",fmt:"(x, y)",h:"Set equal: x−3=−x+1 → 2x=4 → x=2, y=−1."},
-  {q:"Solve the system by graphing:",eq:"y = 2x + 1  and  y = −x + 7",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: 2x+1=−x+7 → 3x=6 → x=2, y=5."},
+  {q:"Solve the system by graphing:",eq:"y = x + 1  and  y = −2x + 4",graphIt:"y=x+1,y=-2x+4",a:"(1, 2)",fmt:"(x, y)",h:"Set equal: x+1=−2x+4 → 3x=3 → x=1, y=2."},
+  {q:"Solve the system by graphing:",eq:"y = 2x − 1  and  y = x + 1",graphIt:"y=2x-1,y=x+1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: 2x−1=x+1 → x=2, y=3."},
+  {q:"Solve the system by graphing:",eq:"y = x  and  y = −x + 4",graphIt:"y=x,y=-x+4",a:"(2, 2)",fmt:"(x, y)",h:"Set equal: x=−x+4 → 2x=4 → x=2, y=2."},
+  {q:"Solve the system by graphing:",eq:"y = 3x − 2  and  y = x + 2",graphIt:"y=3x-2,y=x+2",a:"(2, 4)",fmt:"(x, y)",h:"Set equal: 3x−2=x+2 → 2x=4 → x=2, y=4."},
+  {q:"Solve the system by graphing:",eq:"y = −x + 5  and  y = 2x − 1",graphIt:"y=-x+5,y=2x-1",a:"(2, 3)",fmt:"(x, y)",h:"Set equal: −x+5=2x−1 → 6=3x → x=2, y=3."},
+  {q:"Solve the system by graphing:",eq:"y = x − 3  and  y = −x + 1",graphIt:"y=x-3,y=-x+1",a:"(2, −1)",fmt:"(x, y)",h:"Set equal: x−3=−x+1 → 2x=4 → x=2, y=−1."},
+  {q:"Solve the system by graphing:",eq:"y = 2x + 1  and  y = −x + 7",graphIt:"y=2x+1,y=-x+7",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: 2x+1=−x+7 → 3x=6 → x=2, y=5."},
   {q:"Solve the system by graphing:",eq:"y = x + 3  and  y = 3x − 1",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: x+3=3x−1 → 4=2x → x=2, y=5."},
   {q:"Solve the system by graphing:",eq:"y = −2x + 6  and  y = x",a:"(2, 2)",fmt:"(x, y)",h:"Set equal: −2x+6=x → 6=3x → x=2, y=2."},
   {q:"Solve the system by graphing:",eq:"y = 4x − 3  and  y = x + 3",a:"(2, 5)",fmt:"(x, y)",h:"Set equal: 4x−3=x+3 → 3x=6 → x=2, y=5."},
@@ -863,17 +892,18 @@ function gradeT(){
 }
 function resetT(){loadT();}
 
-function formatEq(s){return s.replace(/\^(\d+)/g,'<sup>$1</sup>');}
+function formatEq(s){return s.replace(/\^\((-?\d+)\)/g,'<sup>$1</sup>').replace(/\^(-\d+)/g,'<sup>$1</sup>').replace(/\^(\d+)/g,'<sup>$1</sup>').replace(/\((\d+)\/(\d+)\)/g,'<span class="frac"><span class="fn">$1</span><span class="fd">$2</span></span>');}
 function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='';
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +graphBtn+'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
@@ -895,6 +925,10 @@ function showHint(i,pfx){
   if(!fb.className.includes('ok')&&!fb.className.includes('no')){fb.className='fb hint';fb.innerHTML='\u{1F4A1} '+formatEq(p.h);}
 }
 
+
+function openDesmosWithEq(enc){
+  openDesmos();
+}
 function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
