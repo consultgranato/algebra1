@@ -146,9 +146,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:.95rem 1.05rem;margin-bottom:.65rem}
 .pcard.ok{border-color:var(--success-border)}
 .pcard.no{border-color:var(--danger-border)}
-.pmeta2{display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem}
+.pmeta2{display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem}
 .pnum{background:var(--nnp);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
-.ptag{background:var(--bg3);color:var(--text2);font-size:11px;padding:2px 7px;border-radius:4px;border:0.5px solid var(--border)}
+.ptag{color:#888;font-size:11px;font-weight:500}
 .pq-q{font-size:13px;line-height:1.55;margin-bottom:.3rem;color:var(--text)}
 .pmath{background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--radius-md);padding:.65rem 1rem;margin:.3rem 0 .4rem;font-size:15px;line-height:2.2;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:48px;display:flex;align-items:center;flex-wrap:wrap;gap:.15rem}
 .afmt{font-size:11px;color:var(--text3);margin-bottom:.4rem;font-style:italic}
@@ -1017,7 +1017,7 @@ function loadP(){
   const el=document.getElementById('plist');el.innerHTML='';
   document.getElementById('p-results').style.display='none';
   document.getElementById('pmeta').textContent='Showing 5 of 15 problems — '+curTopic;
-  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic)));
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic.replace('unit','Unit '))));
 }
 function checkAllDone(){
   const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
@@ -1045,7 +1045,7 @@ function loadT(){
   document.getElementById('t-results').style.display='none';
   document.getElementById('sbtn').classList.remove('hidden');
   document.getElementById('rbtn').classList.add('hidden');
-  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t)));
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t.replace('unit','Unit '))));
 }
 function renderBars(map){
   const lbl={'unit1':'Unit 1','unit2':'Unit 2','unit3':'Unit 3','unit4':'Unit 4'};
