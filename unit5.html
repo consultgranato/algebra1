@@ -207,7 +207,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .subbtn{background:var(--nnp);color:#fff;border:none;padding:.55rem 1.4rem;border-radius:var(--radius-md);font-size:13px;font-weight:500;cursor:pointer;flex:1}
 .subbtn:hover{background:var(--nnpl)}
 .rstbtn{background:transparent;border:0.5px solid var(--border2);color:var(--text2);padding:.55rem 1rem;border-radius:var(--radius-md);font-size:13px;cursor:pointer}
-@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}.match-pairs{grid-template-columns:1fr}}
+@media(max-width:600px){.pt-layout{grid-template-columns:1fr}.pt-calc-col{position:relative;top:auto}.vcard{grid-template-columns:1fr}.vq-opts{grid-template-columns:1fr}.match-pairs{grid-template-columns:1fr}.topic-grid{grid-template-columns:1fr}}
 
 /* V1.1 — Global Patches */
 .vcard{border:1.5px solid #c0c0cc !important}
@@ -224,9 +224,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .frac .fd{padding:1px 4px 0;text-align:center;font-size:1em}
 .math-expr{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;line-height:2.2;color:var(--text)}
 .vw{color:#7c3aed;font-weight:600;border-bottom:1px dotted #7c3aed}
+sup{font-size:.7em;vertical-align:super;line-height:0}
 .nn-logo-link{text-decoration:none;display:inline-flex}
 .nn-logo{cursor:pointer}
-.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;padding:.25rem 0}
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;padding:.25rem 0}
 .tg-card{background:var(--bg2);border:1.5px solid var(--border);border-left:4px solid var(--nnp);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.3rem;transition:all .15s}
 .tg-card:hover{border-color:var(--nnp);transform:translateY(-2px);box-shadow:0 4px 12px rgba(74,44,122,.12)}
 .tg-tag{background:var(--nnp);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;width:fit-content;letter-spacing:.4px}
