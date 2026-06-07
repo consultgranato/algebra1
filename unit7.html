@@ -215,6 +215,18 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
+.desmos-trigger{position:fixed;bottom:1.2rem;right:1.2rem;z-index:900;background:var(--nnp);color:#fff;border:none;border-radius:50px;padding:.55rem 1.1rem;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 10px rgba(74,44,122,.35);transition:all .15s}
+.desmos-trigger:hover{background:var(--nnpd)}
+.desmos-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center}
+.desmos-overlay.open{display:flex}
+.desmos-modal{background:#fff;border-radius:var(--radius-lg);width:min(780px,96vw);height:min(540px,85vh);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.28)}
+.desmos-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;border-bottom:1px solid var(--border);background:var(--bg3)}
+.desmos-modal-title{font-size:14px;font-weight:700;color:var(--nnp)}
+.desmos-close{background:none;border:none;font-size:13px;cursor:pointer;color:var(--text2);padding:4px 8px;border-radius:4px}
+.desmos-close:hover{background:var(--border);color:var(--text)}
+.desmos-iframe{flex:1;border:none;width:100%;height:100%}
+.graph-it-btn{display:inline-flex;align-items:center;gap:5px;margin:.4rem 0 .2rem;padding:5px 13px;border-radius:6px;border:1.5px solid var(--nnp);background:#ede9f7;color:var(--nnp);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.graph-it-btn:hover{background:var(--nnp);color:#fff}
 </style>
 </head>
 <body>
@@ -412,8 +424,8 @@ const BANKS={
   {q:"Is this a function?",eq:"{(2,5),(2,7),(3,9)}",a:"no",fmt:"yes or no",h:"x = 2 appears twice with different y-values (5 and 7). Not a function!"},
   {q:"Is this a function?",eq:"{(0,0),(1,1),(2,4),(3,9)}",a:"yes",fmt:"yes or no",h:"All x-values (0,1,2,3) are different. Each maps to exactly one y."},
   {q:"Is this mapping a function? x = 3 maps to both y = 5 and y = 7.",eq:"",a:"no",fmt:"yes or no",h:"One x-value (3) goes to two different y-values. That breaks the function rule."},
-  {q:"A graph fails the Vertical Line Test. Is it a function?",eq:"",a:"no",fmt:"yes or no",h:"Failing the VLT means a vertical line crosses the graph more than once — not a function."},
-  {q:"A graph passes the Vertical Line Test. Is it a function?",eq:"",a:"yes",fmt:"yes or no",h:"Passing the VLT means every vertical line crosses at most once — it is a function."},
+  {q:"Look at the graph below. Does it pass the Vertical Line Test? Is it a function?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><circle cx="90" cy="80" r="50" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><text x="90" y="153" text-anchor="middle" font-size="9" fill="#4a2c7a" font-style="italic">circle</text></svg></div>',eq:"",a:"no",fmt:"yes or no",h:"A circle fails the VLT — a vertical line through the middle crosses it twice. Not a function."},
+  {q:"Look at the graph below. Does it pass the Vertical Line Test? Is it a function?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><path d="M 50,0 Q 90,160 130,0" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><text x="90" y="153" text-anchor="middle" font-size="9" fill="#4a2c7a" font-style="italic">parabola y=x&#178;</text></svg></div>',eq:"",a:"yes",fmt:"yes or no",h:"A U-shaped parabola passes the VLT — every vertical line crosses it at most once. It is a function."},
   {q:"Is this a function?",eq:"{(4,1),(5,1),(6,1)}",a:"yes",fmt:"yes or no",h:"All x-values are different (4,5,6). Multiple x's sharing the same y is fine!"},
   {q:"Is this a function? In a table: x = 1,2,3; y = 5,5,5.",eq:"",a:"yes",fmt:"yes or no",h:"x-values 1, 2, 3 are all different. Same y-value is allowed. Yes, it's a function."},
   {q:"Is this a function? In a mapping: 1→A, 2→B, 2→C.",eq:"",a:"no",fmt:"yes or no",h:"x = 2 maps to both A and C. Not a function."},
@@ -459,7 +471,7 @@ const BANKS={
   {q:"Table: x = 0,1,2,3; y = 0,1,4,9. Is this linear?",eq:"",a:"not linear",fmt:"linear or not linear",h:"Differences: 1, 3, 5 — NOT constant. Not linear (y = x²)."},
 ],
 '7.4':[
-  {q:"f(x) = 4x - 1. Find f(3).",eq:"",a:"f(3) = 11",fmt:"f(_) = ___",h:"f(3) = 4(3) - 1 = 12 - 1 = 11."},
+  {q:"The graph shows f(x) = x + 1. Use the graph to find f(2).",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><line x1="10" y1="100" x2="150" y2="30" stroke="#4a2c7a" stroke-width="2"/><circle cx="130" cy="40" r="4" fill="#cc3333"/><line x1="130" y1="40" x2="130" y2="80" stroke="#cc3333" stroke-width="1" stroke-dasharray="3,2"/><text x="134" y="38" font-size="9" fill="#cc3333">(2, 3)</text><text x="145" y="26" font-size="9" fill="#4a2c7a" font-style="italic">f(x)=x+1</text></svg></div>',eq:"",a:"f(2) = 3",fmt:"f(_) = ___",h:"Find x=2 on the graph, read up to the line: y=2+1=3. So f(2)=3."},
   {q:"f(x) = 4x - 1. Find f(0).",eq:"",a:"f(0) = -1",fmt:"f(_) = ___",h:"f(0) = 4(0) - 1 = 0 - 1 = -1."},
   {q:"f(x) = 4x - 1. Find f(-2).",eq:"",a:"f(-2) = -9",fmt:"f(_) = ___",h:"f(-2) = 4(-2) - 1 = -8 - 1 = -9."},
   {q:"g(x) = -2x + 6. Find g(0).",eq:"",a:"g(0) = 6",fmt:"g(_) = ___",h:"g(0) = -2(0) + 6 = 6."},
@@ -477,8 +489,8 @@ const BANKS={
 ]};
 
 const T=[
-  {t:"7.1",q:"Is this a function?",eq:"{(1,5),(2,5),(3,5)}",a:"yes",fmt:"yes or no",h:"All x-values are different (1,2,3). Yes, it's a function."},
-  {t:"7.1",q:"Is this a function?",eq:"{(3,1),(3,2),(4,5)}",a:"no",fmt:"yes or no",h:"x = 3 maps to two y-values (1 and 2). Not a function."},
+  {t:"7.1",q:"Look at the graph below. Does it pass the Vertical Line Test? Is it a function?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><path d="M 50,0 Q 90,160 130,0" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><text x="90" y="153" text-anchor="middle" font-size="9" fill="#4a2c7a" font-style="italic">parabola</text></svg></div>',eq:"",a:"yes",fmt:"yes or no",h:"Every vertical line crosses this parabola at most once. It passes the VLT — it is a function."},
+  {t:"7.1",q:"Look at the graph below. Does it pass the Vertical Line Test? Is it a function?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><circle cx="90" cy="80" r="50" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><text x="90" y="153" text-anchor="middle" font-size="9" fill="#4a2c7a" font-style="italic">circle</text></svg></div>',eq:"",a:"no",fmt:"yes or no",h:"A vertical line drawn through the center of the circle crosses it twice. Fails VLT — not a function."},
   {t:"7.1",q:"A graph passes the Vertical Line Test. Is it a function?",eq:"",a:"yes",fmt:"yes or no",h:"Passing VLT means each x has at most one y. Yes, a function."},
   {t:"7.1",q:"Is a vertical straight line a function?",eq:"",a:"no",fmt:"yes or no",h:"A vertical line fails the VLT — every point on it has the same x but different y-values."},
   {t:"7.1",q:"Is this a function?",eq:"{(-1,4),(0,4),(1,4),(2,4)}",a:"yes",fmt:"yes or no",h:"All x-values are unique. Same y-values are perfectly fine."},
@@ -492,7 +504,7 @@ const T=[
   {t:"7.3",q:"Is y = -5x + 3 a linear function?",eq:"",a:"linear",fmt:"linear or not linear",h:"It's in y = mx + b form. Linear!"},
   {t:"7.3",q:"A graph is a curved parabola. Is it a linear function?",eq:"",a:"not linear",fmt:"linear or not linear",h:"A parabola is NOT a straight line. Not linear."},
   {t:"7.3",q:"Table: x = 0,2,4,6; y = 1,5,9,13. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences: +4,+4,+4 — constant. Linear!"},
-  {t:"7.4",q:"f(x) = 5x - 3. Find f(2).",eq:"",a:"f(2) = 7",fmt:"f(_) = ___",h:"f(2) = 5(2) - 3 = 10 - 3 = 7."},
+  {t:"7.4",q:"The graph shows f(x) = x - 1. Use the graph to find f(3).",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 180 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="80" x2="175" y2="80" stroke="#aaa" stroke-width="1"/><line x1="90" y1="5" x2="90" y2="155" stroke="#aaa" stroke-width="1"/><polygon points="172,77 172,83 178,80" fill="#aaa"/><polygon points="87,8 93,8 90,3" fill="#aaa"/><text x="50" y="94" text-anchor="middle" font-size="9" fill="#888">-2</text><text x="130" y="94" text-anchor="middle" font-size="9" fill="#888">2</text><text x="84" y="44" text-anchor="end" font-size="9" fill="#888">2</text><text x="84" y="124" text-anchor="end" font-size="9" fill="#888">-2</text><line x1="10" y1="120" x2="165" y2="42" stroke="#4a2c7a" stroke-width="2"/><circle cx="150" cy="50" r="4" fill="#cc3333"/><line x1="150" y1="50" x2="150" y2="80" stroke="#cc3333" stroke-width="1" stroke-dasharray="3,2"/><text x="140" y="47" font-size="9" fill="#cc3333">(3,2)</text><text x="152" y="40" font-size="9" fill="#4a2c7a" font-style="italic">f(x)=x-1</text></svg></div>',eq:"",a:"f(3) = 2",fmt:"f(_) = ___",h:"Find x=3 on the graph, read up to the line: y=3-1=2. So f(3)=2."},
   {t:"7.4",q:"g(x) = -3x + 9. Find g(3).",eq:"",a:"g(3) = 0",fmt:"g(_) = ___",h:"g(3) = -3(3) + 9 = -9 + 9 = 0."},
   {t:"7.4",q:"f(x) = 2x + 1. Find f(-4).",eq:"",a:"f(-4) = -7",fmt:"f(_) = ___",h:"f(-4) = 2(-4) + 1 = -8 + 1 = -7."},
   {t:"7.4",q:"h(x) = 4x - 8. If h(x) = 0, find x.",eq:"",a:"x = 2",fmt:"x = ___",h:"4x - 8 = 0 → 4x = 8 → x = 2."},
@@ -707,12 +719,14 @@ function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='',svgHtml='';
+  if(p.svg){svgHtml=p.svg;}
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
-    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="pq-q">'+p.q+'</div>'+svgHtml+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer"'+(isTest?'':' onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"')+'>'+(isTest?'':'<button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>')+hint+'</div>'
+    +graphBtn+'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer"'+(isTest?'':' onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"')+'>'+(isTest?'':'<button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>')+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
@@ -772,6 +786,21 @@ function closeTopic(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
+function openDesmosWithEq(enc){openDesmos();}
+function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos();});
 </script>
+<button class="desmos-trigger" id="desmos-trigger" onclick="openDesmos()">&#128202; Graphing Calculator</button>
+<div class="desmos-overlay" id="desmos-overlay">
+  <div class="desmos-modal">
+    <div class="desmos-modal-header">
+      <span class="desmos-modal-title">&#128202; Graphing Calculator</span>
+      <button class="desmos-close" onclick="closeDesmos()">&#10005; Close</button>
+    </div>
+    <iframe src="https://www.desmos.com/calculator?lang=en" id="desmos-iframe" class="desmos-iframe" allowfullscreen></iframe>
+  </div>
+</div>
 </body>
 </html>

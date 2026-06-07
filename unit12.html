@@ -215,6 +215,18 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .topic-modal-close{background:rgba(255,255,255,.15);color:#fff;border:none;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
+.desmos-trigger{position:fixed;bottom:1.2rem;right:1.2rem;z-index:900;background:var(--nnp);color:#fff;border:none;border-radius:50px;padding:.55rem 1.1rem;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 10px rgba(74,44,122,.35);transition:all .15s}
+.desmos-trigger:hover{background:var(--nnpd)}
+.desmos-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center}
+.desmos-overlay.open{display:flex}
+.desmos-modal{background:#fff;border-radius:var(--radius-lg);width:min(780px,96vw);height:min(540px,85vh);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.28)}
+.desmos-modal-header{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1rem;border-bottom:1px solid var(--border);background:var(--bg3)}
+.desmos-modal-title{font-size:14px;font-weight:700;color:var(--nnp)}
+.desmos-close{background:none;border:none;font-size:13px;cursor:pointer;color:var(--text2);padding:4px 8px;border-radius:4px}
+.desmos-close:hover{background:var(--border);color:var(--text)}
+.desmos-iframe{flex:1;border:none;width:100%;height:100%}
+.graph-it-btn{display:inline-flex;align-items:center;gap:5px;margin:.4rem 0 .2rem;padding:5px 13px;border-radius:6px;border:1.5px solid var(--nnp);background:#ede9f7;color:var(--nnp);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.graph-it-btn:hover{background:var(--nnp);color:#fff}
 </style>
 </head>
 <body>
@@ -401,11 +413,11 @@ const UNITS=[
 const BANKS={
 '12.1':[
   {q:"Evaluate y = 3(2<sup>x</sup>) when x = 4",eq:"",a:"48",fmt:"number",h:"3(2<sup>4</sup>) = 3(16) = 48."},
-  {q:"Is y = 5(0.8)<sup>x</sup> growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b = 0.8, 0 < b < 1 → decay."},
+  {q:"Look at the graph. Is this exponential growth or decay?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="110" y="143" text-anchor="middle" font-size="9" fill="#888">2</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="110" y1="127" x2="110" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><path d="M 40,12 Q 55,50 70,82 Q 90,106 115,120 Q 140,126 170,128" fill="none" stroke="#4a2c7a" stroke-width="2"/><text x="155" y="110" font-size="9" fill="#aaa" font-style="italic">y=0</text></svg></div>',eq:"",a:"decay",fmt:"growth or decay",h:"The curve falls from upper-left toward the asymptote y=0 → exponential decay (b&lt;1)."},
   {q:"Evaluate y = 2(3<sup>x</sup>) when x = 3",eq:"",a:"54",fmt:"number",h:"2(3<sup>3</sup>) = 2(27) = 54."},
-  {q:"Is y = 4(1.5)<sup>x</sup> growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b = 1.5 > 1 → growth."},
+  {q:"Look at the graph. Is this exponential growth or decay?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="110" y="143" text-anchor="middle" font-size="9" fill="#888">2</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="110" y1="127" x2="110" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><path d="M 20,128 Q 35,127 50,124 Q 65,118 78,108 Q 95,88 110,60 Q 125,30 145,8" fill="none" stroke="#4a2c7a" stroke-width="2"/><text x="155" y="120" font-size="9" fill="#aaa" font-style="italic">y=0</text></svg></div>',eq:"",a:"growth",fmt:"growth or decay",h:"The curve rises steeply to the right, starting near the asymptote y=0 → exponential growth (b&gt;1)."},
   {q:"Evaluate y = 5(2<sup>x</sup>) when x = 0",eq:"",a:"5",fmt:"number",h:"5(2<sup>0</sup>) = 5(1) = 5. The y-intercept is always a."},
-  {q:"What is the y-intercept of y = 7(3<sup>x</sup>)?",eq:"",a:"7",fmt:"number",h:"At x=0: y = 7(3<sup>0</sup>) = 7(1) = 7."},
+  {q:"Read the y-intercept from the graph of this exponential function:",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><line x1="67" y1="118" x2="73" y2="118" stroke="#888" stroke-width="1"/><text x="62" y="122" text-anchor="end" font-size="9" fill="#888">1</text><line x1="67" y1="106" x2="73" y2="106" stroke="#888" stroke-width="1"/><text x="62" y="110" text-anchor="end" font-size="9" fill="#888">2</text><line x1="67" y1="94" x2="73" y2="94" stroke="#888" stroke-width="1"/><text x="62" y="98" text-anchor="end" font-size="9" fill="#888">3</text><line x1="67" y1="82" x2="73" y2="82" stroke="#888" stroke-width="1"/><text x="62" y="86" text-anchor="end" font-size="9" fill="#888">4</text><path d="M 30,114 Q 50,108 70,94 Q 90,76 110,49 Q 125,25 140,5" fill="none" stroke="#4a2c7a" stroke-width="2"/><circle cx="70" cy="94" r="4" fill="#cc3333"/><text x="73" y="90" font-size="9" fill="#cc3333">y-int</text></svg></div>',eq:"",a:"3",fmt:"number",h:"The curve crosses the y-axis (x=0) at y=3. The y-intercept is 3."},
   {q:"Is y = 10(0.5)<sup>x</sup> growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b = 0.5, 0 < b < 1 → decay."},
   {q:"Evaluate y = 4(5<sup>x</sup>) when x = 2",eq:"",a:"100",fmt:"number",h:"4(5<sup>2</sup>) = 4(25) = 100."},
   {q:"What is the domain of any exponential function y = ab<sup>x</sup>?",eq:"",a:"all real numbers",fmt:"all real numbers / y > 0 / etc.",h:"Exponential functions are defined for all x values."},
@@ -422,7 +434,7 @@ const BANKS={
   {q:"Table: x=0,1,2 and y=10,5,2.5. Write the equation.",eq:"",a:"y=10(0.5<sup>x</sup>)",fmt:"y = ___",h:"a=10, b=5/10=0.5. y=10(0.5<sup>x</sup>). Decay."},
   {q:"y-intercept = 6, common ratio = 3. Write the equation.",eq:"",a:"y=6(3<sup>x</sup>)",fmt:"y = ___",h:"a=6, b=3. y=6(3<sup>x</sup>)."},
   {q:"Table: x=0,1,2,3 and y=1,4,16,64. Write the equation.",eq:"",a:"y=1(4<sup>x</sup>)",fmt:"y = ___",h:"a=1, b=4/1=4. y=4<sup>x</sup>."},
-  {q:"A graph has y-intercept = 5 and each step multiplies by 2. Is this growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b=2 > 1 → growth."},
+  {q:"Look at the graph. Is this exponential growth or decay?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="110" y="143" text-anchor="middle" font-size="9" fill="#888">2</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="110" y1="127" x2="110" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><path d="M 10,128 Q 30,127 50,124 Q 65,118 80,110 Q 100,92 118,64 Q 133,38 148,10" fill="none" stroke="#4a2c7a" stroke-width="2"/><text x="155" y="120" font-size="9" fill="#aaa" font-style="italic">y=0</text></svg></div>',eq:"",a:"growth",fmt:"growth or decay",h:"The graph rises steeply as x increases and approaches y=0 as x decreases → growth (b&gt;1)."},
   {q:"Table: x=0,1,2 and y=100,50,25. Find b (the common ratio).",eq:"",a:"0.5",fmt:"number",h:"50/100 = 0.5."},
   {q:"Table: x=0,1,2 and y=2,6,18. Write the equation.",eq:"",a:"y=2(3<sup>x</sup>)",fmt:"y = ___",h:"a=2, b=6/2=3. y=2(3<sup>x</sup>)."},
   {q:"A graph shows y-intercept = 8 and the curve is decreasing, halving each time. Write the equation.",eq:"",a:"y=8(0.5<sup>x</sup>)",fmt:"y = ___",h:"a=8, b=0.5. y=8(0.5<sup>x</sup>). Decay."},
@@ -470,8 +482,8 @@ const BANKS={
 
 const T=[
   {t:"12.1",q:"Evaluate y = 4(3<sup>x</sup>) when x = 2",eq:"",a:"36",fmt:"number",h:"4(3<sup>2</sup>)=4(9)=36."},
-  {t:"12.1",q:"Is y = 2(0.6)<sup>x</sup> growth or decay?",eq:"",a:"decay",fmt:"growth or decay",h:"b=0.6, 0<b<1 → decay."},
-  {t:"12.1",q:"What is the y-intercept of y = 11(2<sup>x</sup>)?",eq:"",a:"11",fmt:"number",h:"At x=0: y=11(1)=11."},
+  {t:"12.1",q:"Look at the graph. Is this exponential growth or decay?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="110" y="143" text-anchor="middle" font-size="9" fill="#888">2</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="110" y1="127" x2="110" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><path d="M 35,12 Q 50,45 65,75 Q 80,100 100,115 Q 125,124 165,128" fill="none" stroke="#4a2c7a" stroke-width="2"/><text x="170" y="120" font-size="9" fill="#aaa" font-style="italic">y=0</text></svg></div>',eq:"",a:"decay",fmt:"growth or decay",h:"The curve falls from upper-left and approaches the asymptote y=0 as x increases → decay (b&lt;1)."},
+  {t:"12.1",q:"Read the y-intercept from the graph of this exponential function:",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 160" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="10" x2="70" y2="145" stroke="#aaa" stroke-width="1"/><polygon points="67,12 73,12 70,7" fill="#aaa"/><line x1="10" y1="130" x2="195" y2="130" stroke="#aaa" stroke-width="1" stroke-dasharray="3,2"/><text x="70" y="143" text-anchor="middle" font-size="9" fill="#888">0</text><text x="90" y="143" text-anchor="middle" font-size="9" fill="#888">1</text><text x="50" y="143" text-anchor="middle" font-size="9" fill="#888">-1</text><line x1="90" y1="127" x2="90" y2="133" stroke="#888" stroke-width="1"/><line x1="50" y1="127" x2="50" y2="133" stroke="#888" stroke-width="1"/><line x1="67" y1="118" x2="73" y2="118" stroke="#888" stroke-width="1"/><text x="62" y="122" text-anchor="end" font-size="9" fill="#888">1</text><line x1="67" y1="106" x2="73" y2="106" stroke="#888" stroke-width="1"/><text x="62" y="110" text-anchor="end" font-size="9" fill="#888">2</text><line x1="67" y1="94" x2="73" y2="94" stroke="#888" stroke-width="1"/><text x="62" y="98" text-anchor="end" font-size="9" fill="#888">3</text><line x1="67" y1="82" x2="73" y2="82" stroke="#888" stroke-width="1"/><text x="62" y="86" text-anchor="end" font-size="9" fill="#888">4</text><line x1="67" y1="70" x2="73" y2="70" stroke="#888" stroke-width="1"/><text x="62" y="74" text-anchor="end" font-size="9" fill="#888">5</text><path d="M 20,112 Q 45,103 70,82 Q 90,58 110,25 Q 122,10 132,5" fill="none" stroke="#4a2c7a" stroke-width="2"/><circle cx="70" cy="82" r="4" fill="#cc3333"/><text x="73" y="78" font-size="9" fill="#cc3333">y-int</text></svg></div>',eq:"",a:"4",fmt:"number",h:"The curve crosses the y-axis (x=0) at the marked point. Read y=4."},
   {t:"12.1",q:"Find the average rate of change of y=3<sup>x</sup> from x=0 to x=2",eq:"",a:"4",fmt:"number",h:"(9−1)/2 = 8/2 = 4."},
   {t:"12.1",q:"Is y = 100(1.02)<sup>x</sup> growth or decay?",eq:"",a:"growth",fmt:"growth or decay",h:"b=1.02 > 1 → growth."},
   {t:"12.2",q:"Table: x=0,1,2 and y=6,18,54. Write the equation.",eq:"",a:"y=6(3<sup>x</sup>)",fmt:"y = ___",h:"a=6, b=18/6=3. y=6(3<sup>x</sup>)."},
@@ -704,10 +716,12 @@ function mkP(p,i,pfx,topic){
   const d=document.createElement('div');d.className='pcard';d.id=pfx+'c'+i;
   const isTest=pfx==='t';
   const hint=isTest?'':('<button class="hbtn" onclick="showHint('+i+',\''+pfx+'\')" title="Hint">&#128161; Hint</button>');
-  let eq='';
+  let eq='',graphBtn='',svgHtml='';
+  if(p.svg){svgHtml=p.svg;}
   if(p.eq){eq='<div class="pmath">'+formatEq(p.eq)+'</div>';}
+  if(p.graphIt){var enc=encodeURIComponent(p.graphIt);graphBtn='<button class="graph-it-btn" onclick="openDesmosWithEq(\''+enc+'\')">&#128200; Graph it</button>';}
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
-    +'<div class="pq-q">'+p.q+'</div>'+eq
+    +'<div class="pq-q">'+p.q+'</div>'+svgHtml+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
     +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer"'+(isTest?'':' onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"')+'>'+(isTest?'':'<button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>')+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
@@ -769,6 +783,21 @@ function closeTopic(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
+function openDesmosWithEq(enc){openDesmos();}
+function openDesmos(){document.getElementById('desmos-overlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeDesmos(){document.getElementById('desmos-overlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('desmos-overlay').addEventListener('click',function(e){if(e.target===this)closeDesmos();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos();});
 </script>
+<button class="desmos-trigger" id="desmos-trigger" onclick="openDesmos()">&#128202; Graphing Calculator</button>
+<div class="desmos-overlay" id="desmos-overlay">
+  <div class="desmos-modal">
+    <div class="desmos-modal-header">
+      <span class="desmos-modal-title">&#128202; Graphing Calculator</span>
+      <button class="desmos-close" onclick="closeDesmos()">&#10005; Close</button>
+    </div>
+    <iframe src="https://www.desmos.com/calculator?lang=en" id="desmos-iframe" class="desmos-iframe" allowfullscreen></iframe>
+  </div>
+</div>
 </body>
 </html>
