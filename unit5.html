@@ -566,8 +566,27 @@ function isMatch(u,c){
   if(un===cn)return true;
   if((un==='nosolution'||un==='ns')&&cn==='nosolution')return true;
   if((un==='allrealnumbers'||un==='arn'||un==='allreal')&&cn==='allrealnumbers')return true;
+  if(matches(u,c))return true;
   return false;
 }
+function splitSols(s){
+  var parts=s.split(/\s*(?:\bor\b|\band\b|[,;])\s*/i);
+  var ns=parts.map(function(p){return norm(p);}).filter(function(p){return p.length>0;});
+  if(ns.length>1){
+    var allHaveVar=ns.every(function(p){return /^[a-z]=/.test(p);});
+    if(allHaveVar){var v0=ns[0][0];if(ns.every(function(p){return p[0]===v0;}))ns=ns.map(function(p){return p.slice(2);});}
+  }
+  return ns.sort();
+}
+function matches(u,c){
+  if(!u||!u.toString().trim())return false;
+  if(norm(u)===norm(c))return true;
+  var up=splitSols(u),cp=splitSols(c);
+  if(up.length<2&&cp.length<2)return false;
+  if(up.length!==cp.length)return false;
+  return up.every(function(v,i){return v===cp[i];});
+}
+
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}

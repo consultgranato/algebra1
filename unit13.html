@@ -514,6 +514,24 @@ function bc(gid,vid,eid){const g=document.getElementById(gid);if(!g||g.children.
 function ck2(vid,eid,f){const vv=document.getElementById(vid),ve=document.getElementById(eid);let v=vv.textContent;if(f==='clr'){vv.textContent='0';ve.textContent='';CS.hr=false;return;}if(f==='bk'){if(CS.hr){vv.textContent='0';CS.hr=false;}else vv.textContent=v.length>1?v.slice(0,-1):'0';return;}if(f==='ng'){vv.textContent=v.startsWith('-')?v.slice(1):(v==='0'?'0':'-'+v);return;}if(f==='dt'){if(CS.hr){vv.textContent='0.';CS.hr=false;return;}if(!v.includes('.'))vv.textContent=v+'.';return;}if(f.startsWith('n(')){const n=f[2];if(CS.hr){vv.textContent=n;CS.hr=false;}else vv.textContent=v==='0'?n:v+n;return;}if(f.startsWith('op(')){const op=f[3],sym={'+':'+','-':'−','*':'×','/':'÷'}[op]||op;ve.textContent=v+' '+sym+' ';CS.left=parseFloat(v);CS.op=op;CS.hr=false;vv.textContent='0';return;}if(f==='eq'){if(CS.op===undefined)return;const r=parseFloat(v);let res;if(CS.op==='+')res=CS.left+r;else if(CS.op==='-')res=CS.left-r;else if(CS.op==='*')res=CS.left*r;else res=r===0?'Error':CS.left/r;if(typeof res==='number')res=parseFloat(parseFloat(res.toFixed(10)).toString());ve.textContent=ve.textContent+v+' =';vv.textContent=String(res);CS.hr=true;}}
 
 function norm(s){return s.toString().toLowerCase().replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/\^/g,'^').trim();}
+function splitSols(s){
+  var parts=s.split(/\s*(?:\bor\b|\band\b|[,;])\s*/i);
+  var ns=parts.map(function(p){return norm(p);}).filter(function(p){return p.length>0;});
+  if(ns.length>1){
+    var allHaveVar=ns.every(function(p){return /^[a-z]=/.test(p);});
+    if(allHaveVar){var v0=ns[0][0];if(ns.every(function(p){return p[0]===v0;}))ns=ns.map(function(p){return p.slice(2);});}
+  }
+  return ns.sort();
+}
+function matches(u,c){
+  if(!u||!u.toString().trim())return false;
+  if(norm(u)===norm(c))return true;
+  var up=splitSols(u),cp=splitSols(c);
+  if(up.length<2&&cp.length<2)return false;
+  if(up.length!==cp.length)return false;
+  return up.every(function(v,i){return v===cp[i];});
+}
+
 function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
 function sw(n,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');['notes','vocab','practice','test'].forEach(id=>document.getElementById('v-'+id).classList.toggle('hidden','v-'+id!=='v-'+n));if(n==='practice'){if(!document.getElementById('plist').children.length)loadP();bc('cp-grid','cp-val','cp-expr');}if(n==='test'){if(!document.getElementById('tlist').children.length)loadT();bc('ct-grid','ct-val','ct-expr');}if(n==='vocab'&&!vqSet.length)loadVQ();}
 function swV(n,btn){document.querySelectorAll('.vstab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('v-vc').classList.toggle('hidden',n!=='cards');document.getElementById('v-vq').classList.toggle('hidden',n!=='quiz');}
@@ -610,7 +628,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=norm(uval)===norm(p.a);
+    const ok=matches(uval,p.a);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -665,14 +683,14 @@ function mkP(p,i,pfx,topic){
   d.innerHTML='<div class="pmeta2"><span class="pnum">'+(i+1)+'</span><span class="ptag">'+topic+'</span></div>'
     +'<div class="pq-q">'+p.q+'</div>'+eq
     +'<div class="afmt">Answer format: '+p.fmt+'</div>'
-    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer" onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"><button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>'+hint+'</div>'
+    +'<div class="ar"><input class="ai" id="'+pfx+'a'+i+'" placeholder="your answer"'+(isTest?'':' onkeydown="if(event.key===\'Enter\')check('+i+',\''+pfx+'\')"')+'>'+(isTest?'':'<button class="cbtn" onclick="check('+i+',\''+pfx+'\')">Check</button>')+hint+'</div>'
     +'<div class="fb" id="'+pfx+'fb'+i+'"></div>';
   return d;
 }
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=norm(inp.value)===norm(p.a);
+  const ok=matches(inp.value,p.a);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
