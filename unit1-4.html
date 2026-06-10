@@ -1082,95 +1082,95 @@ document.addEventListener('DOMContentLoaded',function(){
 
 const BANKS={
 'unit1':[
-  {q:"Calculate:",eq:"-3 + (-7)",a:"-10",fmt:"numerical answer",h:"Same signs: add 3+7=10, keep negative."},
-  {q:"Calculate:",eq:"-4 + 9",a:"5",fmt:"numerical answer",h:"Different signs: 9−4=5, keep sign of bigger (positive)."},
-  {q:"Calculate:",eq:"5 - (-8)",a:"13",fmt:"numerical answer",h:"Flip: 5 - (-8) = 5 + 8 = 13."},
-  {q:"Calculate:",eq:"(-4) × (-5)",a:"20",fmt:"numerical answer",h:"Same signs = positive. 4×5=20."},
-  {q:"Calculate:",eq:"3 × (-7)",a:"-21",fmt:"numerical answer",h:"Different signs = negative. 3×7=21."},
-  {q:"Calculate:",eq:"(-18) ÷ (-3)",a:"6",fmt:"numerical answer",h:"Same signs = positive. 18÷3=6."},
-  {q:"Calculate:",eq:"(-24) ÷ 4",a:"-6",fmt:"numerical answer",h:"Different signs = negative. 24÷4=6."},
-  {q:"Evaluate using PEMDAS:",eq:"3 + 4 × 2",a:"11",fmt:"numerical answer",h:"Multiply first: 4×2=8. Then add: 3+8=11."},
-  {q:"Evaluate using PEMDAS:",eq:"(3 + 4) × 2",a:"14",fmt:"numerical answer",h:"Parentheses first: 3+4=7. Then multiply: 7×2=14."},
-  {q:"Evaluate using PEMDAS:",eq:"2² + 3 × (5 - 2)",a:"13",fmt:"numerical answer",h:"P: 5-2=3. E: 2²=4. M: 3×3=9. A: 4+9=13."},
-  {q:"Calculate:",eq:"-6 - (-2)",a:"-4",fmt:"numerical answer",h:"Flip: -6+2 = -4."},
-  {q:"Evaluate using PEMDAS:",eq:"10 - 2 × 3 + 1",a:"5",fmt:"numerical answer",h:"Multiply first: 2×3=6. Then left to right: 10-6+1=5."},
-  {q:"Calculate:",eq:"(-3)²",a:"9",fmt:"numerical answer",h:"(-3)×(-3) = 9. Same signs = positive."},
-  {q:"Evaluate using PEMDAS:",eq:"4 × (2 + 3) - 6",a:"14",fmt:"numerical answer",h:"P: 2+3=5. M: 4×5=20. S: 20-6=14."},
-  {q:"Calculate:",eq:"-8 + 3 - (-5)",a:"0",fmt:"numerical answer",h:"-8+3 = -5; then -5-(-5) = -5+5 = 0."},
+  {t:"1.2",q:"Calculate:",eq:"-3 + (-7)",a:"-10",fmt:"numerical answer",h:"Same signs: add 3+7=10, keep negative."},
+  {t:"1.2",q:"Calculate:",eq:"-4 + 9",a:"5",fmt:"numerical answer",h:"Different signs: 9−4=5, keep sign of bigger (positive)."},
+  {t:"1.2",q:"Calculate:",eq:"5 - (-8)",a:"13",fmt:"numerical answer",h:"Flip: 5 - (-8) = 5 + 8 = 13."},
+  {t:"1.3",q:"Calculate:",eq:"(-4) × (-5)",a:"20",fmt:"numerical answer",h:"Same signs = positive. 4×5=20."},
+  {t:"1.3",q:"Calculate:",eq:"3 × (-7)",a:"-21",fmt:"numerical answer",h:"Different signs = negative. 3×7=21."},
+  {t:"1.3",q:"Calculate:",eq:"(-18) ÷ (-3)",a:"6",fmt:"numerical answer",h:"Same signs = positive. 18÷3=6."},
+  {t:"1.3",q:"Calculate:",eq:"(-24) ÷ 4",a:"-6",fmt:"numerical answer",h:"Different signs = negative. 24÷4=6."},
+  {t:"1.4",q:"Evaluate using PEMDAS:",eq:"3 + 4 × 2",a:"11",fmt:"numerical answer",h:"Multiply first: 4×2=8. Then add: 3+8=11."},
+  {t:"1.4",q:"Evaluate using PEMDAS:",eq:"(3 + 4) × 2",a:"14",fmt:"numerical answer",h:"Parentheses first: 3+4=7. Then multiply: 7×2=14."},
+  {t:"1.4",q:"Evaluate using PEMDAS:",eq:"2² + 3 × (5 - 2)",a:"13",fmt:"numerical answer",h:"P: 5-2=3. E: 2²=4. M: 3×3=9. A: 4+9=13."},
+  {t:"1.2",q:"Calculate:",eq:"-6 - (-2)",a:"-4",fmt:"numerical answer",h:"Flip: -6+2 = -4."},
+  {t:"1.4",q:"Evaluate using PEMDAS:",eq:"10 - 2 × 3 + 1",a:"5",fmt:"numerical answer",h:"Multiply first: 2×3=6. Then left to right: 10-6+1=5."},
+  {t:"1.3",q:"Calculate:",eq:"(-3)²",a:"9",fmt:"numerical answer",h:"(-3)×(-3) = 9. Same signs = positive."},
+  {t:"1.4",q:"Evaluate using PEMDAS:",eq:"4 × (2 + 3) - 6",a:"14",fmt:"numerical answer",h:"P: 2+3=5. M: 4×5=20. S: 20-6=14."},
+  {t:"1.2",q:"Calculate:",eq:"-8 + 3 - (-5)",a:"0",fmt:"numerical answer",h:"-8+3 = -5; then -5-(-5) = -5+5 = 0."},
 ],
 'unit2':[
-  {q:"Simplify:",eq:"8/12",a:"2/3",fmt:"fraction in simplest form",h:"GCF(8,12)=4. 8÷4=2, 12÷4=3."},
-  {q:"Simplify:",eq:"15/25",a:"3/5",fmt:"fraction in simplest form",h:"GCF(15,25)=5."},
-  {q:"Add:",eq:"1/4 + 1/3",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 3/12+4/12=7/12."},
-  {q:"Subtract:",eq:"5/6 - 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 10/12-3/12=7/12."},
-  {q:"Multiply:",eq:"2/3 × 3/4",a:"1/2",fmt:"fraction in simplest form",h:"2×3=6, 3×4=12. 6/12=1/2."},
-  {q:"Divide:",eq:"3/4 ÷ 1/2",a:"3/2",fmt:"fraction (improper is ok)",h:"KCF: 3/4 × 2/1 = 6/4 = 3/2."},
-  {q:"Simplify:",eq:"18/24",a:"3/4",fmt:"fraction in simplest form",h:"GCF(18,24)=6."},
-  {q:"Add:",eq:"2/5 + 1/5",a:"3/5",fmt:"fraction in simplest form",h:"Same denominator: 2+1=3, keep 5."},
-  {q:"Subtract:",eq:"3/4 - 1/8",a:"5/8",fmt:"fraction in simplest form",h:"LCD=8. 6/8-1/8=5/8."},
-  {q:"Multiply:",eq:"1/2 × 4/5",a:"2/5",fmt:"fraction in simplest form",h:"1×4=4, 2×5=10. 4/10=2/5."},
-  {q:"Divide:",eq:"2/5 ÷ 4/5",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 2/5 × 5/4 = 10/20 = 1/2."},
-  {q:"Simplify:",eq:"20/30",a:"2/3",fmt:"fraction in simplest form",h:"GCF(20,30)=10."},
-  {q:"Add:",eq:"1/3 + 1/6",a:"1/2",fmt:"fraction in simplest form",h:"LCD=6. 2/6+1/6=3/6=1/2."},
-  {q:"Multiply:",eq:"3/5 × 5/6",a:"1/2",fmt:"fraction in simplest form",h:"3×5=15, 5×6=30. 15/30=1/2."},
-  {q:"Divide:",eq:"5/8 ÷ 5/4",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 5/8 × 4/5 = 20/40 = 1/2."},
+  {t:"2.3",q:"Simplify:",eq:"8/12",a:"2/3",fmt:"fraction in simplest form",h:"GCF(8,12)=4. 8÷4=2, 12÷4=3."},
+  {t:"2.3",q:"Simplify:",eq:"15/25",a:"3/5",fmt:"fraction in simplest form",h:"GCF(15,25)=5."},
+  {t:"2.4",q:"Add:",eq:"1/4 + 1/3",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 3/12+4/12=7/12."},
+  {t:"2.4",q:"Subtract:",eq:"5/6 - 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 10/12-3/12=7/12."},
+  {t:"2.5",q:"Multiply:",eq:"2/3 × 3/4",a:"1/2",fmt:"fraction in simplest form",h:"2×3=6, 3×4=12. 6/12=1/2."},
+  {t:"2.5",q:"Divide:",eq:"3/4 ÷ 1/2",a:"3/2",fmt:"fraction (improper is ok)",h:"KCF: 3/4 × 2/1 = 6/4 = 3/2."},
+  {t:"2.3",q:"Simplify:",eq:"18/24",a:"3/4",fmt:"fraction in simplest form",h:"GCF(18,24)=6."},
+  {t:"2.4",q:"Add:",eq:"2/5 + 1/5",a:"3/5",fmt:"fraction in simplest form",h:"Same denominator: 2+1=3, keep 5."},
+  {t:"2.4",q:"Subtract:",eq:"3/4 - 1/8",a:"5/8",fmt:"fraction in simplest form",h:"LCD=8. 6/8-1/8=5/8."},
+  {t:"2.5",q:"Multiply:",eq:"1/2 × 4/5",a:"2/5",fmt:"fraction in simplest form",h:"1×4=4, 2×5=10. 4/10=2/5."},
+  {t:"2.5",q:"Divide:",eq:"2/5 ÷ 4/5",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 2/5 × 5/4 = 10/20 = 1/2."},
+  {t:"2.3",q:"Simplify:",eq:"20/30",a:"2/3",fmt:"fraction in simplest form",h:"GCF(20,30)=10."},
+  {t:"2.4",q:"Add:",eq:"1/3 + 1/6",a:"1/2",fmt:"fraction in simplest form",h:"LCD=6. 2/6+1/6=3/6=1/2."},
+  {t:"2.5",q:"Multiply:",eq:"3/5 × 5/6",a:"1/2",fmt:"fraction in simplest form",h:"3×5=15, 5×6=30. 15/30=1/2."},
+  {t:"2.5",q:"Divide:",eq:"5/8 ÷ 5/4",a:"1/2",fmt:"fraction in simplest form",h:"KCF: 5/8 × 4/5 = 20/40 = 1/2."},
 ],
 'unit3':[
-  {q:"Simplify:",eq:"3x + 5x",a:"8x",fmt:"simplified expression",h:"Like terms: add coefficients 3+5=8."},
-  {q:"Simplify:",eq:"7y - 3y",a:"4y",fmt:"simplified expression",h:"Like terms: 7-3=4."},
-  {q:"Simplify:",eq:"2x + 4x - x",a:"5x",fmt:"simplified expression",h:"2+4-1=5."},
-  {q:"Can this be simplified? Why or why not:",eq:"3x + 5",a:"no",fmt:"yes or no",h:"3x and 5 are unlike terms (variable vs. constant)."},
-  {q:"Multiply:",eq:"x² · x³",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"Same base: add exponents 2+3=5."},
-  {q:"Multiply:",eq:"(3x²)(5x³)",a:"15x<sup>5</sup>",fmt:"simplified expression",h:"Multiply coefficients: 3×5=15. Add exponents: 2+3=5."},
-  {q:"Multiply:",eq:"(2x³)(4x²)",a:"8x<sup>5</sup>",fmt:"simplified expression",h:"2×4=8, 3+2=5."},
-  {q:"Simplify:",eq:"4a + 2b - a",a:"3a+2b",fmt:"simplified expression",h:"Combine a terms: 4a-a=3a. 2b stays."},
-  {q:"Multiply:",eq:"(x⁴)(x)",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"x has exponent 1. Add: 4+1=5."},
-  {q:"Simplify:",eq:"6x - 2x + x",a:"5x",fmt:"simplified expression",h:"6-2+1=5."},
-  {q:"Can this be simplified?",eq:"5x² + 3x",a:"no",fmt:"yes or no",h:"x² and x terms are unlike (different exponents)."},
-  {q:"Multiply:",eq:"(-2x²)(3x⁴)",a:"-6x<sup>6</sup>",fmt:"simplified expression",h:"-2×3=-6, 2+4=6."},
-  {q:"Simplify:",eq:"8m - 3m + 2m",a:"7m",fmt:"simplified expression",h:"8-3+2=7."},
-  {q:"Multiply:",eq:"(5x)(2x)",a:"10x²",fmt:"simplified expression",h:"5×2=10, 1+1=2."},
-  {q:"Simplify:",eq:"x + x + x",a:"3x",fmt:"simplified expression",h:"Each x has coefficient 1. 1+1+1=3."},
+  {t:"3.2",q:"Simplify:",eq:"3x + 5x",a:"8x",fmt:"simplified expression",h:"Like terms: add coefficients 3+5=8."},
+  {t:"3.2",q:"Simplify:",eq:"7y - 3y",a:"4y",fmt:"simplified expression",h:"Like terms: 7-3=4."},
+  {t:"3.2",q:"Simplify:",eq:"2x + 4x - x",a:"5x",fmt:"simplified expression",h:"2+4-1=5."},
+  {t:"3.2",q:"Can this be simplified? Why or why not:",eq:"3x + 5",a:"no",fmt:"yes or no",h:"3x and 5 are unlike terms (variable vs. constant)."},
+  {t:"3.3",q:"Multiply:",eq:"x² · x³",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"Same base: add exponents 2+3=5."},
+  {t:"3.3",q:"Multiply:",eq:"(3x²)(5x³)",a:"15x<sup>5</sup>",fmt:"simplified expression",h:"Multiply coefficients: 3×5=15. Add exponents: 2+3=5."},
+  {t:"3.3",q:"Multiply:",eq:"(2x³)(4x²)",a:"8x<sup>5</sup>",fmt:"simplified expression",h:"2×4=8, 3+2=5."},
+  {t:"3.2",q:"Simplify:",eq:"4a + 2b - a",a:"3a+2b",fmt:"simplified expression",h:"Combine a terms: 4a-a=3a. 2b stays."},
+  {t:"3.3",q:"Multiply:",eq:"(x⁴)(x)",a:"x<sup>5</sup>",fmt:"x<sup>n</sup> form",h:"x has exponent 1. Add: 4+1=5."},
+  {t:"3.2",q:"Simplify:",eq:"6x - 2x + x",a:"5x",fmt:"simplified expression",h:"6-2+1=5."},
+  {t:"3.2",q:"Can this be simplified?",eq:"5x² + 3x",a:"no",fmt:"yes or no",h:"x² and x terms are unlike (different exponents)."},
+  {t:"3.3",q:"Multiply:",eq:"(-2x²)(3x⁴)",a:"-6x<sup>6</sup>",fmt:"simplified expression",h:"-2×3=-6, 2+4=6."},
+  {t:"3.2",q:"Simplify:",eq:"8m - 3m + 2m",a:"7m",fmt:"simplified expression",h:"8-3+2=7."},
+  {t:"3.3",q:"Multiply:",eq:"(5x)(2x)",a:"10x²",fmt:"simplified expression",h:"5×2=10, 1+1=2."},
+  {t:"3.2",q:"Simplify:",eq:"x + x + x",a:"3x",fmt:"simplified expression",h:"Each x has coefficient 1. 1+1+1=3."},
 ],
 'unit4':[
-  {q:"Simplify:",eq:"3(x + 4) - 2x",a:"x+12",fmt:"simplified expression",h:"Distribute: 3x+12-2x. Combine: x+12."},
-  {q:"Simplify:",eq:"2(3x - 1) + 4",a:"6x+2",fmt:"simplified expression",h:"Distribute: 6x-2+4. Combine constants: 6x+2."},
-  {q:"Simplify:",eq:"-(x + 3) + 5x",a:"4x-3",fmt:"simplified expression",h:"Distribute -1: -x-3+5x. Combine: 4x-3."},
-  {q:"Evaluate 3x - 5 when",eq:"x = 4",a:"7",fmt:"numerical answer",h:"3(4)-5 = 12-5 = 7."},
-  {q:"Evaluate 3x - 5 when",eq:"x = -2",a:"-11",fmt:"numerical answer",h:"3(-2)-5 = -6-5 = -11."},
-  {q:"Evaluate 2x + 1 when",eq:"x = 3",a:"7",fmt:"numerical answer",h:"2(3)+1 = 6+1 = 7."},
-  {q:"Simplify:",eq:"4(x - 2) + 3x",a:"7x-8",fmt:"simplified expression",h:"Distribute: 4x-8+3x. Combine: 7x-8."},
-  {q:"Evaluate x² + 1 when",eq:"x = 3",a:"10",fmt:"numerical answer",h:"(3)²+1 = 9+1 = 10."},
-  {q:"Identify: In the expression 5x - 7, what is the coefficient?",eq:"",a:"5",fmt:"numerical answer",h:"The coefficient is the number in front of x."},
-  {q:"Identify: In the expression 5x - 7, what is the constant?",eq:"",a:"-7",fmt:"numerical answer",h:"The constant is the term with no variable."},
-  {q:"Simplify:",eq:"5 - 2(x - 3)",a:"-2x+11",fmt:"simplified expression",h:"Distribute -2: 5-2x+6. Combine: -2x+11."},
-  {q:"Evaluate -x + 4 when",eq:"x = -3",a:"7",fmt:"numerical answer",h:"-(-3)+4 = 3+4 = 7."},
-  {q:"Is 3x + 5 = 11 an expression or an equation?",eq:"",a:"equation",fmt:"expression or equation",h:"It has an equal sign, so it is an equation."},
-  {q:"Simplify:",eq:"2x + 3(x - 4)",a:"5x-12",fmt:"simplified expression",h:"Distribute: 2x+3x-12. Combine: 5x-12."},
-  {q:"Evaluate 4x when",eq:"x = -2",a:"-8",fmt:"numerical answer",h:"4(-2) = -8."},
+  {t:"4.2",q:"Simplify:",eq:"3(x + 4) - 2x",a:"x+12",fmt:"simplified expression",h:"Distribute: 3x+12-2x. Combine: x+12."},
+  {t:"4.2",q:"Simplify:",eq:"2(3x - 1) + 4",a:"6x+2",fmt:"simplified expression",h:"Distribute: 6x-2+4. Combine constants: 6x+2."},
+  {t:"4.2",q:"Simplify:",eq:"-(x + 3) + 5x",a:"4x-3",fmt:"simplified expression",h:"Distribute -1: -x-3+5x. Combine: 4x-3."},
+  {t:"4.4",q:"Evaluate 3x - 5 when",eq:"x = 4",a:"7",fmt:"numerical answer",h:"3(4)-5 = 12-5 = 7."},
+  {t:"4.4",q:"Evaluate 3x - 5 when",eq:"x = -2",a:"-11",fmt:"numerical answer",h:"3(-2)-5 = -6-5 = -11."},
+  {t:"4.4",q:"Evaluate 2x + 1 when",eq:"x = 3",a:"7",fmt:"numerical answer",h:"2(3)+1 = 6+1 = 7."},
+  {t:"4.2",q:"Simplify:",eq:"4(x - 2) + 3x",a:"7x-8",fmt:"simplified expression",h:"Distribute: 4x-8+3x. Combine: 7x-8."},
+  {t:"4.4",q:"Evaluate x² + 1 when",eq:"x = 3",a:"10",fmt:"numerical answer",h:"(3)²+1 = 9+1 = 10."},
+  {t:"4.1",q:"Identify: In the expression 5x - 7, what is the coefficient?",eq:"",a:"5",fmt:"numerical answer",h:"The coefficient is the number in front of x."},
+  {t:"4.1",q:"Identify: In the expression 5x - 7, what is the constant?",eq:"",a:"-7",fmt:"numerical answer",h:"The constant is the term with no variable."},
+  {t:"4.2",q:"Simplify:",eq:"5 - 2(x - 3)",a:"-2x+11",fmt:"simplified expression",h:"Distribute -2: 5-2x+6. Combine: -2x+11."},
+  {t:"4.4",q:"Evaluate -x + 4 when",eq:"x = -3",a:"7",fmt:"numerical answer",h:"-(-3)+4 = 3+4 = 7."},
+  {t:"4.1",q:"Is 3x + 5 = 11 an expression or an equation?",eq:"",a:"equation",fmt:"expression or equation",h:"It has an equal sign, so it is an equation."},
+  {t:"4.2",q:"Simplify:",eq:"2x + 3(x - 4)",a:"5x-12",fmt:"simplified expression",h:"Distribute: 2x+3x-12. Combine: 5x-12."},
+  {t:"4.4",q:"Evaluate 4x when",eq:"x = -2",a:"-8",fmt:"numerical answer",h:"4(-2) = -8."},
 ]};
 
 const T=[
-  {t:"unit1",q:"Calculate:",eq:"-5 + (-9)",a:"-14",fmt:"numerical answer",h:"Same signs: 5+9=14, keep negative."},
-  {t:"unit1",q:"Calculate:",eq:"(-3) × (-8)",a:"24",fmt:"numerical answer",h:"Same signs = positive. 3×8=24."},
-  {t:"unit1",q:"Calculate:",eq:"4 - (-7)",a:"11",fmt:"numerical answer",h:"Flip: 4+7=11."},
-  {t:"unit1",q:"Evaluate using PEMDAS:",eq:"5 + 2 × (4 - 1)",a:"11",fmt:"numerical answer",h:"P: 4-1=3. M: 2×3=6. A: 5+6=11."},
-  {t:"unit1",q:"Calculate:",eq:"(-36) ÷ 9",a:"-4",fmt:"numerical answer",h:"Different signs = negative. 36÷9=4."},
-  {t:"unit2",q:"Simplify:",eq:"12/18",a:"2/3",fmt:"fraction in simplest form",h:"GCF(12,18)=6."},
-  {t:"unit2",q:"Add:",eq:"1/3 + 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 4/12+3/12=7/12."},
-  {t:"unit2",q:"Subtract:",eq:"3/4 - 1/3",a:"5/12",fmt:"fraction in simplest form",h:"LCD=12. 9/12-4/12=5/12."},
-  {t:"unit2",q:"Multiply:",eq:"2/3 × 9/4",a:"3/2",fmt:"fraction (improper ok)",h:"2×9=18, 3×4=12. 18/12=3/2."},
-  {t:"unit2",q:"Divide:",eq:"1/2 ÷ 3/4",a:"2/3",fmt:"fraction in simplest form",h:"KCF: 1/2 × 4/3 = 4/6 = 2/3."},
-  {t:"unit3",q:"Simplify:",eq:"4x + 9x",a:"13x",fmt:"simplified expression",h:"Like terms: 4+9=13."},
-  {t:"unit3",q:"Multiply:",eq:"(2x²)(6x³)",a:"12x<sup>5</sup>",fmt:"simplified expression",h:"2×6=12, 2+3=5."},
-  {t:"unit3",q:"Simplify:",eq:"10y - 3y + y",a:"8y",fmt:"simplified expression",h:"10-3+1=8."},
-  {t:"unit3",q:"Can 4x + 2 be simplified further?",eq:"",a:"no",fmt:"yes or no",h:"4x and 2 are unlike terms."},
-  {t:"unit3",q:"Multiply:",eq:"(x³)(x⁴)",a:"x<sup>7</sup>",fmt:"x<sup>n</sup> form",h:"Add exponents: 3+4=7."},
-  {t:"unit4",q:"Simplify:",eq:"3(x + 2) - x",a:"2x+6",fmt:"simplified expression",h:"Distribute: 3x+6-x. Combine: 2x+6."},
-  {t:"unit4",q:"Evaluate 2x - 3 when x = 5",eq:"",a:"7",fmt:"numerical answer",h:"2(5)-3 = 10-3 = 7."},
-  {t:"unit4",q:"Simplify:",eq:"-(2x - 4) + x",a:"-x+4",fmt:"simplified expression",h:"Distribute -1: -2x+4+x. Combine: -x+4."},
-  {t:"unit4",q:"Evaluate x² - x when x = 4",eq:"",a:"12",fmt:"numerical answer",h:"(4)²-4 = 16-4 = 12."},
-  {t:"unit4",q:"Simplify:",eq:"5(2x - 1) - 3x",a:"7x-5",fmt:"simplified expression",h:"Distribute: 10x-5-3x. Combine: 7x-5."},
+  {u:"unit1",t:"1.2",q:"Calculate:",eq:"-5 + (-9)",a:"-14",fmt:"numerical answer",h:"Same signs: 5+9=14, keep negative."},
+  {u:"unit1",t:"1.3",q:"Calculate:",eq:"(-3) × (-8)",a:"24",fmt:"numerical answer",h:"Same signs = positive. 3×8=24."},
+  {u:"unit1",t:"1.2",q:"Calculate:",eq:"4 - (-7)",a:"11",fmt:"numerical answer",h:"Flip: 4+7=11."},
+  {u:"unit1",t:"1.4",q:"Evaluate using PEMDAS:",eq:"5 + 2 × (4 - 1)",a:"11",fmt:"numerical answer",h:"P: 4-1=3. M: 2×3=6. A: 5+6=11."},
+  {u:"unit1",t:"1.3",q:"Calculate:",eq:"(-36) ÷ 9",a:"-4",fmt:"numerical answer",h:"Different signs = negative. 36÷9=4."},
+  {u:"unit2",t:"2.3",q:"Simplify:",eq:"12/18",a:"2/3",fmt:"fraction in simplest form",h:"GCF(12,18)=6."},
+  {u:"unit2",t:"2.4",q:"Add:",eq:"1/3 + 1/4",a:"7/12",fmt:"fraction in simplest form",h:"LCD=12. 4/12+3/12=7/12."},
+  {u:"unit2",t:"2.4",q:"Subtract:",eq:"3/4 - 1/3",a:"5/12",fmt:"fraction in simplest form",h:"LCD=12. 9/12-4/12=5/12."},
+  {u:"unit2",t:"2.5",q:"Multiply:",eq:"2/3 × 9/4",a:"3/2",fmt:"fraction (improper ok)",h:"2×9=18, 3×4=12. 18/12=3/2."},
+  {u:"unit2",t:"2.5",q:"Divide:",eq:"1/2 ÷ 3/4",a:"2/3",fmt:"fraction in simplest form",h:"KCF: 1/2 × 4/3 = 4/6 = 2/3."},
+  {u:"unit3",t:"3.2",q:"Simplify:",eq:"4x + 9x",a:"13x",fmt:"simplified expression",h:"Like terms: 4+9=13."},
+  {u:"unit3",t:"3.3",q:"Multiply:",eq:"(2x²)(6x³)",a:"12x<sup>5</sup>",fmt:"simplified expression",h:"2×6=12, 2+3=5."},
+  {u:"unit3",t:"3.2",q:"Simplify:",eq:"10y - 3y + y",a:"8y",fmt:"simplified expression",h:"10-3+1=8."},
+  {u:"unit3",t:"3.2",q:"Can 4x + 2 be simplified further?",eq:"",a:"no",fmt:"yes or no",h:"4x and 2 are unlike terms."},
+  {u:"unit3",t:"3.3",q:"Multiply:",eq:"(x³)(x⁴)",a:"x<sup>7</sup>",fmt:"x<sup>n</sup> form",h:"Add exponents: 3+4=7."},
+  {u:"unit4",t:"4.2",q:"Simplify:",eq:"3(x + 2) - x",a:"2x+6",fmt:"simplified expression",h:"Distribute: 3x+6-x. Combine: 2x+6."},
+  {u:"unit4",t:"4.4",q:"Evaluate 2x - 3 when x = 5",eq:"",a:"7",fmt:"numerical answer",h:"2(5)-3 = 10-3 = 7."},
+  {u:"unit4",t:"4.2",q:"Simplify:",eq:"-(2x - 4) + x",a:"-x+4",fmt:"simplified expression",h:"Distribute -1: -2x+4+x. Combine: -x+4."},
+  {u:"unit4",t:"4.4",q:"Evaluate x² - x when x = 4",eq:"",a:"12",fmt:"numerical answer",h:"(4)²-4 = 16-4 = 12."},
+  {u:"unit4",t:"4.2",q:"Simplify:",eq:"5(2x - 1) - 3x",a:"7x-5",fmt:"simplified expression",h:"Distribute: 10x-5-3x. Combine: 7x-5."},
 ];
 
 const VQB=[
@@ -1303,7 +1303,7 @@ function loadP(){
   const el=document.getElementById('plist');el.innerHTML='';
   document.getElementById('p-results').style.display='none';
   document.getElementById('pmeta').textContent='Showing 5 of 15 problems — '+curTopic;
-  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p',curTopic.replace('unit','Topic '))));
+  pset.forEach((p,i)=>el.appendChild(mkP(p,i,'p','Topic '+p.t)));
 }
 function checkAllDone(){
   const done=pset.every((_,i)=>document.getElementById('pfb'+i).className.includes('ok')||document.getElementById('pfb'+i).className.includes('no'));
@@ -1322,7 +1322,7 @@ function loadT(){
   tset=[];
   const groups=['unit1','unit2','unit3','unit4'];
   groups.forEach(g=>{
-    const pool=T.filter(p=>p.t===g);
+    const pool=T.filter(p=>p.u===g);
     tset.push(...shuffle(pool).slice(0,5));
   });
   tset=shuffle(tset);
@@ -1331,7 +1331,7 @@ function loadT(){
   document.getElementById('t-results').style.display='none';
   document.getElementById('sbtn').classList.remove('hidden');
   document.getElementById('rbtn').classList.add('hidden');
-  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t',p.t.replace('unit','Topic '))));
+  tset.forEach((p,i)=>el.appendChild(mkP(p,i,'t','Topic '+p.t)));
 }
 function renderBars(map){
   const lbl={'unit1':'Unit 1','unit2':'Unit 2','unit3':'Unit 3','unit4':'Unit 4'};
@@ -1341,11 +1341,11 @@ function gradeT(){
   const map={};
   tset.forEach((p,i)=>{
     const inp=document.getElementById('ta'+i);if(inp)inp.disabled=true;
-    if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
+    if(!map[p.u])map[p.u]={c:0,n:0};map[p.u].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
     const ok=isMatch(uval,p.a);
-    if(ok)map[p.t].c++;
+    if(ok)map[p.u].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
     document.getElementById('tc'+i).classList.toggle('ok',ok);
