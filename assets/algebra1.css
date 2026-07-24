@@ -1,207 +1,375 @@
 /* Algebra 1 — Niles North High School, D219
    Shared styles for the enhancement layer. Loaded after each page's own
-   <style> block so it can build on the existing custom properties. */
+   <style> block, so it can both build on and correct the base design. */
+
+:root {
+  --a1-ink: #17172b;
+  --a1-ink2: #4b4b66;
+  --a1-ink3: #7c7c94;
+  --a1-line: #e6e6ef;
+  --a1-purple: #4a2c7a;
+  --a1-purple-l: #6b3db8;
+  --a1-purple-d: #2a1450;
+  --a1-wash: #f3f0fb;
+  --a1-good: #2f6310;
+  --a1-warn: #9a6600;
+  --a1-bad: #a32d2d;
+  --a1-shadow: 0 1px 2px rgba(26, 20, 60, .05), 0 4px 16px rgba(26, 20, 60, .06);
+  --a1-shadow-l: 0 2px 6px rgba(26, 20, 60, .07), 0 12px 32px rgba(26, 20, 60, .10);
+}
+
+/* ==========================================================
+   Base corrections — the old cards used a hard grey hairline
+   that flattened everything. Soften and lift instead.
+   ========================================================== */
+.pcard, .vcard, .vq-card, .calc-box, .results-panel,
+.test-desc, .topic-selector, .worked, .tblock {
+  border: 1px solid var(--a1-line) !important;
+  box-shadow: var(--a1-shadow);
+}
+.pcard, .vq-card {
+  padding: 1.1rem 1.2rem !important;
+  border-radius: 14px !important;
+}
+.pcard.ok { border-color: #b7d99a !important; background: linear-gradient(180deg, #fbfef7, #fff); }
+.pcard.no { border-color: #f0b3b3 !important; }
+.pcard.a1-retrying { border-color: #e8c07a !important; background: linear-gradient(180deg, #fffdf6, #fff); }
+.vq-card.ok { border-color: #b7d99a !important; }
+.vq-card.no { border-color: #f0b3b3 !important; }
+
+.pq-q { font-size: 14px !important; }
+.pmath { font-size: 17px !important; border-color: var(--a1-line) !important; }
+.note-p, .vdef, .kc-body, .tip-body, .warn-body { font-size: 13.5px !important; }
+
+.ai {
+  border: 1px solid #cfcfdd !important;
+  padding: 9px 12px !important;
+  font-size: 14px !important;
+  border-radius: 9px !important;
+}
+.cbtn, .subbtn, .vq-btn {
+  padding: 9px 16px !important;
+  border-radius: 9px !important;
+  font-weight: 600 !important;
+  letter-spacing: .1px;
+}
+.unit-card { box-shadow: var(--a1-shadow); }
+.unit-card:hover { box-shadow: var(--a1-shadow-l); }
+.tg-card { box-shadow: var(--a1-shadow); }
+.tg-card:hover { box-shadow: var(--a1-shadow-l); }
 
 /* ---- Keyboard users can see where they are ---- */
 :focus-visible {
-  outline: 3px solid #6b3db8;
+  outline: 3px solid var(--a1-purple-l);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
-.nn-header :focus-visible,
-.sbar :focus-visible,
-.vq-sbar :focus-visible {
+.nn-header :focus-visible, .sbar :focus-visible, .vq-sbar :focus-visible,
+.a1-hero :focus-visible, .a1-course :focus-visible {
   outline-color: #fff;
 }
 
 .a1-skip {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  z-index: 2000;
-  background: #fff;
-  color: #2a1450;
+  position: absolute; left: -9999px; top: 0; z-index: 2000;
+  background: #fff; color: var(--a1-purple-d);
   font: 600 13px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  padding: 12px 18px;
-  border-radius: 0 0 8px 0;
-  text-decoration: none;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+  padding: 12px 18px; border-radius: 0 0 8px 0; text-decoration: none;
+  box-shadow: var(--a1-shadow-l);
 }
-.a1-skip:focus {
-  left: 0;
-}
+.a1-skip:focus { left: 0; }
 
-/* ---- Per-unit progress strip ---- */
-.a1-progress {
-  background: #fff;
-  border: 1.5px solid #c0c0cc;
-  border-radius: 12px;
-  padding: .8rem 1rem .9rem;
-  margin: -.4rem 0 1.2rem;
+/* ==========================================================
+   Progress rings
+   ========================================================== */
+.a1-ring { transform: rotate(-90deg); display: block; }
+.a1-ring-bg { fill: none; stroke: rgba(255, 255, 255, .18); stroke-width: 7; }
+.a1-ring-fg {
+  fill: none; stroke-width: 7; stroke-linecap: round;
+  transition: stroke-dashoffset .9s cubic-bezier(.2, .8, .2, 1);
 }
-.a1-progress-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .75rem;
-  flex-wrap: wrap;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .8px;
-  text-transform: uppercase;
-  color: #888899;
-  margin-bottom: .7rem;
+.a1-ring-fg.g { stroke: #8fd14f; }
+.a1-ring-fg.y { stroke: #ffc043; }
+.a1-ring-fg.r { stroke: #c9a3f0; }
+.a1-ring-pct {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -.5px;
 }
-.a1-reset {
-  background: transparent;
-  border: 0.5px solid #d0d0dc;
-  color: #555570;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .3px;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-.a1-reset:hover {
-  background: #f0f0f2;
-  color: #1a1a2e;
-}
-.a1-progress-grid {
+.a1-ring-pct i { font-style: normal; font-size: 11px; margin-left: 1px; opacity: .7; }
+
+/* ==========================================================
+   Unit hero
+   ========================================================== */
+.a1-hero {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: .85rem;
-}
-.a1-stat-l {
-  font-size: 11px;
-  color: #555570;
-  margin-bottom: .1rem;
-}
-.a1-stat-v {
-  font-size: 14px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: .35rem;
-}
-.a1-stat-bw {
-  background: #f0f0f2;
-  border-radius: 20px;
-  height: 6px;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.3rem;
+  background: linear-gradient(135deg, #3a1f66 0%, #2a1450 55%, #241046 100%);
+  border-radius: 18px;
+  padding: 1.15rem 1.35rem;
+  margin: 0 0 1.15rem;
+  box-shadow: var(--a1-shadow-l);
+  position: relative;
   overflow: hidden;
 }
-.a1-stat-bar {
-  height: 100%;
-  border-radius: 20px;
-  transition: width .5s ease;
+.a1-hero::after {
+  content: ''; position: absolute; right: -60px; top: -80px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, .30), transparent 70%);
+  pointer-events: none;
 }
-.a1-stat-bar.g { background: #3b6d11; }
-.a1-stat-bar.y { background: #b87a00; }
-.a1-stat-bar.r { background: #a32d2d; }
+.a1-hero-ring { position: relative; width: 76px; height: 76px; flex-shrink: 0; }
+.a1-hero-main { min-width: 0; }
+.a1-hero-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.1px;
+  text-transform: uppercase; color: rgba(255, 255, 255, .55); margin-bottom: .15rem;
+}
+.a1-hero-title {
+  font-size: 20px; font-weight: 700; color: #fff;
+  line-height: 1.2; margin: 0 0 .55rem; letter-spacing: -.2px;
+}
+.a1-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.a1-chip {
+  display: inline-flex; align-items: baseline; gap: .3rem;
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 20px; padding: 3px 10px;
+}
+.a1-chip-l { font-size: 10px; color: rgba(255, 255, 255, .6); letter-spacing: .3px; }
+.a1-chip-v { font-size: 11px; font-weight: 700; color: #fff; }
+.a1-chip.done { background: rgba(143, 209, 79, .16); border-color: rgba(143, 209, 79, .4); }
+.a1-chip.done .a1-chip-v { color: #b6e888; }
 
-@media (max-width: 600px) {
-  .a1-progress-grid { grid-template-columns: repeat(2, 1fr); }
+.a1-hero-next {
+  text-align: right; flex-shrink: 0; position: relative; z-index: 1;
+  max-width: 230px;
+}
+.a1-next-l {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.1px;
+  text-transform: uppercase; color: rgba(255, 255, 255, .45); margin: 0 0 .15rem;
+}
+.a1-next-t {
+  font-size: 12.5px; color: #fff; line-height: 1.4; margin: 0 0 .5rem;
+}
+.a1-next-btn {
+  background: #fff; color: var(--a1-purple-d); border: none;
+  font-size: 12px; font-weight: 700; padding: 8px 15px;
+  border-radius: 20px; cursor: pointer; white-space: nowrap;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.a1-next-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0, 0, 0, .25); }
+.a1-reset {
+  display: block; margin: .45rem 0 0 auto;
+  background: transparent; border: 1px solid rgba(255, 255, 255, .22);
+  color: rgba(255, 255, 255, .65); font-size: 9px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; cursor: pointer;
+}
+.a1-reset:hover { background: rgba(255, 255, 255, .12); color: #fff; }
+
+@media (max-width: 780px) {
+  .a1-hero { grid-template-columns: auto 1fr; gap: 1rem; padding: 1rem; }
+  .a1-hero-next { grid-column: 1 / -1; text-align: left; max-width: none; }
+  .a1-reset { margin: .45rem 0 0; }
 }
 
-/* ---- Notes cards remember what has been read ---- */
-.tg-card.a1-read {
-  border-left-color: #3b6d11;
+/* ==========================================================
+   Tabs as numbered steps
+   ========================================================== */
+.tabs { gap: 3px !important; }
+.tab.a1-step {
+  display: inline-flex; align-items: center; gap: .45rem;
+  position: relative;
 }
-.tg-card.a1-read .tg-arrow::before {
-  content: '\2713\00a0Read\00a0\00a0';
-  color: #3b6d11;
-  font-weight: 700;
-  font-size: 11px;
+.a1-step-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 19px; height: 19px; border-radius: 50%;
+  background: var(--a1-line); color: var(--a1-ink3);
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+  transition: background .15s, color .15s;
 }
+.tab.on .a1-step-n { background: var(--a1-purple); color: #fff; }
+.tab.a1-done .a1-step-n { background: #e2f2d0; color: var(--a1-good); }
+.tab.a1-done .a1-step-n::after { content: '\2713'; font-size: 11px; }
+.tab.a1-done .a1-step-n { font-size: 0; }
+.tab.on.a1-done .a1-step-n { background: var(--a1-good); color: #fff; }
+
+/* ==========================================================
+   Practice loop
+   ========================================================== */
+.a1-streak {
+  font-size: 11px; color: var(--a1-ink3);
+  display: flex; align-items: center; gap: .35rem;
+  padding: 4px 12px; border-radius: 20px;
+  border: 1px dashed var(--a1-line); background: #fff;
+  transition: all .2s ease;
+}
+.a1-streak.on {
+  color: #7a4a00; background: linear-gradient(135deg, #fff5e0, #ffe9c2);
+  border: 1px solid #f0c97a; border-style: solid; font-weight: 600;
+}
+.a1-streak.on::before { content: '\1F525'; font-size: 13px; }
+.a1-streak-n { font-size: 14px; font-weight: 800; }
+.a1-streak-hint { opacity: .75; }
+@media (max-width: 600px) { .a1-streak-hint { display: none; } }
+
+.fb { font-size: 12.5px !important; padding: .55rem .8rem !important; border-radius: 9px !important; }
+.a1-fb-icon { font-weight: 800; margin-right: .1rem; }
+.fb.a1-retry {
+  display: flex !important; align-items: center; gap: .4rem; flex-wrap: wrap;
+  background: #fff6e3; color: #7a4a00; border: 1px solid #f0c97a;
+}
+.a1-fb-hint {
+  background: #fff; border: 1px solid #e0b46a; color: #7a4a00;
+  font-size: 11px; font-weight: 700; padding: 3px 10px;
+  border-radius: 20px; cursor: pointer; margin-left: auto;
+}
+.a1-fb-hint:hover { background: #fdf0d8; }
+.fb.ok em { opacity: .7; font-size: 11px; }
+
+@keyframes a1pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.018); }
+  100% { transform: scale(1); }
+}
+.a1-pop { animation: a1pop .35s ease; }
+
+/* ---- What to do after a finished set ---- */
+.a1-result-cta { margin-top: .9rem; border-top: 1px solid var(--a1-line); padding-top: .85rem; }
+.a1-result-head { font-size: 13.5px; font-weight: 600; color: var(--a1-ink); margin: 0 0 .65rem; }
+.a1-result-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
+.a1-cta {
+  border: none; cursor: pointer; font-size: 12.5px; font-weight: 600;
+  padding: 9px 16px; border-radius: 9px; transition: all .15s ease;
+}
+.a1-cta.primary { background: var(--a1-purple); color: #fff; }
+.a1-cta.primary:hover { background: var(--a1-purple-l); transform: translateY(-1px); }
+.a1-cta.ghost { background: transparent; color: var(--a1-ink2); border: 1px solid #cfcfdd; }
+.a1-cta.ghost:hover { background: var(--a1-wash); color: var(--a1-purple-d); }
+
+/* ---- Confetti on a perfect set or test ---- */
+.a1-confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.a1-confetti i {
+  position: absolute; top: -12px; width: 7px; height: 11px;
+  border-radius: 1px; opacity: 0; animation: a1fall 1.7s ease-in forwards;
+}
+@keyframes a1fall {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(320px) rotate(560deg); }
+}
+
+/* ==========================================================
+   Notes topic cards
+   ========================================================== */
+.tg-card { position: relative; padding-bottom: 2.9rem !important; }
+.tg-card .tg-arrow {
+  font-size: 11px; font-weight: 700; color: var(--a1-purple);
+  letter-spacing: .2px;
+}
+.tg-card .tg-arrow::before { content: 'Read notes\00a0'; }
+.tg-card.a1-read { border-left-color: var(--a1-good); }
+.tg-card.a1-read .tg-arrow { color: var(--a1-good); }
+.tg-card.a1-read .tg-arrow::before { content: '\2713\00a0Read\00a0\00a0\00b7\00a0Open again\00a0'; }
+.a1-tg-practice {
+  position: absolute; right: .9rem; bottom: .85rem;
+  background: var(--a1-wash); border: 1px solid #d8cdf2; color: var(--a1-purple-d);
+  font-size: 11px; font-weight: 700; padding: 5px 12px;
+  border-radius: 20px; cursor: pointer; transition: all .15s ease;
+}
+.a1-tg-practice:hover { background: var(--a1-purple); color: #fff; border-color: var(--a1-purple); }
 
 /* ---- Best score badge on each practice topic button ---- */
 .a1-badge {
-  display: inline-block;
-  margin-left: .4rem;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 10px;
-  vertical-align: middle;
+  display: inline-block; margin-left: .4rem; font-size: 10px; font-weight: 700;
+  padding: 1px 6px; border-radius: 10px; vertical-align: middle;
 }
-.a1-badge.g { background: #eaf3de; color: #27500a; border: 0.5px solid #b0d17c; }
-.a1-badge.y { background: #faeeda; color: #633806; border: 0.5px solid #f0b45a; }
-.a1-badge.r { background: #fcebeb; color: #a32d2d; border: 0.5px solid #f09595; }
+.a1-badge.g { background: #eaf3de; color: var(--a1-good); border: 1px solid #b0d17c; }
+.a1-badge.y { background: #faeeda; color: #633806; border: 1px solid #f0b45a; }
+.a1-badge.r { background: #fcebeb; color: var(--a1-bad); border: 1px solid #f09595; }
 
-/* ---- index.html: progress on each unit card ---- */
-.u-prog {
-  margin-top: .5rem;
-  display: flex;
-  flex-direction: column;
-  gap: .3rem;
+/* ==========================================================
+   index.html — the course at a glance
+   ========================================================== */
+.a1-course {
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 1.4rem;
+  background: linear-gradient(135deg, #3a1f66 0%, #2a1450 55%, #241046 100%);
+  border-radius: 18px; padding: 1.3rem 1.5rem; margin-bottom: 1.75rem;
+  box-shadow: var(--a1-shadow-l); position: relative; overflow: hidden;
 }
-.u-prog-none {
-  font-size: 11px;
-  color: #a8a8b8;
+.a1-course::after {
+  content: ''; position: absolute; right: -70px; top: -90px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, .32), transparent 70%);
+  pointer-events: none;
 }
-.u-prog-bw {
-  display: block;
-  background: #f0f0f2;
-  border-radius: 20px;
-  height: 5px;
-  overflow: hidden;
+.a1-course-ring { position: relative; width: 84px; height: 84px; flex-shrink: 0; }
+.a1-course-ring .a1-ring-pct { font-size: 22px; }
+.a1-course-l {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase;
+  color: rgba(255, 255, 255, .55); margin: 0 0 .2rem;
 }
-.u-prog-bar {
-  display: block;
-  height: 100%;
-  border-radius: 20px;
+.a1-course-v { font-size: 15px; color: #fff; margin: 0; line-height: 1.4; }
+.a1-course-v strong { color: #b6e888; }
+.a1-course-cta {
+  display: flex; flex-direction: column; gap: .15rem;
+  background: rgba(255, 255, 255, .10); border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 12px; padding: .7rem 1rem; text-decoration: none;
+  position: relative; z-index: 1; transition: all .15s ease;
 }
-.u-prog-bar.g { background: #3b6d11; }
+.a1-course-cta:hover { background: rgba(255, 255, 255, .18); transform: translateY(-1px); }
+.a1-course-cta-l {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(255, 255, 255, .5);
+}
+.a1-course-cta-u { font-size: 13px; font-weight: 600; color: #fff; }
+
+@media (max-width: 780px) {
+  .a1-course { grid-template-columns: auto 1fr; gap: 1rem; padding: 1.1rem; }
+  .a1-course-cta { grid-column: 1 / -1; }
+}
+
+/* ---- Unit card state ---- */
+.unit-card { padding-top: 1.35rem !important; }
+.u-state {
+  position: absolute; top: .6rem; right: .7rem;
+  font-size: 9px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 20px;
+}
+.u-state.new { background: #f2f2f6; color: #9a9aae; }
+.u-state.going { background: #fff3dd; color: #7a4a00; border: 1px solid #f0c97a; }
+.u-state.strong { background: #e6f5d6; color: var(--a1-good); border: 1px solid #b0d17c; }
+.unit-card.is-strong { border-left-color: var(--a1-good) !important; }
+.unit-card.is-going { border-left-color: #d99b1e !important; }
+.unit-card.is-new { border-left-color: #d5d5e2 !important; }
+
+.u-prog { margin-top: .55rem; display: flex; flex-direction: column; gap: .3rem; }
+.u-prog-bw { display: block; background: #eeeef4; border-radius: 20px; height: 5px; overflow: hidden; }
+.u-prog-bar { display: block; height: 100%; border-radius: 20px; transition: width .7s cubic-bezier(.2, .8, .2, 1); }
+.u-prog-bar.g { background: var(--a1-good); }
 .u-prog-bar.y { background: #b87a00; }
-.u-prog-bar.r { background: #a32d2d; }
-.u-prog-txt {
-  font-size: 10px;
-  color: #555570;
-  line-height: 1.4;
-}
+.u-prog-bar.r { background: var(--a1-bad); }
+.u-prog-txt { font-size: 10px; color: var(--a1-ink2); line-height: 1.4; }
 
-.a1-resume {
-  display: flex;
-  align-items: baseline;
-  gap: .5rem;
-  flex-wrap: wrap;
-  background: #ede9f7;
-  border: 1.5px solid #c4b5e8;
-  border-radius: 12px;
-  padding: .7rem 1rem;
-  margin-bottom: 1.5rem;
-  text-decoration: none;
-}
-.a1-resume:hover {
-  border-color: #6b3db8;
-}
-.a1-resume-l {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .8px;
-  text-transform: uppercase;
-  color: #6b3db8;
-}
-.a1-resume-u {
-  font-size: 13px;
-  font-weight: 600;
-  color: #2a1450;
-}
-
-/* ---- Comfortable tap targets on phones ---- */
+/* ==========================================================
+   Phones
+   ========================================================== */
 @media (max-width: 700px) {
   .tab, .vstab, .tpbtn, .pqf-btn, .np {
-    min-height: 40px;
-    display: inline-flex;
-    align-items: center;
+    min-height: 40px; display: inline-flex; align-items: center;
   }
-  .cbtn, .hbtn, .nbtn { min-height: 38px; }
+  .cbtn, .hbtn, .nbtn, .a1-cta { min-height: 38px; }
   .ckey { padding: 11px 2px; font-size: 13px; }
-  .ai { min-height: 38px; font-size: 16px; } /* 16px stops iOS zooming on focus */
+  .ai { min-height: 40px; font-size: 16px !important; } /* 16px stops iOS zooming on focus */
   .topic-grid { grid-template-columns: 1fr; }
+  .ph { flex-wrap: wrap; gap: .5rem; }
+  .a1-hero-title { font-size: 17px; }
 }
 
-/* ---- Respect a reduced-motion preference ---- */
+/* ==========================================================
+   Respect a reduced-motion preference
+   ========================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
@@ -209,46 +377,38 @@
     transition-duration: .01ms !important;
     scroll-behavior: auto !important;
   }
-  .unit-card:hover, .tg-card:hover { transform: none; }
+  .unit-card:hover, .tg-card:hover, .a1-next-btn:hover,
+  .a1-cta.primary:hover, .a1-course-cta:hover { transform: none; }
+  .a1-confetti { display: none; }
 }
 
-/* ---- Printing a topic's notes ---- */
+/* ==========================================================
+   Printing a topic's notes
+   ========================================================== */
 @media print {
-  .nn-header, .tabs, .a1-progress, .a1-skip, .desmos-trigger,
+  .nn-header, .tabs, .a1-hero, .a1-course, .a1-skip, .desmos-trigger,
   .pt-calc-col, .topic-modal-close, .vid-btn, #modal-vid-btns,
   .vstabs, .tpbtns, .topic-selector, .ph, .subbar, .vq-sub-bar,
-  footer, .a1-resume {
+  .a1-result-cta, .a1-confetti, .a1-tg-practice, footer {
     display: none !important;
   }
   body { background: #fff; }
   .shell { max-width: none; padding: 0; }
 
-  /* An open notes modal prints as an ordinary page */
   .topic-modal-overlay.open {
-    display: block;
-    position: static;
-    inset: auto;
-    background: none;
-    padding: 0;
+    display: block; position: static; inset: auto; background: none; padding: 0;
   }
-  .topic-modal {
-    max-width: none;
-    max-height: none;
-    box-shadow: none;
-    border-radius: 0;
-  }
+  .topic-modal { max-width: none; max-height: none; box-shadow: none; border-radius: 0; }
   .topic-modal-header {
-    background: none !important;
-    padding: 0 0 .5rem;
-    border-bottom: 2px solid #2a1450;
+    background: none !important; padding: 0 0 .5rem;
+    border-bottom: 2px solid var(--a1-purple-d);
   }
   .topic-modal-tag, .topic-modal-title {
-    color: #000 !important;
-    background: none !important;
-    font-size: 16px;
+    color: #000 !important; background: none !important; font-size: 16px;
   }
   .topic-modal-body { overflow: visible; padding: .75rem 0 0; }
 
   .kc, .tip, .warn, .worked, .vcard, .pcard { break-inside: avoid; }
+  .pcard, .vcard, .vq-card { box-shadow: none !important; }
   img, svg { max-width: 100% !important; }
 }

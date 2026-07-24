@@ -630,7 +630,7 @@
     });
   }
 
-  /* ---- Progress strip + per-topic badges ---- */
+  /* ---- Unit hero, per-topic badges, next step ---- */
   function pct(el) {
     if (!el) return null;
     var m = (el.textContent || '').match(/(\d+)\s*\/\s*(\d+)/);
@@ -649,59 +649,177 @@
     return $$('.tpbtns .tpbtn').map(argOf).filter(Boolean);
   }
 
+  function unitName() {
+    try { if (typeof UNIT !== 'undefined' && UNIT && UNIT.name) return UNIT.name; } catch (e) { }
+    return '';
+  }
+
+  function topicIndexByTag(tag) {
+    try {
+      if (typeof TOPICS !== 'undefined' && TOPICS) {
+        for (var i = 0; i < TOPICS.length; i++) if (String(TOPICS[i].tag) === String(tag)) return i;
+      }
+    } catch (e) { }
+    return -1;
+  }
+
+  /* Move the student to a section the way clicking would. */
+  function goto(view) {
+    var tab = $('.tabs .tab[data-view="' + view + '"]');
+    if (tab) tab.click();
+    return !!tab;
+  }
+
+  function openNotes(idx) {
+    goto('notes');
+    if (typeof W.openTopic === 'function' && idx >= 0) W.openTopic(idx);
+  }
+
+  function openPractice(topic) {
+    goto('practice');
+    var btn = $$('.tpbtns .tpbtn').filter(function (b) { return argOf(b) === topic; })[0];
+    if (btn && !btn.classList.contains('on')) btn.click();
+    var first = $('#plist .ai');
+    if (first) first.focus();
+  }
+
+  /* A single, always-visible "here is what to do next". */
+  function nextStep(u) {
+    var notes = topicCount();
+    var read = u.notesRead ? Object.keys(u.notesRead).length : 0;
+    if (notes && read < notes) {
+      var idx = 0;
+      for (var i = 0; i < notes; i++) { if (!(u.notesRead && u.notesRead[String(i)])) { idx = i; break; } }
+      var label = 'Topic';
+      try { if (typeof TOPICS !== 'undefined' && TOPICS[idx]) label = TOPICS[idx].tag + ' — ' + String(TOPICS[idx].title).replace(/&amp;/g, '&'); } catch (e) { }
+      return { text: 'Read the notes for ' + label, cta: 'Open notes', run: function () { openNotes(idx); } };
+    }
+    var topics = practiceTopics();
+    for (var j = 0; j < topics.length; j++) {
+      var rec = u.practice && u.practice[topics[j]];
+      if (!rec || rec.best < 80) {
+        return {
+          text: (rec ? 'Get topic ' + topics[j] + ' up to 80%' : 'Practice topic ' + topics[j]),
+          cta: 'Practice', run: function () { openPractice(topics[j]); }
+        };
+      }
+    }
+    if (!u.vocab) return { text: 'Check your vocabulary', cta: 'Take the quiz', run: function () { goto('vocab'); var q = $$('.vstab')[1]; if (q) q.click(); } };
+    if (!u.test) return { text: 'You are ready for the practice test', cta: 'Start the test', run: function () { goto('test'); } };
+    if (u.test.best < 80) return { text: 'Practice test best is ' + u.test.best + '% — try once more', cta: 'Retake', run: function () { goto('test'); } };
+    return { text: 'Unit complete. Nice work.', cta: null, run: null };
+  }
+
+  function mastery(u) {
+    var notes = topicCount(), topics = practiceTopics();
+    var read = u.notesRead ? Object.keys(u.notesRead).length : 0;
+    var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
+    var parts = [
+      [.15, notes ? read / notes : 0],
+      [.35, topics.length ? strong / topics.length : 0],
+      [.35, u.test && u.test.best != null ? u.test.best / 100 : 0],
+      [.15, u.vocab && u.vocab.best != null ? u.vocab.best / 100 : 0]
+    ];
+    var sum = 0, w = 0;
+    parts.forEach(function (p) { sum += p[0] * p[1]; w += p[0]; });
+    return Math.round(sum / w * 100);
+  }
+
+  function ring(p, size) {
+    var r = size / 2 - 5, c = 2 * Math.PI * r;
+    var cls = p >= 80 ? 'g' : p >= 40 ? 'y' : 'r';
+    return '<svg class="a1-ring" viewBox="0 0 ' + size + ' ' + size + '" width="' + size + '" height="' + size + '" aria-hidden="true">' +
+      '<circle cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + r + '" class="a1-ring-bg"/>' +
+      '<circle cx="' + size / 2 + '" cy="' + size / 2 + '" r="' + r + '" class="a1-ring-fg ' + cls + '" ' +
+      'stroke-dasharray="' + c + '" stroke-dashoffset="' + (c * (1 - p / 100)) + '"/></svg>';
+  }
+
   function buildProgressStrip() {
     if (!unitId()) return;
-    var content = $('.content');
     var tabs = $('.tabs');
-    if (!content || !tabs || $('#a1-progress')) return;
-    var strip = document.createElement('div');
-    strip.id = 'a1-progress';
-    strip.className = 'a1-progress';
-    strip.setAttribute('role', 'status');
-    strip.setAttribute('aria-live', 'polite');
-    tabs.parentNode.insertBefore(strip, tabs.nextSibling);
+    if (!tabs || $('#a1-hero')) return;
+    var hero = document.createElement('section');
+    hero.id = 'a1-hero';
+    hero.className = 'a1-hero';
+    hero.setAttribute('aria-label', 'Your progress on this unit');
+    tabs.parentNode.insertBefore(hero, tabs);
     renderProgress();
   }
 
   function renderProgress() {
-    var strip = $('#a1-progress');
-    if (!strip) return;
+    var hero = $('#a1-hero');
+    if (!hero) return;
     var id = unitId();
     var u = W.Alg1Progress.unit(id);
-    var topics = practiceTopics();
-    var done = topics.filter(function (t) {
-      return u.practice && u.practice[t] && u.practice[t].best >= 80;
-    }).length;
-    var notes = topicCount();
+    var m = mastery(u);
+    var step = nextStep(u);
+    var notes = topicCount(), topics = practiceTopics();
     var read = u.notesRead ? Object.keys(u.notesRead).length : 0;
-    var bits = [];
-    bits.push(item('Notes read', notes ? read + ' / ' + notes : '—', notes ? read / notes : 0));
-    bits.push(item('Topics at 80%+', topics.length ? done + ' / ' + topics.length : '—',
-      topics.length ? done / topics.length : 0));
-    bits.push(item('Practice test best', u.test && u.test.best != null ? u.test.best + '%' : 'Not taken',
-      u.test && u.test.best != null ? u.test.best / 100 : 0));
-    bits.push(item('Vocab quiz best', u.vocab && u.vocab.best != null ? u.vocab.best + '%' : 'Not taken',
-      u.vocab && u.vocab.best != null ? u.vocab.best / 100 : 0));
-    strip.innerHTML = '<div class="a1-progress-head">Your progress on this unit' +
-      '<button type="button" class="a1-reset" id="a1-reset">Reset unit progress</button></div>' +
-      '<div class="a1-progress-grid">' + bits.join('') + '</div>';
+    var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
+
+    var chips = [
+      chip('Notes', notes ? read + '/' + notes : '—', notes && read >= notes),
+      chip('Topics 80%+', topics.length ? strong + '/' + topics.length : '—', topics.length && strong >= topics.length),
+      chip('Vocab quiz', u.vocab && u.vocab.best != null ? u.vocab.best + '%' : '—', u.vocab && u.vocab.best >= 80),
+      chip('Practice test', u.test && u.test.best != null ? u.test.best + '%' : '—', u.test && u.test.best >= 80)
+    ].join('');
+
+    hero.innerHTML =
+      '<div class="a1-hero-ring">' + ring(m, 76) + '<span class="a1-ring-pct">' + m + '<i>%</i></span></div>' +
+      '<div class="a1-hero-main">' +
+      '<p class="a1-hero-eyebrow">Unit ' + id + (m >= 100 ? ' · complete' : '') + '</p>' +
+      '<h1 class="a1-hero-title">' + unitName() + '</h1>' +
+      '<div class="a1-chips">' + chips + '</div>' +
+      '</div>' +
+      '<div class="a1-hero-next">' +
+      '<p class="a1-next-l">Next step</p>' +
+      '<p class="a1-next-t">' + step.text + '</p>' +
+      (step.cta ? '<button type="button" class="a1-next-btn" id="a1-next">' + step.cta + ' &rarr;</button>' : '') +
+      '<button type="button" class="a1-reset" id="a1-reset">Reset</button>' +
+      '</div>';
+
+    var go = $('#a1-next');
+    if (go && step.run) go.addEventListener('click', step.run);
     var btn = $('#a1-reset');
     if (btn) btn.addEventListener('click', function () {
       W.Alg1Progress.reset(id);
       renderProgress();
-      markNotesRead();
-      badgeTopics();
     });
     markNotesRead();
     badgeTopics();
+    stepTabs(u);
   }
 
-  function item(label, value, frac) {
-    var w = Math.max(0, Math.min(1, frac || 0)) * 100;
-    var cls = w >= 80 ? 'g' : w >= 50 ? 'y' : 'r';
-    return '<div class="a1-stat"><div class="a1-stat-l">' + label + '</div>' +
-      '<div class="a1-stat-v">' + value + '</div>' +
-      '<div class="a1-stat-bw"><div class="a1-stat-bar ' + cls + '" style="width:' + w + '%"></div></div></div>';
+  function chip(label, value, done) {
+    return '<span class="a1-chip' + (done ? ' done' : '') + '">' +
+      '<span class="a1-chip-l">' + label + '</span>' +
+      '<span class="a1-chip-v">' + value + '</span></span>';
+  }
+
+  /* Mark the four tabs as a sequence, ticking off what is finished. */
+  function stepTabs(u) {
+    var notes = topicCount(), topics = practiceTopics();
+    var read = u.notesRead ? Object.keys(u.notesRead).length : 0;
+    var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
+    var done = {
+      notes: !!(notes && read >= notes),
+      vocab: !!(u.vocab && u.vocab.best >= 80),
+      practice: !!(topics.length && strong >= topics.length),
+      test: !!(u.test && u.test.best >= 80)
+    };
+    $$('.tabs .tab').forEach(function (t, i) {
+      var v = t.getAttribute('data-view');
+      if (!t.__a1step) {
+        t.__a1step = true;
+        /* Number the tabs so the unit reads as a sequence, not four
+           unrelated pages. The leading emoji goes; the number replaces it. */
+        var label = (t.textContent || '').replace(/^[^A-Za-z]+/, '').trim();
+        t.innerHTML = '<span class="a1-step-n" aria-hidden="true">' + (i + 1) + '</span>' +
+          '<span class="a1-step-t">' + label + '</span>';
+      }
+      t.classList.add('a1-step');
+      t.classList.toggle('a1-done', !!done[v]);
+    });
   }
 
   function markNotesRead() {
@@ -718,6 +836,22 @@
         card.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
         });
+        /* Notes and practice never referred to each other; now one click
+           goes straight from a topic's notes to practising that topic. */
+        var tag = $('.tg-tag', card);
+        var topic = tag ? tag.textContent.trim() : null;
+        if (topic && practiceTopics().indexOf(topic) >= 0) {
+          var go = document.createElement('button');
+          go.type = 'button';
+          go.className = 'a1-tg-practice';
+          go.textContent = 'Practice this';
+          go.setAttribute('aria-label', 'Practice topic ' + topic);
+          go.addEventListener('click', function (e) {
+            e.stopPropagation();
+            openPractice(topic);
+          });
+          card.appendChild(go);
+        }
       }
     });
   }
@@ -735,6 +869,224 @@
       span.textContent = p + '%';
       b.appendChild(span);
     });
+  }
+
+  /* ==================================================================
+     4. The practice loop
+     ------------------------------------------------------------------
+     A single wrong answer used to disable the input and reveal the
+     solution, so one mistyped character ended the question. Practice now
+     gives a second try and a hint before showing the answer; the practice
+     test is still one attempt, which is what makes it a test.
+     ================================================================== */
+
+  var attempts = {}, streak = 0, bestStreak = 0;
+
+  var PRAISE = ['Correct!', 'Correct!', 'Nice.', 'That’s it.', 'Well done.', 'Exactly.'];
+  var praiseAt = 0;
+  function praise() { return PRAISE[praiseAt++ % PRAISE.length]; }
+
+  function fmt(s) {
+    try { return typeof W.formatEq === 'function' ? W.formatEq(s) : s; }
+    catch (e) { return s; }
+  }
+
+  function problemAt(pfx, i) {
+    try {
+      var arr = pfx === 'p' ? pset : tset;
+      return arr && arr[i] ? arr[i] : null;
+    } catch (e) { return null; }
+  }
+
+  function reduceMotion() {
+    try { return W.matchMedia && W.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    catch (e) { return false; }
+  }
+
+  function pop(el) {
+    if (reduceMotion()) return;
+    el.classList.remove('a1-pop');
+    void el.offsetWidth;
+    el.classList.add('a1-pop');
+  }
+
+  function confetti(host) {
+    if (reduceMotion()) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'a1-confetti';
+    wrap.setAttribute('aria-hidden', 'true');
+    var colors = ['#4a2c7a', '#6b3db8', '#3b6d11', '#b87a00', '#c4b5e8'];
+    for (var i = 0; i < 28; i++) {
+      var b = document.createElement('i');
+      b.style.left = (Math.random() * 100) + '%';
+      b.style.background = colors[i % colors.length];
+      b.style.animationDelay = (Math.random() * .25) + 's';
+      b.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+      wrap.appendChild(b);
+    }
+    (host || document.body).appendChild(wrap);
+    setTimeout(function () { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }, 2200);
+  }
+
+  function setStreak(n) {
+    streak = n;
+    if (n > bestStreak) bestStreak = n;
+    var el = $('#a1-streak');
+    if (!el) return;
+    el.classList.toggle('on', n >= 2);
+    el.innerHTML = n >= 2
+      ? '<span class="a1-streak-n">' + n + '</span> in a row'
+      : '<span class="a1-streak-hint">Answer two in a row to start a streak</span>';
+  }
+
+  function mountStreak() {
+    var ph = $('#v-practice .ph');
+    if (!ph || $('#a1-streak')) return;
+    var el = document.createElement('div');
+    el.id = 'a1-streak';
+    el.className = 'a1-streak';
+    el.setAttribute('role', 'status');
+    el.setAttribute('aria-live', 'polite');
+    ph.insertBefore(el, ph.lastElementChild);
+    setStreak(streak);
+  }
+
+  function focusNext(pfx, i) {
+    var next = document.getElementById(pfx + 'a' + (i + 1));
+    if (next && !next.disabled) { next.focus(); return; }
+    for (var j = 0; j < 40; j++) {
+      var el = document.getElementById(pfx + 'a' + j);
+      if (el && !el.disabled) { el.focus(); return; }
+    }
+  }
+
+  function showHintFor(i, pfx, p) {
+    var fb = document.getElementById(pfx + 'fb' + i);
+    if (!fb || !p) return;
+    fb.className = 'fb hint';
+    fb.innerHTML = '<span class="a1-fb-icon">💡</span> ' + fmt(p.h);
+  }
+
+  /* Replaces each unit's own check()/chk(); every unit had the same body. */
+  function runCheck(i, pfx) {
+    pfx = pfx || 'p';
+    var inp = document.getElementById(pfx + 'a' + i);
+    var card = document.getElementById(pfx + 'c' + i);
+    var fb = document.getElementById(pfx + 'fb' + i);
+    var p = problemAt(pfx, i);
+    if (!inp || !card || !fb || !p) return;
+    if (!String(inp.value).trim()) { inp.focus(); return; }
+
+    var key = pfx + i;
+    var ok = isMatch(inp.value, p.a);
+
+    if (ok) {
+      inp.disabled = true;
+      card.classList.add('ok');
+      card.classList.remove('no', 'a1-retrying');
+      fb.className = 'fb ok';
+      fb.innerHTML = '<span class="a1-fb-icon">✓</span> ' + praise() +
+        (attempts[key] ? ' <em>(second try)</em>' : '');
+      pop(card);
+      if (pfx === 'p') { setStreak(streak + 1); focusNext(pfx, i); }
+    } else {
+      attempts[key] = (attempts[key] || 0) + 1;
+      if (pfx === 'p') setStreak(0);
+      if (pfx === 'p' && attempts[key] < 2) {
+        card.classList.remove('ok', 'no');
+        card.classList.add('a1-retrying');
+        fb.className = 'fb a1-retry';
+        fb.innerHTML = '<span class="a1-fb-icon">↺</span> Not quite — try once more. ' +
+          '<button type="button" class="a1-fb-hint">Show a hint</button>';
+        var hb = $('.a1-fb-hint', fb);
+        if (hb) hb.addEventListener('click', function () { showHintFor(i, pfx, p); });
+        inp.disabled = false;
+        inp.focus();
+        if (inp.select) inp.select();
+        return; /* not resolved, so the set is not finished */
+      }
+      inp.disabled = true;
+      card.classList.add('no');
+      card.classList.remove('ok', 'a1-retrying');
+      fb.className = 'fb no';
+      fb.innerHTML = '<span class="a1-fb-icon">✗</span> Answer: <strong>' + fmt(p.a) +
+        '</strong> — ' + fmt(p.h);
+    }
+    if (pfx === 'p' && typeof W.checkAllDone === 'function') W.checkAllDone();
+  }
+
+  function installPracticeLoop() {
+    if (typeof W.check === 'function' || typeof W.chk === 'function') {
+      W.check = function (i, pfx) { runCheck(i, pfx); };
+      W.chk = function (i) { runCheck(i, 'p'); };
+    }
+    /* A fresh set is a fresh start. */
+    wrap('loadP', function () {
+      attempts = {};
+      setStreak(0);
+      mountStreak();
+    });
+    wrap('loadT', function () { attempts = {}; });
+  }
+
+  /* After a finished set: say what to do next instead of just "try another". */
+  function resultsCTA() {
+    var panel = $('#p-results');
+    if (!panel || panel.style.display === 'none') return;
+    var cards = $$('#plist .pcard');
+    if (!cards.length) return;
+    var okCount = cards.filter(function (c) { return c.classList.contains('ok'); }).length;
+    var p = Math.round(okCount / cards.length * 100);
+    var topic = null;
+    try { topic = typeof curTopic !== 'undefined' ? curTopic : null; } catch (e) { }
+
+    var old = $('#a1-result-cta');
+    if (old) old.parentNode.removeChild(old);
+    var box = document.createElement('div');
+    box.id = 'a1-result-cta';
+    box.className = 'a1-result-cta';
+
+    var topics = practiceTopics();
+    var at = topics.indexOf(topic);
+    var nextTopic = at >= 0 && at < topics.length - 1 ? topics[at + 1] : null;
+    var idx = topicIndexByTag(topic);
+
+    var head, actions = [];
+    if (p === 100) {
+      head = 'Perfect set. ' + (bestStreak >= 4 ? 'Best streak: ' + bestStreak + '.' : '');
+      if (nextTopic) actions.push(['primary', 'Move on to ' + nextTopic, function () { openPractice(nextTopic); }]);
+      else actions.push(['primary', 'Take the practice test', function () { goto('test'); }]);
+      actions.push(['ghost', 'Another set of ' + topic, function () { W.loadP(); }]);
+      confetti(panel);
+    } else if (p >= 80) {
+      head = 'Strong — ' + p + '% on topic ' + topic + '.';
+      if (nextTopic) actions.push(['primary', 'Move on to ' + nextTopic, function () { openPractice(nextTopic); }]);
+      else actions.push(['primary', 'Take the practice test', function () { goto('test'); }]);
+      actions.push(['ghost', 'Another set', function () { W.loadP(); }]);
+    } else if (p >= 50) {
+      head = p + '% — one more set should do it.';
+      actions.push(['primary', 'Another set', function () { W.loadP(); }]);
+      if (idx >= 0) actions.push(['ghost', 'Reread the notes', function () { openNotes(idx); }]);
+    } else {
+      head = 'This one needs another look — that is fine.';
+      if (idx >= 0) actions.push(['primary', 'Reread the notes for ' + topic, function () { openNotes(idx); }]);
+      actions.push(['ghost', 'Try another set', function () { W.loadP(); }]);
+    }
+
+    box.innerHTML = '<p class="a1-result-head">' + head + '</p><div class="a1-result-btns"></div>';
+    var row = $('.a1-result-btns', box);
+    actions.forEach(function (a) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'a1-cta ' + a[0];
+      b.textContent = a[1];
+      b.addEventListener('click', a[2]);
+      row.appendChild(b);
+    });
+    panel.appendChild(box);
+
+    var oldCta = $('.next-cta', panel);
+    if (oldCta) oldCta.style.display = 'none';
   }
 
   function recordHooks() {
@@ -759,6 +1111,7 @@
         u.practice[topic] = rec;
       });
       renderProgress();
+      resultsCTA();
     });
 
     wrap('gradeT', function () {
@@ -772,6 +1125,7 @@
         u.test = rec;
       });
       renderProgress();
+      if (p >= 90) confetti($('#sbar'));
     });
 
     wrap('gradeVQ', function () {
@@ -785,6 +1139,7 @@
         u.vocab = rec;
       });
       renderProgress();
+      if (p >= 90) confetti($('#vq-sbar'));
     });
 
     /* Re-apply the ARIA/labelling passes whenever a view re-renders. */
@@ -797,6 +1152,7 @@
     labelQuestions();
     liveRegions();
     enhanceCalculators();
+    mountStreak();
   }
 
   /* ---- Skip link ---- */
@@ -813,50 +1169,93 @@
     if (target.tagName !== 'MAIN') target.setAttribute('role', 'main');
   }
 
-  /* ---- index.html: progress on the unit cards ---- */
+  /* ---- index.html: the course at a glance ---- */
+
+  /* The unit pages know their own weighting; here we only have the stored
+     record, so approximate the same shape from it. */
+  function unitScore(u) {
+    if (!u) return 0;
+    var topics = u.practice ? Object.keys(u.practice) : [];
+    var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
+    var parts = [
+      [.35, topics.length ? strong / topics.length : 0],
+      [.35, u.test && u.test.best != null ? u.test.best / 100 : 0],
+      [.15, u.vocab && u.vocab.best != null ? u.vocab.best / 100 : 0],
+      [.15, u.notesRead ? Math.min(1, Object.keys(u.notesRead).length / 4) : 0]
+    ];
+    var s = 0;
+    parts.forEach(function (p) { s += p[0] * p[1]; });
+    return Math.round(s * 100);
+  }
+
   function indexProgress() {
     var cards = $$('.unit-card');
     if (!cards.length) return;
     var all = W.Alg1Progress.all();
-    var latest = null;
+    var latest = null, started = 0, strongUnits = 0, totalScore = 0;
+
     cards.forEach(function (card) {
       var badge = $('.u-badge', card);
       if (!badge) return;
-      var id = badge.textContent.replace(/–|—/g, '-').trim();
+      var id = badge.textContent.replace(/[–—]/g, '-').trim();
       var u = all[id];
       var meta = $('.u-meta', card);
+      var score = unitScore(u);
+      totalScore += score;
+
+      var state = document.createElement('span');
+      state.className = 'u-state';
+      if (!u) {
+        state.classList.add('new');
+        state.textContent = 'Not started';
+        card.classList.add('is-new');
+      } else {
+        started++;
+        if (score >= 80) { strongUnits++; state.classList.add('strong'); state.textContent = 'Strong'; card.classList.add('is-strong'); }
+        else { state.classList.add('going'); state.textContent = score + '%'; card.classList.add('is-going'); }
+        if (!latest || (u.updated || 0) > (latest.u.updated || 0)) latest = { u: u, card: card, id: id };
+      }
+      card.insertBefore(state, card.firstChild);
+
       var row = document.createElement('div');
       row.className = 'u-prog';
-      if (!u) {
-        row.innerHTML = '<span class="u-prog-none">Not started</span>';
-      } else {
+      if (u) {
         var parts = [];
-        if (u.test && u.test.best != null) parts.push('Test ' + u.test.best + '%');
         var topics = u.practice ? Object.keys(u.practice) : [];
         var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
         if (topics.length) parts.push(strong + '/' + topics.length + ' topics strong');
-        if (u.notesRead) parts.push(Object.keys(u.notesRead).length + ' notes read');
-        var score = u.test && u.test.best != null ? u.test.best : (strong && topics.length ? Math.round(strong / topics.length * 100) : 10);
+        if (u.test && u.test.best != null) parts.push('test ' + u.test.best + '%');
         row.innerHTML = '<span class="u-prog-bw"><span class="u-prog-bar ' +
-          (score >= 80 ? 'g' : score >= 50 ? 'y' : 'r') + '" style="width:' + score + '%"></span></span>' +
+          (score >= 80 ? 'g' : score >= 50 ? 'y' : 'r') + '" style="width:' + Math.max(score, 3) + '%"></span></span>' +
           '<span class="u-prog-txt">' + (parts.join(' · ') || 'Started') + '</span>';
-        if (!latest || (u.updated || 0) > (latest.u.updated || 0)) latest = { u: u, card: card, id: id };
+        if (meta && meta.parentNode) meta.parentNode.insertBefore(row, meta.nextSibling);
       }
-      if (meta && meta.parentNode) meta.parentNode.insertBefore(row, meta.nextSibling);
     });
-    if (latest) {
-      var main = $('.main');
-      var host = $('.page-sub');
-      if (main && host) {
-        var name = $('.u-name', latest.card);
-        var cta = document.createElement('a');
-        cta.className = 'a1-resume';
-        cta.href = latest.card.getAttribute('href');
-        cta.innerHTML = '<span class="a1-resume-l">Pick up where you left off</span>' +
-          '<span class="a1-resume-u">Unit ' + latest.id + ' — ' + (name ? name.textContent : '') + '</span>';
-        host.parentNode.insertBefore(cta, host.nextSibling);
-      }
+
+    var overall = Math.round(totalScore / cards.length);
+    var host = $('.page-sub');
+    if (host) {
+      var hero = document.createElement('section');
+      hero.className = 'a1-course';
+      hero.setAttribute('aria-label', 'Your progress across the course');
+      var resume = latest
+        ? '<a class="a1-course-cta" href="' + latest.card.getAttribute('href') + '">' +
+          '<span class="a1-course-cta-l">Pick up where you left off</span>' +
+          '<span class="a1-course-cta-u">Unit ' + latest.id + ' — ' +
+          ($('.u-name', latest.card) ? $('.u-name', latest.card).textContent : '') + ' &rarr;</span></a>'
+        : '<a class="a1-course-cta" href="unit1-4.html">' +
+          '<span class="a1-course-cta-l">Start here</span>' +
+          '<span class="a1-course-cta-u">Unit 1–4 — Getting the Rust Off &rarr;</span></a>';
+      hero.innerHTML =
+        '<div class="a1-course-ring">' + ring(overall, 84) + '<span class="a1-ring-pct">' + overall + '<i>%</i></span></div>' +
+        '<div class="a1-course-stats">' +
+        '<p class="a1-course-l">Course progress</p>' +
+        '<p class="a1-course-v">' + started + ' of ' + cards.length + ' units started' +
+        (strongUnits ? ' · <strong>' + strongUnits + '</strong> at 80%+' : '') + '</p>' +
+        '</div>' + resume;
+      host.parentNode.insertBefore(hero, host.nextSibling);
     }
+
     var reset = $('#a1-reset-all');
     if (reset) reset.addEventListener('click', function () {
       if (W.confirm('Clear saved progress for every unit on this device?')) {
@@ -873,6 +1272,7 @@
     try { enhanceModal(); } catch (e) { }
     try { enhanceDesmos(); } catch (e) { }
     try { buildProgressStrip(); } catch (e) { }
+    try { installPracticeLoop(); } catch (e) { }
     try { recordHooks(); } catch (e) { }
     try { refresh(); } catch (e) { }
     try { indexProgress(); } catch (e) { }
