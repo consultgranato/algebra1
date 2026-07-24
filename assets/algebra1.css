@@ -353,6 +353,273 @@
 .u-prog-txt { font-size: 10px; color: var(--a1-ink2); line-height: 1.4; }
 
 /* ==========================================================
+   NOTES — the reading experience inside a topic
+   ========================================================== */
+
+/* ---- Modal chrome ---- */
+.topic-modal { max-width: 900px !important; max-height: 92vh !important; border-radius: 16px !important; }
+.topic-modal-header {
+  padding: .9rem 1.2rem !important;
+  background: linear-gradient(135deg, #3a1f66, #2a1450) !important;
+  position: relative;
+}
+.topic-modal-tag {
+  background: rgba(255, 255, 255, .16) !important;
+  border: 1px solid rgba(255, 255, 255, .2);
+  font-size: 11px !important; letter-spacing: .4px; padding: 3px 10px !important;
+  border-radius: 20px !important;
+}
+.topic-modal-title { font-size: 17px !important; letter-spacing: -.2px; }
+.topic-modal-close {
+  background: rgba(255, 255, 255, .12) !important;
+  border: 1px solid rgba(255, 255, 255, .18) !important;
+}
+/* The video links were pillar-box red and shouted over the title. */
+.topic-modal-header .vid-btn {
+  background: rgba(255, 255, 255, .12) !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  color: #fff !important; font-weight: 600 !important;
+}
+.topic-modal-header .vid-btn:hover { background: rgba(255, 255, 255, .24) !important; }
+
+.a1-read-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: rgba(255, 255, 255, .12);
+}
+.a1-read-bar i {
+  display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, #8b5cf6, #b6e888);
+  transition: width .15s linear;
+}
+
+/* ---- Page ---- */
+.a1-note {
+  padding: 1.5rem 2rem 1.25rem !important;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--a1-ink);
+}
+.a1-note > *:first-child { margin-top: 0; }
+.a1-note .note-p {
+  font-size: 15px !important; line-height: 1.75 !important;
+  color: var(--a1-ink2) !important; margin-bottom: 1rem !important;
+  max-width: 66ch;
+}
+.a1-note .note-p em:first-child { color: var(--a1-purple); font-style: normal; font-weight: 600; }
+.a1-note strong { color: var(--a1-ink); font-weight: 650; }
+
+/* Section headings — the old rule uppercased them, which turned
+   "y = 2x + 1" into "Y = 2X + 1". */
+.a1-note .a1-note-h {
+  text-transform: none !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.2px !important;
+  color: var(--a1-ink) !important;
+  margin: 2rem 0 .8rem !important;
+  padding-bottom: .45rem;
+  border-bottom: 2px solid var(--a1-line);
+  scroll-margin-top: 60px;
+}
+
+/* ---- Section index for longer topics ---- */
+.a1-note-nav {
+  position: sticky; top: -1.5rem; z-index: 5;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem;
+  /* No backdrop-filter here: it is GPU-expensive on the school Chromebooks
+     this runs on, and it sits on a sticky element over scrolling content. */
+  background: #fff;
+  border: 1px solid var(--a1-line); border-radius: 12px;
+  padding: .6rem .8rem; margin: 0 0 1.4rem;
+  box-shadow: var(--a1-shadow);
+}
+.a1-note-nav-l {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--a1-ink3); margin-right: .3rem;
+}
+.a1-note-nav a {
+  font-size: 11.5px; font-weight: 600; color: var(--a1-purple);
+  text-decoration: none; background: var(--a1-wash);
+  border: 1px solid #e2daf6; border-radius: 20px; padding: 3px 10px;
+  transition: all .12s ease;
+}
+.a1-note-nav a:hover { background: var(--a1-purple); color: #fff; border-color: var(--a1-purple); }
+
+/* ---- Callouts ---- */
+.a1-note .a1-callout {
+  border-radius: 12px !important;
+  border: 1px solid;
+  border-left-width: 4px !important;
+  padding: .9rem 1.1rem !important;
+  margin: 1rem 0 !important;
+}
+.a1-note .a1-callout-lbl {
+  display: flex; align-items: center; gap: .4rem;
+  font-size: 10.5px !important; letter-spacing: .9px !important;
+  margin-bottom: .4rem !important;
+}
+.a1-note .a1-callout-lbl::before { font-size: 13px; line-height: 1; }
+.a1-note .a1-kc {
+  background: linear-gradient(180deg, #f6f2ff, #fbf9ff) !important;
+  border-color: #ddd0f7; border-left-color: var(--a1-purple) !important;
+}
+.a1-note .a1-kc .a1-callout-lbl::before { content: '\25C7'; }
+.a1-note .a1-tip {
+  background: linear-gradient(180deg, #f2f9e9, #fafdf6) !important;
+  border-color: #cbe5ac; border-left-color: #4a8317 !important;
+}
+.a1-note .a1-tip .a1-callout-lbl::before { content: '\1F4A1'; }
+.a1-note .a1-warn {
+  background: linear-gradient(180deg, #fff6e8, #fffdf8) !important;
+  border-color: #f0d3a4; border-left-color: #b8770c !important;
+}
+.a1-note .a1-warn .a1-callout-lbl::before { content: '\26A0'; }
+.a1-note .kc-body, .a1-note .tip-body, .a1-note .warn-body {
+  font-size: 14.5px !important; line-height: 1.7 !important;
+}
+
+/* ---- Worked examples ---- */
+.a1-note .a1-worked {
+  background: #fff !important;
+  border: 1px solid var(--a1-line) !important;
+  border-radius: 14px !important;
+  padding: 0 !important;
+  margin: 1.1rem 0 !important;
+  overflow: hidden;
+  box-shadow: var(--a1-shadow);
+}
+.a1-worked-head {
+  display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+  background: linear-gradient(180deg, #faf8ff, #f5f2fc);
+  border-bottom: 1px solid #ece6fa;
+  padding: .7rem 1.1rem;
+  font-size: 14px; font-weight: 600; color: var(--a1-ink);
+  text-transform: none !important; letter-spacing: 0 !important;
+}
+.a1-worked-badge {
+  background: var(--a1-purple); color: #fff;
+  font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px; flex-shrink: 0;
+}
+.a1-worked-title { font-size: 14px; color: var(--a1-ink); }
+
+/* Math was set in Courier New, which read as terminal output.
+   A serif with proper numerals reads as a textbook. */
+.a1-note .a1-steps {
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Cambria, Georgia, serif !important;
+  font-size: 15.5px !important;
+  line-height: 1.6 !important;
+  padding: .35rem 0 !important;
+}
+.a1-note .a1-eq {
+  display: flex; align-items: baseline; gap: .65rem;
+  padding: .5rem 1.1rem !important;
+  border: 0 !important; margin: 0 !important;
+  position: relative;
+}
+.a1-note .a1-eq + .a1-eq { border-top: 1px solid #f3f3f8 !important; }
+.a1-note .a1-eq::before {
+  content: ''; flex: 0 0 5px; height: 5px; margin-top: .45em;
+  border-radius: 50%; background: #d8d0ee;
+}
+.a1-note .a1-eq-final {
+  background: linear-gradient(90deg, #f4f9ec, #fbfdf7);
+  border-top: 1px solid #dcebc7 !important;
+  font-weight: 600;
+}
+.a1-note .a1-eq-final::before { background: #7aa84a; }
+.a1-note .a1-eq-note {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 12px !important; color: var(--a1-ink3) !important;
+  margin-left: .5rem !important;
+}
+
+/* ---- Numbered procedure lists ---- */
+.a1-note .steps li { font-size: 14.5px !important; line-height: 1.65 !important; margin-bottom: .6rem !important; }
+.a1-note .steps li::before { width: 22px; min-width: 22px; height: 22px; font-size: 11px; }
+
+/* ---- Figures ---- */
+.a1-fig { margin: 1.2rem 0; text-align: center; }
+.a1-fig img {
+  display: block; margin: 0 auto; max-width: 100%; max-height: 340px;
+  width: auto; border: 1px solid var(--a1-line); border-radius: 10px;
+  background: #fff; box-shadow: var(--a1-shadow); transition: max-height .25s ease;
+}
+.a1-fig.big img { max-height: none; }
+.a1-fig figcaption {
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  font-size: 10.5px; color: var(--a1-ink3); margin-top: .45rem;
+  letter-spacing: .3px; text-transform: uppercase; font-weight: 600;
+}
+.a1-fig-zoom {
+  background: var(--a1-wash); border: 1px solid #ddd3f5; color: var(--a1-purple);
+  font-size: 10px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  padding: 2px 9px; border-radius: 20px; cursor: pointer;
+}
+.a1-fig-zoom:hover { background: var(--a1-purple); color: #fff; }
+.a1-note .a1-diagram {
+  background: #fbfaff !important; border: 1px solid var(--a1-line);
+  border-radius: 12px; padding: .9rem !important; margin: 1.1rem 0 !important;
+  overflow-x: auto;
+}
+.a1-note .a1-diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+
+/* ---- Tables ---- */
+.a1-note .a1-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  margin: 1rem 0; font-size: 14px;
+  border: 1px solid var(--a1-line); border-radius: 12px; overflow: hidden;
+}
+.a1-note .a1-table th {
+  background: #f5f2fc; text-align: left; font-size: 11px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: var(--a1-purple-d);
+  padding: .6rem .85rem; border-bottom: 1px solid #e6e0f5;
+}
+.a1-note .a1-table td { padding: .55rem .85rem; border-bottom: 1px solid #f2f2f7; }
+.a1-note .a1-table tr:last-child td { border-bottom: 0; }
+.a1-note .a1-table tr:nth-child(even) td { background: #fcfcfe; }
+
+/* ---- Vocabulary highlight and maths bits ---- */
+.a1-note .vw {
+  color: #6d28d9 !important; font-weight: 650 !important;
+  border-bottom: 0 !important;
+  background: linear-gradient(180deg, transparent 62%, #ede4ff 62%);
+  padding: 0 1px;
+}
+.a1-note .frac { font-size: 1em !important; margin: 0 3px !important; }
+.a1-note .frac .fn { border-bottom-width: 1.4px !important; padding: 0 4px 2px !important; }
+.a1-note .frac .fd { padding: 2px 4px 0 !important; }
+.a1-note sup { font-size: .72em; }
+.a1-note .eq-box { font-size: 13px; padding: 3px 8px; border-radius: 6px; }
+
+/* ---- Aside ---- */
+.a1-note .a1-aside {
+  background: #fafaff !important; border: 1px dashed #d7d7e6 !important;
+  border-radius: 12px !important; padding: .75rem 1rem !important;
+  font-size: 13px !important; margin-top: 1.2rem !important;
+}
+
+/* ---- Footer ---- */
+.a1-note-foot {
+  margin-top: 2rem; padding-top: 1.1rem;
+  border-top: 2px solid var(--a1-line);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: .8rem; flex-wrap: wrap;
+}
+.a1-note-foot-l { font-size: 13px; color: var(--a1-ink2); margin: 0; font-weight: 600; }
+.a1-note-foot-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+@media (max-width: 700px) {
+  .a1-note { padding: 1.1rem 1.1rem 1rem !important; font-size: 14.5px; }
+  .a1-note .a1-note-h { font-size: 16px !important; }
+  .a1-note .a1-steps { font-size: 14.5px !important; }
+  .a1-note .a1-eq { padding: .45rem .85rem !important; }
+  .a1-worked-head { padding: .6rem .85rem; }
+  .a1-note-nav { top: -1.1rem; }
+  .a1-note-foot { flex-direction: column; align-items: stretch; }
+}
+
+/* ==========================================================
    Phones
    ========================================================== */
 @media (max-width: 700px) {
@@ -389,9 +656,18 @@
   .nn-header, .tabs, .a1-hero, .a1-course, .a1-skip, .desmos-trigger,
   .pt-calc-col, .topic-modal-close, .vid-btn, #modal-vid-btns,
   .vstabs, .tpbtns, .topic-selector, .ph, .subbar, .vq-sub-bar,
-  .a1-result-cta, .a1-confetti, .a1-tg-practice, footer {
+  .a1-result-cta, .a1-confetti, .a1-tg-practice, footer,
+  .a1-note-nav, .a1-note-foot, .a1-fig-zoom, .a1-read-bar {
     display: none !important;
   }
+  /* Notes print as an article: no cropped scans, no card chrome. */
+  .a1-note { padding: 0 !important; font-size: 11.5pt; }
+  .a1-note .a1-worked { box-shadow: none !important; border: 1px solid #bbb !important; }
+  .a1-worked-head { background: none !important; border-bottom: 1px solid #bbb; }
+  .a1-worked-badge { background: none !important; color: #000 !important; border: 1px solid #666; }
+  .a1-note .a1-eq-final { background: none !important; font-weight: 700; }
+  .a1-fig img { max-height: none !important; box-shadow: none !important; }
+  .a1-note .a1-note-h { break-after: avoid; }
   body { background: #fff; }
   .shell { max-width: none; padding: 0; }
 

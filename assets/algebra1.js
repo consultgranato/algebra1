@@ -507,6 +507,7 @@
 
     wrap('openTopic', function (i) {
       lastFocus = document.activeElement;
+      try { enhanceNote(i); } catch (e) { }
       var close = $('.topic-modal-close', modal);
       if (close) close.focus();
       var id = unitId();
@@ -522,6 +523,234 @@
       if (lastFocus && lastFocus.focus) lastFocus.focus();
       lastFocus = null;
     });
+  }
+
+  /* ==================================================================
+     Notes: turn the injected HTML into a proper reading experience
+     ------------------------------------------------------------------
+     The content is authored per unit as an HTML string, so rather than
+     rewrite thirteen files we restructure it here once it is in the DOM:
+     number the worked examples, break their steps into rows, frame the
+     figures, and build a section index for long topics.
+     ================================================================== */
+
+  var ROMAN = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+
+  function slug(s, n) {
+    return 'note-s' + n + '-' + String(s || '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 32);
+  }
+
+  var SUP_OUT = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '-': '⁻', '+': '⁺', 'n': 'ⁿ' };
+
+  /* textContent flattens the maths: the halves of a stacked 3/4 run together
+     as "34", and x<sup>2</sup> becomes "x2". Rebuild both before reading. */
+  function flatText(el) {
+    var c = el.cloneNode(true);
+    $$('.frac', c).forEach(function (f) {
+      var n = $('.fn', f), d = $('.fd', f);
+      f.parentNode.replaceChild(
+        document.createTextNode((n ? n.textContent : '') + '/' + (d ? d.textContent : '')), f);
+    });
+    $$('sup', c).forEach(function (s) {
+      var raw = (s.textContent || '').trim(), out = '';
+      for (var i = 0; i < raw.length; i++) {
+        if (!SUP_OUT[raw.charAt(i)]) { out = ''; break; }
+        out += SUP_OUT[raw.charAt(i)];
+      }
+      s.parentNode.replaceChild(document.createTextNode(out || ('^' + raw)), s);
+    });
+    return (c.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function navLabel(h) {
+    var full = flatText(h);
+    var t = full
+      .replace(/^(?:worked\s+)?example\s*/i, '')     /* "Worked example 2 — …" */
+      .replace(/^\d+\s*(?:—|–|-|:)\s*/, '')          /* leftover "2 — " */
+      .replace(/^(?:—|–|-|:)\s*/, '');
+    if (!t) t = full;
+    /* Capitalise real words only. A leading lone letter is a variable —
+       "x² + 5x + 6" must not become "X² + 5x + 6". */
+    if (!/^[a-z](?![a-z])/.test(t)) t = t.charAt(0).toUpperCase() + t.slice(1);
+    return t.length > 46 ? t.slice(0, 44).replace(/\s+\S*$/, '') + '…' : t;
+  }
+
+  function enhanceNote(topicIndex) {
+    var body = $('#modal-body');
+    if (!body) return;
+    body.classList.add('a1-note');
+    body.scrollTop = 0;
+
+    /* --- worked examples become numbered, stepped cards --- */
+    $$('.worked', body).forEach(function (w, n) {
+      w.classList.add('a1-worked');
+      var lbl = $('.wlbl', w);
+      var title = lbl ? lbl.innerHTML : '';
+      /* Authors wrote labels like "Example 2 — Simplify: 4^-2"; keep the
+         descriptive half and let the badge carry the number. */
+      title = title.replace(/^\s*(worked\s+)?example\s*\d*\s*(&mdash;|—|-|:)?\s*/i, '');
+      if (lbl) {
+        lbl.className = 'a1-worked-head';
+        lbl.innerHTML = '<span class="a1-worked-badge">Example ' + (n + 1) + '</span>' +
+          (title ? '<span class="a1-worked-title">' + title + '</span>' : '');
+      }
+      var steps = $('.wsteps', w);
+      if (!steps) return;
+      steps.classList.add('a1-steps');
+      var rows = $$('.eq', steps);
+      rows.forEach(function (r, k) {
+        r.classList.add('a1-eq');
+        /* .eq-div marks the line the author drew a rule above: the result. */
+        if (r.classList.contains('eq-div') || k === rows.length - 1) r.classList.add('a1-eq-final');
+        var note = $('.eq-note', r);
+        if (note) note.classList.add('a1-eq-note');
+      });
+    });
+
+    /* --- callouts get an icon and a clearer identity --- */
+    ['kc', 'tip', 'warn'].forEach(function (kind) {
+      $$('.' + kind, body).forEach(function (c) {
+        c.classList.add('a1-callout', 'a1-' + kind);
+        var lbl = $('.' + kind + '-lbl', c);
+        if (lbl) lbl.classList.add('a1-callout-lbl');
+      });
+    });
+
+    /* --- section headings: collect for the index, drop the id-less state --- */
+    var heads = $$('.note-h', body);
+    heads.forEach(function (h, n) {
+      h.classList.add('a1-note-h');
+      h.id = slug(flatText(h), n);
+    });
+
+    /* --- packet scans and diagrams get framed, and can be enlarged --- */
+    $$('img', body).forEach(function (img) {
+      if (img.closest('.a1-fig')) return;
+      var fig = document.createElement('figure');
+      fig.className = 'a1-fig';
+      img.parentNode.insertBefore(fig, img);
+      fig.appendChild(img);
+      img.removeAttribute('style');
+      img.setAttribute('alt', img.getAttribute('alt') || 'Diagram from the course packet');
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = 'From the course packet <button type="button" class="a1-fig-zoom">Enlarge</button>';
+      fig.appendChild(cap);
+      var zoom = $('.a1-fig-zoom', cap);
+      zoom.addEventListener('click', function () {
+        var big = fig.classList.toggle('big');
+        this.textContent = big ? 'Shrink' : 'Enlarge';
+      });
+      /* Only offer "Enlarge" when the frame is actually cropping the scan. */
+      var gate = function () {
+        if (!img.naturalHeight) return;
+        var capped = img.naturalHeight > img.clientHeight + 4;
+        zoom.style.display = capped ? '' : 'none';
+      };
+      if (img.complete) gate(); else img.addEventListener('load', gate, { once: true });
+    });
+    $$('svg', body).forEach(function (s) {
+      if (s.closest('.a1-fig') || s.closest('.a1-diagram')) return;
+      var host = s.parentNode;
+      if (host && host !== body && !host.classList.contains('a1-diagram')) host.classList.add('a1-diagram');
+    });
+
+    /* --- tables --- */
+    $$('table', body).forEach(function (t) { t.classList.add('a1-table'); });
+
+    /* --- the joke reads as an aside, not stray text --- */
+    $$('.joke', body).forEach(function (j) { j.classList.add('a1-aside'); });
+
+    buildNoteNav(body, heads);
+    buildNoteFooter(body, topicIndex);
+    trackReading(body);
+  }
+
+  function buildNoteNav(body, heads) {
+    if (heads.length < 3) return;
+    var nav = document.createElement('nav');
+    nav.className = 'a1-note-nav';
+    nav.setAttribute('aria-label', 'Sections in this topic');
+    nav.innerHTML = '<span class="a1-note-nav-l">On this page</span>' +
+      heads.map(function (h) {
+        return '<a href="#' + h.id + '" title="' + flatText(h).replace(/"/g, '&quot;') + '">' +
+          navLabel(h) + '</a>';
+      }).join('');
+    body.insertBefore(nav, body.firstChild);
+    $$('a', nav).forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var t = document.getElementById(a.getAttribute('href').slice(1));
+        if (!t) return;
+        /* offsetTop is measured from the positioned overlay, not from the
+           scrolling body, so compare rectangles instead. */
+        var delta = t.getBoundingClientRect().top - body.getBoundingClientRect().top;
+        /* Instant, not smooth: smooth scrolling on this overflow container
+           is silently dropped in some browsers, which left the link dead. */
+        body.scrollTop = body.scrollTop + delta - nav.offsetHeight - 14;
+        if (body.__a1scroll) body.__a1scroll();
+      });
+    });
+  }
+
+  function buildNoteFooter(body, topicIndex) {
+    /* Read the tag off the header the page just filled in: unit1-4 keeps its
+       notes in hidden DOM with TOPIC_TAGS, the rest use a TOPICS array, and
+       both populate #modal-tag. */
+    var tag = null;
+    var tagEl = $('#modal-tag');
+    if (tagEl && tagEl.textContent.trim()) tag = tagEl.textContent.trim();
+    if (!tag) {
+      try { if (typeof TOPICS !== 'undefined' && TOPICS[topicIndex]) tag = TOPICS[topicIndex].tag; }
+      catch (e) { }
+    }
+    var foot = document.createElement('div');
+    foot.className = 'a1-note-foot';
+    var canPractice = tag && practiceTopics().indexOf(String(tag)) >= 0;
+    foot.innerHTML =
+      '<p class="a1-note-foot-l">Finished reading?</p>' +
+      '<div class="a1-note-foot-btns">' +
+      (canPractice ? '<button type="button" class="a1-cta primary" id="a1-note-practice">Practice ' + tag + ' &rarr;</button>' : '') +
+      '<button type="button" class="a1-cta ghost" id="a1-note-print">Print these notes</button>' +
+      '</div>';
+    body.appendChild(foot);
+    var pb = $('#a1-note-practice');
+    if (pb) pb.addEventListener('click', function () {
+      if (typeof W.closeTopic === 'function') W.closeTopic();
+      openPractice(String(tag));
+    });
+    var rb = $('#a1-note-print');
+    if (rb) rb.addEventListener('click', function () { W.print(); });
+  }
+
+  function trackReading(body) {
+    var head = $('.topic-modal-header');
+    if (!head) return;
+    var bar = $('.a1-read-bar', head);
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'a1-read-bar';
+      bar.innerHTML = '<i></i>';
+      head.appendChild(bar);
+    }
+    var fill = $('i', bar);
+    var onScroll = function () {
+      var max = body.scrollHeight - body.clientHeight;
+      fill.style.width = (max > 20 ? Math.min(100, body.scrollTop / max * 100) : 0) + '%';
+    };
+    if (body.__a1scroll) {
+      body.removeEventListener('scroll', body.__a1scroll);
+      W.removeEventListener('resize', body.__a1scroll);
+    }
+    body.__a1scroll = onScroll;
+    body.addEventListener('scroll', onScroll, { passive: true });
+    W.addEventListener('resize', onScroll);
+    /* Images and the serif face load after this runs and change the
+       scroll height, so recompute rather than trust the first reading. */
+    $$('img', body).forEach(function (img) {
+      if (!img.complete) img.addEventListener('load', onScroll, { once: true });
+    });
+    [0, 250, 1000].forEach(function (t) { setTimeout(onScroll, t); });
   }
 
   /* ---- Desmos: only fetch the iframe once it is actually opened ---- */
