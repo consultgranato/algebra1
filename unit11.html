@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Unit 11: Exponent Properties. Notes, vocabulary, practice problems and a practice test for Algebra 1 at Niles North High School, District 219.">
+<meta name="theme-color" content="#2a1450">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232a1450'/%3E%3Ctext x='32' y='45' font-family='Helvetica,Arial,sans-serif' font-size='32' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA1%3C/text%3E%3C/svg%3E">
 <title>Unit 11 — Exponent Properties | Algebra 1 | Niles North D219</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -216,13 +218,14 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
+<link rel="stylesheet" href="assets/algebra1.css">
 </head>
 <body>
 <div class="shell">
   <div class="nn-header">
     <div class="nn-top">
       <a href="index.html" class="nn-logo-link"><div class="nn-logo">
-        <img src="https://consultgranato.github.io/algebra1/assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
+        <img src="assets/vikings-v.jpg" alt="Niles North Vikings V" onerror="this.style.display='none'">
       </div></a>
       <div>
         <div class="nn-school">Niles North High School &middot; D219</div>
@@ -607,7 +610,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=norm(uval)===norm(p.a);
+    const ok=isMatch(uval,p.a);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -669,7 +672,7 @@ function mkP(p,i,pfx,topic){
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=norm(inp.value)===norm(p.a);
+  const ok=isMatch(inp.value,p.a);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
@@ -723,5 +726,6 @@ function closeTopic(){
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
+<script src="assets/algebra1.js"></script>
 </body>
 </html>

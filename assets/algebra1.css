@@ -1,0 +1,254 @@
+/* Algebra 1 — Niles North High School, D219
+   Shared styles for the enhancement layer. Loaded after each page's own
+   <style> block so it can build on the existing custom properties. */
+
+/* ---- Keyboard users can see where they are ---- */
+:focus-visible {
+  outline: 3px solid #6b3db8;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.nn-header :focus-visible,
+.sbar :focus-visible,
+.vq-sbar :focus-visible {
+  outline-color: #fff;
+}
+
+.a1-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  background: #fff;
+  color: #2a1450;
+  font: 600 13px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 12px 18px;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .3);
+}
+.a1-skip:focus {
+  left: 0;
+}
+
+/* ---- Per-unit progress strip ---- */
+.a1-progress {
+  background: #fff;
+  border: 1.5px solid #c0c0cc;
+  border-radius: 12px;
+  padding: .8rem 1rem .9rem;
+  margin: -.4rem 0 1.2rem;
+}
+.a1-progress-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: #888899;
+  margin-bottom: .7rem;
+}
+.a1-reset {
+  background: transparent;
+  border: 0.5px solid #d0d0dc;
+  color: #555570;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.a1-reset:hover {
+  background: #f0f0f2;
+  color: #1a1a2e;
+}
+.a1-progress-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .85rem;
+}
+.a1-stat-l {
+  font-size: 11px;
+  color: #555570;
+  margin-bottom: .1rem;
+}
+.a1-stat-v {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: .35rem;
+}
+.a1-stat-bw {
+  background: #f0f0f2;
+  border-radius: 20px;
+  height: 6px;
+  overflow: hidden;
+}
+.a1-stat-bar {
+  height: 100%;
+  border-radius: 20px;
+  transition: width .5s ease;
+}
+.a1-stat-bar.g { background: #3b6d11; }
+.a1-stat-bar.y { background: #b87a00; }
+.a1-stat-bar.r { background: #a32d2d; }
+
+@media (max-width: 600px) {
+  .a1-progress-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- Notes cards remember what has been read ---- */
+.tg-card.a1-read {
+  border-left-color: #3b6d11;
+}
+.tg-card.a1-read .tg-arrow::before {
+  content: '\2713\00a0Read\00a0\00a0';
+  color: #3b6d11;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* ---- Best score badge on each practice topic button ---- */
+.a1-badge {
+  display: inline-block;
+  margin-left: .4rem;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+.a1-badge.g { background: #eaf3de; color: #27500a; border: 0.5px solid #b0d17c; }
+.a1-badge.y { background: #faeeda; color: #633806; border: 0.5px solid #f0b45a; }
+.a1-badge.r { background: #fcebeb; color: #a32d2d; border: 0.5px solid #f09595; }
+
+/* ---- index.html: progress on each unit card ---- */
+.u-prog {
+  margin-top: .5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.u-prog-none {
+  font-size: 11px;
+  color: #a8a8b8;
+}
+.u-prog-bw {
+  display: block;
+  background: #f0f0f2;
+  border-radius: 20px;
+  height: 5px;
+  overflow: hidden;
+}
+.u-prog-bar {
+  display: block;
+  height: 100%;
+  border-radius: 20px;
+}
+.u-prog-bar.g { background: #3b6d11; }
+.u-prog-bar.y { background: #b87a00; }
+.u-prog-bar.r { background: #a32d2d; }
+.u-prog-txt {
+  font-size: 10px;
+  color: #555570;
+  line-height: 1.4;
+}
+
+.a1-resume {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  flex-wrap: wrap;
+  background: #ede9f7;
+  border: 1.5px solid #c4b5e8;
+  border-radius: 12px;
+  padding: .7rem 1rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+.a1-resume:hover {
+  border-color: #6b3db8;
+}
+.a1-resume-l {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: #6b3db8;
+}
+.a1-resume-u {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2a1450;
+}
+
+/* ---- Comfortable tap targets on phones ---- */
+@media (max-width: 700px) {
+  .tab, .vstab, .tpbtn, .pqf-btn, .np {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .cbtn, .hbtn, .nbtn { min-height: 38px; }
+  .ckey { padding: 11px 2px; font-size: 13px; }
+  .ai { min-height: 38px; font-size: 16px; } /* 16px stops iOS zooming on focus */
+  .topic-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Respect a reduced-motion preference ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .unit-card:hover, .tg-card:hover { transform: none; }
+}
+
+/* ---- Printing a topic's notes ---- */
+@media print {
+  .nn-header, .tabs, .a1-progress, .a1-skip, .desmos-trigger,
+  .pt-calc-col, .topic-modal-close, .vid-btn, #modal-vid-btns,
+  .vstabs, .tpbtns, .topic-selector, .ph, .subbar, .vq-sub-bar,
+  footer, .a1-resume {
+    display: none !important;
+  }
+  body { background: #fff; }
+  .shell { max-width: none; padding: 0; }
+
+  /* An open notes modal prints as an ordinary page */
+  .topic-modal-overlay.open {
+    display: block;
+    position: static;
+    inset: auto;
+    background: none;
+    padding: 0;
+  }
+  .topic-modal {
+    max-width: none;
+    max-height: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  .topic-modal-header {
+    background: none !important;
+    padding: 0 0 .5rem;
+    border-bottom: 2px solid #2a1450;
+  }
+  .topic-modal-tag, .topic-modal-title {
+    color: #000 !important;
+    background: none !important;
+    font-size: 16px;
+  }
+  .topic-modal-body { overflow: visible; padding: .75rem 0 0; }
+
+  .kc, .tip, .warn, .worked, .vcard, .pcard { break-inside: avoid; }
+  img, svg { max-width: 100% !important; }
+}
