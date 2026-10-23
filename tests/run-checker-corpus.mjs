@@ -8,7 +8,7 @@
 //   node tests/run-checker-corpus.mjs --check    -> exit 1 if any input accepted in the baseline is now rejected
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, UNIT_PAGES, serve, browser, localOnly } from '../tools/lib/site.mjs';
+import { ROOT, RAW, UNIT_PAGES, serve, browser, localOnly } from '../tools/lib/site.mjs';
 
 const corpus = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests/checker-corpus.json'), 'utf8'));
 const { server, base } = await serve();
@@ -38,8 +38,8 @@ try {
 const verdict = r => r.expected === 'either' ? 'unjudged' : r.expected === r.actual ? 'ok' : r.expected === 'accept' ? 'CORRECT-REJECTED' : 'WRONG-ACCEPTED';
 results.forEach(r => { r.verdict = verdict(r); });
 const run = { when: new Date().toISOString(), identity, results };
-fs.mkdirSync(path.join(ROOT, 'audit/raw'), { recursive: true });
-fs.writeFileSync(path.join(ROOT, 'audit/raw/checker-run.json'), JSON.stringify(run, null, 1));
+fs.mkdirSync(RAW, { recursive: true });
+fs.writeFileSync(path.join(RAW, 'checker-run.json'), JSON.stringify(run, null, 1));
 
 const count = v => results.filter(r => r.verdict === v).length;
 console.log(`cases ${results.length}: ok ${count('ok')}, correct-rejected ${count('CORRECT-REJECTED')}, wrong-accepted ${count('WRONG-ACCEPTED')}, unjudged ${count('unjudged')}`);

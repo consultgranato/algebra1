@@ -7,6 +7,9 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+// Where generated evidence goes. The test harness points this at tests/out so the
+// Phase 0 baseline in audit/raw is never overwritten.
+export const RAW = path.resolve(ROOT, process.env.A1_RAW || 'audit/raw');
 
 export const PAGES = ['index.html', 'unit1-4.html', 'unit5.html', 'unit6.html', 'unit7.html', 'unit8.html',
   'unit9.html', 'unit10.html', 'unit11.html', 'unit12.html', 'unit13.html', 'unit14.html', 'unit15.html',

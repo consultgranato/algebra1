@@ -4,9 +4,9 @@
 // site's own checker. Output: audit/raw/key-roundtrip.json
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, serve, browser, localOnly } from '../tools/lib/site.mjs';
+import { RAW, serve, browser, localOnly } from '../tools/lib/site.mjs';
 
-const items = JSON.parse(fs.readFileSync(path.join(ROOT, 'audit/raw/items.json'), 'utf8'));
+const items = JSON.parse(fs.readFileSync(path.join(RAW, 'items.json'), 'utf8'));
 const typed = k => String(k)
   .replace(/<sup>(.*?)<\/sup>/g, (_, e) => '^' + (/^-?\w$|^-?\d+$/.test(e) ? e : '(' + e + ')'))
   .replace(/<[^>]+>/g, '').replace(/[−–]/g, '-').replace(/&[a-z]+;/g, ' ').trim();
@@ -30,7 +30,7 @@ server.close();
 const bad = res.filter(r => !r.accepted);
 const byUnit = {};
 res.forEach(r => { const u = r.id.split(':')[0]; byUnit[u] = byUnit[u] || { items: 0, keyRejected: 0 }; byUnit[u].items++; if (!r.accepted) byUnit[u].keyRejected++; });
-fs.writeFileSync(path.join(ROOT, 'audit/raw/key-roundtrip.json'), JSON.stringify({ byUnit, rejected: bad }, null, 1));
+fs.writeFileSync(path.join(RAW, 'key-roundtrip.json'), JSON.stringify({ byUnit, rejected: bad }, null, 1));
 console.log(byUnit);
 bad.slice(0, 60).forEach(r => console.log(r.id, '| key:', JSON.stringify(r.key), '| typed:', JSON.stringify(r.typed)));
 console.log('total items whose own key, typed normally, is marked wrong:', bad.length, 'of', res.length);

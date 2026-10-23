@@ -3,7 +3,7 @@
 // HTML of each problem's equation. Output: audit/raw/items.json
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, UNIT_PAGES, serve, browser, localOnly } from './lib/site.mjs';
+import { RAW, UNIT_PAGES, serve, browser, localOnly } from './lib/site.mjs';
 
 const { server, base } = await serve();
 const b = await browser();
@@ -45,8 +45,8 @@ try {
   await b.close();
   server.close();
 }
-fs.mkdirSync(path.join(ROOT, 'audit/raw'), { recursive: true });
-fs.writeFileSync(path.join(ROOT, 'audit/raw/items.json'), JSON.stringify(out, null, 1));
+fs.mkdirSync(RAW, { recursive: true });
+fs.writeFileSync(path.join(RAW, 'items.json'), JSON.stringify(out, null, 1));
 for (const [f, d] of Object.entries(out)) {
   console.log(f.padEnd(14), 'bank', d.items.filter(i => i.kind === 'bank').length, 'test', d.items.filter(i => i.kind === 'test').length,
     'vqb', (d.vqb || []).length, 'errors', d.pageErrors.length);

@@ -9,6 +9,7 @@ item is a word problem, concept question or picture, by a hand-written
 independent solution (manual.py). Neither path imports or evaluates site code.
 """
 import json
+import os
 import random
 import re
 import sys
@@ -21,7 +22,8 @@ from manual import MANUAL, AMBIGUOUS  # noqa: E402
 from mathtext import MALFORMED_SUP  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-ITEMS = json.loads((ROOT / 'audit/raw/items.json').read_text(encoding='utf-8'))
+RAW = (ROOT / os.environ.get('A1_RAW', 'audit/raw')).resolve()  # tests/out under the harness
+ITEMS = json.loads((RAW / 'items.json').read_text(encoding='utf-8'))
 
 
 def item_id(f, it):
@@ -171,7 +173,7 @@ def main():
                               'tests_drawn': draws, 'tests_with_duplicate': dup_tests,
                               'test_length': dict(sizes)}
 
-    out = ROOT / 'audit/raw/verification.json'
+    out = RAW / 'verification.json'
     out.write_text(json.dumps(report, indent=1, ensure_ascii=False, default=str), encoding='utf-8')
     tot = Counter()
     for f, c in report['units'].items():
@@ -217,8 +219,8 @@ def vocab_checks():
 
 
 if __name__ == '__main__':
-    rep = json.loads((ROOT / 'audit/raw/verification.json').read_text(encoding='utf-8'))
+    rep = json.loads((RAW / 'verification.json').read_text(encoding='utf-8'))
     rep['vocab'] = vocab_checks()
-    (ROOT / 'audit/raw/verification.json').write_text(json.dumps(rep, indent=1, ensure_ascii=False, default=str), encoding='utf-8')
+    (RAW / 'verification.json').write_text(json.dumps(rep, indent=1, ensure_ascii=False, default=str), encoding='utf-8')
     for v in rep['vocab']:
         print('VOCAB', v)
