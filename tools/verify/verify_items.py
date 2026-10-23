@@ -196,6 +196,9 @@ def vocab_checks():
         topics = sorted({q['topic'] for q in vqb})
         filters = [x for x in unit.get('vqFilters') or [] if x and x != 'all']
         for i, q in enumerate(vqb):
+            texts = [q.get('q', '')] + [str(o) for o in q.get('opts') or []] + [str(x) for p in q.get('pairs') or [] for x in p]
+            if any(MALFORMED_SUP.search(t) for t in texts):
+                out.append({'unit': f, 'idx': i, 'issue': 'malformed <sup> markup', 'q': q['q']})
             if q['type'] in ('mc', 'tf'):
                 if not (0 <= q['a'] < len(q['opts'])):
                     out.append({'unit': f, 'idx': i, 'issue': 'answer index out of range', 'q': q['q']})

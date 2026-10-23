@@ -17,7 +17,9 @@ x, y, t = LETTERS['x'], LETTERS['y'], LETTERS['t']
 
 SUP = {'⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁻': '-'}
 
-MALFORMED_SUP = re.compile(r'<sup>[^<]*[()][^<]*</sup>')
+# A superscript that swallowed more than the exponent: a parenthesis, or an
+# exponent followed by an operator and more terms ('x<sup>2+8x+15</sup>').
+MALFORMED_SUP = re.compile(r'<sup>(?:[^<]*[()][^<]*|-?\d+\s*[+\-−][^<]+)</sup>')
 
 
 def repair_sup(s):
