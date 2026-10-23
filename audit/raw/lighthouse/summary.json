@@ -1,0 +1,138 @@
+[
+ {
+  "page": "index.html",
+  "formFactor": "mobile",
+  "perf": 91,
+  "a11y": 95,
+  "bp": 100,
+  "transferKB": 100,
+  "htmlKB": 9,
+  "fcpMs": 909,
+  "lcpMs": 1359,
+  "tbtMs": 0,
+  "cls": 0.197,
+  "longTasks": 1,
+  "failedA11y": [
+   "color-contrast"
+  ]
+ },
+ {
+  "page": "unit1-4.html",
+  "formFactor": "mobile",
+  "perf": 85,
+  "a11y": 100,
+  "bp": 100,
+  "transferKB": 256,
+  "htmlKB": 127,
+  "fcpMs": 1361,
+  "lcpMs": 2426,
+  "tbtMs": 0,
+  "cls": 0.253,
+  "longTasks": 1,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ },
+ {
+  "page": "unit5.html",
+  "formFactor": "mobile",
+  "perf": 87,
+  "a11y": 100,
+  "bp": 96,
+  "transferKB": 181,
+  "htmlKB": 89,
+  "fcpMs": 1205,
+  "lcpMs": 1821,
+  "tbtMs": 0,
+  "cls": 0.253,
+  "longTasks": 1,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ },
+ {
+  "page": "unit15.html",
+  "formFactor": "mobile",
+  "perf": 85,
+  "a11y": 100,
+  "bp": 96,
+  "transferKB": 202,
+  "htmlKB": 111,
+  "fcpMs": 1365,
+  "lcpMs": 1975,
+  "tbtMs": 0,
+  "cls": 0.27,
+  "longTasks": 1,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ },
+ {
+  "page": "index.html",
+  "formFactor": "desktop",
+  "perf": 100,
+  "a11y": 95,
+  "bp": 100,
+  "transferKB": 100,
+  "htmlKB": 9,
+  "fcpMs": 340,
+  "lcpMs": 340,
+  "tbtMs": 0,
+  "cls": 0,
+  "longTasks": 0,
+  "failedA11y": [
+   "color-contrast"
+  ]
+ },
+ {
+  "page": "unit1-4.html",
+  "formFactor": "desktop",
+  "perf": 99,
+  "a11y": 100,
+  "bp": 100,
+  "transferKB": 256,
+  "htmlKB": 127,
+  "fcpMs": 324,
+  "lcpMs": 528,
+  "tbtMs": 0,
+  "cls": 0.061,
+  "longTasks": 0,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ },
+ {
+  "page": "unit5.html",
+  "formFactor": "desktop",
+  "perf": 100,
+  "a11y": 100,
+  "bp": 100,
+  "transferKB": 181,
+  "htmlKB": 89,
+  "fcpMs": 286,
+  "lcpMs": 410,
+  "tbtMs": 0,
+  "cls": 0.043,
+  "longTasks": 0,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ },
+ {
+  "page": "unit15.html",
+  "formFactor": "desktop",
+  "perf": 100,
+  "a11y": 100,
+  "bp": 100,
+  "transferKB": 202,
+  "htmlKB": 111,
+  "fcpMs": 325,
+  "lcpMs": 449,
+  "tbtMs": 0,
+  "cls": 0.054,
+  "longTasks": 0,
+  "failedA11y": [
+   "label-content-name-mismatch"
+  ]
+ }
+]

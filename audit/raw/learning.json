@@ -1,0 +1,1466 @@
+{
+ "topics": [
+  {
+   "file": "unit1-4.html",
+   "tag": "1.2",
+   "title": "Adding & Subtracting Integers",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 216,
+   "fkGrade": 9.3,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "1.3",
+   "title": "Multiplying & Dividing Integers",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 81,
+   "fkGrade": 9.6,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "1.4",
+   "title": "Order of Operations",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 0,
+   "proseWords": 66,
+   "fkGrade": 12.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "2.1",
+   "title": "Introduction to Fractions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 2,
+   "proseWords": 78,
+   "fkGrade": 8.6,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "2.3",
+   "title": "Simplifying Fractions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 79,
+   "fkGrade": 10.3,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "2.4",
+   "title": "Adding & Subtracting Fractions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 81,
+   "fkGrade": 8.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "2.5",
+   "title": "Multiplying & Dividing Fractions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 39,
+   "fkGrade": 11.3,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "3.1",
+   "title": "Introduction to Variables",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 94,
+   "fkGrade": 8.2,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "3.2",
+   "title": "Adding & Subtracting Variables (Like Terms)",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 43,
+   "fkGrade": 8.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "3.3",
+   "title": "Multiplying Variables (Exponents)",
+   "workedExamples": 3,
+   "warnings": [
+    "Common mistake — adding vs. multiplying 3x + 3x = 6x (add coefficients — same idea as 3 apples + 3 apples = 6 apples) 3x · 3x = 9x² (multiply coefficients AND add exponents) Don’t mix them up! Adding "
+   ],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 138,
+   "fkGrade": 10.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "4.1",
+   "title": "The Language of Algebra",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 123,
+   "fkGrade": 9.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "4.2",
+   "title": "Simplifying Expressions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 80,
+   "fkGrade": 7.1,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit1-4.html",
+   "tag": "4.4",
+   "title": "Evaluating Expressions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 47,
+   "fkGrade": 7.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit5.html",
+   "tag": "5.1",
+   "title": "Solving Basic Equations",
+   "workedExamples": 3,
+   "warnings": [
+    "Gotcha — the invisible coefficient When you see −x , there is a −1 right there — it's invisible. So −x is really −1·x. Watch your signs!"
+   ],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 311,
+   "fkGrade": 5.7,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit5.html",
+   "tag": "5.2",
+   "title": "Solving Equations with Fractions",
+   "workedExamples": 3,
+   "warnings": [
+    "Sign errors in numerators When you see (6 − 3x)/5, think (6 − 3x) ÷ 5. The −3 stays with x. Say it out loud: “negative three times x.”"
+   ],
+   "tips": 0,
+   "keyConcepts": 0,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 80,
+   "fkGrade": 3.7,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit5.html",
+   "tag": "5.3",
+   "title": "Solving More Complex Equations",
+   "workedExamples": 3,
+   "warnings": [
+    "Negative sign before parentheses When you see −(2x + 7), write a 1: −1(2x + 7). Circle that −1. It multiplies every term inside. Say it out loud as you go."
+   ],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 0,
+   "proseWords": 169,
+   "fkGrade": 6.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit5.html",
+   "tag": "5.4",
+   "title": "Special Case Equations",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 88,
+   "fkGrade": 6.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": true
+  },
+  {
+   "file": "unit6.html",
+   "tag": "6.1",
+   "title": "Writing & Graphing Inequalities",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 2,
+   "svgs": 4,
+   "proseWords": 205,
+   "fkGrade": 10.4,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit6.html",
+   "tag": "6.2",
+   "title": "Solving Basic Inequalities",
+   "workedExamples": 3,
+   "warnings": [
+    "When do you flip? Only when you multiply or divide both sides by a negative number. Adding or subtracting a negative does NOT require a flip."
+   ],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 183,
+   "fkGrade": 6.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit6.html",
+   "tag": "6.3",
+   "title": "Solving More Complex Inequalities",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 91,
+   "fkGrade": 13.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit6.html",
+   "tag": "6.4",
+   "title": "Special Case Inequalities",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 100,
+   "fkGrade": 9.7,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit6.html",
+   "tag": "6.5",
+   "title": "Compound Inequalities",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 132,
+   "fkGrade": 6.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit7.html",
+   "tag": "7.1",
+   "title": "Relations & Functions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 4,
+   "images": 1,
+   "svgs": 1,
+   "proseWords": 249,
+   "fkGrade": 6.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit7.html",
+   "tag": "7.2",
+   "title": "Domain & Range",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 153,
+   "fkGrade": 8.6,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit7.html",
+   "tag": "7.3",
+   "title": "Linear Functions",
+   "workedExamples": 3,
+   "warnings": [
+    "Non-linear clue If the differences in y-values are NOT constant in a table , or if the graph is a curve, it is NOT linear.",
+    "Exception — vertical lines A vertical line (e.g., x = 3) is NOT a linear function — it fails the Vertical Line Test because one x-value maps to infinitely many y-values. Vertical lines have undefined "
+   ],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 154,
+   "fkGrade": 10.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit7.html",
+   "tag": "7.4",
+   "title": "Function Notation",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 153,
+   "fkGrade": 3.7,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit8.html",
+   "tag": "8.1",
+   "title": "What is Slope?",
+   "workedExamples": 4,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 4,
+   "proseWords": 155,
+   "fkGrade": 10.2,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit8.html",
+   "tag": "8.2",
+   "title": "Slope-Intercept Form",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 3,
+   "images": 1,
+   "svgs": 1,
+   "proseWords": 140,
+   "fkGrade": 7.7,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit8.html",
+   "tag": "8.3",
+   "title": "Writing Equations of Lines",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 134,
+   "fkGrade": 9.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit8.html",
+   "tag": "8.4",
+   "title": "Standard Form & Special Lines",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 112,
+   "fkGrade": 9.9,
+   "videos": 3,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit8.html",
+   "tag": "8.5",
+   "title": "Graphing Linear Inequalities",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 2,
+   "proseWords": 216,
+   "fkGrade": 9.6,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit9.html",
+   "tag": "9.1",
+   "title": "What is a System of Equations?",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 225,
+   "fkGrade": 7.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit9.html",
+   "tag": "9.2",
+   "title": "Solving Systems by Graphing",
+   "workedExamples": 1,
+   "warnings": [
+    "Note Graphing gives approximate answers. Substitution and elimination give exact answers every time."
+   ],
+   "tips": 0,
+   "keyConcepts": 3,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 224,
+   "fkGrade": 12.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit9.html",
+   "tag": "9.3",
+   "title": "Solving Systems by Substitution",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 123,
+   "fkGrade": 12.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit9.html",
+   "tag": "9.4",
+   "title": "Solving Systems by Elimination",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 187,
+   "fkGrade": 12.4,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.1",
+   "title": "Translating Words to Algebra",
+   "workedExamples": 1,
+   "warnings": [
+    "Watch out: \"less than\" reverses order! \"5 less than a number\" means x − 5, NOT 5 − x. The phrase names what comes first in the subtraction."
+   ],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 151,
+   "fkGrade": 7.1,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.2",
+   "title": "One-Variable Word Problems",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 72,
+   "fkGrade": 13.3,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.3",
+   "title": "Geometry Word Problems",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 92,
+   "fkGrade": 9.6,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.4",
+   "title": "Linear Rate Problems (b + mx = y)",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 100,
+   "fkGrade": 9.4,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.5",
+   "title": "Two-Variable Word Problems",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 90,
+   "fkGrade": 7.0,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.6",
+   "title": "Rate, Time & Distance Problems",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 66,
+   "fkGrade": 12.1,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit10.html",
+   "tag": "10.7",
+   "title": "Mixture & Multi-Step Problems",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 95,
+   "fkGrade": 8.2,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit11.html",
+   "tag": "11.1",
+   "title": "Zero & Negative Exponents",
+   "workedExamples": 3,
+   "warnings": [
+    "Watch the parentheses! (−3) 0 = 1 ← the negative is inside, so the whole thing is raised to 0. −3 0 = −(3 0 ) = −1 ← only 3 is raised to 0, then we negate. Parentheses matter!"
+   ],
+   "tips": 0,
+   "keyConcepts": 3,
+   "images": 1,
+   "svgs": 0,
+   "proseWords": 173,
+   "fkGrade": 8.4,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit11.html",
+   "tag": "11.2",
+   "title": "Multiplying & Dividing Powers",
+   "workedExamples": 6,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 3,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 167,
+   "fkGrade": 8.6,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit11.html",
+   "tag": "11.3",
+   "title": "Raising a Power to a Power",
+   "workedExamples": 3,
+   "warnings": [
+    "Distribute to ALL factors! When you raise a product inside parentheses to a power, the outer exponent applies to every factor inside — coefficient AND variable(s). (2x²)³ = 2³ · (x²)³ = 8x 6 ← don't f"
+   ],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 0,
+   "proseWords": 87,
+   "fkGrade": 6.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit12.html",
+   "tag": "12.1",
+   "title": "Exponential Functions (Part 1)",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 4,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 206,
+   "fkGrade": 10.7,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit12.html",
+   "tag": "12.2",
+   "title": "Exponential Functions (Part 2)",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 103,
+   "fkGrade": 4.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit12.html",
+   "tag": "12.3",
+   "title": "Exponential Function Word Problems",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 92,
+   "fkGrade": 14.7,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit12.html",
+   "tag": "12.4",
+   "title": "Solving Exponential Equations",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 90,
+   "fkGrade": 7.6,
+   "videos": 2,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit13.html",
+   "tag": "13.1",
+   "title": "Introduction to Polynomials",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 1,
+   "svgs": 0,
+   "proseWords": 101,
+   "fkGrade": 14.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit13.html",
+   "tag": "13.2",
+   "title": "Adding & Subtracting Polynomials",
+   "workedExamples": 2,
+   "warnings": [
+    "Subtracting Polynomials — DANGER ZONE When subtracting, distribute the negative sign to EVERY term in the second polynomial . Use parentheses! Say it out loud as you go."
+   ],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 81,
+   "fkGrade": 7.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit13.html",
+   "tag": "13.3",
+   "title": "Multiplying Polynomials (Monomial × Polynomial)",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 48,
+   "fkGrade": 15.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit13.html",
+   "tag": "13.4",
+   "title": "Multiplying Polynomials (Binomial × Binomial — FOIL)",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 143,
+   "fkGrade": 9.8,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit14.html",
+   "tag": "14.1",
+   "title": "Introduction to Factoring",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 153,
+   "fkGrade": 9.3,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit14.html",
+   "tag": "14.2",
+   "title": "Factoring Trinomials (Part 1)",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 116,
+   "fkGrade": 5.5,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit14.html",
+   "tag": "14.3",
+   "title": "Factoring Trinomials (Part 2)",
+   "workedExamples": 3,
+   "warnings": [
+    "When the first term is negative Factor out −1 first! This changes all signs inside and makes the leading coefficient positive, so you can use normal methods."
+   ],
+   "tips": 0,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 139,
+   "fkGrade": 11.3,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit14.html",
+   "tag": "14.4",
+   "title": "Solving Equations by Factoring",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 2,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 99,
+   "fkGrade": 12.9,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit15.html",
+   "tag": "15.1",
+   "title": "Introduction to Quadratic Functions",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 3,
+   "images": 0,
+   "svgs": 2,
+   "proseWords": 191,
+   "fkGrade": 9.6,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit15.html",
+   "tag": "15.2",
+   "title": "Vertex & Axis of Symmetry",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 72,
+   "fkGrade": null,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit15.html",
+   "tag": "15.3",
+   "title": "Graphing in Standard Form",
+   "workedExamples": 1,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 82,
+   "fkGrade": 11.6,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit15.html",
+   "tag": "15.4",
+   "title": "Graphing in Vertex Form",
+   "workedExamples": 2,
+   "warnings": [
+    "Watch the sign of h! y = (x − 3)² + 1 → vertex is (3, 1) NOT (−3, 1). The h value is whatever makes (x − h) = 0."
+   ],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 157,
+   "fkGrade": 9.6,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit15.html",
+   "tag": "15.5",
+   "title": "Quadratic Word Problems",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 1,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 165,
+   "fkGrade": 7.7,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit16.html",
+   "tag": "16.1",
+   "title": "Solving by Square Roots",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 3,
+   "proseWords": 88,
+   "fkGrade": 7.6,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit16.html",
+   "tag": "16.2",
+   "title": "Solving by Factoring",
+   "workedExamples": 3,
+   "warnings": [
+    "Don't divide both sides by x! If you divide x 2 − 5x = 0 by x, you get x − 5 = 0 and only find x = 5. You lose x = 0. Rule: Never divide by a variable — always factor it out instead."
+   ],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 1,
+   "proseWords": 156,
+   "fkGrade": 5.3,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit16.html",
+   "tag": "16.3",
+   "title": "The Quadratic Formula",
+   "workedExamples": 2,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 79,
+   "fkGrade": 12.0,
+   "videos": 1,
+   "exampleBeforeFirstRule": false
+  },
+  {
+   "file": "unit16.html",
+   "tag": "16.4",
+   "title": "Discriminant & Types of Solutions",
+   "workedExamples": 3,
+   "warnings": [],
+   "tips": 0,
+   "keyConcepts": 1,
+   "images": 0,
+   "svgs": 0,
+   "proseWords": 61,
+   "fkGrade": 13.2,
+   "videos": 0,
+   "exampleBeforeFirstRule": false
+  }
+ ],
+ "units": {
+  "unit1-4.html": {
+   "topics": 13,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "unit1",
+    "unit2",
+    "unit3",
+    "unit4"
+   ],
+   "fkGradeMedian": 9.0,
+   "fkGradeRange": [
+    7.1,
+    12.8
+   ],
+   "proseWords": 1165
+  },
+  "unit5.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [
+    "5.2"
+   ],
+   "vocabFilters": [
+    "all",
+    "5.1",
+    "5.3",
+    "5.4"
+   ],
+   "fkGradeMedian": 6.0,
+   "fkGradeRange": [
+    3.7,
+    6.5
+   ],
+   "proseWords": 648
+  },
+  "unit6.html": {
+   "topics": 5,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4",
+    "6.5"
+   ],
+   "fkGradeMedian": 9.7,
+   "fkGradeRange": [
+    6.5,
+    13.5
+   ],
+   "proseWords": 711
+  },
+  "unit7.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4"
+   ],
+   "fkGradeMedian": 8.6,
+   "fkGradeRange": [
+    3.7,
+    10.0
+   ],
+   "proseWords": 709
+  },
+  "unit8.html": {
+   "topics": 5,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [
+    "8.5"
+   ],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "8.1",
+    "8.2",
+    "8.3",
+    "8.4",
+    "8.5"
+   ],
+   "fkGradeMedian": 9.9,
+   "fkGradeRange": [
+    7.7,
+    10.2
+   ],
+   "proseWords": 757
+  },
+  "unit9.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "9.1",
+    "9.2",
+    "9.3",
+    "9.4"
+   ],
+   "fkGradeMedian": 12.5,
+   "fkGradeRange": [
+    7.0,
+    12.8
+   ],
+   "proseWords": 759
+  },
+  "unit10.html": {
+   "topics": 7,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [
+    "10.1",
+    "10.2",
+    "10.3",
+    "10.4",
+    "10.5",
+    "10.6",
+    "10.7"
+   ],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "10.1",
+    "10.2",
+    "10.3",
+    "10.4",
+    "10.5",
+    "10.6",
+    "10.7"
+   ],
+   "fkGradeMedian": 9.4,
+   "fkGradeRange": [
+    7.0,
+    13.3
+   ],
+   "proseWords": 666
+  },
+  "unit11.html": {
+   "topics": 3,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "11.1",
+    "11.2",
+    "11.3"
+   ],
+   "fkGradeMedian": 8.4,
+   "fkGradeRange": [
+    6.8,
+    8.6
+   ],
+   "proseWords": 427
+  },
+  "unit12.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "12.1",
+    "12.2",
+    "12.3",
+    "12.4"
+   ],
+   "fkGradeMedian": 10.7,
+   "fkGradeRange": [
+    4.9,
+    14.7
+   ],
+   "proseWords": 491
+  },
+  "unit13.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "13.1",
+    "13.2",
+    "13.3",
+    "13.4"
+   ],
+   "fkGradeMedian": 14.8,
+   "fkGradeRange": [
+    7.5,
+    15.0
+   ],
+   "proseWords": 373
+  },
+  "unit14.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "14.1",
+    "14.2",
+    "14.3",
+    "14.4"
+   ],
+   "fkGradeMedian": 11.3,
+   "fkGradeRange": [
+    5.5,
+    12.9
+   ],
+   "proseWords": 507
+  },
+  "unit15.html": {
+   "topics": 5,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [
+    "15.2",
+    "15.3",
+    "15.5"
+   ],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "15.1",
+    "15.2",
+    "15.3",
+    "15.4",
+    "15.5"
+   ],
+   "fkGradeMedian": 9.6,
+   "fkGradeRange": [
+    7.7,
+    11.6
+   ],
+   "proseWords": 667
+  },
+  "unit16.html": {
+   "topics": 4,
+   "topicsWithoutWorkedExample": [],
+   "topicsWithoutVideo": [
+    "16.2",
+    "16.4"
+   ],
+   "practiceTopicsWithoutVocab": [],
+   "vocabFilters": [
+    "all",
+    "16.1",
+    "16.2",
+    "16.3",
+    "16.4"
+   ],
+   "fkGradeMedian": 12.0,
+   "fkGradeRange": [
+    5.3,
+    13.2
+   ],
+   "proseWords": 384
+  }
+ },
+ "error_coverage": [
+  {
+   "unit": "unit6.html",
+   "topic": "6.2",
+   "error": "dividing/multiplying by a negative flips the sign",
+   "itemsExercisingIt": 4,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.154
+  },
+  {
+   "unit": "unit6.html",
+   "topic": "6.3",
+   "error": "dividing/multiplying by a negative flips the sign",
+   "itemsExercisingIt": 7,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.019
+  },
+  {
+   "unit": "unit5.html",
+   "topic": "5.4",
+   "error": "no solution vs all real numbers (both kinds present)",
+   "itemsExercisingIt": 7,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.019
+  },
+  {
+   "unit": "unit5.html",
+   "topic": "5.4",
+   "error": "all real numbers case",
+   "itemsExercisingIt": 8,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.007
+  },
+  {
+   "unit": "unit6.html",
+   "topic": "6.4",
+   "error": "no solution case",
+   "itemsExercisingIt": 8,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.007
+  },
+  {
+   "unit": "unit6.html",
+   "topic": "6.4",
+   "error": "all real numbers case",
+   "itemsExercisingIt": 7,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.019
+  },
+  {
+   "unit": "unit11.html",
+   "topic": "11.1",
+   "error": "-a^0 = -1 versus (-a)^0 = 1",
+   "itemsExercisingIt": 1,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.667
+  },
+  {
+   "unit": "unit16.html",
+   "topic": "16.1",
+   "error": "square root gives two answers (±)",
+   "itemsExercisingIt": 13,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.0
+  },
+  {
+   "unit": "unit14.html",
+   "topic": "14.3",
+   "error": "difference of squares",
+   "itemsExercisingIt": 5,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.084
+  },
+  {
+   "unit": "unit9.html",
+   "topic": "9.4",
+   "error": "multiply an equation before eliminating",
+   "itemsExercisingIt": 4,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.154
+  },
+  {
+   "unit": "unit9.html",
+   "topic": "9.2",
+   "error": "parallel lines / no solution",
+   "itemsExercisingIt": 3,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.264
+  },
+  {
+   "unit": "unit5.html",
+   "topic": "5.1",
+   "error": "notes warning: invisible -1 coefficient (-x)",
+   "itemsExercisingIt": 0,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 1.0
+  },
+  {
+   "unit": "unit5.html",
+   "topic": "5.2",
+   "error": "notes warning: sign errors in a binomial numerator like (6 - 3x)/5",
+   "itemsExercisingIt": 0,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 1.0
+  },
+  {
+   "unit": "unit5.html",
+   "topic": "5.3",
+   "error": "notes warning: negative sign before parentheses",
+   "itemsExercisingIt": 2,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.429
+  },
+  {
+   "unit": "unit10.html",
+   "topic": "10.1",
+   "error": "notes warning: \"less than\" reverses order",
+   "itemsExercisingIt": 2,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.429
+  },
+  {
+   "unit": "unit11.html",
+   "topic": "11.1",
+   "error": "notes warning: (-a)^0 versus -a^0 (either form)",
+   "itemsExercisingIt": 2,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.429
+  },
+  {
+   "unit": "unit11.html",
+   "topic": "11.3",
+   "error": "notes warning: power applies to the coefficient too",
+   "itemsExercisingIt": 8,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.007
+  },
+  {
+   "unit": "unit13.html",
+   "topic": "13.2",
+   "error": "notes warning: distribute the negative when subtracting",
+   "itemsExercisingIt": 7,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.019
+  },
+  {
+   "unit": "unit14.html",
+   "topic": "14.3",
+   "error": "notes warning: negative leading coefficient",
+   "itemsExercisingIt": 3,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.264
+  },
+  {
+   "unit": "unit15.html",
+   "topic": "15.4",
+   "error": "notes warning: sign of h in (x - h)",
+   "itemsExercisingIt": 10,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.0
+  },
+  {
+   "unit": "unit16.html",
+   "topic": "16.2",
+   "error": "notes warning: do not divide by x (x^2 + bx = 0)",
+   "itemsExercisingIt": 2,
+   "bankSize": 15,
+   "probSetOfFiveHasNone": 0.429
+  }
+ ],
+ "ordering": "loadP() shuffles the 15-item bank and takes 5 (e.g. unit5.html:654), so no set is ordered easy-to-hard and a set can open with the hardest item."
+}

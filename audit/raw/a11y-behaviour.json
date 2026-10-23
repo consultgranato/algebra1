@@ -1,0 +1,281 @@
+{
+ "reflow": [
+  {
+   "zoom": "200%",
+   "file": "index.html",
+   "view": "notes",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-index-notes.png"
+  },
+  {
+   "zoom": "200%",
+   "file": "unit5.html",
+   "view": "notes",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-unit5-notes.png"
+  },
+  {
+   "zoom": "200%",
+   "file": "unit5.html",
+   "view": "modal",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-unit5-modal.png"
+  },
+  {
+   "zoom": "200%",
+   "file": "unit5.html",
+   "view": "practice",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-unit5-practice.png"
+  },
+  {
+   "zoom": "200%",
+   "file": "unit5.html",
+   "view": "test",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-unit5-test.png"
+  },
+  {
+   "zoom": "200%",
+   "file": "unit15.html",
+   "view": "practice",
+   "viewport": 640,
+   "scrollWidth": 640,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-200-unit15-practice.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "index.html",
+   "view": "notes",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-index-notes.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "unit5.html",
+   "view": "notes",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-unit5-notes.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "unit5.html",
+   "view": "modal",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-unit5-modal.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "unit5.html",
+   "view": "practice",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-unit5-practice.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "unit5.html",
+   "view": "test",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-unit5-test.png"
+  },
+  {
+   "zoom": "400%",
+   "file": "unit15.html",
+   "view": "practice",
+   "viewport": 320,
+   "scrollWidth": 320,
+   "horizontalScroll": false,
+   "offenders": [],
+   "shot": "reflow-400-unit15-practice.png"
+  }
+ ],
+ "motion": {
+  "cssHasReducedMotionQuery": true,
+  "cssRulesInsideQuery": "\r\n  *, *::before, *::after {\r\n    animation-duration: .01ms !important;\r\n    animation-iteration-count: 1 !important;\r\n    transition-duration: .01ms !important;\r\n    scroll-behavior: auto !important;\r\n  }\r\n  .unit-card:hover, .tg-card:hover, .a1-next-btn:hover,\r\n  .a1-cta.primary:hover, .a1-course-cta:hover { transform: none; }\r\n  .a1-confetti { display: none; }\r",
+  "runningAnimationsAfterCorrect": [
+   {
+    "name": "background-color",
+    "target": "pcard ok"
+   },
+   {
+    "name": "border-bottom-color",
+    "target": "pcard ok"
+   },
+   {
+    "name": "border-left-color",
+    "target": "pcard ok"
+   },
+   {
+    "name": "border-right-color",
+    "target": "pcard ok"
+   },
+   {
+    "name": "border-top-color",
+    "target": "pcard ok"
+   },
+   {
+    "name": "box-shadow",
+    "target": "ai"
+   },
+   {
+    "name": "outline-offset",
+    "target": "ai"
+   }
+  ],
+  "smoothScrollCallsInSource": [
+   [
+    "unit1-4.html",
+    3
+   ],
+   [
+    "unit10.html",
+    3
+   ],
+   [
+    "unit11.html",
+    3
+   ],
+   [
+    "unit12.html",
+    3
+   ],
+   [
+    "unit13.html",
+    3
+   ],
+   [
+    "unit14.html",
+    3
+   ],
+   [
+    "unit15.html",
+    3
+   ],
+   [
+    "unit16.html",
+    3
+   ],
+   [
+    "unit5.html",
+    3
+   ],
+   [
+    "unit6.html",
+    3
+   ],
+   [
+    "unit7.html",
+    3
+   ],
+   [
+    "unit8.html",
+    3
+   ],
+   [
+    "unit9.html",
+    3
+   ]
+  ]
+ },
+ "forcedColors": [
+  {
+   "shots": [
+    "forced-colors-unit5-notes.png",
+    "forced-colors-unit5-practice-feedback.png",
+    "forced-colors-unit5-vocab-graded.png"
+   ],
+   "selectedTabDistinguishable": true
+  }
+ ],
+ "keyboard": {
+  "first30Tabs": [
+   "a.a1-skip \"Skip to content\" focusRing=true",
+   "a.nn-logo-link \"\" focusRing=true",
+   "a.np \"⌂\" focusRing=true",
+   "a.np \"1–4\" focusRing=true",
+   "a.np \"5\" focusRing=true",
+   "a.np \"6\" focusRing=true",
+   "a.np \"7\" focusRing=true",
+   "a.np \"8\" focusRing=true",
+   "a.np \"9\" focusRing=true",
+   "a.np \"10\" focusRing=true",
+   "a.np \"11\" focusRing=true",
+   "a.np \"12\" focusRing=true",
+   "a.np \"13\" focusRing=true",
+   "a.np \"14\" focusRing=true",
+   "a.np \"15\" focusRing=true",
+   "a.np \"16\" focusRing=true",
+   "button#a1-next.a1-next-btn \"Open notes →\" focusRing=true",
+   "button#a1-reset.a1-reset \"Reset\" focusRing=true",
+   "button#tab-notes.tab \"1Notes\" focusRing=true",
+   "div#v-notes \"5.1Solving Basic Equations→P\" focusRing=true",
+   "div.tg-card \"Solving Basic Equations\" focusRing=true",
+   "button.a1-tg-practice \"Practice topic 5.1\" focusRing=true",
+   "div.tg-card \"Solving Equations with Fract\" focusRing=true",
+   "button.a1-tg-practice \"Practice topic 5.2\" focusRing=true",
+   "div.tg-card \"Solving More Complex Equatio\" focusRing=true",
+   "button.a1-tg-practice \"Practice topic 5.3\" focusRing=true",
+   "div.tg-card \"Special Case Equations\" focusRing=true",
+   "button.a1-tg-practice \"Practice topic 5.4\" focusRing=true",
+   "body",
+   "a.a1-skip \"Skip to content\" focusRing=true"
+  ],
+  "arrowRightFromNotes": "button#tab-vocab.tab \"2Vocabulary\" focusRing=true",
+  "backToNotes": "button#tab-notes.tab \"1Notes\" focusRing=true",
+  "modalOpenFocus": "button.topic-modal-close \"✕ Close\" focusRing=true",
+  "focusStaysInModalFor40Tabs": true,
+  "afterEscape": {
+   "focus": "div.tg-card \"Solving Basic Equations — al\" focusRing=true",
+   "modalOpen": false
+  },
+  "practiceEnterChecks": true,
+  "focusAfterCorrect": "input#pa1.ai \"Answer for question 2: Solve\" focusRing=true",
+  "afterWrongTabs": [
+   "button.cbtn \"Check\" focusRing=true",
+   "button.hbtn \"Hint\" focusRing=true",
+   "button.a1-fb-hint \"Show a hint\" focusRing=true",
+   "input#pa2.ai \"Answer for question 3: Solve\" focusRing=true"
+  ],
+  "calculatorTyped7x6": "42",
+  "calculatorKeysAreButtons": true,
+  "quizOptionSelectable": true,
+  "quizHasMatchSelects": false,
+  "testSubmittedWithAllBlank": {
+   "score": "0/20",
+   "warned": false
+  },
+  "focusAfterSubmit": "body"
+ }
+}
