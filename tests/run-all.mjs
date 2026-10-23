@@ -72,6 +72,15 @@ run(PY, ['tools/verify/verify_items.py']);
   for (const [u, d] of Object.entries(v.draws)) if (d.practice_sets_with_duplicate || d.tests_with_duplicate) content[`draws:${u}`] = 'duplicate in draws';
   for (const q of v.vocab || []) content[`vocab:${q.unit}:${q.idx}:${q.issue}`] = 'vocab';
   compare('item verification', content, 'content.json');
+
+  // Regression cases: each key fixed in Phase 1 must keep its corrected value and keep matching the solver.
+  const regs = read(path.join(ROOT, 'tests/content-regressions.json'));
+  const items = read(path.join(OUT, 'items.json'));
+  const keyOf = id => { const [f, kind, group, idx] = id.split(':'); const it = items[f].items.find(i => i.kind === kind && i.group === group && String(i.idx) === idx); return it && it.a; };
+  const byId = Object.fromEntries(v.items.map(i => [i.id, i]));
+  const bad = regs.filter(r => keyOf(r.id) !== r.key || !byId[r.id] || byId[r.id].status !== 'match')
+    .map(r => `${r.id}: key ${JSON.stringify(keyOf(r.id))}, solver ${byId[r.id] && byId[r.id].status} (${r.finding})`);
+  results.push({ name: 'content regression cases', status: bad.length ? 'FAIL' : 'pass', detail: bad.join('\n      ') || `${regs.length} fixed keys hold` });
 }
 
 // 2. Checker corpus: no answer accepted in the baseline may now be rejected
