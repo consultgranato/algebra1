@@ -1,0 +1,544 @@
+{
+ "byUnit": {
+  "unit1-4.html": {
+   "items": 80,
+   "keyRejected": 7
+  },
+  "unit5.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit6.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit7.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit8.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit9.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit10.html": {
+   "items": 140,
+   "keyRejected": 0
+  },
+  "unit11.html": {
+   "items": 60,
+   "keyRejected": 0
+  },
+  "unit12.html": {
+   "items": 80,
+   "keyRejected": 17
+  },
+  "unit13.html": {
+   "items": 80,
+   "keyRejected": 57
+  },
+  "unit14.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit15.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit16.html": {
+   "items": 80,
+   "keyRejected": 0
+  }
+ },
+ "rejected": [
+  {
+   "id": "unit1-4.html:bank:unit3:4",
+   "key": "x<sup>5</sup>",
+   "typed": "x^5",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:bank:unit3:5",
+   "key": "15x<sup>5</sup>",
+   "typed": "15x^5",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:bank:unit3:6",
+   "key": "8x<sup>5</sup>",
+   "typed": "8x^5",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:bank:unit3:8",
+   "key": "x<sup>5</sup>",
+   "typed": "x^5",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:bank:unit3:11",
+   "key": "-6x<sup>6</sup>",
+   "typed": "-6x^6",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:test:3.3:11",
+   "key": "12x<sup>5</sup>",
+   "typed": "12x^5",
+   "accepted": false
+  },
+  {
+   "id": "unit1-4.html:test:3.3:14",
+   "key": "x<sup>7</sup>",
+   "typed": "x^7",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:0",
+   "key": "y=4(2<sup>x</sup>)",
+   "typed": "y=4(2^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:1",
+   "key": "y=3(3<sup>x</sup>)",
+   "typed": "y=3(3^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:2",
+   "key": "y=10(0.5<sup>x</sup>)",
+   "typed": "y=10(0.5^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:3",
+   "key": "y=6(3<sup>x</sup>)",
+   "typed": "y=6(3^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:4",
+   "key": "y=1(4<sup>x</sup>)",
+   "typed": "y=1(4^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:7",
+   "key": "y=2(3<sup>x</sup>)",
+   "typed": "y=2(3^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:8",
+   "key": "y=8(0.5<sup>x</sup>)",
+   "typed": "y=8(0.5^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:10",
+   "key": "y=5(3<sup>x</sup>)",
+   "typed": "y=5(3^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:13",
+   "key": "y=3(4<sup>x</sup>)",
+   "typed": "y=3(4^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.2:14",
+   "key": "y=1(5<sup>x</sup>)",
+   "typed": "y=1(5^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.3:0",
+   "key": "5000(1.03)<sup>t</sup>",
+   "typed": "5000(1.03)^t",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.3:6",
+   "key": "2000(2)<sup>t</sup>",
+   "typed": "2000(2)^t",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:bank:12.3:13",
+   "key": "A = A0(1-r)<sup>t</sup>",
+   "typed": "A = A0(1-r)^t",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:test:12.2:5",
+   "key": "y=6(3<sup>x</sup>)",
+   "typed": "y=6(3^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:test:12.2:6",
+   "key": "y=16(0.5<sup>x</sup>)",
+   "typed": "y=16(0.5^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:test:12.2:8",
+   "key": "y=2(4<sup>x</sup>)",
+   "typed": "y=2(4^x)",
+   "accepted": false
+  },
+  {
+   "id": "unit12.html:test:12.3:13",
+   "key": "A = A0(1+r)<sup>t</sup>",
+   "typed": "A = A0(1+r)^t",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.1:4",
+   "key": "-x<sup>2</sup> + 2x + 3",
+   "typed": "-x^2 + 2x + 3",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.1:5",
+   "key": "x<sup>3</sup> + 4x - 6",
+   "typed": "x^3 + 4x - 6",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.1:11",
+   "key": "-5x<sup>2</sup> + 2x + 8",
+   "typed": "-5x^2 + 2x + 8",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.1:14",
+   "key": "-3x<sup>3</sup> + x<sup>2</sup> + x + 7",
+   "typed": "-3x^3 + x^2 + x + 7",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:0",
+   "key": "4x<sup>2</sup> - 3x + 3",
+   "typed": "4x^2 - 3x + 3",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:2",
+   "key": "4x<sup>2</sup> + 3x + 2",
+   "typed": "4x^2 + 3x + 2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:3",
+   "key": "3x<sup>2</sup> - 4x + 7",
+   "typed": "3x^2 - 4x + 7",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:5",
+   "key": "2x<sup>2</sup> + 3x - 7",
+   "typed": "2x^2 + 3x - 7",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:6",
+   "key": "3x<sup>3</sup> + 2x + 4",
+   "typed": "3x^3 + 2x + 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:7",
+   "key": "3x<sup>2</sup> + 11",
+   "typed": "3x^2 + 11",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:10",
+   "key": "4x<sup>2</sup> + 3x - 7",
+   "typed": "4x^2 + 3x - 7",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:11",
+   "key": "5x<sup>2</sup> - 4",
+   "typed": "5x^2 - 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.2:12",
+   "key": "3x<sup>3</sup> + x",
+   "typed": "3x^3 + x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:0",
+   "key": "6x<sup>3</sup> - 15x<sup>2</sup> + 12x",
+   "typed": "6x^3 - 15x^2 + 12x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:1",
+   "key": "2x<sup>2</sup> + 14x",
+   "typed": "2x^2 + 14x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:2",
+   "key": "-12x<sup>2</sup> + 8x",
+   "typed": "-12x^2 + 8x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:3",
+   "key": "5x<sup>3</sup> - 15x<sup>2</sup>",
+   "typed": "5x^3 - 15x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:4",
+   "key": "x<sup>3</sup> + 4x<sup>2</sup> - x",
+   "typed": "x^3 + 4x^2 - x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:5",
+   "key": "-6x<sup>3</sup> - 10x<sup>2</sup>",
+   "typed": "-6x^3 - 10x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:6",
+   "key": "8x<sup>3</sup> + 4x<sup>2</sup> - 24x",
+   "typed": "8x^3 + 4x^2 - 24x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:7",
+   "key": "3x<sup>5</sup> - 6x<sup>4</sup>",
+   "typed": "3x^5 - 6x^4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:8",
+   "key": "-4x<sup>2</sup> + 9x",
+   "typed": "-4x^2 + 9x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:9",
+   "key": "6x<sup>4</sup> + 18x<sup>3</sup> - 6x<sup>2</sup>",
+   "typed": "6x^4 + 18x^3 - 6x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:10",
+   "key": "10x - 2x<sup>2</sup>",
+   "typed": "10x - 2x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:11",
+   "key": "-3x<sup>3</sup> - 6x<sup>2</sup> + 12x",
+   "typed": "-3x^3 - 6x^2 + 12x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:12",
+   "key": "14x<sup>3</sup> - 7x<sup>2</sup>",
+   "typed": "14x^3 - 7x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:13",
+   "key": "x<sup>5</sup> - x<sup>3</sup> + 2x<sup>2</sup>",
+   "typed": "x^5 - x^3 + 2x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.3:14",
+   "key": "-5x<sup>3</sup> + 15x<sup>2</sup> - 10x",
+   "typed": "-5x^3 + 15x^2 - 10x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:0",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "typed": "x^2 + 8x + 15",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:1",
+   "key": "x<sup>2</sup> - 2x - 8",
+   "typed": "x^2 - 2x - 8",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:2",
+   "key": "x<sup>2</sup> - 36",
+   "typed": "x^2 - 36",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:3",
+   "key": "2x<sup>2</sup> + 9x + 4",
+   "typed": "2x^2 + 9x + 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:4",
+   "key": "3x<sup>2</sup> + 13x - 10",
+   "typed": "3x^2 + 13x - 10",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:5",
+   "key": "x<sup>2</sup> - 10x + 21",
+   "typed": "x^2 - 10x + 21",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:6",
+   "key": "4x<sup>2</sup> - 9",
+   "typed": "4x^2 - 9",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:7",
+   "key": "x<sup>2</sup> + 8x + 16",
+   "typed": "x^2 + 8x + 16",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:8",
+   "key": "3x<sup>2</sup> - 5x - 2",
+   "typed": "3x^2 - 5x - 2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:9",
+   "key": "x<sup>2</sup> - 10x + 25",
+   "typed": "x^2 - 10x + 25",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:10",
+   "key": "4x<sup>2</sup> - x - 3",
+   "typed": "4x^2 - x - 3",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:11",
+   "key": "2x<sup>2</sup> + x - 15",
+   "typed": "2x^2 + x - 15",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:12",
+   "key": "x<sup>2</sup> - 1",
+   "typed": "x^2 - 1",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:13",
+   "key": "5x<sup>2</sup> + 18x - 8",
+   "typed": "5x^2 + 18x - 8",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:bank:13.4:14",
+   "key": "x<sup>2</sup> - 9",
+   "typed": "x^2 - 9",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.1:2",
+   "key": "-4x<sup>3</sup> + 2x + 5",
+   "typed": "-4x^3 + 2x + 5",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.2:5",
+   "key": "3x<sup>2</sup> + 2x + 4",
+   "typed": "3x^2 + 2x + 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.2:6",
+   "key": "3x<sup>2</sup> + 3x - 4",
+   "typed": "3x^2 + 3x - 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.2:7",
+   "key": "3x<sup>3</sup> + 4x - 4",
+   "typed": "3x^3 + 4x - 4",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.3:10",
+   "key": "4x<sup>3</sup> - 12x<sup>2</sup> + 4x",
+   "typed": "4x^3 - 12x^2 + 4x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.3:11",
+   "key": "-10x<sup>2</sup> - 6x",
+   "typed": "-10x^2 - 6x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.3:12",
+   "key": "3x<sup>3</sup> - 4x<sup>2</sup>",
+   "typed": "3x^3 - 4x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.3:13",
+   "key": "6x<sup>4</sup> + 3x<sup>3</sup> - 15x<sup>2</sup>",
+   "typed": "6x^4 + 3x^3 - 15x^2",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.3:14",
+   "key": "-x<sup>3</sup> + 6x",
+   "typed": "-x^3 + 6x",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.4:15",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "typed": "x^2 + 8x + 15",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.4:16",
+   "key": "x<sup>2</sup> + 6x - 16",
+   "typed": "x^2 + 6x - 16",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.4:17",
+   "key": "2x<sup>2</sup> - 5x - 12",
+   "typed": "2x^2 - 5x - 12",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.4:18",
+   "key": "x<sup>2</sup> - 49",
+   "typed": "x^2 - 49",
+   "accepted": false
+  },
+  {
+   "id": "unit13.html:test:13.4:19",
+   "key": "9x<sup>2</sup> - 1",
+   "typed": "9x^2 - 1",
+   "accepted": false
+  }
+ ]
+}
