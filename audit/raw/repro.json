@@ -1,0 +1,152 @@
+{
+ "testLostOnRefresh": {
+  "urlAfterOpeningTest": "http://127.0.0.1:57530/unit8.html",
+  "viewAfterReload": "notes",
+  "typedAnswersAfterReload": [
+   "",
+   "",
+   ""
+  ],
+  "questionsInSamePositionAfterReload": "1/25"
+ },
+ "deepLink": {
+  "unit8.html#test opens view": "notes",
+  "url after clicking Practice (from #test)": "unit8.html#test",
+  "unit8.html#practice opens view": "notes",
+  "url after clicking Practice (from #practice)": "unit8.html#practice",
+  "unit8.html#v-test opens view": "notes",
+  "url after clicking Practice (from #v-test)": "unit8.html#v-test"
+ },
+ "blankSubmit": {
+  "nativeDialogs": [],
+  "score": "5/25",
+  "blankCardAfterGrading": {
+   "cls": "pcard no",
+   "feedback": "✗ Answer: x >= ≈ 1.6 — Distribute: 8x-4≥3x+12. Subtract 3x: "
+  },
+  "anyInPageWarning": false
+ },
+ "resultsBreakdown": {
+  "rows": [
+   {
+    "label": "Topic 6.3",
+    "pct": "40%",
+    "hasLinkOrButton": false
+   },
+   {
+    "label": "Topic 6.2",
+    "pct": "20%",
+    "hasLinkOrButton": false
+   },
+   {
+    "label": "Topic 6.1",
+    "pct": "20%",
+    "hasLinkOrButton": false
+   },
+   {
+    "label": "Topic 6.5",
+    "pct": "20%",
+    "hasLinkOrButton": false
+   },
+   {
+    "label": "Topic 6.4",
+    "pct": "0%",
+    "hasLinkOrButton": false
+   }
+  ],
+  "sortedByScore": false,
+  "anyRowLinksToNotesOrPractice": false
+ },
+ "mobileCalculator": {
+  "firstProblemTop": 835,
+  "lastProblemBottom": 1981,
+  "calcTop": 2007,
+  "calcBelowFirstProblemPx": 1172,
+  "calcBelowLastProblemPx": 26
+ },
+ "mobileStreakPill": {
+  "text": "Answer two in a row to start a streak",
+  "w": 26,
+  "h": 10,
+  "overflow": "visible",
+  "whiteSpace": "normal",
+  "innerW": 0,
+  "innerColor": "rgb(124, 124, 148)",
+  "innerDisplay": "none",
+  "clipped": false
+ },
+ "clearAll": {
+  "buttonInsideH2": true,
+  "headingText": "Semester 2 Clear all saved progress",
+  "dialogs": [
+   {
+    "type": "confirm",
+    "message": "Clear saved progress for every unit on this device?"
+   }
+  ]
+ },
+ "notesModal": {
+  "staticSource": {
+   "hasRoleDialog": false
+  },
+  "rendered": {
+   "role": "dialog",
+   "ariaModal": "true",
+   "labelledBy": "modal-title",
+   "name": "Solving Basic Equations",
+   "focus": "topic-modal-close"
+  }
+ },
+ "imagesWithoutAlt": {
+  "sourceLines": [
+   {
+    "line": 427,
+    "tag": "<img src=\"Packetsite/unit1-4-img-023.png\" style=\"max-width:100%;display:block;margin:1rem auto;border-radius:8px;\">"
+   },
+   {
+    "line": 463,
+    "tag": "<img src=\"Packetsite/unit1-4-img-064.png\" style=\"max-width:100%;display:block;margin:1rem auto;border-radius:8px;\">"
+   }
+  ],
+  "runtimeAltInModal": [
+   {
+    "topic": 2,
+    "src": "Packetsite/unit1-4-img-023.png",
+    "alt": "Diagram from the course packet"
+   },
+   {
+    "topic": 3,
+    "src": "Packetsite/unit1-4-img-064.png",
+    "alt": "Diagram from the course packet"
+   }
+  ]
+ },
+ "unit13": {
+  "correctTypedNormally": [
+   {
+    "typed": "x^2 - 36",
+    "feedback": "↺ Not quite — try once more. Show a hint"
+   },
+   {
+    "typed": "x^2 - 10x + 25",
+    "feedback": "↺ Not quite — try once more. Show a hint"
+   },
+   {
+    "typed": "x^2 - 9",
+    "feedback": "↺ Not quite — try once more. Show a hint"
+   },
+   {
+    "typed": "x^2 + 8x + 15",
+    "feedback": "↺ Not quite — try once more. Show a hint"
+   },
+   {
+    "typed": "4x^2 - x - 3",
+    "feedback": "↺ Not quite — try once more. Show a hint"
+   }
+  ],
+  "withoutCaret": {
+   "typed": "x2 - 10x + 25",
+   "feedback": "✓ Correct!"
+  }
+ }
+}
