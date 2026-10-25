@@ -248,6 +248,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
   </div>
 
   <div class="content">
+    <section id="a1-hero" class="a1-hero a1-hero-pending" aria-label="Your progress on this unit"></section>
     <div class="tabs">
       <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
       <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
@@ -483,7 +484,7 @@ const BANKS={
   {q:"Solve:",eq:"-x + 7 ≥ -x + 3",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Add x: 7≥3. True!"},
   {q:"Solve:",eq:"3x - 8 > 3(x - 3)",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 3x-8>3x-9. Subtract 3x: -8>-9. True!"},
   {q:"Solve:",eq:"7x + 2 < 7x - 1",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 7x: 2<-1. False."},
-  {q:"Solve:",eq:"4(x + 1) ≥ 4x + 3",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 4x+4≥4x+3. Subtract 4x: 4≥3. True! (All real numbers)"},
+  {q:"Solve:",eq:"4(x + 1) ≥ 4x + 3",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 4x+4≥4x+3. Subtract 4x: 4≥3. True! (All real numbers)"},
   {q:"Solve:",eq:"-3x + 1 > -3x + 5",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Add 3x: 1>5. False."},
   {q:"Solve:",eq:"2x + 9 ≤ 2(x + 5)",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 2x+9≤2x+10. Subtract 2x: 9≤10. True!"},
   {q:"Solve:",eq:"8x - 3 > 8x + 2",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 8x: -3>2. False."},
@@ -521,7 +522,7 @@ const T=[
   {t:"6.3",q:"Solve:",eq:"5x + 2 ≤ 3x + 10",a:"x <= 4",fmt:"inequality using x",h:"Subtract 3x: 2x+2≤10. Subtract 2, divide by 2."},
   {t:"6.3",q:"Solve:",eq:"-3(x + 1) ≥ 12",a:"x <= -5",fmt:"inequality using x",h:"Distribute: -3x-3≥12. Add 3: -3x≥15. Divide by -3, FLIP!"},
   {t:"6.3",q:"Solve:",eq:"6x - 7 < 4x + 3",a:"x < 5",fmt:"inequality using x",h:"Subtract 4x: 2x-7<3. Add 7, divide by 2."},
-  {t:"6.3",q:"Solve:",eq:"4(2x - 1) ≥ 3(x + 4)",a:"x >= ≈ 1.6",fmt:"x >= ___",h:"Distribute: 8x-4≥3x+12. Subtract 3x: 5x-4≥12. Add 4: 5x≥16. x≥16/5."},
+  {t:"6.3",q:"Solve:",eq:"4(2x - 1) ≥ 3(x + 4)",a:"x >= 16/5",fmt:"x >= ___",h:"Distribute: 8x-4≥3x+12. Subtract 3x: 5x-4≥12. Add 4: 5x≥16. x≥16/5."},
   {t:"6.4",q:"Solve:",eq:"3x + 7 > 3x - 2",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 3x: 7>-2. True!"},
   {t:"6.4",q:"Solve:",eq:"2x - 5 ≤ 2x + 1",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 2x: -5≤1. True!"},
   {t:"6.4",q:"Solve:",eq:"4(x + 2) > 4x + 10",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 4x+8>4x+10. Subtract 4x: 8>10. False."},

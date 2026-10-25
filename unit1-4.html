@@ -249,6 +249,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
   </div>
 
   <div class="content">
+    <section id="a1-hero" class="a1-hero a1-hero-pending" aria-label="Your progress on this unit"></section>
     <div class="tabs">
       <button class="tab on" onclick="sw('notes',this)">&#128211; Notes</button>
       <button class="tab" onclick="sw('vocab',this)">&#128218; Vocabulary</button>
@@ -424,7 +425,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
             Memory trick: &ldquo;Please Excuse My Dear Aunt Sally&rdquo;<br><br>
             <strong>Operation vocabulary:</strong> Adding &rarr; <span class="vw">sum</span> &nbsp;&bull;&nbsp; Subtracting &rarr; <span class="vw">difference</span> &nbsp;&bull;&nbsp; Multiplying &rarr; <span class="vw">product</span> &nbsp;&bull;&nbsp; Dividing &rarr; <span class="vw">quotient</span>
           </div></div>
-          <img src="Packetsite/unit1-4-img-023.png" style="max-width:100%;display:block;margin:1rem auto;border-radius:8px;">
+          <img src="Packetsite/unit1-4-img-023.png" alt="PEMDAS order of operations: Parentheses ( ), Exponents a², Multiply × or Divide ÷, Add + or Subtract −." style="max-width:100%;display:block;margin:1rem auto;border-radius:8px;">
           <p class="note-h">Worked examples</p>
           <div class="worked"><div class="wlbl">Example 1 &mdash; Evaluate: 3 + 4 &times; 2</div><div class="wsteps">
             <span class="eq">Multiply first: 4 &times; 2 = 8</span>
@@ -460,7 +461,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
           <div class="worked"><div class="wlbl">Example 2 &mdash; Equivalent fractions</div><div class="wsteps">
             <span class="eq"><span class="frac"><span class="fn">1</span><span class="fd">2</span></span> = <span class="frac"><span class="fn">2</span><span class="fd">4</span></span> = <span class="frac"><span class="fn">3</span><span class="fd">6</span></span> = <span class="frac"><span class="fn">4</span><span class="fd">8</span></span> (all the same value)</span>
           </div></div>
-          <img src="Packetsite/unit1-4-img-064.png" style="max-width:100%;display:block;margin:1rem auto;border-radius:8px;">
+          <img src="Packetsite/unit1-4-img-064.png" alt="Fraction wall: one whole bar divided into equal parts — halves, thirds, fourths, fifths, sixths, eighths, tenths and twelfths." style="max-width:100%;display:block;margin:1rem auto;border-radius:8px;">
           <div class="worked"><div class="wlbl">Example 3 &mdash; Negative fraction</div><div class="wsteps">
             <span class="eq"><span class="frac"><span class="fn">&minus;3</span><span class="fd">4</span></span> = <span class="frac"><span class="fn">3</span><span class="fd">&minus;4</span></span> = &minus;<span class="frac"><span class="fn">3</span><span class="fd">4</span></span> <span class="eq-note">&larr; all equivalent; use <span class="frac"><span class="fn">&minus;3</span><span class="fd">4</span></span></span></span>
           </div></div>
@@ -1145,7 +1146,7 @@ const BANKS={
   {t:"4.2",q:"Simplify:",eq:"4(x - 2) + 3x",a:"7x-8",fmt:"simplified expression",h:"Distribute: 4x-8+3x. Combine: 7x-8."},
   {t:"4.4",q:"Evaluate x² + 1 when",eq:"x = 3",a:"10",fmt:"numerical answer",h:"(3)²+1 = 9+1 = 10."},
   {t:"4.1",q:"Identify: In the expression 5x - 7, what is the coefficient?",eq:"",a:"5",fmt:"numerical answer",h:"The coefficient is the number in front of x."},
-  {t:"4.1",q:"Identify: In the expression 5x - 7, what is the constant?",eq:"",a:"-7",fmt:"numerical answer",h:"The constant is the term with no variable."},
+  {t:"4.1",q:"Identify: In the expression 5x - 7, what is the constant term? (Include its sign.)",eq:"",a:"-7",fmt:"numerical answer, with its sign",h:"The constant is the term with no variable. 5x - 7 is 5x + (-7), so the constant term is -7."},
   {t:"4.2",q:"Simplify:",eq:"5 - 2(x - 3)",a:"-2x+11",fmt:"simplified expression",h:"Distribute -2: 5-2x+6. Combine: -2x+11."},
   {t:"4.4",q:"Evaluate -x + 4 when",eq:"x = -3",a:"7",fmt:"numerical answer",h:"-(-3)+4 = 3+4 = 7."},
   {t:"4.1",q:"Is 3x + 5 = 11 an expression or an equation?",eq:"",a:"equation",fmt:"expression or equation",h:"It has an equal sign, so it is an equation."},
@@ -1197,7 +1198,7 @@ const VQB=[
   {topic:'unit4',type:'mc',q:'What is a "constant" in an algebraic expression?',opts:['A term with a variable','A term with no variable','The leading coefficient','The exponent'],a:1},
   {topic:'unit4',type:'mc',q:'Using the distributive property: 2(x + 3) = ?',opts:['2x + 3','x + 6','2x + 6','2x + 2'],a:2},
   {topic:'unit4',type:'tf',q:'True or False: To evaluate an expression, you substitute the given number for the variable.',opts:['True','False'],a:0},
-  {topic:'unit4',type:'mc',q:'Evaluate 4x − 2 when x = 3.',opts:['10','14','10','2'],a:0},
+  {topic:'unit4',type:'mc',q:'Evaluate 4x − 2 when x = 3.',opts:['10','14','2'],a:0},
 ];
 
 const DESCS={

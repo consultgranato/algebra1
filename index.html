@@ -66,6 +66,7 @@ footer{background:var(--nnpd);padding:.85rem 1.5rem;text-align:center;font-size:
 <main class="main" id="a1-main">
   <h1 class="page-title">Course Units</h1>
   <p class="page-sub">Select a unit to access notes, vocabulary, practice problems, and a practice test. Your scores are saved on this device as you go.</p>
+  <section class="a1-course a1-course-pending" aria-label="Your progress across the course"></section>
 
   <h2 class="section-label"><span>Semester 1</span></h2>
   <nav class="grid" aria-label="Semester 1 units">
@@ -113,9 +114,7 @@ footer{background:var(--nnpd);padding:.85rem 1.5rem;text-align:center;font-size:
     </a>
   </nav>
 
-  <h2 class="section-label"><span>Semester 2</span>
-    <button type="button" class="reset-all" id="a1-reset-all">Clear all saved progress</button>
-  </h2>
+  <h2 class="section-label"><span>Semester 2</span></h2>
   <nav class="grid" aria-label="Semester 2 units">
     <a href="unit11.html" class="unit-card">
       <span class="u-badge">11</span>
@@ -154,6 +153,18 @@ footer{background:var(--nnpd);padding:.85rem 1.5rem;text-align:center;font-size:
       <span class="u-arrow" aria-hidden="true">&#8594;</span>
     </a>
   </nav>
+
+  <section class="a1-saved" aria-labelledby="a1-saved-h">
+    <h2 class="section-label" id="a1-saved-h"><span>Saved progress</span></h2>
+    <p class="a1-saved-p">This site keeps, in this browser on this device only, your scores and a short log of each
+      question you answer: which question, right or wrong, how many tries, whether you used a hint, how long it took,
+      and what you typed when it was wrong. No name or account. Nothing is sent anywhere.</p>
+    <p class="a1-saved-p" id="a1-export-count"></p>
+    <div class="a1-saved-btns">
+      <button type="button" class="reset-all a1-export" id="a1-export">Export my data</button>
+      <button type="button" class="reset-all" id="a1-reset-all">Clear all saved progress</button>
+    </div>
+  </section>
 </main>
 
 <footer>Niles North High School &middot; D219 &middot; Algebra 1</footer>

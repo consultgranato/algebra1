@@ -1,0 +1,87 @@
+[
+ {
+  "id": "unit6.html:bank:6.4:11",
+  "key": "all real numbers",
+  "finding": "4(x+1) >= 4x+3 reduces to 4 >= 3, always true"
+ },
+ {
+  "id": "unit6.html:test:6.3:14",
+  "key": "x >= 16/5",
+  "finding": "key was 'x >= ≈ 1.6'"
+ },
+ {
+  "id": "unit9.html:bank:9.1:7",
+  "key": "no",
+  "finding": "(1,1) fails x + y = 3"
+ },
+ {
+  "id": "unit9.html:bank:9.1:12",
+  "key": "no",
+  "finding": "(2,3) fails y = x + 2"
+ },
+ {
+  "id": "unit9.html:test:9.1:2",
+  "key": "no",
+  "finding": "(2,5) fails x + y = 8"
+ },
+ {
+  "id": "unit9.html:bank:9.3:14",
+  "key": "no solution",
+  "finding": "substitution gives 6 = 8"
+ },
+ {
+  "id": "unit9.html:bank:9.4:6",
+  "key": "(5/2, 4)",
+  "finding": "key was (2, 2)"
+ },
+ {
+  "id": "unit9.html:test:9.4:18",
+  "key": "(3/4, 5)",
+  "finding": "key contained scratch work"
+ },
+ {
+  "id": "unit10.html:test:10.7:31",
+  "key": "2 lbs of A, 6 lbs of B",
+  "finding": "4 lb of each costs $40, not $44"
+ },
+ {
+  "id": "unit12.html:bank:12.3:10",
+  "key": "143",
+  "finding": "50(1.3)^4 = 142.8"
+ },
+ {
+  "id": "unit12.html:bank:12.3:12",
+  "key": "72314",
+  "finding": "80000(0.98)^5 = 72313.7"
+ },
+ {
+  "id": "unit7.html:bank:7.4:0",
+  "key": "f(2) = 3",
+  "finding": "D1: graph redrawn as y = x + 1"
+ },
+ {
+  "id": "unit7.html:test:7.4:15",
+  "key": "f(3) = 2",
+  "finding": "D2: graph redrawn as y = x - 1"
+ },
+ {
+  "id": "unit15.html:test:15.2:6",
+  "key": "(1, -3)",
+  "finding": "D3: y-axis relabelled so the vertex reads (1, -3)"
+ },
+ {
+  "id": "unit15.html:test:15.3:10",
+  "key": "(-1, -4)",
+  "finding": "D4: graph redrawn as y = (x + 1)^2 - 4"
+ },
+ {
+  "id": "unit10.html:bank:10.7:0",
+  "key": "2 jeans, 3 shirts",
+  "finding": "D5: total changed to $120"
+ },
+ {
+  "id": "unit10.html:bank:10.3:14",
+  "key": "6",
+  "finding": "D6: perimeter changed to 32"
+ }
+]

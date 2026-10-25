@@ -1,0 +1,231 @@
+[
+ {
+  "name": "test: URL names the view",
+  "pass": true,
+  "detail": "http://127.0.0.1:55857/unit8.html#test"
+ },
+ {
+  "name": "test: reload returns to the test",
+  "pass": true
+ },
+ {
+  "name": "test: same questions after reload",
+  "pass": true,
+  "detail": "25 questions"
+ },
+ {
+  "name": "test: typed answers restored",
+  "pass": true,
+  "detail": "answer 0|answer 1|answer 2|"
+ },
+ {
+  "name": "test: restored answers are announced",
+  "pass": true
+ },
+ {
+  "name": "test: saved answers cleared on submit",
+  "pass": true
+ },
+ {
+  "name": "test: Retake draws a new set",
+  "pass": true
+ },
+ {
+  "name": "test: no page errors",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "name": "deep link: #practice/8.3 opens practice on 8.3",
+  "pass": true
+ },
+ {
+  "name": "deep link: tab click updates the URL",
+  "pass": true,
+  "detail": "http://127.0.0.1:55857/unit8.html#vocab"
+ },
+ {
+  "name": "deep link: #notes",
+  "pass": true
+ },
+ {
+  "name": "blank: warning shown before grading",
+  "pass": true,
+  "detail": "19 questions are blank (7, 8, 9, 10, 11, 12, 13, 14 and 11 more). If you submit "
+ },
+ {
+  "name": "blank: warning has focus",
+  "pass": true
+ },
+ {
+  "name": "blank: \"Go to question\" focuses the first blank",
+  "pass": true
+ },
+ {
+  "name": "blank: no native dialog",
+  "pass": true,
+  "detail": ""
+ },
+ {
+  "name": "blank: graded after confirming",
+  "pass": true,
+  "detail": "6/25"
+ },
+ {
+  "name": "blank: blank cards say Skipped",
+  "pass": true
+ },
+ {
+  "name": "results: focus moves to the score",
+  "pass": true
+ },
+ {
+  "name": "results: weakest first",
+  "pass": true,
+  "detail": "0,20,20,40,40"
+ },
+ {
+  "name": "results: every row links to notes and practice",
+  "pass": true,
+  "detail": "2,2,2,2,2"
+ },
+ {
+  "name": "results: Practice link opens practice",
+  "pass": true
+ },
+ {
+  "name": "phone: calculator is a sheet at the bottom",
+  "pass": true,
+  "detail": "{\"fixed\":true,\"toggleBottom\":832,\"vh\":844,\"toggleH\":52,\"boxHidden\":true}"
+ },
+ {
+  "name": "phone: sheet starts closed",
+  "pass": true
+ },
+ {
+  "name": "phone: calculator keys at least 44px",
+  "pass": true,
+  "detail": "48,48,48,48"
+ },
+ {
+  "name": "phone: empty streak pill hidden",
+  "pass": true
+ },
+ {
+  "name": "phone: streak pill shows text once there is a streak",
+  "pass": true,
+  "detail": "{\"shown\":true,\"text\":\"2 in a row\"}"
+ },
+ {
+  "name": "clear all: not inside a heading",
+  "pass": true
+ },
+ {
+  "name": "clear all: in-page confirmation, no native dialog",
+  "pass": true
+ },
+ {
+  "name": "clear all: Cancel keeps progress and returns focus",
+  "pass": true
+ },
+ {
+  "name": "clear all: Delete clears progress",
+  "pass": true
+ },
+ {
+  "name": "reset: target at least 44px tall",
+  "pass": true,
+  "detail": 44
+ },
+ {
+  "name": "reset: asks before deleting",
+  "pass": true
+ },
+ {
+  "name": "reset: deletes after confirming",
+  "pass": true
+ },
+ {
+  "name": "keyboard: Enter on a topic opens its notes",
+  "pass": true
+ },
+ {
+  "name": "keyboard: Escape returns focus to the topic button",
+  "pass": true
+ },
+ {
+  "name": "structure: no topic card is a button containing a button",
+  "pass": true
+ },
+ {
+  "name": "structure: every tab panel has a heading",
+  "pass": true
+ },
+ {
+  "name": "log: practice attempts recorded with item ids",
+  "pass": true,
+  "detail": "[{\"item\":\"unit5.html:bank:5.1:4\",\"mode\":\"practice\",\"correct\":true,\"tries\":1,\"hint\":false,\"seconds\":0,\"at\":1792895717102},{\"item\":\"unit5.html:bank:5.1:6\",\"mode\":\"practice\",\"correct\":true,\"tries\":2,\"hint\":true,\"seconds\":0,\"wrong\":\"zzz\",\"at\":1792895717241}]"
+ },
+ {
+  "name": "log: first try, second try, hint and wrong answer captured",
+  "pass": true,
+  "detail": "[{\"item\":\"unit5.html:bank:5.1:4\",\"mode\":\"practice\",\"correct\":true,\"tries\":1,\"hint\":false,\"seconds\":0,\"at\":1792895717102},{\"item\":\"unit5.html:bank:5.1:6\",\"mode\":\"practice\",\"correct\":true,\"tries\":2,\"hint\":true,\"seconds\":0,\"wrong\":\"zzz\",\"at\":1792895717241}]"
+ },
+ {
+  "name": "log: test answers recorded, blanks marked skipped",
+  "pass": true,
+  "detail": "20 entries"
+ },
+ {
+  "name": "log: no identifying fields",
+  "pass": true
+ },
+ {
+  "name": "export: page says what is stored and that it stays on the device",
+  "pass": true
+ },
+ {
+  "name": "export: downloads a JSON file with the log",
+  "pass": true,
+  "detail": "algebra1-my-data-2026-10-25.json"
+ },
+ {
+  "name": "log: capped at 2,000 entries",
+  "pass": true
+ },
+ {
+  "name": "item analysis: reads exports and reports per item",
+  "pass": true,
+  "detail": "# Item analysis\n\n1 student file; 22 items attempted. Flags use items tried by at least 1 students.\n\nA \"wrong\" answer that is actually right but typed differently is a checker bug, not a student error:"
+ },
+ {
+  "name": "old progress: every original field unchanged",
+  "pass": true,
+  "detail": "{\"5\":{\"notesRead\":{\"0\":true,\"1\":true},\"practice\":{\"5.1\":{\"attempts\":3,\"last\":80,\"best\":100},\"5.4\":{\"attempts\":1,\"last\":40,\"best\":40}},\"test\":{\"attempts\":1,\"last\":65,\"best\":65},\"vocab\":{\"attempts\":2,\"last\":75,\"best\":83},\"updated\":1700000001000,\"pct\":51,\"topics\":4},\"10\":{\"practice\":{\"10.1\":{\"attempts\""
+ },
+ {
+  "name": "old progress: unit 5 shows its saved scores",
+  "pass": true,
+  "detail": "Notes2/4 | Topics 80%+1/4 | Vocab quiz83% | Practice test65%"
+ },
+ {
+  "name": "index and unit page agree (unit 5)",
+  "pass": true,
+  "detail": "unit 51%, index 51%"
+ },
+ {
+  "name": "index and unit page agree (unit 10)",
+  "pass": true,
+  "detail": "unit 5%, index 5%"
+ },
+ {
+  "name": "old progress: unit never opened keeps the old estimate",
+  "pass": true,
+  "detail": "{\"5\":\"51%\",\"6\":\"Not started\",\"7\":\"Not started\",\"8\":\"Not started\",\"9\":\"Not started\",\"10\":\"5%\",\"11\":\"Not started\",\"12\":\"Not started\",\"13\":\"Not started\",\"14\":\"Not started\",\"15\":\"Not started\",\"16\":\"Not started\",\"1–4\":\"4%\"}"
+ },
+ {
+  "name": "old progress: no page errors",
+  "pass": true,
+  "detail": ""
+ }
+]

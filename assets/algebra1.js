@@ -39,7 +39,11 @@
      down to plain ASCII. */
   function clean(s) {
     s = String(s == null ? '' : s);
-    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '');
+    /* Keys mark exponents with <sup>. Keep them as exponents: stripping the tag
+       alone turned x<sup>2</sup> into x2, so a correct x^2 was marked wrong. */
+    s = s.replace(/<sup>([\s\S]*?)<\/sup>/gi, '^($1)');
+    /* Only real tags: "x < -2 or x > 4" must not be read as a tag and deleted. */
+    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<\/?[a-z][^<>]*>/gi, '');
     s = s.replace(/&minus;/gi, '-').replace(/&times;/gi, '*').replace(/&divide;/gi, '/')
       .replace(/&middot;/gi, '*').replace(/&sdot;/gi, '*').replace(/&nbsp;/gi, ' ')
       .replace(/&le;/gi, '<=').replace(/&ge;/gi, '>=').replace(/&ne;/gi, '!=')
@@ -68,6 +72,8 @@
     t = t.replace(/\s+/g, '');
     t = t.replace(/=</g, '<=').replace(/=>/g, '>=');
     t = t.replace(/\^\(\+?(-?\d+)\)/g, '^$1');
+    t = t.replace(/\^\(([a-z])\)/g, '^$1');
+    t = t.replace(/(^|[^a-z])\(([a-z])\)/g, '$1$2');   /* -(x)^2 is -x^2 */
     t = t.replace(/\^\+/g, '^');
     /* 2*x and 2x are the same thing; so are (x+1)*(x+2) and (x+1)(x+2) */
     for (var i = 0; i < 3; i++) t = t.replace(/([0-9a-z)\]])\*([a-z(\[])/g, '$1$2');
@@ -313,26 +319,353 @@
   function varStripEq(a, b) {
     var ra = a.replace(/^[a-z]=/, ''), rb = b.replace(/^[a-z]=/, '');
     if (ra === a && rb === b) return false;
+    /* x = 5 and y = 5 are different lines, not two ways of writing one answer. */
+    if (ra !== a && rb !== b && a.charAt(0) !== b.charAt(0) && /[xy]/.test(a.charAt(0)) && /[xy]/.test(b.charAt(0))) return false;
     return core(ra, rb);
+  }
+
+  /* The original matcher. Everything it accepts is still accepted; the lenient
+     pass below only adds forms it used to reject. */
+  function strictMatch(u, c) {
+    var a = norm(u), b = norm(c);
+    if (!b) return false;
+    if (a === b) return true;
+
+    var A = aliasOf(a), B = aliasOf(b);
+    if (A && B && A === B && b.length > 1) return true;
+
+    if (core(a, b)) return true;
+    if (varStripEq(a, b)) return true;
+    if (isOrderedPair(a) || isOrderedPair(b)) return pairEq(a, b);
+    if (setEq(a, b)) return true;
+    if (ineqEq(a, b)) return true;
+    return false;
+  }
+
+  /* ---- a small evaluator, for checks that compare values rather than text ----
+     Grammar: + - * / ^ ( ) √, implicit multiplication, one-letter variables.
+     1/2x reads as (1/2)x, the way the course writes slopes. Returns NaN on
+     anything it does not understand, and NaN never compares equal. */
+  function evalExpr(src, env) {
+    var s = String(src).replace(/\s+/g, '').replace(/sqrt/g, '√'), i = 0;
+    function peek() { return s.charAt(i); }
+    function atomStart(ch) { return /[0-9.a-z(√]/.test(ch); }
+    function expr() {
+      var v = term();
+      while (peek() === '+' || peek() === '-') { var op = s.charAt(i++); var r = term(); v = op === '+' ? v + r : v - r; }
+      return v;
+    }
+    function term() {
+      var v = unary();
+      for (;;) {
+        var ch = peek();
+        if (ch === '*' || ch === '/') { i++; var r = unary(); v = ch === '*' ? v * r : v / r; }
+        else if (atomStart(ch)) v = v * power();
+        else return v;
+      }
+    }
+    function unary() {
+      if (peek() === '-') { i++; return -unary(); }
+      if (peek() === '+') { i++; return unary(); }
+      return power();
+    }
+    function power() {
+      var b = atom();
+      if (peek() === '^') { i++; return Math.pow(b, unary()); }
+      return b;
+    }
+    function atom() {
+      var ch = peek(), m;
+      if (ch === '(') { i++; var v = expr(); if (peek() !== ')') return NaN; i++; return v; }
+      if (ch === '√') { i++; return Math.sqrt(atom()); }
+      m = /^(\d+\.?\d*|\.\d+)/.exec(s.slice(i));
+      if (m) { i += m[0].length; return parseFloat(m[0]); }
+      if (/[a-z]/.test(ch)) { i++; return env && env.hasOwnProperty(ch) ? env[ch] : NaN; }
+      return NaN;
+    }
+    var out = expr();
+    return i === s.length ? out : NaN;
+  }
+
+  var PROBES = [1.37, -0.83, 2.71, 0.59, 3.14];
+
+  function letters(s) {
+    var seen = {};
+    String(s).replace(/sqrt/g, '').replace(/[a-z]/g, function (ch) { seen[ch] = 1; return ch; });
+    return Object.keys(seen);
+  }
+
+  /* Same value at several points for every variable in either expression. */
+  function sameValues(p, q) {
+    var vars = letters(p + q);
+    for (var k = 0; k < PROBES.length; k++) {
+      var env = {};
+      vars.forEach(function (v, j) { env[v] = PROBES[(k + j) % PROBES.length]; });
+      var x = evalExpr(p, env), y = evalExpr(q, env);
+      if (!isFinite(x) || !isFinite(y)) return false;
+      if (Math.abs(x - y) > 1e-9 * Math.max(1, Math.abs(x), Math.abs(y))) return false;
+    }
+    return true;
+  }
+
+  /* ---- inequalities as sets: "3 > x > -1" = "-1 < x < 3"; "and" is not "or" ---- */
+  function ineqSet(s) {
+    s = s.replace(/=</g, '<=').replace(/=>/g, '>=');
+    var orParts = s.split(/\s+or\s+|,/), set = [], v = null;
+    for (var p = 0; p < orParts.length; p++) {
+      var lo = -Infinity, loC = false, hi = Infinity, hiC = false;
+      var andParts = orParts[p].split(/\s+and\s+/);
+      for (var q = 0; q < andParts.length; q++) {
+        var toks = andParts[q].replace(/\s+/g, '').split(/(<=|>=|<|>)/);
+        if (toks.length !== 3 && toks.length !== 5) return null;
+        for (var t = 1; t < toks.length; t += 2) {
+          var L = toks[t - 1], op = toks[t], R = toks[t + 1], bound, side;
+          if (/^[a-z]$/.test(L)) { v = v || L; if (L !== v) return null; bound = R; side = op; }
+          else if (/^[a-z]$/.test(R)) { v = v || R; if (R !== v) return null; bound = L; side = { '<': '>', '>': '<', '<=': '>=', '>=': '<=' }[op]; }
+          else continue;
+          var n = evalExpr(bound, {});
+          if (!isFinite(n)) return null;
+          if (side.charAt(0) === '>') { if (n > lo || (n === lo && !(side === '>=') )) { lo = n; loC = side === '>='; } }
+          else if (n < hi || (n === hi && side !== '<=')) { hi = n; hiC = side === '<='; }
+        }
+      }
+      if (lo < hi || (lo === hi && loC && hiC)) set.push([lo, loC, hi, hiC]);
+    }
+    if (!v) return null;
+    set.sort(function (a, b) { return a[0] - b[0]; });
+    return set;
+  }
+
+  function ineqSetEq(u, c) {
+    var A = ineqSet(u), B = ineqSet(c);
+    if (!A || !B) return null;
+    if (A.length !== B.length) return false;
+    for (var k = 0; k < A.length; k++)
+      for (var j = 0; j < 4; j++)
+        if (j % 2 ? A[k][j] !== B[k][j] : Math.abs(A[k][j] - B[k][j]) > 1e-9 && A[k][j] !== B[k][j]) return false;
+    return true;
+  }
+
+  /* ---- the lenient pass ---- */
+
+  /* Rewrite common student notation into the form the strict matcher reads. */
+  function studentForms(raw) {
+    var s = clean(raw).trim(), out = [];
+    var t = s
+      .replace(/(^|[^\d])\.(\d)/g, '$10.$2')                       /* .5 -> 0.5 */
+      .replace(/(-?)(\d+)\s+(\d+)\/(\d+)/g, function (_, sg, w, n, d) {   /* 1 1/2 -> 3/2 */
+        return sg + (parseInt(w, 10) * parseInt(d, 10) + parseInt(n, 10)) + '/' + d;
+      })
+      .replace(/sqrt\s*\(?\s*(\d+)\s*\)?/g, '√$1')
+      .replace(/=\s*\+/g, '=');
+    /* ±: "2±√3" -> "2+√3, 2-√3"; "x = ±5" -> "x = 5, x = -5" */
+    var pm = /^(?:([a-z])\s*=\s*)?(.*?)\s*±\s*(.+)$/.exec(t);
+    if (pm) {
+      var v = pm[1] ? pm[1] + '=' : '', base = pm[2];
+      t = base ? v + base + '+' + pm[3] + ',' + v + base + '-' + pm[3] : v + pm[3] + ',' + v + '-' + pm[3];
+    }
+    /* "(3/2)" -> "3/2" */
+    var par = /^\((-?[\d.\/]+)\)$/.exec(t);
+    if (par) t = par[1];
+    /* "7 8 9" -> "7, 8, 9" */
+    if (/^-?\d+(\.\d+)?(\s+-?\d+(\.\d+)?)+$/.test(t)) t = t.split(/\s+/).join(',');
+    out.push(t);
+    /* x2 typed for x^2 (letter followed by digits) */
+    var ex = t.replace(/([a-z])(\d+)/g, '$1^$2');
+    if (ex !== t) out.push(ex);
+    return out;
+  }
+
+  var WORD_SYNONYMS = { max: 'maximum', min: 'minimum', nonlinear: 'not linear', non: 'not' };
+  var WORD_FILLER = { circle: 1, exponential: 1, the: 1, to: 1, a: 1, an: 1, is: 1, it: 1 };
+
+  function wordBag(s) {
+    var words = String(s).toLowerCase().replace(/[^a-z]+/g, ' ').trim().split(' ');
+    var out = [];
+    words.forEach(function (w) {
+      (WORD_SYNONYMS[w] || w).split(' ').forEach(function (x) { if (x && !WORD_FILLER[x]) out.push(x); });
+    });
+    return out.sort().join(' ');
+  }
+
+  /* "solid below" = "below, solid"; "max" = "maximum"; "open circle" = "open" */
+  function wordEq(u, c) {
+    var k = clean(c);
+    if (!/^[a-z][a-z\s,\-]*$/.test(k.trim())) return false;
+    if (!/^[a-z][a-z\s,\-]*$/.test(clean(u).trim())) return false;
+    var a = wordBag(u), b = wordBag(c);
+    return !!a && a === b;
+  }
+
+  /* "two solutions" accepts 2 / two / 2 solutions; "no real solutions" accepts 0 / none */
+  var COUNT = { zero: 0, none: 0, no: 0, one: 1, two: 2 };
+  function countOf(s, isKey) {
+    var m = /^(\d|zero|none|no|one|two)(?:\s+real)?(?:\s+(?:solutions?|x-?\s?intercepts?))?$/.exec(s.trim());
+    /* only the quadratic counting keys ("two solutions", "no real solutions"): for a
+       linear equation "0" is far more likely to mean x = 0 than "zero solutions" */
+    if (!m || (isKey && !(/solution/.test(s) && /two|one|real/.test(s)))) return null;
+    return /^\d$/.test(m[1]) ? +m[1] : COUNT[m[1]];
+  }
+  function countEq(u, c) {
+    var k = countOf(clean(c), true);
+    if (k === null) return false;
+    var a = countOf(clean(u).replace(/\.$/, ''), false);
+    return a !== null && a === k;
+  }
+
+  /* Answers that are just numbers, maybe with units, "$", thousands commas, "by",
+     "and", "of each" ("4 hours" = 4, "$4,000" = 4000, "6 x 11" = "6 by 11").
+     Fractions are left to numEq so an unreduced fraction is still rejected. */
+  var UNIT_WORDS = /^(and|by|x|of|each|a|b|lbs?|pounds?|liters?|l|ml|hours?|hrs?|h|minutes?|mins?|miles?|mi|mph|months?|days?|years?|yrs?|feet|ft|dollars?|degrees?|deg|w|l|width|length|units?|oz|grams?|g|tickets?|items?|guests?|texts?|walks?)$/;
+  function numberList(s, isKey) {
+    s = clean(s).replace(/\$/g, '').replace(/(\d),(\d{3})(?!\d)/g, '$1$2').replace(/°/g, ' ');
+    if (/[\/=<>()^]/.test(s.replace(/^[a-z]\s*=|,\s*[a-z]\s*=/g, ','))) return null;
+    if (isKey) s = s.replace(/-?\d+(\.\d+)?\s*%/g, ' ');            /* "10 liters of 40%" -> the 10 */
+    else if (/%/.test(s)) return null;
+    var nums = s.match(/-?\d+(\.\d+)?/g);
+    if (!nums) return null;
+    var words = s.replace(/-?\d+(\.\d+)?/g, ' ').replace(/[,=]/g, ' ').trim();
+    if (words && !words.split(/\s+/).every(function (w) { return UNIT_WORDS.test(w); })) return null;
+    return { nums: nums.map(parseFloat), unordered: isKey && /^[\s\d.,\-]*(and[\s\d.,\-]*)*$/.test(s) };
+  }
+  function numberListEq(u, c) {
+    var K = numberList(c, true), U = numberList(u, false);
+    if (!K || !U || K.nums.length !== U.nums.length) return false;
+    var a = U.nums.slice(), b = K.nums.slice();
+    if (K.unordered) { a.sort(function (x, y) { return x - y; }); b.sort(function (x, y) { return x - y; }); }
+    for (var k = 0; k < a.length; k++) if (Math.abs(a[k] - b[k]) > 1e-9) return false;
+    return true;
+  }
+
+  /* Split on top-level commas only, so "vertex=(1,-1)" stays whole. */
+  function topSplit(s) {
+    var out = [], depth = 0, cur = '';
+    for (var i = 0; i < s.length; i++) {
+      var ch = s.charAt(i);
+      if (ch === '(' || ch === '{') depth++;
+      if (ch === ')' || ch === '}') depth--;
+      if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch;
+    }
+    out.push(cur);
+    return out.map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+
+  /* "slope = 3, y-intercept = 5" accepts "m = 3, b = 5", "3, 5", "slope 3, y-intercept 5" */
+  function labeledEq(u, c) {
+    var K = topSplit(clean(c));
+    if (K.length < 2 || !K.some(function (p) { return /^[a-z][a-z\- ]*=/.test(p); })) return false;
+    var U = topSplit(clean(u).replace(/\s+and\s+/g, ','));
+    if (U.length !== K.length) return false;
+    for (var i = 0; i < K.length; i++) {
+      var kv = K[i].replace(/^[a-z][a-z\- ]*=\s*/, '');
+      var uv = U[i].replace(/^[a-z][a-z\- ]*?\s*(=|:)\s*/, '').replace(/^(slope|y-intercept|x-intercept|vertex|aos|d)\s+/, '');
+      if (!(strictMatch(uv, kv) || wordEq(uv, kv) || countEq(uv, kv))) return false;
+    }
+    return true;
+  }
+
+  /* "f(2) = 3" accepts "3" */
+  function fnValueEq(u, c) {
+    var m = /^([a-z])\(([^)]+)\)\s*=\s*(.+)$/.exec(clean(c).trim());
+    return !!m && strictMatch(u, m[3]);
+  }
+
+  /* y = mx + b written any way: "y = 0.5x + 1", "y = x/2 + 1", "y = 1/2x + 1".
+     Only for linear keys, and only answers without leftover brackets. */
+  function lineEq(u, c) {
+    var K = /^([a-z])\s*=\s*(.+)$/.exec(norm(c)), a = norm(u);
+    if (!K) return false;
+    var U = /^([a-z])=(.+)$/.exec(a), rhs = U ? U[2] : a;
+    if (U && U[1] !== K[1]) return false;
+    if (/\(/.test(rhs.replace(/-?\((-?[\d.]+\/[\d.]+)\)/g, '$1'))) return false;
+    var v = letters(K[2]);
+    if (v.length !== 1 || v[0] === K[1]) return false;
+    var f = function (x) { var e = {}; e[v[0]] = x; return evalExpr(K[2], e); };
+    if (Math.abs((f(2) - f(1)) - (f(1) - f(0))) > 1e-9) return false;       /* key must be linear */
+    return letters(rhs).every(function (x) { return x === v[0]; }) && sameValues(rhs, K[2]);
+  }
+
+  /* y = a·b^x written any way: "y = 4*2^x", "4(2)^x", "y = 10(1/2)^x" */
+  function expEq(u, c) {
+    var K = /^(?:([a-z])\s*=\s*)?(.+)$/.exec(norm(c)), a = norm(u);
+    if (!K || !/\^[a-z]/.test(K[2])) return false;
+    var v = letters(K[2]);
+    if (v.length !== 1) return false;
+    var U = /^([a-z])=(.+)$/.exec(a), rhs = U && U[1] !== v[0] ? U[2] : a;
+    if (U && K[1] && U[1] !== K[1]) return false;
+    if (!letters(rhs).every(function (x) { return x === v[0]; })) return false;
+    for (var x = 0; x <= 3; x++) {
+      var e = {}; e[v[0]] = x;
+      var p = evalExpr(rhs, e), q = evalExpr(K[2], e);
+      if (!isFinite(p) || Math.abs(p - q) > 1e-9 * Math.max(1, Math.abs(q))) return false;
+    }
+    return true;
+  }
+
+  /* Factored answers in another arrangement: "(5-x)(x+1)" = "-(x-5)(x+1)",
+     "4x(2+x)" = "4x(x+2)". Both must be products with the same number of
+     bracketed factors, equal as polynomials, and every bracket must have no
+     common whole-number factor left (so 2x(2x+4) is still not the GCF form). */
+  function factorShape(s) {
+    var m = /^(-?\d*(?:[a-z](?:\^\d+)?)*)((?:\([^()]+\)(?:\^\d+)?)+)$/.exec(s);
+    if (!m) return null;
+    var groups = m[2].match(/\(([^()]+)\)(?:\^(\d+))?/g), count = 0, primitive = true;
+    groups.forEach(function (g) {
+      var mm = /\(([^()]+)\)(?:\^(\d+))?/.exec(g);
+      count += mm[2] ? parseInt(mm[2], 10) : 1;
+      var coefs = (splitTerms(mm[1]) || []).map(function (t) { var p = parseProduct(t); return p ? Math.round(p.coef) : 1; });
+      if (coefs.length && coefs.reduce(function (g2, x) { return gcd(g2, x); }, 0) !== 1) primitive = false;
+    });
+    return { count: count, primitive: primitive };
+  }
+  function factoredEq(u, c) {
+    var a = norm(u), b = norm(c), A = factorShape(a), B = factorShape(b);
+    if (!A || !B || A.count !== B.count) return false;
+    if (B.primitive && !A.primitive) return false;
+    return sameValues(a, b);
+  }
+
+  /* Exact roots typed as decimals, where the item invites them ("exact or decimal form"). */
+  function radicalApproxEq(u, c) {
+    var k = norm(c);
+    if (k.indexOf('√') < 0) return false;
+    var K = k.split(',').map(function (p) { return evalExpr(p.replace(/^[a-z]=/, ''), {}); });
+    var U = norm(u).split(',').map(function (p) { return p.replace(/^[a-z]=/, ''); });
+    if (K.length !== U.length || !U.every(function (p) { return /^-?\d+\.\d+$/.test(p); })) return false;
+    var used = [];
+    return U.every(function (p) {
+      var x = parseFloat(p), tol = 0.5 * Math.pow(10, -(p.split('.')[1].length)) + 1e-9;
+      for (var j = 0; j < K.length; j++) if (!used[j] && Math.abs(K[j] - x) <= tol) { used[j] = true; return true; }
+      return false;
+    });
+  }
+
+  function lenientMatch(u, c) {
+    var forms = studentForms(u);
+    for (var i = 0; i < forms.length; i++) {
+      var f = forms[i];
+      if (strictMatch(f, c)) return true;
+      if (wordEq(f, c) || countEq(f, c) || numberListEq(f, c) || labeledEq(f, c) || fnValueEq(f, c)) return true;
+      if (lineEq(f, c) || expEq(f, c) || factoredEq(f, c) || radicalApproxEq(f, c)) return true;
+      if (/[{}]/.test(c) && strictMatch(f.replace(/[{}]/g, ''), String(c).replace(/[{}]/g, ''))) return true;
+      var sw = /^(.+)=(.+)$/.exec(norm(f));
+      if (sw && /=/.test(norm(c)) && !/^[a-z]=/.test(norm(f)) && strictMatch(sw[2] + '=' + sw[1], c)) return true;
+    }
+    return false;
   }
 
   function isMatch(u, c) {
     try {
       if (u === undefined || u === null) return false;
       if (!String(u).trim()) return false;
-      var a = norm(u), b = norm(c);
-      if (!b) return false;
-      if (a === b) return true;
-
-      var A = aliasOf(a), B = aliasOf(b);
-      if (A && B && A === B && b.length > 1) return true;
-
-      if (core(a, b)) return true;
-      if (varStripEq(a, b)) return true;
-      if (isOrderedPair(a) || isOrderedPair(b)) return pairEq(a, b);
-      if (setEq(a, b)) return true;
-      if (ineqEq(a, b)) return true;
-      return false;
+      /* Inequalities are compared as sets, so "and" (both at once) can no
+         longer pass for "or" (either one). */
+      var cu = clean(u), ck = clean(c);
+      if (/[<>]/.test(cu) && /[<>]/.test(ck)) {
+        var r = ineqSetEq(cu, ck);
+        if (r !== null) return r;
+      }
+      return strictMatch(u, c) || lenientMatch(u, c);
     } catch (e) {
       /* Never let a grading bug swallow a student's answer. */
       try { return String(u).trim().toLowerCase() === String(c).trim().toLowerCase(); }
@@ -424,6 +757,41 @@
     };
     fn.__a1 = true;
     W[name] = fn;
+  }
+
+  /* Like wrap(), but stackable: each named hook is added once, on top of any
+     earlier wrapping of the same function. */
+  function hook(name, tag, after) {
+    var orig = W[name];
+    if (typeof orig !== 'function' || orig['__a1_' + tag]) return;
+    var fn = function () {
+      var r = orig.apply(this, arguments);
+      try { after.apply(this, arguments); } catch (e) { }
+      return r;
+    };
+    for (var k in orig) if (/^__a1/.test(k)) fn[k] = orig[k];
+    fn['__a1_' + tag] = true;
+    W[name] = fn;
+  }
+
+  /* An in-page "are you sure?" next to a control, instead of window.confirm.
+     Announced, keyboard reachable, and it gives focus back on cancel. */
+  function confirmInline(anchor, message, yesLabel, onYes) {
+    var old = $('.a1-confirm');
+    if (old) old.parentNode.removeChild(old);
+    var box = document.createElement('div');
+    box.className = 'a1-confirm';
+    box.setAttribute('role', 'alertdialog');
+    box.setAttribute('aria-label', message);
+    box.innerHTML = '<p class="a1-confirm-t">' + message + '</p>' +
+      '<div class="a1-confirm-btns"><button type="button" class="a1-cta danger" data-yes>' + yesLabel + '</button>' +
+      '<button type="button" class="a1-cta ghost" data-no>Cancel</button></div>';
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    var close = function () { if (box.parentNode) box.parentNode.removeChild(box); anchor.focus(); };
+    $('[data-no]', box).addEventListener('click', close);
+    $('[data-yes]', box).addEventListener('click', function () { if (box.parentNode) box.parentNode.removeChild(box); onYes(); });
+    box.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.stopPropagation(); close(); } });
+    $('[data-no]', box).focus();
   }
 
   /* ---- Tabs: real ARIA tablist with arrow-key navigation ---- */
@@ -547,6 +915,7 @@
      as "34", and x<sup>2</sup> becomes "x2". Rebuild both before reading. */
   function flatText(el) {
     var c = el.cloneNode(true);
+    $$('.a1-sr', c).forEach(function (s) { s.parentNode.removeChild(s); });
     $$('.frac', c).forEach(function (f) {
       var n = $('.fn', f), d = $('.fd', f);
       f.parentNode.replaceChild(
@@ -966,13 +1335,20 @@
   function buildProgressStrip() {
     if (!unitId()) return;
     var tabs = $('.tabs');
-    if (!tabs || $('#a1-hero')) return;
-    var hero = document.createElement('section');
-    hero.id = 'a1-hero';
-    hero.className = 'a1-hero';
-    hero.setAttribute('aria-label', 'Your progress on this unit');
-    tabs.parentNode.insertBefore(hero, tabs);
+    if (!tabs) return;
+    /* Pages carry an empty, size-reserved placeholder so the hero does not
+       push the page down when it appears; create one if a page lacks it. */
+    var hero = $('#a1-hero');
+    if (hero && hero.childNodes.length) return;
+    if (!hero) {
+      hero = document.createElement('section');
+      hero.id = 'a1-hero';
+      hero.className = 'a1-hero';
+      hero.setAttribute('aria-label', 'Your progress on this unit');
+      tabs.parentNode.insertBefore(hero, tabs);
+    }
     renderProgress();
+    hero.classList.remove('a1-hero-pending');
   }
 
   function renderProgress() {
@@ -1011,9 +1387,24 @@
     if (go && step.run) go.addEventListener('click', step.run);
     var btn = $('#a1-reset');
     if (btn) btn.addEventListener('click', function () {
-      W.Alg1Progress.reset(id);
-      renderProgress();
+      confirmInline(btn, 'Delete your saved progress for this unit?', 'Delete progress', function () {
+        W.Alg1Progress.reset(id);
+        renderProgress();
+        var again = $('#a1-reset'); if (again) again.focus();
+      });
     });
+    /* Remember this unit's own percentage (and topic count), so the index shows
+       the same number as this page instead of re-deriving a different one.
+       Additive fields; written only for a unit that already has a record, and
+       without touching 'updated', so merely opening a page is not activity. */
+    try {
+      var all = W.Alg1Progress.all();
+      if (all[id] && (all[id].pct !== m || all[id].topics !== topics.length)) {
+        all[id].pct = m;
+        all[id].topics = topics.length;
+        writeAll(all);
+      }
+    } catch (e) { }
     markNotesRead();
     badgeTopics();
     stepTabs(u);
@@ -1056,15 +1447,12 @@
     $$('.tg-card').forEach(function (card, i) {
       var on = !!(u.notesRead && u.notesRead[String(i)]);
       card.classList.toggle('a1-read', on);
-      card.setAttribute('role', 'button');
-      card.setAttribute('tabindex', '0');
-      var t = $('.tg-title', card);
-      card.setAttribute('aria-label', (t ? t.textContent : 'Topic') + (on ? ' — already read' : ''));
+      /* Keyboard and screen-reader access is the real button fixTopicCards()
+         puts in the title; keep its name in step with the read state. */
+      var open = $('.a1-tg-open', card);
+      if (open) open.setAttribute('aria-label', open.getAttribute('aria-label').replace(/ \(read\)$/, '') + (on ? ' (read)' : ''));
       if (!card.__a1key) {
         card.__a1key = true;
-        card.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-        });
         /* Notes and practice never referred to each other; now one click
            goes straight from a topic's notes to practising that topic. */
         var tag = $('.tg-tag', card);
@@ -1074,7 +1462,7 @@
           go.type = 'button';
           go.className = 'a1-tg-practice';
           go.textContent = 'Practice this';
-          go.setAttribute('aria-label', 'Practice topic ' + topic);
+          go.setAttribute('aria-label', 'Practice this: topic ' + topic);
           go.addEventListener('click', function (e) {
             e.stopPropagation();
             openPractice(topic);
@@ -1109,7 +1497,7 @@
      test is still one attempt, which is what makes it a test.
      ================================================================== */
 
-  var attempts = {}, streak = 0, bestStreak = 0;
+  var attempts = {}, firstWrong = {}, streak = 0, bestStreak = 0;
 
   var PRAISE = ['Correct!', 'Correct!', 'Nice.', 'That’s it.', 'Well done.', 'Exactly.'];
   var praiseAt = 0;
@@ -1217,9 +1605,10 @@
       fb.innerHTML = '<span class="a1-fb-icon">✓</span> ' + praise() +
         (attempts[key] ? ' <em>(second try)</em>' : '');
       pop(card);
-      if (pfx === 'p') { setStreak(streak + 1); focusNext(pfx, i); }
+      if (pfx === 'p') { logPractice(i, p, true, (attempts[key] || 0) + 1); setStreak(streak + 1); focusNext(pfx, i); }
     } else {
       attempts[key] = (attempts[key] || 0) + 1;
+      if (pfx === 'p' && attempts[key] === 1) firstWrong[key] = String(inp.value);
       if (pfx === 'p') setStreak(0);
       if (pfx === 'p' && attempts[key] < 2) {
         card.classList.remove('ok', 'no');
@@ -1240,6 +1629,7 @@
       fb.className = 'fb no';
       fb.innerHTML = '<span class="a1-fb-icon">✗</span> Answer: <strong>' + fmt(p.a) +
         '</strong> — ' + fmt(p.h);
+      if (pfx === 'p') logPractice(i, p, false, attempts[key]);
     }
     if (pfx === 'p' && typeof W.checkAllDone === 'function') W.checkAllDone();
   }
@@ -1252,6 +1642,8 @@
     /* A fresh set is a fresh start. */
     wrap('loadP', function () {
       attempts = {};
+      firstWrong = {};
+      itemClock = {};
       setStreak(0);
       mountStreak();
     });
@@ -1404,6 +1796,9 @@
      record, so approximate the same shape from it. */
   function unitScore(u) {
     if (!u) return 0;
+    /* The unit page records its own percentage; use it so both pages agree.
+       Older records without it fall back to the previous estimate. */
+    if (typeof u.pct === 'number') return u.pct;
     var topics = u.practice ? Object.keys(u.practice) : [];
     var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
     var parts = [
@@ -1452,7 +1847,7 @@
         var parts = [];
         var topics = u.practice ? Object.keys(u.practice) : [];
         var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
-        if (topics.length) parts.push(strong + '/' + topics.length + ' topics strong');
+        if (topics.length) parts.push(strong + '/' + (u.topics || topics.length) + ' topics strong');
         if (u.test && u.test.best != null) parts.push('test ' + u.test.best + '%');
         row.innerHTML = '<span class="u-prog-bw"><span class="u-prog-bar ' +
           (score >= 80 ? 'g' : score >= 50 ? 'y' : 'r') + '" style="width:' + Math.max(score, 3) + '%"></span></span>' +
@@ -1464,7 +1859,8 @@
     var overall = Math.round(totalScore / cards.length);
     var host = $('.page-sub');
     if (host) {
-      var hero = document.createElement('section');
+      /* index.html reserves the space with an empty placeholder; fill it. */
+      var hero = $('.a1-course') || document.createElement('section');
       hero.className = 'a1-course';
       hero.setAttribute('aria-label', 'Your progress across the course');
       var resume = latest
@@ -1482,16 +1878,472 @@
         '<p class="a1-course-v">' + started + ' of ' + cards.length + ' units started' +
         (strongUnits ? ' · <strong>' + strongUnits + '</strong> at 80%+' : '') + '</p>' +
         '</div>' + resume;
-      host.parentNode.insertBefore(hero, host.nextSibling);
+      if (!hero.parentNode) host.parentNode.insertBefore(hero, host.nextSibling);
     }
 
     var reset = $('#a1-reset-all');
     if (reset) reset.addEventListener('click', function () {
-      if (W.confirm('Clear saved progress for every unit on this device?')) {
+      confirmInline(reset, 'Delete saved progress for every unit on this device? This cannot be undone.', 'Delete everything', function () {
         W.Alg1Progress.reset();
+        try {
+          localStorage.removeItem(LOG);
+          Object.keys(localStorage).filter(function (k) { return /^alg1\.test\.v1\./.test(k); })
+            .forEach(function (k) { localStorage.removeItem(k); });
+        } catch (e) { }
         W.location.reload();
-      }
+      });
     });
+  }
+
+  /* ==================================================================
+     8. A private, local log of attempts, and "Export my data"
+     ------------------------------------------------------------------
+     Stored only in this browser under alg1.attempts.v1, newest 2,000
+     entries. No name, email or ID. Per answered question: which item,
+     right or wrong, tries, hint used, seconds spent, and (when wrong) the
+     first wrong answer typed, cut to 40 characters, so a teacher can see
+     common mistakes. Nothing is sent anywhere; the student can export it.
+     ================================================================== */
+  var LOG = 'alg1.attempts.v1', LOG_CAP = 2000;
+  var itemClock = {}, hintUsed = {};
+
+  function pageFile() { return (location.pathname.split('/').pop() || 'index.html'); }
+
+  /* Same ids as tools/verify: unit5.html:bank:5.2:7, unit5.html:test:5.2:6 */
+  function itemId(p, pfx) {
+    try {
+      if (pfx === 't') return pageFile() + ':test:' + (p.t || p.u) + ':' + T.indexOf(p);
+      for (var k in BANKS) if (BANKS.hasOwnProperty(k) && BANKS[k].indexOf(p) >= 0) return pageFile() + ':bank:' + k + ':' + BANKS[k].indexOf(p);
+    } catch (e) { }
+    return pageFile() + ':unknown';
+  }
+
+  function logAttempt(rec) {
+    try {
+      var a = JSON.parse(localStorage.getItem(LOG)) || [];
+      a.push(rec);
+      if (a.length > LOG_CAP) a = a.slice(a.length - LOG_CAP);
+      localStorage.setItem(LOG, JSON.stringify(a));
+    } catch (e) { /* private mode or full: never block the student */ }
+  }
+
+  function secondsOn(key) {
+    var c = itemClock[key];
+    return c ? Math.round((Date.now() - c) / 1000) : null;
+  }
+
+  function logPractice(i, p, correct, tries) {
+    var key = 'p' + i;
+    logAttempt({ item: itemId(p, 'p'), mode: 'practice', correct: !!correct, tries: tries, hint: !!hintUsed[key],
+      seconds: secondsOn(key), wrong: firstWrong[key] ? firstWrong[key].slice(0, 40) : undefined, at: Date.now() });
+  }
+
+  function logTest(blanks) {
+    var set = currentTest();
+    if (!set) return;
+    set.forEach(function (p, i) {
+      var inp = document.getElementById('ta' + i), card = document.getElementById('tc' + i);
+      var skipped = blanks.indexOf(i) >= 0, correct = !!(card && card.classList.contains('ok'));
+      logAttempt({ item: itemId(p, 't'), mode: 'test', correct: correct, tries: 1, hint: false, skipped: skipped || undefined,
+        seconds: secondsOn('t' + i), wrong: !correct && !skipped && inp ? String(inp.value).slice(0, 40) : undefined, at: Date.now() });
+    });
+    itemClock = {};
+  }
+
+  /* Time starts when a student first works on a question. */
+  function installAttemptClock() {
+    ['#plist', '#tlist'].forEach(function (sel) {
+      var list = $(sel);
+      if (!list) return;
+      list.addEventListener('focusin', function (e) {
+        var m = /^([pt])a(\d+)$/.exec(e.target.id || '');
+        if (m && !itemClock[m[1] + m[2]]) itemClock[m[1] + m[2]] = Date.now();
+      });
+      list.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.hbtn, .a1-fb-hint');
+        var card = b && b.closest('.pcard');
+        if (card) { var m = /^([pt])c(\d+)$/.exec(card.id); if (m) hintUsed[m[1] + m[2]] = true; }
+      }, true);
+    });
+    hook('loadP', 'clock', function () { hintUsed = {}; });
+  }
+
+  function exportMyData() {
+    var data = { site: 'Algebra 1 — Niles North (consultgranato.github.io/algebra1)', format: 'alg1.export.v1',
+      exported: new Date().toISOString().slice(0, 10), attempts: [], progress: {} };
+    try { data.attempts = JSON.parse(localStorage.getItem(LOG)) || []; } catch (e) { }
+    try { data.progress = W.Alg1Progress.all(); } catch (e) { }
+    var blob = new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'algebra1-my-data-' + data.exported + '.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.parentNode.removeChild(a); }, 0);
+  }
+
+  function installExport() {
+    var b = $('#a1-export');
+    if (!b) return;
+    var n = 0;
+    try { n = (JSON.parse(localStorage.getItem(LOG)) || []).length; } catch (e) { }
+    var c = $('#a1-export-count');
+    if (c) c.textContent = n ? n + ' answered question' + (n === 1 ? '' : 's') + ' saved on this device.' : 'Nothing saved on this device yet.';
+    b.addEventListener('click', exportMyData);
+  }
+
+  /* ==================================================================
+     6. The practice test, deep links, and small things that lost work
+     ================================================================== */
+
+  /* ---- Practice Test survives a refresh ----
+     The drawn questions (as positions in T) and the typed answers are kept
+     under their own key, alg1.test.v1.<unit>; alg1.progress.v1 is not
+     touched. Cleared on submit and on Retake. */
+  function testKey() { return 'alg1.test.v1.' + unitId(); }
+  function readTest() { try { return JSON.parse(localStorage.getItem(testKey())) || null; } catch (e) { return null; } }
+  function writeTest(st) { try { localStorage.setItem(testKey(), JSON.stringify(st)); } catch (e) { } }
+  function clearTest() { try { localStorage.removeItem(testKey()); } catch (e) { } }
+  function testPool() { try { return T; } catch (e) { return null; } }
+  function currentTest() { try { return tset; } catch (e) { return null; } }
+
+  function rememberTest() {
+    var pool = testPool(), set = currentTest();
+    if (!pool || !set || !set.length) return;
+    writeTest({ items: set.map(function (p) { return pool.indexOf(p); }), answers: {}, saved: Date.now() });
+  }
+
+  function restoreTest() {
+    var st = readTest(), pool = testPool(), el = $('#tlist');
+    if (!st || !st.items || !pool || !el || typeof W.mkP !== 'function') return false;
+    var set = st.items.map(function (k) { return pool[k]; });
+    if (!set.length || set.some(function (p) { return !p; })) { clearTest(); return false; }
+    tset = set;  /* the page's own `let tset`, shared across scripts */
+    el.innerHTML = '';
+    set.forEach(function (p, i) { el.appendChild(W.mkP(p, i, 't', 'Topic ' + p.t)); });
+    Object.keys(st.answers || {}).forEach(function (i) {
+      var inp = document.getElementById('ta' + i);
+      if (inp) inp.value = st.answers[i];
+    });
+    var n = Object.keys(st.answers || {}).filter(function (k) { return String(st.answers[k]).trim(); }).length;
+    if (n) {
+      var note = document.createElement('p');
+      note.className = 'a1-restored';
+      note.setAttribute('role', 'status');
+      note.textContent = 'Welcome back — your ' + n + ' answer' + (n === 1 ? ' is' : 's are') + ' still here.';
+      el.parentNode.insertBefore(note, el);
+    }
+    return true;
+  }
+
+  function installTestSave() {
+    if (!testPool() || !$('#tlist')) return;
+    var origReset = W.resetT;
+    if (typeof origReset === 'function' && !origReset.__a1_clearfirst) {
+      W.resetT = function () { clearTest(); var old = $('.a1-restored'); if (old) old.parentNode.removeChild(old); return origReset.apply(this, arguments); };
+      for (var k in origReset) if (/^__a1/.test(k)) W.resetT[k] = origReset[k];
+      W.resetT.__a1_clearfirst = true;
+    }
+    hook('loadT', 'testsave', function () { if (!restoreTest()) rememberTest(); refresh(); });
+    $('#tlist').addEventListener('input', function (e) {
+      var m = /^ta(\d+)$/.exec(e.target.id || '');
+      if (!m) return;
+      var st = readTest();
+      if (!st) return;
+      st.answers = st.answers || {};
+      st.answers[m[1]] = e.target.value;
+      st.saved = Date.now();
+      writeTest(st);
+    });
+  }
+
+  /* ---- Submitting with blanks: warn first, then mark them "Skipped" ---- */
+  function installBlankGuard() {
+    var orig = W.gradeT;
+    if (typeof orig !== 'function' || orig.__a1_guard) return;
+    var guarded = function () {
+      var inputs = $$('#tlist .ai');
+      var blanks = inputs.map(function (inp, i) { return String(inp.value).trim() ? -1 : i; }).filter(function (i) { return i >= 0; });
+      var warn = $('#a1-blank-warn');
+      if (blanks.length && !(warn && warn.__confirmed)) { showBlankWarning(blanks); return; }
+      if (warn) warn.parentNode.removeChild(warn);
+      var r = orig.apply(this, arguments);
+      try {
+        blanks.forEach(function (i) {
+          var card = document.getElementById('tc' + i), fb = document.getElementById('tfb' + i);
+          if (card) card.classList.add('a1-skipped');
+          if (fb) fb.innerHTML = '<span class="a1-skip-tag">Skipped</span> ' + fb.innerHTML.replace(/^\s*✗\s*/, '');
+        });
+        logTest(blanks);
+        clearTest();
+        organiseResults();
+        var bar = $('#sbar');
+        if (bar) { bar.setAttribute('tabindex', '-1'); bar.focus({ preventScroll: true }); }
+      } catch (e) { }
+      return r;
+    };
+    for (var k in orig) if (/^__a1/.test(k)) guarded[k] = orig[k];
+    guarded.__a1_guard = true;
+    W.gradeT = guarded;
+  }
+
+  function showBlankWarning(blanks) {
+    var old = $('#a1-blank-warn');
+    if (old) old.parentNode.removeChild(old);
+    var sbtn = $('#sbtn');
+    if (!sbtn) return;
+    var nums = blanks.map(function (i) { return i + 1; });
+    var list = nums.length > 8 ? nums.slice(0, 8).join(', ') + ' and ' + (nums.length - 8) + ' more' : nums.join(', ');
+    var box = document.createElement('div');
+    box.id = 'a1-blank-warn';
+    box.className = 'a1-blank-warn';
+    box.setAttribute('role', 'alert');
+    box.innerHTML = '<p><strong>' + blanks.length + ' question' + (blanks.length === 1 ? ' is' : 's are') + ' blank</strong> (' + list + '). ' +
+      'If you submit now, ' + (blanks.length === 1 ? 'it is' : 'they are') + ' marked Skipped and count as wrong.</p>' +
+      '<div class="a1-blank-btns"><button type="button" class="a1-cta primary" data-a1-goto-blank>Go to question ' + nums[0] + '</button>' +
+      '<button type="button" class="a1-cta ghost" data-a1-confirm-submit>Submit anyway</button></div>';
+    sbtn.parentNode.insertBefore(box, sbtn);
+    $('[data-a1-goto-blank]', box).addEventListener('click', function () {
+      var inp = document.getElementById('ta' + blanks[0]);
+      if (inp) { inp.scrollIntoView({ block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' }); inp.focus({ preventScroll: true }); }
+    });
+    $('[data-a1-confirm-submit]', box).addEventListener('click', function () { box.__confirmed = true; W.gradeT(); });
+    $('[data-a1-goto-blank]', box).focus();
+  }
+
+  /* ---- Results: weakest topic first, each with a way back to it ---- */
+  function organiseResults() {
+    var body = $('#t-results-body');
+    if (!body) return;
+    var rows = $$('.tr-row', body);
+    rows.sort(function (a, b) {
+      return parseInt($('.tr-pct', a).textContent, 10) - parseInt($('.tr-pct', b).textContent, 10);
+    }).forEach(function (r) { body.appendChild(r); });
+    rows.forEach(function (r) {
+      if ($('.a1-tr-links', r)) return;
+      var label = ($('.tr-label', r) || {}).textContent || '';
+      var m = /Topic\s+(\S+)/i.exec(label), u = /Unit\s+(\d+)/i.exec(label);
+      var tag = m ? m[1] : u ? 'unit' + u[1] : null;
+      if (!tag) return;
+      var links = document.createElement('span');
+      links.className = 'a1-tr-links';
+      var idx = topicIndexByTag(tag);
+      if (idx >= 0) links.appendChild(linkButton('Notes', 'Review the notes for ' + label, function () { openNotes(idx); }));
+      if (practiceTopics().indexOf(tag) >= 0) links.appendChild(linkButton('Practice', 'Practise ' + label, function () { openPractice(tag); }));
+      if (links.childNodes.length) r.appendChild(links);
+    });
+    var title = $('#t-results .results-title');
+    if (title && !/weakest/i.test(title.textContent)) title.textContent += ' — weakest first';
+  }
+
+  function linkButton(text, label, run) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'a1-tr-link';
+    b.textContent = text;
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', run);
+    return b;
+  }
+
+  /* ---- Deep links: #notes, #vocab, #practice, #practice/5.2, #test ---- */
+  function setHash(h) {
+    try { if (location.hash !== '#' + h) history.replaceState(null, '', '#' + h); } catch (e) { }
+  }
+
+  function applyHash() {
+    var m = /^#(?:v-)?(notes|vocab|practice|test)(?:\/(.+))?$/.exec(decodeURIComponent(location.hash || ''));
+    if (!m) return;
+    if (m[1] === 'practice' && m[2] && practiceTopics().indexOf(m[2]) >= 0) openPractice(m[2]);
+    else goto(m[1]);
+  }
+
+  function installDeepLinks() {
+    if (!$('.tabs')) return;
+    hook('sw', 'hash', function (n) {
+      if (n === 'practice') {
+        var t = null; try { t = curTopic; } catch (e) { }
+        setHash(t ? 'practice/' + t : 'practice');
+      } else setHash(n);
+    });
+    hook('selTopic', 'hash', function (t) { setHash('practice/' + t); });
+    applyHash();
+    W.addEventListener('hashchange', applyHash);
+  }
+
+  /* ---- Phones: the calculator becomes a sheet at the bottom of the screen ---- */
+  function installCalcSheet() {
+    $$('.pt-calc-col').forEach(function (col) {
+      if ($('.a1-calc-toggle', col)) return;
+      var box = $('.calc-box', col);
+      if (!box) return;
+      if (!box.id) box.id = 'a1-calc-' + ($$('.pt-calc-col').indexOf(col));
+      var t = document.createElement('button');
+      t.type = 'button';
+      t.className = 'a1-calc-toggle';
+      t.setAttribute('aria-expanded', 'false');
+      t.setAttribute('aria-controls', box.id);
+      t.innerHTML = '<span aria-hidden="true">🧮</span> Calculator';
+      t.addEventListener('click', function () {
+        var open = col.classList.toggle('a1-open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) box.focus();
+      });
+      col.insertBefore(t, col.firstChild);
+    });
+  }
+
+  /* ==================================================================
+     5. Maths a screen reader can read
+     ------------------------------------------------------------------
+     Fractions are two stacked spans and exponents are bare <sup>, so a
+     screen reader heard "(7/3)x = 14" as "7 3 x = 14" and x^9 / x^3 as
+     "x 9 x 3". Each fraction and exponent gets a visually hidden spoken
+     form, and the visual markup is hidden from assistive technology. The
+     spoken form is built from the markup itself, so no maths is authored
+     here. Runs on everything the pages render, now and later.
+     ================================================================== */
+
+  function spokenPower(raw) {
+    var e = raw.replace(/[−–]/g, '-').trim();
+    if (e === '2') return ' squared';
+    if (e === '3') return ' cubed';
+    if (/^-/.test(e)) return ' to the power negative ' + e.slice(1);
+    return ' to the power ' + e;
+  }
+
+  /* Spoken text of a node, using the spoken form of any maths inside it. */
+  function spokenOf(node) {
+    if (node.nodeType === 3) return node.nodeValue;
+    if (node.nodeType !== 1) return '';
+    if (node.classList.contains('a1-sr')) return '';
+    if (node.classList.contains('frac')) {
+      var n = $('.fn', node), d = $('.fd', node);
+      return ' ' + (n ? spokenOf(n) : '').trim() + ' over ' + (d ? spokenOf(d) : '').trim() + ' ';
+    }
+    if (node.tagName === 'SUP') return spokenPower(node.textContent || '');
+    var out = '';
+    for (var i = 0; i < node.childNodes.length; i++) out += spokenOf(node.childNodes[i]);
+    return out;
+  }
+
+  function speakMath(root) {
+    $$('.frac, sup', root || document.body).forEach(function (el) {
+      if (el.hasAttribute('data-a1-spoken')) return;
+      /* An exponent inside a fraction is read as part of that fraction. */
+      if (el.tagName === 'SUP' && el.closest('.frac')) return;
+      if (el.closest('svg, script, style, .a1-sr')) return;
+      el.setAttribute('data-a1-spoken', '');
+      var sr = document.createElement('span');
+      sr.className = 'a1-sr';
+      sr.textContent = spokenOf(el).replace(/\s+/g, ' ').replace(/^ (?!to )/, '');
+      el.setAttribute('aria-hidden', 'true');
+      el.parentNode.insertBefore(sr, el);
+    });
+  }
+
+  function watchMath() {
+    speakMath();
+    if (!W.MutationObserver) return;
+    var queued = false;
+    new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      (W.requestAnimationFrame || setTimeout)(function () { queued = false; try { speakMath(); } catch (e) { } structureAll(); });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ==================================================================
+     7. Structure and labels for assistive technology
+     ================================================================== */
+
+  /* The unit header is a <div>: give it the banner landmark. Each tab panel
+     gets a heading, so screen-reader users can jump between sections. */
+  function landmarksAndHeadings() {
+    var head = $('.nn-header');
+    if (head && head.tagName !== 'HEADER' && !head.getAttribute('role')) head.setAttribute('role', 'banner');
+    $$('.tabs .tab').forEach(function (t) {
+      var panel = document.getElementById('v-' + t.getAttribute('data-view'));
+      if (!panel || $('.a1-panel-h', panel)) return;
+      var h = document.createElement('h2');
+      h.className = 'a1-panel-h a1-sr-heading';
+      h.textContent = ($('.a1-step-t', t) || t).textContent.trim();
+      panel.insertBefore(h, panel.firstChild);
+    });
+    var title = $('#modal-title');
+    if (title && !title.getAttribute('role')) { title.setAttribute('role', 'heading'); title.setAttribute('aria-level', '2'); }
+  }
+
+  /* Topic cards: the card was role="button" with a second button inside it,
+     which assistive technology cannot represent. The card keeps its click for
+     mouse users; keyboard and screen-reader users get a real button. */
+  function fixTopicCards() {
+    $$('.tg-card').forEach(function (card) {
+      if ($('.a1-tg-open', card)) return;
+      card.removeAttribute('role');
+      card.removeAttribute('tabindex');
+      card.removeAttribute('aria-label');
+      var title = $('.tg-title', card);
+      if (!title) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'a1-tg-open';
+      b.innerHTML = title.innerHTML;
+      b.addEventListener('click', function (e) { e.stopPropagation(); card.click(); });
+      title.innerHTML = '';
+      title.appendChild(b);
+      var tag = $('.tg-tag', card);
+      b.setAttribute('aria-label', 'Notes: ' + (tag ? tag.textContent.trim() + ' ' : '') + b.textContent.trim() +
+        (card.classList.contains('a1-read') ? ' (read)' : ''));
+    });
+  }
+
+  /* Links that open a new tab say so. */
+  function labelNewTabLinks(root) {
+    $$('a[target="_blank"]', root || document).forEach(function (a) {
+      if ($('.a1-newtab', a)) return;
+      var s = document.createElement('span');
+      s.className = 'a1-newtab';
+      s.innerHTML = '<span aria-hidden="true"> ↗</span><span class="a1-sr"> (opens in a new tab)</span>';
+      a.appendChild(s);
+    });
+  }
+
+  /* Matching-question dropdowns had no name; name each after its term. */
+  function labelMatchSelects(root) {
+    $$('.match-pairs', root || document).forEach(function (mp) {
+      var terms = $$('.match-term', mp), sels = $$('.match-sel', mp);
+      sels.forEach(function (s, i) {
+        if (!s.getAttribute('aria-label')) s.setAttribute('aria-label', 'Match for: ' + (terms[i] ? terms[i].textContent.trim() : 'item ' + (i + 1)));
+      });
+    });
+  }
+
+  /* An empty corner cell in a table is not a header. */
+  function fixEmptyHeaders(root) {
+    $$('th', root || document).forEach(function (th) {
+      if (!th.textContent.trim() && !th.getAttribute('role')) th.setAttribute('role', 'cell');
+    });
+  }
+
+  /* The pages scroll results into view smoothly even when the student has
+     asked for reduced motion; honour the setting for every such call. */
+  function calmScrolling() {
+    var orig = Element.prototype.scrollIntoView;
+    if (orig.__a1) return;
+    var calm = function (opts) {
+      if (reduceMotion() && opts && typeof opts === 'object') opts = Object.assign({}, opts, { behavior: 'auto' });
+      return orig.call(this, opts);
+    };
+    calm.__a1 = true;
+    Element.prototype.scrollIntoView = calm;
+  }
+
+  function structureAll() {
+    try { fixTopicCards(); } catch (e) { }
+    try { labelNewTabLinks(); } catch (e) { }
+    try { labelMatchSelects(); } catch (e) { }
+    try { fixEmptyHeaders(); } catch (e) { }
   }
 
   /* ---- Boot ---- */
@@ -1505,8 +2357,23 @@
     try { recordHooks(); } catch (e) { }
     try { refresh(); } catch (e) { }
     try { indexProgress(); } catch (e) { }
+    try { installTestSave(); } catch (e) { }
+    try { installAttemptClock(); } catch (e) { }
+    try { installExport(); } catch (e) { }
+    try { installBlankGuard(); } catch (e) { }
+    try { installCalcSheet(); } catch (e) { }
+    try { landmarksAndHeadings(); } catch (e) { }
+    try { calmScrolling(); } catch (e) { }
+    try { structureAll(); } catch (e) { }
+    try { installDeepLinks(); } catch (e) { }
+    try { watchMath(); } catch (e) { }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  /* This file is the last thing in every page's <body>, so the page is
+     already in the DOM: build the progress hero and the other additions now,
+     before the first paint, rather than at DOMContentLoaded. Waiting let the
+     browser paint first and then shove the page down (mobile layout shift
+     0.25-0.50). Only a page that loads it early still waits. */
+  if (document.readyState === 'loading' && !(document.body && $('.tabs, .unit-card'))) document.addEventListener('DOMContentLoaded', init);
   else init();
 })();

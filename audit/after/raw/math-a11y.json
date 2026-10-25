@@ -1,0 +1,231 @@
+[
+ {
+  "file": "unit5.html",
+  "label": "fraction coefficient",
+  "source": "(7/3)x = 14",
+  "html": "<span class=\"frac\"><span class=\"fn\">7</span><span class=\"fd\">3</span></span>x = 14",
+  "innerText": "7 over 3⏎7⏎3⏎x = 14",
+  "axStaticText": [
+   "7 over 3",
+   "x = 14"
+  ],
+  "axReading": "7 over 3 x = 14",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit5.html",
+  "label": "x over a number",
+  "source": "x/4 + 6 = 2",
+  "html": "<span class=\"frac\"><span class=\"fn\">x</span><span class=\"fd\">4</span></span> + 6 = 2",
+  "innerText": "x over 4⏎x⏎4⏎+ 6 = 2",
+  "axStaticText": [
+   "x over 4",
+   "+ 6 = 2"
+  ],
+  "axReading": "x over 4 + 6 = 2",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit1-4.html",
+  "label": "fraction arithmetic",
+  "source": "1/3 + 1/4",
+  "html": "<span class=\"frac\"><span class=\"fn\">1</span><span class=\"fd\">3</span></span> + <span class=\"frac\"><span class=\"fn\">1</span><span class=\"fd\">4</span></span>",
+  "innerText": "1 over 3⏎1⏎3⏎+⏎1 over 4⏎1⏎4",
+  "axStaticText": [
+   "1 over 3",
+   "+",
+   "1 over 4"
+  ],
+  "axReading": "1 over 3 + 1 over 4",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit11.html",
+  "label": "exponent",
+  "source": "x^9 / x^3",
+  "html": "<span class=\"frac\"><span class=\"fn\">x<sup>9</sup></span><span class=\"fd\">x<sup>3</sup></span></span>",
+  "innerText": "x to the power 9 over x cubed⏎x9⏎x3",
+  "axStaticText": [
+   "x to the power 9 over x cubed"
+  ],
+  "axReading": "x to the power 9 over x cubed",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit11.html",
+  "label": "negative exponent",
+  "source": "x^(-4)",
+  "html": "x<sup>-4</sup>",
+  "innerText": "x⏎to the power negative 4⏎-4",
+  "axStaticText": [
+   "x",
+   "to the power negative 4"
+  ],
+  "axReading": "x to the power negative 4",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit13.html",
+  "label": "superscript in markup",
+  "source": "4x<sup>3</sup> - 2x + 7",
+  "html": "4x<sup>3</sup> - 2x + 7",
+  "innerText": "4x⏎cubed⏎3⏎- 2x + 7",
+  "axStaticText": [
+   "4x",
+   "cubed",
+   "- 2x + 7"
+  ],
+  "axReading": "4x cubed - 2x + 7",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit13.html",
+  "label": "monomial times binomial",
+  "source": "5x<sup>2</sup>(x - 3)",
+  "html": "5x<sup>2</sup>(x - 3)",
+  "innerText": "5x⏎squared⏎2⏎(x - 3)",
+  "axStaticText": [
+   "5x",
+   "squared",
+   "(x - 3)"
+  ],
+  "axReading": "5x squared (x - 3)",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit6.html",
+  "label": "inequality symbol",
+  "source": "-5x + 10 ≥ -2x - 5",
+  "html": "-5x + 10 ≥ -2x - 5",
+  "innerText": "-5x + 10 ≥ -2x - 5",
+  "axStaticText": [
+   "-5x + 10 ≥ -2x - 5"
+  ],
+  "axReading": "-5x + 10 ≥ -2x - 5",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit6.html",
+  "label": "compound inequality",
+  "source": "-1 < 2x + 1 < 7",
+  "html": "-1 &lt; 2x + 1 &lt; 7",
+  "innerText": "-1 < 2x + 1 < 7",
+  "axStaticText": [
+   "-1 < 2x + 1 < 7"
+  ],
+  "axReading": "-1 < 2x + 1 < 7",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit16.html",
+  "label": "square root in a key",
+  "source": "x = 2+√3 or x = 2-√3",
+  "html": "x = 2+√3 or x = 2-√3",
+  "innerText": "x = 2+√3 or x = 2-√3",
+  "axStaticText": [
+   "x = 2+√3 or x = 2-√3"
+  ],
+  "axReading": "x = 2+√3 or x = 2-√3",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit7.html",
+  "label": "absolute value",
+  "source": "Is y = |x| a linear function?",
+  "html": "Is y = |x| a linear function?",
+  "innerText": "Is y = |x| a linear function?",
+  "axStaticText": [
+   "Is y = |x| a linear function?"
+  ],
+  "axReading": "Is y = |x| a linear function?",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ },
+ {
+  "file": "unit15.html",
+  "label": "vertex form",
+  "source": "y = (1/2)(x - 4)^2 - 3",
+  "html": "y = <span class=\"frac\"><span class=\"fn\">1</span><span class=\"fd\">2</span></span>(x - 4)<sup>2</sup> - 3",
+  "innerText": "y =⏎1 over 2⏎1⏎2⏎(x - 4)⏎squared⏎2⏎- 3",
+  "axStaticText": [
+   "y =",
+   "1 over 2",
+   "(x - 4)",
+   "squared",
+   "- 3"
+  ],
+  "axReading": "y = 1 over 2 (x - 4) squared - 3",
+  "axRoles": [
+   "generic",
+   "StaticText",
+   "InlineTextBox"
+  ],
+  "hasMathML": false,
+  "hasAriaLabel": false
+ }
+]

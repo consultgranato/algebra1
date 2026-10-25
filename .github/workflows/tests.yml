@@ -1,0 +1,33 @@
+# Runs the audit safety net on every pull request: independent item verification,
+# checker corpus, key round-trip and axe-core. Dev-only; the site itself has no build.
+name: tests
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  safety-net:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: tools/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci --no-audit --no-fund
+        working-directory: tools
+      - run: pip install -r tools/requirements-dev.txt
+      - name: Run the safety net (uses the runner's preinstalled Chrome)
+        run: node tests/run-all.mjs
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          PYTHON: python
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output
+          path: tests/out/

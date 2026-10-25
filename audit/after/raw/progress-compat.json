@@ -1,0 +1,125 @@
+{
+ "seeded": {
+  "5": {
+   "notesRead": {
+    "0": true,
+    "1": true
+   },
+   "practice": {
+    "5.1": {
+     "attempts": 3,
+     "last": 80,
+     "best": 100
+    },
+    "5.4": {
+     "attempts": 1,
+     "last": 40,
+     "best": 40
+    }
+   },
+   "test": {
+    "attempts": 1,
+    "last": 65,
+    "best": 65
+   },
+   "vocab": {
+    "attempts": 2,
+    "last": 75,
+    "best": 83
+   },
+   "updated": 1700000001000
+  },
+  "10": {
+   "practice": {
+    "10.1": {
+     "attempts": 1,
+     "last": 100,
+     "best": 100
+    }
+   },
+   "updated": 1700000000000
+  },
+  "1-4": {
+   "notesRead": {
+    "3": true
+   },
+   "updated": 1700000002000
+  }
+ },
+ "after": {
+  "5": {
+   "notesRead": {
+    "0": true,
+    "1": true
+   },
+   "practice": {
+    "5.1": {
+     "attempts": 3,
+     "last": 80,
+     "best": 100
+    },
+    "5.4": {
+     "attempts": 1,
+     "last": 40,
+     "best": 40
+    }
+   },
+   "test": {
+    "attempts": 1,
+    "last": 65,
+    "best": 65
+   },
+   "vocab": {
+    "attempts": 2,
+    "last": 75,
+    "best": 83
+   },
+   "updated": 1700000001000,
+   "pct": 51,
+   "topics": 4
+  },
+  "10": {
+   "practice": {
+    "10.1": {
+     "attempts": 1,
+     "last": 100,
+     "best": 100
+    }
+   },
+   "updated": 1700000000000,
+   "pct": 5,
+   "topics": 7
+  },
+  "1-4": {
+   "notesRead": {
+    "3": true
+   },
+   "updated": 1700000002000
+  }
+ },
+ "unit5": {
+  "pct": "51%",
+  "chips": [
+   "Notes2/4",
+   "Topics 80%+1/4",
+   "Vocab quiz83%",
+   "Practice test65%"
+  ]
+ },
+ "unit10": "5%",
+ "index": {
+  "5": "51%",
+  "6": "Not started",
+  "7": "Not started",
+  "8": "Not started",
+  "9": "Not started",
+  "10": "5%",
+  "11": "Not started",
+  "12": "Not started",
+  "13": "Not started",
+  "14": "Not started",
+  "15": "Not started",
+  "16": "Not started",
+  "1–4": "4%"
+ }
+}
