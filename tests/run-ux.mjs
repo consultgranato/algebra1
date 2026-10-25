@@ -173,6 +173,51 @@ try {
     await m.ctx.close();
   }
 
+  // 12. Local attempt log, "Export my data", item analysis
+  {
+    const { ctx, page } = await open('unit5.html', { width: 1280, height: 800 }, { acceptDownloads: true });
+    await page.click('.tabs .tab[data-view="practice"]');
+    await page.waitForSelector('#pa0');
+    const k = await page.evaluate(() => pset.map(p => p.a));
+    await page.click('#pa0'); await page.fill('#pa0', typed(k[0])); await page.press('#pa0', 'Enter');      // right, 1st try
+    await page.click('#pa1'); await page.fill('#pa1', 'zzz'); await page.press('#pa1', 'Enter');            // wrong
+    await page.click('#pfb1 .a1-fb-hint');                                                                  // hint
+    await page.fill('#pa1', typed(k[1])); await page.press('#pa1', 'Enter');                                // right, 2nd try
+    await page.click('.tabs .tab[data-view="test"]');
+    await page.waitForSelector('#ta0');
+    await page.fill('#ta0', 'qqq');
+    await page.click('#sbtn'); await page.click('[data-a1-confirm-submit]');
+    const log = await page.evaluate(() => JSON.parse(localStorage.getItem('alg1.attempts.v1')));
+    const pr = log.filter(r => r.mode === 'practice');
+    ok('log: practice attempts recorded with item ids', pr.length === 2 && pr.every(r => /^unit5\.html:bank:5\.1:\d+$/.test(r.item)), JSON.stringify(pr));
+    ok('log: first try, second try, hint and wrong answer captured',
+      pr[0] && pr[0].correct && pr[0].tries === 1 && !pr[0].hint && pr[1] && pr[1].correct && pr[1].tries === 2 && pr[1].hint && pr[1].wrong === 'zzz', JSON.stringify(pr));
+    const te = log.filter(r => r.mode === 'test');
+    ok('log: test answers recorded, blanks marked skipped', te.length === 20 && te.filter(r => r.skipped).length === 19 && te[0].wrong === 'qqq' && /^unit5\.html:test:/.test(te[0].item), te.length + ' entries');
+    ok('log: no identifying fields', log.every(r => Object.keys(r).every(f => ['item', 'mode', 'correct', 'tries', 'hint', 'seconds', 'wrong', 'skipped', 'at'].includes(f))));
+    await page.goto(base + 'index.html');
+    ok('export: page says what is stored and that it stays on the device', /never|Nothing is sent anywhere/.test(await page.textContent('.a1-saved')) && /22 answered questions/.test(await page.textContent('#a1-export-count')));
+    const [dl] = await Promise.all([page.waitForEvent('download'), page.click('#a1-export')]);
+    const exportDir = path.join(RAW, 'exports');
+    fs.mkdirSync(exportDir, { recursive: true });
+    const target = path.join(exportDir, 'S01.json');
+    await dl.saveAs(target);
+    const exported = JSON.parse(fs.readFileSync(target, 'utf8'));
+    ok('export: downloads a JSON file with the log', /^algebra1-my-data-\d{4}-\d{2}-\d{2}\.json$/.test(dl.suggestedFilename()) && exported.format === 'alg1.export.v1' && exported.attempts.length === 22, dl.suggestedFilename());
+    await page.evaluate(() => localStorage.setItem('alg1.attempts.v1', JSON.stringify(Array.from({ length: 2100 }, (_, i) => ({ item: 'x', mode: 'practice', correct: true, tries: 1, hint: false, at: i })))));
+    await page.goto(base + 'unit5.html');
+    await page.click('.tabs .tab[data-view="practice"]');
+    await page.waitForSelector('#pa0');
+    const k2 = await page.evaluate(() => pset[0].a);
+    await page.fill('#pa0', typed(k2)); await page.press('#pa0', 'Enter');
+    ok('log: capped at 2,000 entries', await page.evaluate(() => JSON.parse(localStorage.getItem('alg1.attempts.v1')).length) === 2000);
+    await ctx.close();
+    const { execFileSync } = await import('node:child_process');
+    const report = execFileSync('node', [path.join(path.dirname(new URL(import.meta.url).pathname.replace(/^\/(\w:)/, '$1')), '..', 'tools', 'item-analysis.mjs'), exportDir, '--min', '1'], { encoding: 'utf8' });
+    fs.writeFileSync(path.join(RAW, 'item-analysis-sample.md'), report);
+    ok('item analysis: reads exports and reports per item', /1 student file/.test(report) && /\| `unit5\.html:bank:5\.1:\d+` \|/.test(report) && /zzz \(1\)/.test(report), report.slice(0, 200));
+  }
+
   // 9+10. Index and unit agree; an old-shape record loads intact
   {
     const OLD = {

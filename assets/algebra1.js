@@ -1490,7 +1490,7 @@
      test is still one attempt, which is what makes it a test.
      ================================================================== */
 
-  var attempts = {}, streak = 0, bestStreak = 0;
+  var attempts = {}, firstWrong = {}, streak = 0, bestStreak = 0;
 
   var PRAISE = ['Correct!', 'Correct!', 'Nice.', 'That’s it.', 'Well done.', 'Exactly.'];
   var praiseAt = 0;
@@ -1598,9 +1598,10 @@
       fb.innerHTML = '<span class="a1-fb-icon">✓</span> ' + praise() +
         (attempts[key] ? ' <em>(second try)</em>' : '');
       pop(card);
-      if (pfx === 'p') { setStreak(streak + 1); focusNext(pfx, i); }
+      if (pfx === 'p') { logPractice(i, p, true, (attempts[key] || 0) + 1); setStreak(streak + 1); focusNext(pfx, i); }
     } else {
       attempts[key] = (attempts[key] || 0) + 1;
+      if (pfx === 'p' && attempts[key] === 1) firstWrong[key] = String(inp.value);
       if (pfx === 'p') setStreak(0);
       if (pfx === 'p' && attempts[key] < 2) {
         card.classList.remove('ok', 'no');
@@ -1621,6 +1622,7 @@
       fb.className = 'fb no';
       fb.innerHTML = '<span class="a1-fb-icon">✗</span> Answer: <strong>' + fmt(p.a) +
         '</strong> — ' + fmt(p.h);
+      if (pfx === 'p') logPractice(i, p, false, attempts[key]);
     }
     if (pfx === 'p' && typeof W.checkAllDone === 'function') W.checkAllDone();
   }
@@ -1633,6 +1635,8 @@
     /* A fresh set is a fresh start. */
     wrap('loadP', function () {
       attempts = {};
+      firstWrong = {};
+      itemClock = {};
       setStreak(0);
       mountStreak();
     });
@@ -1873,9 +1877,111 @@
     if (reset) reset.addEventListener('click', function () {
       confirmInline(reset, 'Delete saved progress for every unit on this device? This cannot be undone.', 'Delete everything', function () {
         W.Alg1Progress.reset();
+        try {
+          localStorage.removeItem(LOG);
+          Object.keys(localStorage).filter(function (k) { return /^alg1\.test\.v1\./.test(k); })
+            .forEach(function (k) { localStorage.removeItem(k); });
+        } catch (e) { }
         W.location.reload();
       });
     });
+  }
+
+  /* ==================================================================
+     8. A private, local log of attempts, and "Export my data"
+     ------------------------------------------------------------------
+     Stored only in this browser under alg1.attempts.v1, newest 2,000
+     entries. No name, email or ID. Per answered question: which item,
+     right or wrong, tries, hint used, seconds spent, and (when wrong) the
+     first wrong answer typed, cut to 40 characters, so a teacher can see
+     common mistakes. Nothing is sent anywhere; the student can export it.
+     ================================================================== */
+  var LOG = 'alg1.attempts.v1', LOG_CAP = 2000;
+  var itemClock = {}, hintUsed = {};
+
+  function pageFile() { return (location.pathname.split('/').pop() || 'index.html'); }
+
+  /* Same ids as tools/verify: unit5.html:bank:5.2:7, unit5.html:test:5.2:6 */
+  function itemId(p, pfx) {
+    try {
+      if (pfx === 't') return pageFile() + ':test:' + (p.t || p.u) + ':' + T.indexOf(p);
+      for (var k in BANKS) if (BANKS.hasOwnProperty(k) && BANKS[k].indexOf(p) >= 0) return pageFile() + ':bank:' + k + ':' + BANKS[k].indexOf(p);
+    } catch (e) { }
+    return pageFile() + ':unknown';
+  }
+
+  function logAttempt(rec) {
+    try {
+      var a = JSON.parse(localStorage.getItem(LOG)) || [];
+      a.push(rec);
+      if (a.length > LOG_CAP) a = a.slice(a.length - LOG_CAP);
+      localStorage.setItem(LOG, JSON.stringify(a));
+    } catch (e) { /* private mode or full: never block the student */ }
+  }
+
+  function secondsOn(key) {
+    var c = itemClock[key];
+    return c ? Math.round((Date.now() - c) / 1000) : null;
+  }
+
+  function logPractice(i, p, correct, tries) {
+    var key = 'p' + i;
+    logAttempt({ item: itemId(p, 'p'), mode: 'practice', correct: !!correct, tries: tries, hint: !!hintUsed[key],
+      seconds: secondsOn(key), wrong: firstWrong[key] ? firstWrong[key].slice(0, 40) : undefined, at: Date.now() });
+  }
+
+  function logTest(blanks) {
+    var set = currentTest();
+    if (!set) return;
+    set.forEach(function (p, i) {
+      var inp = document.getElementById('ta' + i), card = document.getElementById('tc' + i);
+      var skipped = blanks.indexOf(i) >= 0, correct = !!(card && card.classList.contains('ok'));
+      logAttempt({ item: itemId(p, 't'), mode: 'test', correct: correct, tries: 1, hint: false, skipped: skipped || undefined,
+        seconds: secondsOn('t' + i), wrong: !correct && !skipped && inp ? String(inp.value).slice(0, 40) : undefined, at: Date.now() });
+    });
+    itemClock = {};
+  }
+
+  /* Time starts when a student first works on a question. */
+  function installAttemptClock() {
+    ['#plist', '#tlist'].forEach(function (sel) {
+      var list = $(sel);
+      if (!list) return;
+      list.addEventListener('focusin', function (e) {
+        var m = /^([pt])a(\d+)$/.exec(e.target.id || '');
+        if (m && !itemClock[m[1] + m[2]]) itemClock[m[1] + m[2]] = Date.now();
+      });
+      list.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.hbtn, .a1-fb-hint');
+        var card = b && b.closest('.pcard');
+        if (card) { var m = /^([pt])c(\d+)$/.exec(card.id); if (m) hintUsed[m[1] + m[2]] = true; }
+      }, true);
+    });
+    hook('loadP', 'clock', function () { hintUsed = {}; });
+  }
+
+  function exportMyData() {
+    var data = { site: 'Algebra 1 — Niles North (consultgranato.github.io/algebra1)', format: 'alg1.export.v1',
+      exported: new Date().toISOString().slice(0, 10), attempts: [], progress: {} };
+    try { data.attempts = JSON.parse(localStorage.getItem(LOG)) || []; } catch (e) { }
+    try { data.progress = W.Alg1Progress.all(); } catch (e) { }
+    var blob = new Blob([JSON.stringify(data, null, 1)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'algebra1-my-data-' + data.exported + '.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.parentNode.removeChild(a); }, 0);
+  }
+
+  function installExport() {
+    var b = $('#a1-export');
+    if (!b) return;
+    var n = 0;
+    try { n = (JSON.parse(localStorage.getItem(LOG)) || []).length; } catch (e) { }
+    var c = $('#a1-export-count');
+    if (c) c.textContent = n ? n + ' answered question' + (n === 1 ? '' : 's') + ' saved on this device.' : 'Nothing saved on this device yet.';
+    b.addEventListener('click', exportMyData);
   }
 
   /* ==================================================================
@@ -1960,6 +2066,7 @@
           if (card) card.classList.add('a1-skipped');
           if (fb) fb.innerHTML = '<span class="a1-skip-tag">Skipped</span> ' + fb.innerHTML.replace(/^\s*✗\s*/, '');
         });
+        logTest(blanks);
         clearTest();
         organiseResults();
         var bar = $('#sbar');
@@ -2243,6 +2350,8 @@
     try { refresh(); } catch (e) { }
     try { indexProgress(); } catch (e) { }
     try { installTestSave(); } catch (e) { }
+    try { installAttemptClock(); } catch (e) { }
+    try { installExport(); } catch (e) { }
     try { installBlankGuard(); } catch (e) { }
     try { installCalcSheet(); } catch (e) { }
     try { landmarksAndHeadings(); } catch (e) { }
