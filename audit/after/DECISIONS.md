@@ -40,3 +40,12 @@ keeps flagging it until you decide. Reply with the letter for each.
 | D15 | Unit 1–4 vocabulary "Evaluate 4x − 2 when x = 3" had "10" twice; I removed the duplicate, leaving 3 options. | **a)** keep 3 options · **b)** add a fourth distractor, e.g. 12 (forgot to subtract) |
 | D16 | Unit 5 topic 5.2 has no vocabulary questions (so no 5.2 quiz filter) | **a)** leave · **b)** I draft 2–3 for your approval |
 | D17 | Videos: Unit 10 has none; 8.3 and 8.4 look swapped by title; 13.1 and 15.4 look off-topic | You choose links; I will wire them in |
+
+## Wording I wrote that you should approve
+
+| # | Where | Text |
+|---|---|---|
+| D18 | unit1-4 PEMDAS chart (`Packetsite/unit1-4-img-023.png`) alt text | "PEMDAS order of operations: Parentheses ( ), Exponents a², Multiply × or Divide ÷, Add + or Subtract −." |
+| D19 | unit1-4 fraction wall (`Packetsite/unit1-4-img-064.png`) alt text | "Fraction wall: one whole bar divided into equal parts — halves, thirds, fourths, fifths, sixths, eighths, tenths and twelfths." |
+| D20 | Spoken maths (screen readers) | Fractions read as "7 over 3"; powers as "squared", "cubed", "to the power 9", "to the power negative 4". Say if you teach a different reading (e.g. "seven thirds"). |
+| D21 | Blank-answer warning on the practice test | "N questions are blank (3, 7, 12). If you submit now, they are marked Skipped and count as wrong." — Skipped still counts as wrong; say if it should not count. |

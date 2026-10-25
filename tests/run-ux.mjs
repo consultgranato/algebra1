@@ -152,6 +152,27 @@ try {
     await ctx.close();
   }
 
+  // 11. Keyboard: topic cards are real buttons; notes open and give focus back
+  {
+    const { ctx, page } = await open('unit5.html');
+    await page.focus('.tg-card .a1-tg-open');
+    await page.keyboard.press('Enter');
+    await page.waitForTimeout(200);
+    ok('keyboard: Enter on a topic opens its notes', await page.evaluate(() => document.getElementById('topic-overlay').classList.contains('open')));
+    await page.keyboard.press('Escape');
+    ok('keyboard: Escape returns focus to the topic button', await page.evaluate(() => document.activeElement.classList.contains('a1-tg-open')));
+    ok('structure: no topic card is a button containing a button', await page.$$eval('.tg-card', cs => cs.every(c => c.getAttribute('role') !== 'button')));
+    ok('structure: every tab panel has a heading', await page.$$eval('[role=tabpanel]', ps => ps.every(p => p.querySelector('h2'))));
+    await page.screenshot({ path: path.join(SHOTS, 'ux-unit5-desktop.png') });
+    await ctx.close();
+    const m = await open('unit5.html', { width: 390, height: 844 }, { isMobile: true, hasTouch: true, deviceScaleFactor: 3 });
+    await m.page.screenshot({ path: path.join(SHOTS, 'ux-unit5-390.png') });
+    await m.page.click('.tabs .tab[data-view="practice"]');
+    await m.page.waitForTimeout(300);
+    await m.page.screenshot({ path: path.join(SHOTS, 'ux-unit5-practice-390.png') });
+    await m.ctx.close();
+  }
+
   // 9+10. Index and unit agree; an old-shape record loads intact
   {
     const OLD = {

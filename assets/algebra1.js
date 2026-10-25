@@ -1440,15 +1440,12 @@
     $$('.tg-card').forEach(function (card, i) {
       var on = !!(u.notesRead && u.notesRead[String(i)]);
       card.classList.toggle('a1-read', on);
-      card.setAttribute('role', 'button');
-      card.setAttribute('tabindex', '0');
-      var t = $('.tg-title', card);
-      card.setAttribute('aria-label', (t ? t.textContent : 'Topic') + (on ? ' — already read' : ''));
+      /* Keyboard and screen-reader access is the real button fixTopicCards()
+         puts in the title; keep its name in step with the read state. */
+      var open = $('.a1-tg-open', card);
+      if (open) open.setAttribute('aria-label', open.getAttribute('aria-label').replace(/ \(read\)$/, '') + (on ? ' (read)' : ''));
       if (!card.__a1key) {
         card.__a1key = true;
-        card.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
-        });
         /* Notes and practice never referred to each other; now one click
            goes straight from a topic's notes to practising that topic. */
         var tag = $('.tg-tag', card);
@@ -1458,7 +1455,7 @@
           go.type = 'button';
           go.className = 'a1-tg-practice';
           go.textContent = 'Practice this';
-          go.setAttribute('aria-label', 'Practice topic ' + topic);
+          go.setAttribute('aria-label', 'Practice this: topic ' + topic);
           go.addEventListener('click', function (e) {
             e.stopPropagation();
             openPractice(topic);
@@ -2137,8 +2134,101 @@
     new MutationObserver(function () {
       if (queued) return;
       queued = true;
-      (W.requestAnimationFrame || setTimeout)(function () { queued = false; try { speakMath(); } catch (e) { } });
+      (W.requestAnimationFrame || setTimeout)(function () { queued = false; try { speakMath(); } catch (e) { } structureAll(); });
     }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* ==================================================================
+     7. Structure and labels for assistive technology
+     ================================================================== */
+
+  /* The unit header is a <div>: give it the banner landmark. Each tab panel
+     gets a heading, so screen-reader users can jump between sections. */
+  function landmarksAndHeadings() {
+    var head = $('.nn-header');
+    if (head && head.tagName !== 'HEADER' && !head.getAttribute('role')) head.setAttribute('role', 'banner');
+    $$('.tabs .tab').forEach(function (t) {
+      var panel = document.getElementById('v-' + t.getAttribute('data-view'));
+      if (!panel || $('.a1-panel-h', panel)) return;
+      var h = document.createElement('h2');
+      h.className = 'a1-panel-h a1-sr-heading';
+      h.textContent = ($('.a1-step-t', t) || t).textContent.trim();
+      panel.insertBefore(h, panel.firstChild);
+    });
+    var title = $('#modal-title');
+    if (title && !title.getAttribute('role')) { title.setAttribute('role', 'heading'); title.setAttribute('aria-level', '2'); }
+  }
+
+  /* Topic cards: the card was role="button" with a second button inside it,
+     which assistive technology cannot represent. The card keeps its click for
+     mouse users; keyboard and screen-reader users get a real button. */
+  function fixTopicCards() {
+    $$('.tg-card').forEach(function (card) {
+      if ($('.a1-tg-open', card)) return;
+      card.removeAttribute('role');
+      card.removeAttribute('tabindex');
+      card.removeAttribute('aria-label');
+      var title = $('.tg-title', card);
+      if (!title) return;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'a1-tg-open';
+      b.innerHTML = title.innerHTML;
+      b.addEventListener('click', function (e) { e.stopPropagation(); card.click(); });
+      title.innerHTML = '';
+      title.appendChild(b);
+      var tag = $('.tg-tag', card);
+      b.setAttribute('aria-label', 'Notes: ' + (tag ? tag.textContent.trim() + ' ' : '') + b.textContent.trim() +
+        (card.classList.contains('a1-read') ? ' (read)' : ''));
+    });
+  }
+
+  /* Links that open a new tab say so. */
+  function labelNewTabLinks(root) {
+    $$('a[target="_blank"]', root || document).forEach(function (a) {
+      if ($('.a1-newtab', a)) return;
+      var s = document.createElement('span');
+      s.className = 'a1-newtab';
+      s.innerHTML = '<span aria-hidden="true"> ↗</span><span class="a1-sr"> (opens in a new tab)</span>';
+      a.appendChild(s);
+    });
+  }
+
+  /* Matching-question dropdowns had no name; name each after its term. */
+  function labelMatchSelects(root) {
+    $$('.match-pairs', root || document).forEach(function (mp) {
+      var terms = $$('.match-term', mp), sels = $$('.match-sel', mp);
+      sels.forEach(function (s, i) {
+        if (!s.getAttribute('aria-label')) s.setAttribute('aria-label', 'Match for: ' + (terms[i] ? terms[i].textContent.trim() : 'item ' + (i + 1)));
+      });
+    });
+  }
+
+  /* An empty corner cell in a table is not a header. */
+  function fixEmptyHeaders(root) {
+    $$('th', root || document).forEach(function (th) {
+      if (!th.textContent.trim() && !th.getAttribute('role')) th.setAttribute('role', 'cell');
+    });
+  }
+
+  /* The pages scroll results into view smoothly even when the student has
+     asked for reduced motion; honour the setting for every such call. */
+  function calmScrolling() {
+    var orig = Element.prototype.scrollIntoView;
+    if (orig.__a1) return;
+    var calm = function (opts) {
+      if (reduceMotion() && opts && typeof opts === 'object') opts = Object.assign({}, opts, { behavior: 'auto' });
+      return orig.call(this, opts);
+    };
+    calm.__a1 = true;
+    Element.prototype.scrollIntoView = calm;
+  }
+
+  function structureAll() {
+    try { fixTopicCards(); } catch (e) { }
+    try { labelNewTabLinks(); } catch (e) { }
+    try { labelMatchSelects(); } catch (e) { }
+    try { fixEmptyHeaders(); } catch (e) { }
   }
 
   /* ---- Boot ---- */
@@ -2155,6 +2245,9 @@
     try { installTestSave(); } catch (e) { }
     try { installBlankGuard(); } catch (e) { }
     try { installCalcSheet(); } catch (e) { }
+    try { landmarksAndHeadings(); } catch (e) { }
+    try { calmScrolling(); } catch (e) { }
+    try { structureAll(); } catch (e) { }
     try { installDeepLinks(); } catch (e) { }
     try { watchMath(); } catch (e) { }
   }

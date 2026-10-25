@@ -443,11 +443,11 @@
   box-shadow: var(--a1-shadow);
 }
 .a1-note-nav-l {
-  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
   color: var(--a1-ink3); margin-right: .3rem;
 }
 .a1-note-nav a {
-  font-size: 11.5px; font-weight: 600; color: var(--a1-purple);
+  font-size: 12px; font-weight: 600; color: var(--a1-purple);
   text-decoration: none; background: var(--a1-wash);
   border: 1px solid #e2daf6; border-radius: 20px; padding: 3px 10px;
   transition: all .12s ease;
@@ -464,7 +464,7 @@
 }
 .a1-note .a1-callout-lbl {
   display: flex; align-items: center; gap: .4rem;
-  font-size: 10.5px !important; letter-spacing: .9px !important;
+  font-size: 12px !important; letter-spacing: .9px !important;
   margin-bottom: .4rem !important;
 }
 .a1-note .a1-callout-lbl::before { font-size: 13px; line-height: 1; }
@@ -557,7 +557,7 @@
 .a1-fig.big img { max-height: none; }
 .a1-fig figcaption {
   display: flex; align-items: center; justify-content: center; gap: .5rem;
-  font-size: 10.5px; color: var(--a1-ink3); margin-top: .45rem;
+  font-size: 12px; color: var(--a1-ink3); margin-top: .45rem;
   letter-spacing: .3px; text-transform: uppercase; font-weight: 600;
 }
 .a1-fig-zoom {
@@ -761,3 +761,60 @@
 }
 .a1-saved-p { font-size: 14px; color: var(--a1-ink2); margin: 0 0 .6rem; }
 .reset-all { min-height: 44px; font-size: 12px !important; }
+
+/* ==========================================================
+   Phase 1 — accessibility: contrast, text size, targets
+   ========================================================== */
+/* Muted text: #888899 measured 3.06-3.48:1. #5d5d73 is at least 4.9:1 on
+   every background these pages use. Pages read --text3 from their own :root,
+   which this later rule overrides. */
+:root { --text3: #5d5d73; --a1-ink3: #5d5d73; }
+.ptag, .afmt, .calc-title, .vsec, .vex-lbl, .u-meta, .section-label, .section-label span,
+.a1-note-nav-l, .a1-fig figcaption, .eq-note, .a1-eq-note, .undo-dir span, .a1-streak-hint,
+.tr-pct, .results-title { color: #5d5d73 !important; opacity: 1 !important; }
+/* Notes that hard-code the old grey inline */
+[style*="#888899"], [style*="color:#888;"], [style*="color: #888;"], [style*="color:#999"] { color: #5d5d73 !important; }
+.u-state.new { color: #4b4b66 !important; background: #ececf3 !important; }
+.a1-step-n { color: #3d3d55 !important; }
+.tab.on .a1-step-n { color: #fff !important; }
+#unit-nav > span { color: rgba(255, 255, 255, .7) !important; }
+
+/* Nothing a student needs to read is smaller than 12px. */
+.nn-school, .u-meta, .u-state, .a1-course-l, .a1-course-cta-l, .reset-all, .np, .a1-hero-eyebrow,
+.a1-chip-l, .a1-chip-v, .a1-next-l, .a1-reset, .a1-step-n, .tg-tag, .tg-arrow, #modal-tag,
+.a1-callout-lbl, .kc-lbl, .tip-lbl, .warn-lbl, .a1-worked-badge, .vsec, .vtag, .vex-lbl, .chip,
+.pqf-btn, .vq-qnum, .vq-qtag, .a1-streak, .a1-streak-hint, .pnum, .ptag, .afmt, .cbtn, .hbtn,
+.results-title, .tr-pct, .tr-flag, .a1-tg-practice, .a1-note-nav-l, th.uh, .vw, .calc-title,
+.graph-it-btn, footer, .section-label, .a1-fig figcaption, .eq-note { font-size: max(12px, 1em) !important; }
+.frac .fn, .frac .fd { font-size: max(12px, .85em) !important; }
+sup { font-size: max(11px, .75em); }
+
+/* Touch targets: 44px for everything a student taps. */
+.tab, .cbtn, .hbtn, .nbtn, .tpbtn, .vstab, .pqf-btn, .vq-opt, .topic-modal-close, .vid-btn,
+.a1-tg-practice, .a1-tg-open, .graph-it-btn, .subbtn, .rstbtn, #sbtn, #rbtn, #vq-sbtn, #vq-rbtn,
+.a1-next-btn, .a1-cta, .a1-fig-zoom, .desmos-trigger, .a1-skip, .a1-fb-hint { min-height: 44px; }
+.np { min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; }
+.a1-tg-open {
+  display: block; width: 100%; text-align: left; background: none; border: 0; padding: 0;
+  font: inherit; color: inherit; cursor: pointer;
+}
+.a1-tg-open:focus-visible { outline: 3px solid var(--a1-purple-l); outline-offset: 3px; border-radius: 4px; }
+.a1-newtab { white-space: nowrap; }
+
+/* Section headings for screen readers; the tabs already label them visually. */
+.a1-sr-heading {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+/* Answer boxes, notes section links and the logo link are tapped too. */
+.ai { min-height: 44px; }
+.a1-note-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.nn-logo-link { min-width: 44px; min-height: 44px; }
+/* Small labels and inline-sized text inside the notes. */
+.a1-callout-lbl, .a1-ring-pct i, .a1-eq, .a1-aside, .a1-aside *, .a1-note th, .a1-note td,
+#modal-body [style*="font-size:10px"], #modal-body [style*="font-size:11px"],
+#modal-body [style*="font-size: 10px"], #modal-body [style*="font-size: 11px"],
+.tbody [style*="font-size:10px"], .tbody [style*="font-size:11px"] { font-size: max(12px, 1em) !important; }
+.undo-dir { font-size: 12px !important; }
+.match-sel { min-height: 44px; font-size: 14px !important; }
+.pqf-btn { min-width: 48px; }

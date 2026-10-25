@@ -7,8 +7,10 @@ import { RAW, PAGES, serve, browser, localOnly } from '../tools/lib/site.mjs';
 
 const require = createRequire(import.meta.url);
 const AXE = fs.readFileSync(require.resolve('../tools/node_modules/axe-core/axe.min.js'), 'utf8');
-const VIEWPORTS = { desktop: { viewport: { width: 1280, height: 800 } },
-  mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true } };
+// reducedMotion: colour transitions finish instantly, so contrast is measured on
+// final colours rather than mid-animation.
+const VIEWPORTS = { desktop: { viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' },
+  mobile: { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' } };
 
 /* Practice sets and quizzes are random; seed Math.random in the page (test only) so
    every run sees the same questions and axe counts are comparable. */
@@ -48,6 +50,7 @@ function states(page) {
 const { server, base } = await serve();
 const b = await browser();
 const out = {};
+const detail = {};
 const errors = [];
 try {
   for (const [vp, opts] of Object.entries(VIEWPORTS)) {
@@ -64,7 +67,14 @@ try {
         const res = await page.evaluate(() => window.axe.run(document, {
           runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] },
           resultTypes: ['violations'] }));
-        for (const v of res.violations) out[`${file}|${vp}|${name}|${v.id}`] = v.nodes.length;
+        for (const v of res.violations) {
+          out[`${file}|${vp}|${name}|${v.id}`] = v.nodes.length;
+          for (const n of v.nodes.slice(0, 50)) {
+            const d = n.any[0] && n.any[0].data;
+            const k = `${v.id} ${n.target.join(' ').replace(/:nth-child\(\d+\)/g, '').replace(/#[a-z]+\d+(_\d+)?/g, '#N').slice(-70)}${d && d.contrastRatio ? ` ${d.fgColor} on ${d.bgColor} = ${d.contrastRatio}` : ''}`;
+            detail[k] = (detail[k] || new Set()).add(file);
+          }
+        }
       }
       await ctx.close();
     }
@@ -74,6 +84,7 @@ try {
   server.close();
 }
 fs.mkdirSync(RAW, { recursive: true });
-fs.writeFileSync(path.join(RAW, 'axe-run.json'), JSON.stringify({ violations: out, errors }, null, 1));
+fs.writeFileSync(path.join(RAW, 'axe-run.json'), JSON.stringify({ violations: out, errors,
+  nodes: Object.fromEntries(Object.entries(detail).map(([k, v]) => [k, [...v]])) }, null, 1));
 console.log(`axe: ${Object.keys(out).length} page/view/rule combinations with violations, ${errors.length} state errors`);
 errors.forEach(e => console.log('  state error:', e));

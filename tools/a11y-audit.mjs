@@ -5,11 +5,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
-import { ROOT, serve, browser, localOnly } from './lib/site.mjs';
+import { ROOT, RAW, serve, browser, localOnly } from './lib/site.mjs';
 
 const require = createRequire(import.meta.url);
 const AXE = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
-const OUT = path.join(ROOT, 'audit/raw/axe');
+const OUT = path.join(RAW, 'axe');
 fs.mkdirSync(OUT, { recursive: true });
 
 const PAGES = ['index.html', 'unit1-4.html', 'unit5.html', 'unit15.html'];
@@ -121,6 +121,6 @@ try {
   await b.close();
   server.close();
 }
-fs.writeFileSync(path.join(ROOT, 'audit/raw/a11y-domwalk.json'), JSON.stringify(domwalk, null, 1));
-fs.writeFileSync(path.join(ROOT, 'audit/raw/a11y-summary.json'), JSON.stringify(summary, null, 1));
+fs.writeFileSync(path.join(RAW, 'a11y-domwalk.json'), JSON.stringify(domwalk, null, 1));
+fs.writeFileSync(path.join(RAW, 'a11y-summary.json'), JSON.stringify(summary, null, 1));
 for (const s of summary) console.log(s.vpName.padEnd(8), s.file.padEnd(13), (s.name || '').padEnd(18), s.error || s.violations.join(' '));
