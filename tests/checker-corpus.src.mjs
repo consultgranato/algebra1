@@ -247,7 +247,7 @@ const C = [
   ['wrong-common', '(x+3)(x+5)', 'x<sup>2</sup> + 8x + 15', 'reject', 'asked to multiply; factored form'],
   ['wrong-common', '2', 'f(2) = 3', 'reject', 'gave the input'],
   ['wrong-common', '5, 3', 'slope = 3, y-intercept = 5', 'reject', 'swapped'],
-  ['wrong-common', 'x5', 'x<sup>5</sup>', 'reject', 'missing caret: reads as x times 5'],
+  ['wrong-common', 'x5', 'x<sup>5</sup>', 'accept', 'teacher decision D13: a digit straight after a variable is read as its exponent (students learned to type x2)'],
 
   // --- expressions ---
   ['expression', '5x-12', '5x-12', 'accept', ''],

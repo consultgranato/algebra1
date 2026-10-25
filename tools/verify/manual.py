@@ -86,6 +86,11 @@ def graph(indep, reading):
     return f
 
 
+def fvalue(v, method):
+    """Key written 'f(2) = 3': compare the value after '='."""
+    return lambda it: _v(number(plain(it['a']).split('=')[-1]) == v, f'f(...) = {v}', method)
+
+
 U4, U6, U7, U8, U9, U10, U12, U15, U16 = ('unit1-4.html', 'unit6.html', 'unit7.html', 'unit8.html', 'unit9.html',
                                           'unit10.html', 'unit12.html', 'unit15.html', 'unit16.html')
 
@@ -130,12 +135,10 @@ MANUAL = {
     f'{U7}:test:7.2:7': word('Cartesian plane', 'coordinate plane', method='definition'),
     f'{U7}:test:7.3:13': word('not linear', method='definition'),
     # The question says "use the graph", so the graph is the source of truth for a student.
-    f'{U7}:bank:7.4:0': mismatch('graph reads f(2) = 2; formula gives f(2) = 3', 'svgread',
-                                 'GRAPH CONTRADICTS KEY: drawn line is y = 0.5x + 1 (through (-4,-1) and (3,2.5)) and the '
-                                 'red point sits at (2, 2) although it is labelled (2, 3). The formula f(x) = x + 1 gives 3.'),
-    f'{U7}:test:7.4:15': mismatch('graph reads f(3) = 1.5; formula gives f(3) = 2', 'svgread',
-                                  'GRAPH CONTRADICTS KEY: drawn line is y = 0.5x (through the origin) and the red point sits '
-                                  'at (3, 1.5) although it is labelled (3,2). The formula f(x) = x - 1 gives 2.'),
+    # D1 (teacher): graph redrawn as y = x + 1; svgread: slope 1, y-int 1, dot at (2, 3)
+    f'{U7}:bank:7.4:0': fvalue(3, 'read from the drawn SVG: line slope 1, y-intercept 1, dot at (2, 3)'),
+    # D2 (teacher): redrawn as y = x - 1; svgread: slope 1, y-int -1, dot at (3, 2)
+    f'{U7}:test:7.4:15': fvalue(2, 'read from the drawn SVG: line slope 1, y-intercept -1, dot at (3, 2)'),
 
     # ---- Unit 8: graphs ----
     f'{U8}:bank:8.1:0': graph(['2'], 'line through (-1,-1) and (1,3): slope 2'),
@@ -197,12 +200,10 @@ MANUAL = {
     f'{U15}:test:15.2:5': graph('x=3', 'dashed red line at x = 3'),
     f'{U15}:bank:15.2:7': graph('maximum', 'downward parabola, vertex at top'),
     f'{U15}:bank:15.3:4': graph('no', 'vertex at (0, 3) above the x-axis, opens up'),
-    f'{U15}:test:15.2:6': mismatch('graph reads (1, -2)', 'svgread',
-                                   'GRAPH CONTRADICTS KEY: the vertex dot is drawn level with the "-2" label (y-labels -1,-2,-3 '
-                                   'sit at 124/136/148 px; dot at 136 px). Key and graphIt say (1, -3).'),
-    f'{U15}:test:15.3:10': mismatch('graph reads (0, -4)', 'svgread',
-                                    'GRAPH CONTRADICTS KEY: the drawn polyline is symmetric about x = 0 with zeros at -2 and 2 '
-                                    '(that is y = x^2 - 4); the vertex dot is on the y-axis. Key and graphIt say (-1, -4).'),
+    # D3 (teacher): y-axis relabelled at 12 px/unit; svgread: vertex dot at (1, -3)
+    f'{U15}:test:15.2:6': graph((1, -3), 'vertex dot at (1, -3), y labels evenly spaced'),
+    # D4 (teacher): redrawn as y = (x + 1)^2 - 4; svgread: vertex dot at (-1, -4)
+    f'{U15}:test:15.3:10': graph((-1, -4), 'curve symmetric about x = -1, vertex dot at (-1, -4)'),
 
     # ---- Unit 16: graphs ----
     f'{U16}:bank:16.4:3': graph('two solutions', 'crosses at 1 and 3'),
@@ -270,8 +271,8 @@ MANUAL = {
     f'{U10}:bank:10.3:11': nums([8, 10, 12], '3x + 6 = 30 -> x = 8'),
     f'{U10}:bank:10.3:12': solve_for(Eq(N + 3 * N + 10, 30), N),
     f'{U10}:bank:10.3:13': solve_for(Eq(2 * (W + W + 9), 62), W, '2(w + w+9) = 62 -> w = 11, L = 20') if False else num(20, '2(w + w+9) = 62 -> w = 11, length = 20'),
-    f'{U10}:bank:10.3:14': solve_for(Eq(2 * (2 * N - 1) + (N + 4), 31), N,
-                                     '2(2x-1) + (x+4) = 31 -> 5x + 2 = 31 -> x = 29/5'),
+    # D6 (teacher): perimeter changed to 32
+    f'{U10}:bank:10.3:14': solve_for(Eq(2 * (2 * N - 1) + (N + 4), 32), N, '2(2x-1) + (x+4) = 32 -> 5x + 2 = 32 -> x = 6'),
     f'{U10}:test:10.3:10': solve_for(Eq(2 * (W + W + 3), 26), W),
     f'{U10}:test:10.3:11': nums([40, 60, 80], '9x = 180 -> x = 20'),
     f'{U10}:test:10.3:12': nums([6, 12], '2(w + 2w) = 36 -> w = 6', ordered=True),
@@ -343,8 +344,8 @@ MANUAL = {
     f'{U10}:test:10.6:29': num(Rational(45, 15), 'd / r'),
 
     # ---- Unit 10.7: mixtures and money ----
-    f'{U10}:bank:10.7:0': mismatch('no whole-number answer: 42j + 12(5 - j) = 126 gives j = 2.2', 'SymPy solve',
-                                   'KEY DOES NOT SATISFY THE PROBLEM: 2 jeans + 3 shirts = 2(42) + 3(12) = $120, not $126.'),
+    # D5 (teacher): total changed to $120
+    f'{U10}:bank:10.7:0': nums([2, 3], '42j + 12(5 - j) = 120 -> j = 2 jeans, 3 shirts', ordered=True),
     f'{U10}:bank:10.7:1': nums([5], '5a + 8(10 - a) = 65 -> a = 5 (5 lb of each)'),
     f'{U10}:bank:10.7:2': nums([10], '3a + 5(20 - a) = 80 -> a = 10 (10 lb of each)'),
     f'{U10}:bank:10.7:3': nums([10, 40, 20, 10], '0.4a + 0.1(30 - a) = 6 -> a = 10 L of 40%, 20 L of 10%', ordered=True),
@@ -367,16 +368,6 @@ MANUAL = {
     f'{U10}:test:10.7:34': solve_for(Eq(Rational(3, 2) * A + 3 * (10 - A), 21), A),
 }
 
-AMBIGUOUS = {
-    f'{U10}:bank:10.4:7': 'cable costs the same at 10 months and less from 11; "after how many months" reads as 10 '
-                          'to many students. The key is 11.',
-    f'{U10}:bank:10.6:6': 'mentions a tailwind but gives no wind speed; 600 mph is the ground speed, not the '
-                          'plane\'s own airspeed.',
-    f'{U10}:bank:10.7:7': 'exact answer is 100/3 and 50/3 mL; key uses rounded decimals with units in a free-text '
-                          'answer, so most student phrasings cannot match.',
-    f'{U4}:bank:unit4:9': 'texts differ on whether the constant of 5x - 7 is 7 or -7; the key requires -7.',
-    f'{U12}:bank:12.3:13': '"losing r% per year" with A = A0(1 - r)^t is only right if r is a decimal, not a percent.',
-    f'{U16}:bank:16.4:3': 'asks how many x-intercepts but the key is phrased "two solutions"; a student answering "2" '
-                          'or "two" is marked wrong (see checker corpus).',
-    f'{U16}:bank:16.3:12': 'format says "0, 1, or 2 solutions" but the key is "no real solutions"; "0" is marked wrong.',
-}
+# Every ambiguity found in Phase 0 has been resolved by the teacher (audit/after/DECISIONS.md D7-D12):
+# D7-D11 reworded; D12 keys kept because the checker accepts 2 / two / 0 / none.
+AMBIGUOUS = {}

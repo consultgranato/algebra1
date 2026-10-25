@@ -4,6 +4,8 @@ Phase 0 baseline (`audit/raw/items.json`) vs current pages. Solver = independent
 
 | Item | Field | Before | After | Solver says | Solver verdict |
 |---|---|---|---|---|---|
+| unit1-4.html:bank:unit4:9 | explanation | `The constant is the term with no variable.` | `The constant is the term with no variable. 5x - 7 is 5x + (-7), so the constant term is -7.` |  |  |
+| unit1-4.html:bank:unit4:9 | format | `numerical answer` | `numerical answer, with its sign` |  |  |
 | unit6.html:bank:6.4:11 | key | `no solution` | `all real numbers` | Reals | match |
 | unit6.html:test:6.3:14 | key | `x >= ≈ 1.6` | `x >= 16/5` | Interval(16/5, oo) | match |
 | unit9.html:bank:9.1:7 | key | `yes` | `no` | no | match |
@@ -16,6 +18,17 @@ Phase 0 baseline (`audit/raw/items.json`) vs current pages. Solver = independent
 | unit9.html:test:9.1:2 | key | `yes` | `no` | no | match |
 | unit9.html:test:9.4:18 | key | `(1, 2) — wait: add: 4y=20 → y=5, 4x+15=18 → x=3/4` | `(3/4, 5)` | (3/4, 5) | match |
 | unit10.html:bank:10.3:12 | explanation | `s+10+3s=30 → 4s=20 → s=4. Hmm: let s=short, s+10+3s=30→4s=20→s=5. Recheck: 5+10+15=30 ✓` | `Let s = shortest: s + 10 + 3s = 30 → 4s = 20 → s = 5. Check: 5 + 10 + 15 = 30 ✓` |  |  |
+| unit10.html:bank:10.3:14 | explanation | `2(2x−1)+(x+4)=31 → 5x+2=31 → x=6 (but: 2(11)+10=32≠31; try: 5x−2+4=31→5x=29... Actually: 2(2x-1)+(x+4)=4x-2+x+4=5x+2=31→5x=29→x=5.8. Use x=6 for integer: let's fix the problem to perimeter=32: 5x+2=32→x=6 ✓)` | `2(2x − 1) + (x + 4) = 32 → 4x − 2 + x + 4 = 32 → 5x + 2 = 32 → 5x = 30 → x = 6. Check: 11 + 11 + 10 = 32 ✓` |  |  |
+| unit10.html:bank:10.3:14 | problem | `An isosceles triangle has two equal sides of length 2x−1 and a base of x+4. Perimeter = 31. Find x.` | `An isosceles triangle has two equal sides of length 2x−1 and a base of x+4. Perimeter = 32. Find x.` |  |  |
+| unit10.html:bank:10.4:7 | explanation | `30+5m < 8m → 30 < 3m → m > 10. After 11 months cable is cheaper.` | `30 + 5m < 8m → 30 < 3m → m > 10. At 10 months both cost $80; from month 11 cable is cheaper.` |  |  |
+| unit10.html:bank:10.4:7 | problem | `Streaming service: $8/month. Cable: $30 setup + $5/month. After how many months does cable cost less?` | `Streaming service: $8/month. Cable: $30 setup + $5/month. In which month does cable first cost less than streaming?` |  |  |
+| unit10.html:bank:10.4:7 | format | `after ___ months` | `month ___` |  |  |
+| unit10.html:bank:10.6:6 | problem | `A plane flies 2400 miles with a tailwind in 4 hours. What is the plane's speed?` | `A plane flies 2400 miles in 4 hours. What is the plane's average speed?` |  |  |
+| unit10.html:bank:10.7:0 | explanation | `42j + 12(5-j) = 126 → 30j = 66 → j ≈ 2.2 → 2 jeans, 3 shirts` | `42j + 12(5 − j) = 120 → 30j + 60 = 120 → 30j = 60 → j = 2. So 2 jeans and 3 shirts. Check: 84 + 36 = 120 ✓` |  |  |
+| unit10.html:bank:10.7:0 | problem | `You went shopping for jeans ($42 each) and shirts ($12 each). Bought 5 items for $126. How many of each?` | `You went shopping for jeans ($42 each) and shirts ($12 each). Bought 5 items for $120. How many of each?` |  |  |
+| unit10.html:bank:10.7:7 | explanation | `0.20x + 0.50(50-x) = 15 → -0.30x = -10 → x ≈ 33.3` | `0.20x + 0.50(50 − x) = 15 → −0.30x = −10 → x = 33.3 mL of 20%, and 50 − 33.3 = 16.7 mL of 50%` |  |  |
+| unit10.html:bank:10.7:7 | problem | `A chemistry student needs 50 mL of 30% alcohol. She has 20% and 50% solutions. How much of each?` | `A chemistry student needs 50 mL of 30% alcohol. She has 20% and 50% solutions. How much of each? Round to the nearest tenth of a mL.` |  |  |
+| unit10.html:bank:10.7:7 | format | `mL of each` | `mL of 20%, mL of 50%` |  |  |
 | unit10.html:test:10.7:31 | key | `4 lbs of each` | `2 lbs of A, 6 lbs of B` | 2, 6 | match |
 | unit10.html:test:10.7:31 | explanation | `4x + 6(8-x) = 44 → -2x = -8 → x = 4` | `4x + 6(8 − x) = 44 → 4x + 48 − 6x = 44 → −2x = −4 → x = 2. So 2 lbs of A and 6 lbs of B.` |  |  |
 | unit10.html:test:10.7:31 | format | `# lbs of each` | `lbs of A, lbs of B` |  |  |

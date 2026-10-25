@@ -1676,8 +1676,8 @@
   "category": "wrong-common",
   "input": "x5",
   "key": "x<sup>5</sup>",
-  "expected": "reject",
-  "why": "missing caret: reads as x times 5"
+  "expected": "accept",
+  "why": "teacher decision D13: a digit straight after a variable is read as its exponent (students learned to type x2)"
  },
  {
   "id": 211,

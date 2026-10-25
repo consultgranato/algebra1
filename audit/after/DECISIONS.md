@@ -49,3 +49,30 @@ keeps flagging it until you decide. Reply with the letter for each.
 | D19 | unit1-4 fraction wall (`Packetsite/unit1-4-img-064.png`) alt text | "Fraction wall: one whole bar divided into equal parts — halves, thirds, fourths, fifths, sixths, eighths, tenths and twelfths." |
 | D20 | Spoken maths (screen readers) | Fractions read as "7 over 3"; powers as "squared", "cubed", "to the power 9", "to the power negative 4". Say if you teach a different reading (e.g. "seven thirds"). |
 | D21 | Blank-answer warning on the practice test | "N questions are blank (3, 7, 12). If you submit now, they are marked Skipped and count as wrong." — Skipped still counts as wrong; say if it should not count. |
+
+---
+
+## Outcome (teacher: "fix all to your recommended")
+
+| # | Applied |
+|---|---|
+| D1 | **a** — Unit 7 practice graph redrawn as y = x + 1, dot at (2, 3); key unchanged. Verified from the SVG (slope 1, y-intercept 1). |
+| D2 | **a** — Unit 7 test graph redrawn as y = x − 1, dot at (3, 2); key unchanged. Verified from the SVG. |
+| D3 | **a** — the curve was already y = (x − 1)² − 3; the y-axis labels were mis-spaced. Relabelled at an even 12 px per unit, smoothed the curve, added guide lines from the vertex to both axes. Key (1, −3) unchanged. |
+| D4 | **a** — redrawn as y = (x + 1)² − 4 (smooth curve), vertex dot at (−1, −4) with guide lines; y labels moved clear of the dot. Key unchanged. |
+| D5 | **a** — total changed to $120; key (2 jeans, 3 shirts) unchanged; explanation rewritten with a check. |
+| D6 | **a** — perimeter changed to 32; key x = 6 unchanged; drafting removed from the explanation. |
+| D7 | **c** — reworded: "what is the constant term? (Include its sign.)"; key −7. |
+| D8 | **b** — reworded: "In which month does cable first cost less than streaming?"; key 11; explanation notes they cost the same at 10. |
+| D9 | **a** — "with a tailwind" removed; asks for the plane's average speed; key 600. |
+| D10 | **b** — "Round to the nearest tenth of a mL" added; key unchanged. |
+| D11 | **a** — reworded: "loses a rate r per year (r as a decimal, e.g. 0.05 for 5%)". |
+| D12 | **a** — keys kept; the checker already accepts 2, two, 0 and none. |
+| D13 | **a** — `x2` keeps being accepted for x²; corpus case #210 now expects accept. |
+| D14 | Drafted 4 + 4 items in `PROPOSED-CONTENT.md`, checked with SymPy. **Not live until you approve.** |
+| D15 | **a** — kept 3 options. |
+| D16 | Drafted 3 questions in `PROPOSED-CONTENT.md`. **Not live until you approve.** |
+| D17 | **Still needs you:** I cannot choose video links. Send links for Unit 10 and confirm whether 8.3/8.4 should swap. |
+| D18–D21 | Kept as written. |
+
+After these changes the independent verifier reports 1,140 of 1,140 items matching, with no ambiguous or flagged items.
