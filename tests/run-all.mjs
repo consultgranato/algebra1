@@ -118,7 +118,15 @@ run(PY, ['tools/verify/verify_items.py']);
     detail: [...bad, ...missing.map(m => 'no sample: ' + m)].join('\n      ') || `${Object.keys(want).length} samples read as intended` });
 }
 
-// 5. axe-core on every page and view
+// 5. Student-experience checks through the real UI (all must pass)
+{
+  const r = run('node', ['tests/run-ux.mjs', '--check']);
+  const lines = r.stdout.split('\n').filter(l => /^FAIL/.test(l));
+  const n = r.stdout.split('\n').filter(l => /^ok/.test(l)).length;
+  results.push({ name: 'student experience (tests/run-ux.mjs)', status: r.status ? 'FAIL' : 'pass', detail: lines.join('\n      ') || `${n} checks pass` });
+}
+
+// 6. axe-core on every page and view
 if (!process.argv.includes('--skip-axe')) {
   run('node', ['tests/run-axe.mjs']);
   const a = read(path.join(OUT, 'axe-run.json'));

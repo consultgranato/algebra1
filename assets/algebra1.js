@@ -759,6 +759,41 @@
     W[name] = fn;
   }
 
+  /* Like wrap(), but stackable: each named hook is added once, on top of any
+     earlier wrapping of the same function. */
+  function hook(name, tag, after) {
+    var orig = W[name];
+    if (typeof orig !== 'function' || orig['__a1_' + tag]) return;
+    var fn = function () {
+      var r = orig.apply(this, arguments);
+      try { after.apply(this, arguments); } catch (e) { }
+      return r;
+    };
+    for (var k in orig) if (/^__a1/.test(k)) fn[k] = orig[k];
+    fn['__a1_' + tag] = true;
+    W[name] = fn;
+  }
+
+  /* An in-page "are you sure?" next to a control, instead of window.confirm.
+     Announced, keyboard reachable, and it gives focus back on cancel. */
+  function confirmInline(anchor, message, yesLabel, onYes) {
+    var old = $('.a1-confirm');
+    if (old) old.parentNode.removeChild(old);
+    var box = document.createElement('div');
+    box.className = 'a1-confirm';
+    box.setAttribute('role', 'alertdialog');
+    box.setAttribute('aria-label', message);
+    box.innerHTML = '<p class="a1-confirm-t">' + message + '</p>' +
+      '<div class="a1-confirm-btns"><button type="button" class="a1-cta danger" data-yes>' + yesLabel + '</button>' +
+      '<button type="button" class="a1-cta ghost" data-no>Cancel</button></div>';
+    anchor.parentNode.insertBefore(box, anchor.nextSibling);
+    var close = function () { if (box.parentNode) box.parentNode.removeChild(box); anchor.focus(); };
+    $('[data-no]', box).addEventListener('click', close);
+    $('[data-yes]', box).addEventListener('click', function () { if (box.parentNode) box.parentNode.removeChild(box); onYes(); });
+    box.addEventListener('keydown', function (e) { if (e.key === 'Escape') { e.stopPropagation(); close(); } });
+    $('[data-no]', box).focus();
+  }
+
   /* ---- Tabs: real ARIA tablist with arrow-key navigation ---- */
   function enhanceTabs() {
     var list = $('.tabs');
@@ -1345,9 +1380,24 @@
     if (go && step.run) go.addEventListener('click', step.run);
     var btn = $('#a1-reset');
     if (btn) btn.addEventListener('click', function () {
-      W.Alg1Progress.reset(id);
-      renderProgress();
+      confirmInline(btn, 'Delete your saved progress for this unit?', 'Delete progress', function () {
+        W.Alg1Progress.reset(id);
+        renderProgress();
+        var again = $('#a1-reset'); if (again) again.focus();
+      });
     });
+    /* Remember this unit's own percentage (and topic count), so the index shows
+       the same number as this page instead of re-deriving a different one.
+       Additive fields; written only for a unit that already has a record, and
+       without touching 'updated', so merely opening a page is not activity. */
+    try {
+      var all = W.Alg1Progress.all();
+      if (all[id] && (all[id].pct !== m || all[id].topics !== topics.length)) {
+        all[id].pct = m;
+        all[id].topics = topics.length;
+        writeAll(all);
+      }
+    } catch (e) { }
     markNotesRead();
     badgeTopics();
     stepTabs(u);
@@ -1738,6 +1788,9 @@
      record, so approximate the same shape from it. */
   function unitScore(u) {
     if (!u) return 0;
+    /* The unit page records its own percentage; use it so both pages agree.
+       Older records without it fall back to the previous estimate. */
+    if (typeof u.pct === 'number') return u.pct;
     var topics = u.practice ? Object.keys(u.practice) : [];
     var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
     var parts = [
@@ -1786,7 +1839,7 @@
         var parts = [];
         var topics = u.practice ? Object.keys(u.practice) : [];
         var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
-        if (topics.length) parts.push(strong + '/' + topics.length + ' topics strong');
+        if (topics.length) parts.push(strong + '/' + (u.topics || topics.length) + ' topics strong');
         if (u.test && u.test.best != null) parts.push('test ' + u.test.best + '%');
         row.innerHTML = '<span class="u-prog-bw"><span class="u-prog-bar ' +
           (score >= 80 ? 'g' : score >= 50 ? 'y' : 'r') + '" style="width:' + Math.max(score, 3) + '%"></span></span>' +
@@ -1821,10 +1874,210 @@
 
     var reset = $('#a1-reset-all');
     if (reset) reset.addEventListener('click', function () {
-      if (W.confirm('Clear saved progress for every unit on this device?')) {
+      confirmInline(reset, 'Delete saved progress for every unit on this device? This cannot be undone.', 'Delete everything', function () {
         W.Alg1Progress.reset();
         W.location.reload();
-      }
+      });
+    });
+  }
+
+  /* ==================================================================
+     6. The practice test, deep links, and small things that lost work
+     ================================================================== */
+
+  /* ---- Practice Test survives a refresh ----
+     The drawn questions (as positions in T) and the typed answers are kept
+     under their own key, alg1.test.v1.<unit>; alg1.progress.v1 is not
+     touched. Cleared on submit and on Retake. */
+  function testKey() { return 'alg1.test.v1.' + unitId(); }
+  function readTest() { try { return JSON.parse(localStorage.getItem(testKey())) || null; } catch (e) { return null; } }
+  function writeTest(st) { try { localStorage.setItem(testKey(), JSON.stringify(st)); } catch (e) { } }
+  function clearTest() { try { localStorage.removeItem(testKey()); } catch (e) { } }
+  function testPool() { try { return T; } catch (e) { return null; } }
+  function currentTest() { try { return tset; } catch (e) { return null; } }
+
+  function rememberTest() {
+    var pool = testPool(), set = currentTest();
+    if (!pool || !set || !set.length) return;
+    writeTest({ items: set.map(function (p) { return pool.indexOf(p); }), answers: {}, saved: Date.now() });
+  }
+
+  function restoreTest() {
+    var st = readTest(), pool = testPool(), el = $('#tlist');
+    if (!st || !st.items || !pool || !el || typeof W.mkP !== 'function') return false;
+    var set = st.items.map(function (k) { return pool[k]; });
+    if (!set.length || set.some(function (p) { return !p; })) { clearTest(); return false; }
+    tset = set;  /* the page's own `let tset`, shared across scripts */
+    el.innerHTML = '';
+    set.forEach(function (p, i) { el.appendChild(W.mkP(p, i, 't', 'Topic ' + p.t)); });
+    Object.keys(st.answers || {}).forEach(function (i) {
+      var inp = document.getElementById('ta' + i);
+      if (inp) inp.value = st.answers[i];
+    });
+    var n = Object.keys(st.answers || {}).filter(function (k) { return String(st.answers[k]).trim(); }).length;
+    if (n) {
+      var note = document.createElement('p');
+      note.className = 'a1-restored';
+      note.setAttribute('role', 'status');
+      note.textContent = 'Welcome back — your ' + n + ' answer' + (n === 1 ? ' is' : 's are') + ' still here.';
+      el.parentNode.insertBefore(note, el);
+    }
+    return true;
+  }
+
+  function installTestSave() {
+    if (!testPool() || !$('#tlist')) return;
+    var origReset = W.resetT;
+    if (typeof origReset === 'function' && !origReset.__a1_clearfirst) {
+      W.resetT = function () { clearTest(); var old = $('.a1-restored'); if (old) old.parentNode.removeChild(old); return origReset.apply(this, arguments); };
+      for (var k in origReset) if (/^__a1/.test(k)) W.resetT[k] = origReset[k];
+      W.resetT.__a1_clearfirst = true;
+    }
+    hook('loadT', 'testsave', function () { if (!restoreTest()) rememberTest(); refresh(); });
+    $('#tlist').addEventListener('input', function (e) {
+      var m = /^ta(\d+)$/.exec(e.target.id || '');
+      if (!m) return;
+      var st = readTest();
+      if (!st) return;
+      st.answers = st.answers || {};
+      st.answers[m[1]] = e.target.value;
+      st.saved = Date.now();
+      writeTest(st);
+    });
+  }
+
+  /* ---- Submitting with blanks: warn first, then mark them "Skipped" ---- */
+  function installBlankGuard() {
+    var orig = W.gradeT;
+    if (typeof orig !== 'function' || orig.__a1_guard) return;
+    var guarded = function () {
+      var inputs = $$('#tlist .ai');
+      var blanks = inputs.map(function (inp, i) { return String(inp.value).trim() ? -1 : i; }).filter(function (i) { return i >= 0; });
+      var warn = $('#a1-blank-warn');
+      if (blanks.length && !(warn && warn.__confirmed)) { showBlankWarning(blanks); return; }
+      if (warn) warn.parentNode.removeChild(warn);
+      var r = orig.apply(this, arguments);
+      try {
+        blanks.forEach(function (i) {
+          var card = document.getElementById('tc' + i), fb = document.getElementById('tfb' + i);
+          if (card) card.classList.add('a1-skipped');
+          if (fb) fb.innerHTML = '<span class="a1-skip-tag">Skipped</span> ' + fb.innerHTML.replace(/^\s*✗\s*/, '');
+        });
+        clearTest();
+        organiseResults();
+        var bar = $('#sbar');
+        if (bar) { bar.setAttribute('tabindex', '-1'); bar.focus({ preventScroll: true }); }
+      } catch (e) { }
+      return r;
+    };
+    for (var k in orig) if (/^__a1/.test(k)) guarded[k] = orig[k];
+    guarded.__a1_guard = true;
+    W.gradeT = guarded;
+  }
+
+  function showBlankWarning(blanks) {
+    var old = $('#a1-blank-warn');
+    if (old) old.parentNode.removeChild(old);
+    var sbtn = $('#sbtn');
+    if (!sbtn) return;
+    var nums = blanks.map(function (i) { return i + 1; });
+    var list = nums.length > 8 ? nums.slice(0, 8).join(', ') + ' and ' + (nums.length - 8) + ' more' : nums.join(', ');
+    var box = document.createElement('div');
+    box.id = 'a1-blank-warn';
+    box.className = 'a1-blank-warn';
+    box.setAttribute('role', 'alert');
+    box.innerHTML = '<p><strong>' + blanks.length + ' question' + (blanks.length === 1 ? ' is' : 's are') + ' blank</strong> (' + list + '). ' +
+      'If you submit now, ' + (blanks.length === 1 ? 'it is' : 'they are') + ' marked Skipped and count as wrong.</p>' +
+      '<div class="a1-blank-btns"><button type="button" class="a1-cta primary" data-a1-goto-blank>Go to question ' + nums[0] + '</button>' +
+      '<button type="button" class="a1-cta ghost" data-a1-confirm-submit>Submit anyway</button></div>';
+    sbtn.parentNode.insertBefore(box, sbtn);
+    $('[data-a1-goto-blank]', box).addEventListener('click', function () {
+      var inp = document.getElementById('ta' + blanks[0]);
+      if (inp) { inp.scrollIntoView({ block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' }); inp.focus({ preventScroll: true }); }
+    });
+    $('[data-a1-confirm-submit]', box).addEventListener('click', function () { box.__confirmed = true; W.gradeT(); });
+    $('[data-a1-goto-blank]', box).focus();
+  }
+
+  /* ---- Results: weakest topic first, each with a way back to it ---- */
+  function organiseResults() {
+    var body = $('#t-results-body');
+    if (!body) return;
+    var rows = $$('.tr-row', body);
+    rows.sort(function (a, b) {
+      return parseInt($('.tr-pct', a).textContent, 10) - parseInt($('.tr-pct', b).textContent, 10);
+    }).forEach(function (r) { body.appendChild(r); });
+    rows.forEach(function (r) {
+      if ($('.a1-tr-links', r)) return;
+      var label = ($('.tr-label', r) || {}).textContent || '';
+      var m = /Topic\s+(\S+)/i.exec(label), u = /Unit\s+(\d+)/i.exec(label);
+      var tag = m ? m[1] : u ? 'unit' + u[1] : null;
+      if (!tag) return;
+      var links = document.createElement('span');
+      links.className = 'a1-tr-links';
+      var idx = topicIndexByTag(tag);
+      if (idx >= 0) links.appendChild(linkButton('Notes', 'Review the notes for ' + label, function () { openNotes(idx); }));
+      if (practiceTopics().indexOf(tag) >= 0) links.appendChild(linkButton('Practice', 'Practise ' + label, function () { openPractice(tag); }));
+      if (links.childNodes.length) r.appendChild(links);
+    });
+    var title = $('#t-results .results-title');
+    if (title && !/weakest/i.test(title.textContent)) title.textContent += ' — weakest first';
+  }
+
+  function linkButton(text, label, run) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'a1-tr-link';
+    b.textContent = text;
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', run);
+    return b;
+  }
+
+  /* ---- Deep links: #notes, #vocab, #practice, #practice/5.2, #test ---- */
+  function setHash(h) {
+    try { if (location.hash !== '#' + h) history.replaceState(null, '', '#' + h); } catch (e) { }
+  }
+
+  function applyHash() {
+    var m = /^#(?:v-)?(notes|vocab|practice|test)(?:\/(.+))?$/.exec(decodeURIComponent(location.hash || ''));
+    if (!m) return;
+    if (m[1] === 'practice' && m[2] && practiceTopics().indexOf(m[2]) >= 0) openPractice(m[2]);
+    else goto(m[1]);
+  }
+
+  function installDeepLinks() {
+    if (!$('.tabs')) return;
+    hook('sw', 'hash', function (n) {
+      if (n === 'practice') {
+        var t = null; try { t = curTopic; } catch (e) { }
+        setHash(t ? 'practice/' + t : 'practice');
+      } else setHash(n);
+    });
+    hook('selTopic', 'hash', function (t) { setHash('practice/' + t); });
+    applyHash();
+    W.addEventListener('hashchange', applyHash);
+  }
+
+  /* ---- Phones: the calculator becomes a sheet at the bottom of the screen ---- */
+  function installCalcSheet() {
+    $$('.pt-calc-col').forEach(function (col) {
+      if ($('.a1-calc-toggle', col)) return;
+      var box = $('.calc-box', col);
+      if (!box) return;
+      if (!box.id) box.id = 'a1-calc-' + ($$('.pt-calc-col').indexOf(col));
+      var t = document.createElement('button');
+      t.type = 'button';
+      t.className = 'a1-calc-toggle';
+      t.setAttribute('aria-expanded', 'false');
+      t.setAttribute('aria-controls', box.id);
+      t.innerHTML = '<span aria-hidden="true">🧮</span> Calculator';
+      t.addEventListener('click', function () {
+        var open = col.classList.toggle('a1-open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) box.focus();
+      });
+      col.insertBefore(t, col.firstChild);
     });
   }
 
@@ -1899,6 +2152,10 @@
     try { recordHooks(); } catch (e) { }
     try { refresh(); } catch (e) { }
     try { indexProgress(); } catch (e) { }
+    try { installTestSave(); } catch (e) { }
+    try { installBlankGuard(); } catch (e) { }
+    try { installCalcSheet(); } catch (e) { }
+    try { installDeepLinks(); } catch (e) { }
     try { watchMath(); } catch (e) { }
   }
 
