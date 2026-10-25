@@ -785,7 +785,7 @@
 .a1-callout-lbl, .kc-lbl, .tip-lbl, .warn-lbl, .a1-worked-badge, .vsec, .vtag, .vex-lbl, .chip,
 .pqf-btn, .vq-qnum, .vq-qtag, .a1-streak, .a1-streak-hint, .pnum, .ptag, .afmt, .cbtn, .hbtn,
 .results-title, .tr-pct, .tr-flag, .a1-tg-practice, .a1-note-nav-l, th.uh, .vw, .calc-title,
-.graph-it-btn, footer, .section-label, .a1-fig figcaption, .eq-note { font-size: max(12px, 1em) !important; }
+.graph-it-btn, footer, .section-label, .a1-fig figcaption, .eq-note { font-size: 12px !important; }
 .frac .fn, .frac .fd { font-size: max(12px, .85em) !important; }
 sup { font-size: max(11px, .75em); }
 
@@ -811,10 +811,10 @@ sup { font-size: max(11px, .75em); }
 .a1-note-nav a { min-height: 44px; display: inline-flex; align-items: center; }
 .nn-logo-link { min-width: 44px; min-height: 44px; }
 /* Small labels and inline-sized text inside the notes. */
-.a1-callout-lbl, .a1-ring-pct i, .a1-eq, .a1-aside, .a1-aside *, .a1-note th, .a1-note td,
+.a1-ring-pct i, .a1-aside strong, .a1-note th,
 #modal-body [style*="font-size:10px"], #modal-body [style*="font-size:11px"],
 #modal-body [style*="font-size: 10px"], #modal-body [style*="font-size: 11px"],
-.tbody [style*="font-size:10px"], .tbody [style*="font-size:11px"] { font-size: max(12px, 1em) !important; }
+.tbody [style*="font-size:10px"], .tbody [style*="font-size:11px"] { font-size: 12px !important; }
 .undo-dir { font-size: 12px !important; }
 .match-sel { min-height: 44px; font-size: 14px !important; }
 .pqf-btn { min-width: 48px; }

@@ -1,0 +1,57 @@
+{
+ "byUnit": {
+  "unit1-4.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit5.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit6.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit7.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit8.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit9.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit10.html": {
+   "items": 140,
+   "keyRejected": 0
+  },
+  "unit11.html": {
+   "items": 60,
+   "keyRejected": 0
+  },
+  "unit12.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit13.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit14.html": {
+   "items": 80,
+   "keyRejected": 0
+  },
+  "unit15.html": {
+   "items": 100,
+   "keyRejected": 0
+  },
+  "unit16.html": {
+   "items": 80,
+   "keyRejected": 0
+  }
+ },
+ "rejected": []
+}

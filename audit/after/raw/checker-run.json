@@ -1,0 +1,3632 @@
+{
+ "when": "2026-10-25T02:34:57.988Z",
+ "identity": {
+  "unit1-4.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit5.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit6.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit7.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit8.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit9.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit10.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit11.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit12.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit13.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit14.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit15.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  },
+  "unit16.html": {
+   "shared": true,
+   "matchesIsShared": true,
+   "lexical": true
+  }
+ },
+ "results": [
+  {
+   "id": 1,
+   "category": "unicode-minus",
+   "input": "−7",
+   "key": "x = −7",
+   "expected": "accept",
+   "why": "U+2212 minus, bare number",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 2,
+   "category": "unicode-minus",
+   "input": "x = −7",
+   "key": "x = −7",
+   "expected": "accept",
+   "why": "exact",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 3,
+   "category": "unicode-minus",
+   "input": "-7",
+   "key": "x = −7",
+   "expected": "accept",
+   "why": "ASCII hyphen for U+2212 key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 4,
+   "category": "unicode-minus",
+   "input": "x=−7",
+   "key": "x = −7",
+   "expected": "accept",
+   "why": "no spaces",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 5,
+   "category": "unicode-minus",
+   "input": "–7",
+   "key": "x = −7",
+   "expected": "accept",
+   "why": "en dash (phone keyboards substitute it)",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 6,
+   "category": "unicode-minus",
+   "input": "−10",
+   "key": "-10",
+   "expected": "accept",
+   "why": "U+2212 input, ASCII key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 7,
+   "category": "unicode-minus",
+   "input": "(2, −1)",
+   "key": "(2, −1)",
+   "expected": "accept",
+   "why": "minus inside a pair",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 8,
+   "category": "unicode-minus",
+   "input": "x⁻⁴",
+   "key": "1/x^4",
+   "expected": "accept",
+   "why": "superscript minus",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 9,
+   "category": "unicode-minus",
+   "input": "−1/2",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "U+2212 in a fraction",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 10,
+   "category": "x-equals",
+   "input": "x=8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 11,
+   "category": "x-equals",
+   "input": "x = 8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 12,
+   "category": "x-equals",
+   "input": "X = 8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "capital X from phone autocapitalise",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 13,
+   "category": "x-equals",
+   "input": "x= 8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 14,
+   "category": "x-equals",
+   "input": "8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "bare value",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 15,
+   "category": "x-equals",
+   "input": "8 = x",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "symmetric",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 16,
+   "category": "x-equals",
+   "input": "x = 9",
+   "key": "x = 9",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 17,
+   "category": "x-equals",
+   "input": "x",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "no value",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 18,
+   "category": "x-equals",
+   "input": "x =",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "no value",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 19,
+   "category": "x-equals",
+   "input": "t = 3",
+   "key": "t = 3",
+   "expected": "accept",
+   "why": "variable t",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 20,
+   "category": "x-equals",
+   "input": "3",
+   "key": "t = 3",
+   "expected": "accept",
+   "why": "bare value, t key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 21,
+   "category": "spaces",
+   "input": " 8 ",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "leading/trailing space",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 22,
+   "category": "spaces",
+   "input": "x =  8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "double space",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 23,
+   "category": "spaces",
+   "input": "5x -12",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 24,
+   "category": "spaces",
+   "input": "5x - 12",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 25,
+   "category": "spaces",
+   "input": "5 x - 12",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "space between coefficient and variable",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 26,
+   "category": "spaces",
+   "input": "8 ",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "non-breaking space (iOS)",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 27,
+   "category": "decimal",
+   "input": ".5",
+   "key": "1/2",
+   "expected": "accept",
+   "why": "no leading zero",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 28,
+   "category": "decimal",
+   "input": "0.5",
+   "key": "1/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 29,
+   "category": "decimal",
+   "input": "-.5",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "negative, no leading zero",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 30,
+   "category": "decimal",
+   "input": "-0.5",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 31,
+   "category": "decimal",
+   "input": "0.50",
+   "key": "1/2",
+   "expected": "accept",
+   "why": "trailing zero",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 32,
+   "category": "decimal",
+   "input": "1.50",
+   "key": "1.5",
+   "expected": "accept",
+   "why": "trailing zero",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 33,
+   "category": "decimal",
+   "input": "3.0",
+   "key": "3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 34,
+   "category": "decimal",
+   "input": "1.5",
+   "key": "x = 3/2",
+   "expected": "accept",
+   "why": "decimal for fraction solution",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 35,
+   "category": "decimal",
+   "input": "x = 1.5",
+   "key": "x = 3/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 36,
+   "category": "decimal",
+   "input": "1157.630",
+   "key": "1157.63",
+   "expected": "accept",
+   "why": "trailing zero on money",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 37,
+   "category": "decimal",
+   "input": "1157.6",
+   "key": "1157.63",
+   "expected": "reject",
+   "why": "wrong rounding",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 38,
+   "category": "decimal",
+   "input": "0.333",
+   "key": "1/3",
+   "expected": "either",
+   "why": "rounded decimal for a repeating fraction: content decision",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 39,
+   "category": "decimal",
+   "input": "7.50",
+   "key": "7.5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 40,
+   "category": "decimal",
+   "input": "15/2",
+   "key": "7.5",
+   "expected": "accept",
+   "why": "fraction for decimal key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 41,
+   "category": "decimal",
+   "input": "-.5",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "unit 15 \"Identify a\" style",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 42,
+   "category": "fraction",
+   "input": "1/2",
+   "key": "1/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 43,
+   "category": "fraction",
+   "input": "-1/2",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 44,
+   "category": "fraction",
+   "input": "1/-2",
+   "key": "-1/2",
+   "expected": "accept",
+   "why": "sign in denominator is equal",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 45,
+   "category": "fraction",
+   "input": "-1/-2",
+   "key": "1/2",
+   "expected": "accept",
+   "why": "two negatives",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 46,
+   "category": "fraction",
+   "input": "2/4",
+   "key": "1/2",
+   "expected": "reject",
+   "why": "unreduced (by design: simplifying is assessed)",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 47,
+   "category": "fraction",
+   "input": "6/4",
+   "key": "3/2",
+   "expected": "reject",
+   "why": "unreduced",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 48,
+   "category": "fraction",
+   "input": "8/12",
+   "key": "2/3",
+   "expected": "reject",
+   "why": "unreduced: unit 2.3 asks for simplest form",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 49,
+   "category": "fraction",
+   "input": "3/2",
+   "key": "x = 3/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 50,
+   "category": "fraction",
+   "input": "x=3/2",
+   "key": "x = 3/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 51,
+   "category": "fraction",
+   "input": "(3/2)",
+   "key": "3/2",
+   "expected": "accept",
+   "why": "parenthesised",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 52,
+   "category": "fraction",
+   "input": "3 / 2",
+   "key": "3/2",
+   "expected": "accept",
+   "why": "spaced slash",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 53,
+   "category": "fraction",
+   "input": "2/3",
+   "key": "x = 3/2",
+   "expected": "reject",
+   "why": "reciprocal error",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 54,
+   "category": "fraction",
+   "input": "7/12",
+   "key": "7/12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 55,
+   "category": "fraction",
+   "input": "7/12ths",
+   "key": "7/12",
+   "expected": "either",
+   "why": "",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 56,
+   "category": "mixed-number",
+   "input": "1 1/2",
+   "key": "3/2",
+   "expected": "accept",
+   "why": "mixed number for improper fraction",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 57,
+   "category": "mixed-number",
+   "input": "3 1/2",
+   "key": "7/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 58,
+   "category": "mixed-number",
+   "input": "-1 1/2",
+   "key": "-3/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 59,
+   "category": "mixed-number",
+   "input": "1 1/2",
+   "key": "x = 3/2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 60,
+   "category": "mixed-number",
+   "input": "11/2",
+   "key": "3/2",
+   "expected": "reject",
+   "why": "typed without the space: a different number",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 61,
+   "category": "mixed-number",
+   "input": "7 1/2",
+   "key": "7.5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 62,
+   "category": "mixed-number",
+   "input": "1 1/2",
+   "key": "1.5",
+   "expected": "accept",
+   "why": "hours",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 63,
+   "category": "trailing-period",
+   "input": "8.",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 64,
+   "category": "trailing-period",
+   "input": "x = 8.",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 65,
+   "category": "trailing-period",
+   "input": "no solution.",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 66,
+   "category": "trailing-period",
+   "input": "yes.",
+   "key": "yes",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 67,
+   "category": "leading-plus",
+   "input": "+8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 68,
+   "category": "leading-plus",
+   "input": "x = +8",
+   "key": "x = 8",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 69,
+   "category": "leading-plus",
+   "input": "+5x-12",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 70,
+   "category": "comma",
+   "input": "4000",
+   "key": "$4,000",
+   "expected": "accept",
+   "why": "no comma, no dollar",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 71,
+   "category": "comma",
+   "input": "4,000",
+   "key": "$4,000",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 72,
+   "category": "comma",
+   "input": "$4000",
+   "key": "$4,000",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 73,
+   "category": "comma",
+   "input": "$4,000",
+   "key": "$4,000",
+   "expected": "accept",
+   "why": "exact",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 74,
+   "category": "comma",
+   "input": "14,580",
+   "key": "14580",
+   "expected": "accept",
+   "why": "thousands comma on a plain-number key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 75,
+   "category": "comma",
+   "input": "$14,580",
+   "key": "14580",
+   "expected": "accept",
+   "why": "dollar sign on a \"no $\" key",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 76,
+   "category": "comma",
+   "input": "304,163",
+   "key": "304163",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 77,
+   "category": "sci-notation",
+   "input": "1e1",
+   "key": "10",
+   "expected": "either",
+   "why": "not school notation",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 78,
+   "category": "sci-notation",
+   "input": "2e2",
+   "key": "200",
+   "expected": "either",
+   "why": "",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 79,
+   "category": "words",
+   "input": "six",
+   "key": "6",
+   "expected": "either",
+   "why": "number word: nice to have",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 80,
+   "category": "words",
+   "input": "two",
+   "key": "two solutions",
+   "expected": "accept",
+   "why": "question asks \"how many x-intercepts\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 81,
+   "category": "words",
+   "input": "2",
+   "key": "two solutions",
+   "expected": "accept",
+   "why": "format offers \"0, 1, or 2\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 82,
+   "category": "words",
+   "input": "2 solutions",
+   "key": "two solutions",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 83,
+   "category": "words",
+   "input": "one",
+   "key": "one solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 84,
+   "category": "words",
+   "input": "1",
+   "key": "one solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 85,
+   "category": "words",
+   "input": "0",
+   "key": "no real solutions",
+   "expected": "accept",
+   "why": "format offers \"0, 1, or 2 solutions\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 86,
+   "category": "words",
+   "input": "none",
+   "key": "no real solutions",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 87,
+   "category": "words",
+   "input": "yes",
+   "key": "yes",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 88,
+   "category": "words",
+   "input": "Yes",
+   "key": "yes",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 89,
+   "category": "words",
+   "input": "YES",
+   "key": "yes",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 90,
+   "category": "words",
+   "input": "y",
+   "key": "yes",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 91,
+   "category": "words",
+   "input": "n",
+   "key": "no",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 92,
+   "category": "words",
+   "input": "no",
+   "key": "yes",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 93,
+   "category": "words",
+   "input": "yes",
+   "key": "no",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 94,
+   "category": "words",
+   "input": "true",
+   "key": "true",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 95,
+   "category": "words",
+   "input": "false",
+   "key": "true",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 96,
+   "category": "words",
+   "input": "linear",
+   "key": "not linear",
+   "expected": "reject",
+   "why": "opposite meaning",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 97,
+   "category": "words",
+   "input": "not linear",
+   "key": "linear",
+   "expected": "reject",
+   "why": "opposite meaning",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 98,
+   "category": "words",
+   "input": "nonlinear",
+   "key": "not linear",
+   "expected": "accept",
+   "why": "synonym",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 99,
+   "category": "words",
+   "input": "open circle",
+   "key": "open",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 100,
+   "category": "words",
+   "input": "closed circle",
+   "key": "closed",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 101,
+   "category": "words",
+   "input": "closed",
+   "key": "open",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 102,
+   "category": "words",
+   "input": "decay",
+   "key": "decay",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 103,
+   "category": "words",
+   "input": "exponential decay",
+   "key": "decay",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 104,
+   "category": "words",
+   "input": "growth",
+   "key": "decay",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 105,
+   "category": "words",
+   "input": "max",
+   "key": "maximum",
+   "expected": "accept",
+   "why": "abbreviation",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 106,
+   "category": "words",
+   "input": "min",
+   "key": "minimum",
+   "expected": "accept",
+   "why": "abbreviation",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 107,
+   "category": "words",
+   "input": "maximum",
+   "key": "minimum",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 108,
+   "category": "words",
+   "input": "solid below",
+   "key": "solid, below",
+   "expected": "accept",
+   "why": "no comma",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 109,
+   "category": "words",
+   "input": "below, solid",
+   "key": "solid, below",
+   "expected": "accept",
+   "why": "order of two independent facts",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 110,
+   "category": "words",
+   "input": "solid, above",
+   "key": "solid, below",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 111,
+   "category": "words",
+   "input": "dashed, below",
+   "key": "solid, below",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 112,
+   "category": "words",
+   "input": "parallel",
+   "key": "parallel",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 113,
+   "category": "words",
+   "input": "perpendicular",
+   "key": "parallel",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 114,
+   "category": "words",
+   "input": "x axis",
+   "key": "x-axis",
+   "expected": "accept",
+   "why": "no hyphen",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 115,
+   "category": "words",
+   "input": "cartesian plane",
+   "key": "Cartesian plane",
+   "expected": "accept",
+   "why": "lower case",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 116,
+   "category": "words",
+   "input": "narrower",
+   "key": "narrower",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 117,
+   "category": "words",
+   "input": "wider",
+   "key": "narrower",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 118,
+   "category": "words",
+   "input": "equation",
+   "key": "equation",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 119,
+   "category": "words",
+   "input": "expression",
+   "key": "equation",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 120,
+   "category": "special-case",
+   "input": "no solution",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 121,
+   "category": "special-case",
+   "input": "No Solution",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 122,
+   "category": "special-case",
+   "input": "no solutions",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 123,
+   "category": "special-case",
+   "input": "ns",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "abbreviation taught in class",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 124,
+   "category": "special-case",
+   "input": "∅",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "empty set",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 125,
+   "category": "special-case",
+   "input": "{}",
+   "key": "no solution",
+   "expected": "accept",
+   "why": "empty set",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 126,
+   "category": "special-case",
+   "input": "no real solution",
+   "key": "no real solutions",
+   "expected": "accept",
+   "why": "singular/plural",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 127,
+   "category": "special-case",
+   "input": "no real solutions",
+   "key": "no real solution",
+   "expected": "accept",
+   "why": "singular/plural",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 128,
+   "category": "special-case",
+   "input": "no solution",
+   "key": "no real solutions",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 129,
+   "category": "special-case",
+   "input": "all real numbers",
+   "key": "all real numbers",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 130,
+   "category": "special-case",
+   "input": "all reals",
+   "key": "all real numbers",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 131,
+   "category": "special-case",
+   "input": "ARN",
+   "key": "all real numbers",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 132,
+   "category": "special-case",
+   "input": "infinitely many solutions",
+   "key": "all real numbers",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 133,
+   "category": "special-case",
+   "input": "infinite solutions",
+   "key": "all real numbers",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 134,
+   "category": "special-case",
+   "input": "infinitely many solutions",
+   "key": "infinite solutions",
+   "expected": "accept",
+   "why": "systems",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 135,
+   "category": "special-case",
+   "input": "infinite",
+   "key": "infinite solutions",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 136,
+   "category": "special-case",
+   "input": "all real numbers",
+   "key": "infinite solutions",
+   "expected": "either",
+   "why": "system: imprecise but common",
+   "actual": "accept",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 137,
+   "category": "special-case",
+   "input": "no solution",
+   "key": "all real numbers",
+   "expected": "reject",
+   "why": "special-case swap",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 138,
+   "category": "special-case",
+   "input": "all real numbers",
+   "key": "no solution",
+   "expected": "reject",
+   "why": "special-case swap",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 139,
+   "category": "special-case",
+   "input": "x = 0",
+   "key": "no solution",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 140,
+   "category": "special-case",
+   "input": "0",
+   "key": "all real numbers",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 141,
+   "category": "special-case",
+   "input": "no solution",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 142,
+   "category": "inequality",
+   "input": "x > 7",
+   "key": "x > 7",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 143,
+   "category": "inequality",
+   "input": "x>7",
+   "key": "x > 7",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 144,
+   "category": "inequality",
+   "input": "7 < x",
+   "key": "x > 7",
+   "expected": "accept",
+   "why": "read backwards",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 145,
+   "category": "inequality",
+   "input": "x ≥ 7",
+   "key": "x >= 7",
+   "expected": "accept",
+   "why": "symbol",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 146,
+   "category": "inequality",
+   "input": "x => 7",
+   "key": "x >= 7",
+   "expected": "accept",
+   "why": "typed backwards",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 147,
+   "category": "inequality",
+   "input": "x =< -5",
+   "key": "x <= -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 148,
+   "category": "inequality",
+   "input": "x > 7",
+   "key": "x >= 7",
+   "expected": "reject",
+   "why": "boundary excluded",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 149,
+   "category": "inequality",
+   "input": "x < 7",
+   "key": "x > 7",
+   "expected": "reject",
+   "why": "direction",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 150,
+   "category": "inequality",
+   "input": "x > -4",
+   "key": "x < -4",
+   "expected": "reject",
+   "why": "forgot to flip after dividing by a negative",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 151,
+   "category": "inequality",
+   "input": "-4 > x",
+   "key": "x < -4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 152,
+   "category": "inequality",
+   "input": "-1 < x < 3",
+   "key": "-1 < x < 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 153,
+   "category": "inequality",
+   "input": "-1<x<3",
+   "key": "-1 < x < 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 154,
+   "category": "inequality",
+   "input": "3 > x > -1",
+   "key": "-1 < x < 3",
+   "expected": "accept",
+   "why": "compound written backwards",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 155,
+   "category": "inequality",
+   "input": "x > -1 and x < 3",
+   "key": "-1 < x < 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 156,
+   "category": "inequality",
+   "input": "-1 < x < 3",
+   "key": "-1 <= x < 3",
+   "expected": "reject",
+   "why": "boundary",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 157,
+   "category": "inequality",
+   "input": "x > 4 or x < -2",
+   "key": "x > 4 or x < -2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 158,
+   "category": "inequality",
+   "input": "x < -2 or x > 4",
+   "key": "x > 4 or x < -2",
+   "expected": "accept",
+   "why": "order of the two parts",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 159,
+   "category": "inequality",
+   "input": "x>4 OR x<-2",
+   "key": "x > 4 or x < -2",
+   "expected": "accept",
+   "why": "capitals",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 160,
+   "category": "inequality",
+   "input": "x > 4 and x < -2",
+   "key": "x > 4 or x < -2",
+   "expected": "reject",
+   "why": "\"and\" is the empty set",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 161,
+   "category": "inequality",
+   "input": "x > 4",
+   "key": "x > 4 or x < -2",
+   "expected": "reject",
+   "why": "half the answer",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 162,
+   "category": "inequality",
+   "input": "y>0",
+   "key": "y > 0",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 163,
+   "category": "inequality",
+   "input": "0 < y",
+   "key": "y > 0",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 164,
+   "category": "pair",
+   "input": "(2, 3)",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 165,
+   "category": "pair",
+   "input": "(2,3)",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 166,
+   "category": "pair",
+   "input": "2,3",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "no parentheses",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 167,
+   "category": "pair",
+   "input": "2, 3",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 168,
+   "category": "pair",
+   "input": "x=2, y=3",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 169,
+   "category": "pair",
+   "input": "x = 2, y = 3",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 170,
+   "category": "pair",
+   "input": "y=3, x=2",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "named, either order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 171,
+   "category": "pair",
+   "input": "x = 2 and y = 3",
+   "key": "(2, 3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 172,
+   "category": "pair",
+   "input": "(3, 2)",
+   "key": "(2, 3)",
+   "expected": "reject",
+   "why": "swapped coordinates",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 173,
+   "category": "pair",
+   "input": "(2.5, 4)",
+   "key": "(5/2, 4)",
+   "expected": "accept",
+   "why": "decimal coordinate",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 174,
+   "category": "pair",
+   "input": "(5/2, 4)",
+   "key": "(5/2, 4)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 175,
+   "category": "pair",
+   "input": "(2,-3)",
+   "key": "(2, -3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 176,
+   "category": "pair",
+   "input": "2, -3",
+   "key": "(2, -3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 177,
+   "category": "solution-set",
+   "input": "x = 5 or x = -5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 178,
+   "category": "solution-set",
+   "input": "5, -5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 179,
+   "category": "solution-set",
+   "input": "-5, 5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 180,
+   "category": "solution-set",
+   "input": "5 or -5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 181,
+   "category": "solution-set",
+   "input": "x=5, x=-5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 182,
+   "category": "solution-set",
+   "input": "±5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "plus-minus notation taught in 16.1",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 183,
+   "category": "solution-set",
+   "input": "x = ±5",
+   "key": "x = 5 or x = -5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 184,
+   "category": "solution-set",
+   "input": "5",
+   "key": "x = 5 or x = -5",
+   "expected": "reject",
+   "why": "missing the negative root",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 185,
+   "category": "solution-set",
+   "input": "x=-3, x=-2",
+   "key": "x=-2 or x=-3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 186,
+   "category": "solution-set",
+   "input": "3",
+   "key": "x = 3",
+   "expected": "accept",
+   "why": "double root",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 187,
+   "category": "solution-set",
+   "input": "x = 3, x = 3",
+   "key": "x = 3",
+   "expected": "either",
+   "why": "double root written twice",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 188,
+   "category": "solution-set",
+   "input": "x = 2+√3 or x = 2-√3",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 189,
+   "category": "solution-set",
+   "input": "2±√3",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "plus-minus form",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 190,
+   "category": "solution-set",
+   "input": "2+sqrt(3), 2-sqrt(3)",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "keyboard sqrt",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 191,
+   "category": "solution-set",
+   "input": "3.732, 0.268",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "item format says \"exact or decimal form\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 192,
+   "category": "solution-set",
+   "input": "3.73, 0.27",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "item format says \"exact or decimal form\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 193,
+   "category": "solution-set",
+   "input": "0.5, -1",
+   "key": "x=1/2 or x=-1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 194,
+   "category": "solution-set",
+   "input": "t = 2 and t = 6",
+   "key": "t = 2 and t = 6",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 195,
+   "category": "solution-set",
+   "input": "2, 6",
+   "key": "t = 2 and t = 6",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 196,
+   "category": "solution-set",
+   "input": "x = 8, x = 9",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "extra wrong root",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 197,
+   "category": "wrong-common",
+   "input": "4",
+   "key": "x = 7",
+   "expected": "reject",
+   "why": "4x = 28: answered the coefficient",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 198,
+   "category": "wrong-common",
+   "input": "28",
+   "key": "x = 7",
+   "expected": "reject",
+   "why": "answered the constant",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 199,
+   "category": "wrong-common",
+   "input": "-3",
+   "key": "x = −7",
+   "expected": "reject",
+   "why": "-3x = 21: answered the coefficient",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 200,
+   "category": "wrong-common",
+   "input": "7",
+   "key": "x = −7",
+   "expected": "reject",
+   "why": "sign error",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 201,
+   "category": "wrong-common",
+   "input": "-8",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "sign error",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 202,
+   "category": "wrong-common",
+   "input": "1",
+   "key": "-1",
+   "expected": "reject",
+   "why": "-5^0: sign error",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 203,
+   "category": "wrong-common",
+   "input": "6x+2",
+   "key": "2x+6",
+   "expected": "reject",
+   "why": "swapped coefficient and constant",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 204,
+   "category": "wrong-common",
+   "input": "(x+4)(x-3)",
+   "key": "(x-4)(x+3)",
+   "expected": "reject",
+   "why": "factoring sign error",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 205,
+   "category": "wrong-common",
+   "input": "2x(2x+4)",
+   "key": "4x(x+2)",
+   "expected": "reject",
+   "why": "not the greatest common factor",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 206,
+   "category": "wrong-common",
+   "input": "x^2+5x+6",
+   "key": "(x+2)(x+3)",
+   "expected": "reject",
+   "why": "asked to factor; expanded form",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 207,
+   "category": "wrong-common",
+   "input": "(x+3)(x+5)",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "expected": "reject",
+   "why": "asked to multiply; factored form",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 208,
+   "category": "wrong-common",
+   "input": "2",
+   "key": "f(2) = 3",
+   "expected": "reject",
+   "why": "gave the input",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 209,
+   "category": "wrong-common",
+   "input": "5, 3",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "reject",
+   "why": "swapped",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 210,
+   "category": "wrong-common",
+   "input": "x5",
+   "key": "x<sup>5</sup>",
+   "expected": "reject",
+   "why": "missing caret: reads as x times 5",
+   "actual": "accept",
+   "verdict": "WRONG-ACCEPTED"
+  },
+  {
+   "id": 211,
+   "category": "expression",
+   "input": "5x-12",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 212,
+   "category": "expression",
+   "input": "-12+5x",
+   "key": "5x-12",
+   "expected": "accept",
+   "why": "term order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 213,
+   "category": "expression",
+   "input": "-x+4",
+   "key": "-x+4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 214,
+   "category": "expression",
+   "input": "4-x",
+   "key": "-x+4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 215,
+   "category": "expression",
+   "input": "-1x+4",
+   "key": "-x+4",
+   "expected": "accept",
+   "why": "explicit 1",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 216,
+   "category": "expression",
+   "input": "12+x",
+   "key": "x+12",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 217,
+   "category": "expression",
+   "input": "x^5",
+   "key": "x<sup>5</sup>",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 218,
+   "category": "expression",
+   "input": "x⁵",
+   "key": "x<sup>5</sup>",
+   "expected": "accept",
+   "why": "superscript from phone keyboard",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 219,
+   "category": "expression",
+   "input": "15x^5",
+   "key": "15x<sup>5</sup>",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 220,
+   "category": "expression",
+   "input": "15 x^5",
+   "key": "15x<sup>5</sup>",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 221,
+   "category": "expression",
+   "input": "x^5*15",
+   "key": "15x<sup>5</sup>",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 222,
+   "category": "expression",
+   "input": "x^-4",
+   "key": "1/x^4",
+   "expected": "accept",
+   "why": "negative exponent form",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 223,
+   "category": "expression",
+   "input": "x^(-4)",
+   "key": "1/x^4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 224,
+   "category": "expression",
+   "input": "1/x^4",
+   "key": "1/x^4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 225,
+   "category": "expression",
+   "input": "x^-3",
+   "key": "1/x^3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 226,
+   "category": "expression",
+   "input": "3x³",
+   "key": "3x^3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 227,
+   "category": "expression",
+   "input": "0.125",
+   "key": "1/8",
+   "expected": "accept",
+   "why": "decimal",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 228,
+   "category": "expression",
+   "input": "-1",
+   "key": "-1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 229,
+   "category": "expression",
+   "input": "x^2+8x+15",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 230,
+   "category": "expression",
+   "input": "x²+8x+15",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 231,
+   "category": "expression",
+   "input": "15+8x+x^2",
+   "key": "x<sup>2</sup> + 8x + 15",
+   "expected": "accept",
+   "why": "term order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 232,
+   "category": "expression",
+   "input": "9x^4y^2",
+   "key": "9x^4y^2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 233,
+   "category": "expression",
+   "input": "9y^2x^4",
+   "key": "9x^4y^2",
+   "expected": "accept",
+   "why": "variable order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 234,
+   "category": "expression",
+   "input": "10x-2x^2",
+   "key": "10x - 2x<sup>2</sup>",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 235,
+   "category": "expression",
+   "input": "-2x^2+10x",
+   "key": "10x - 2x<sup>2</sup>",
+   "expected": "accept",
+   "why": "standard form of the same polynomial",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 236,
+   "category": "factored",
+   "input": "(x+2)(x+3)",
+   "key": "(x+2)(x+3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 237,
+   "category": "factored",
+   "input": "(x+3)(x+2)",
+   "key": "(x+2)(x+3)",
+   "expected": "accept",
+   "why": "factor order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 238,
+   "category": "factored",
+   "input": "(x + 2)(x + 3)",
+   "key": "(x+2)(x+3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 239,
+   "category": "factored",
+   "input": "(x+3)^2",
+   "key": "(x+3)(x+3)",
+   "expected": "accept",
+   "why": "square of a binomial",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 240,
+   "category": "factored",
+   "input": "(x+3)²",
+   "key": "(x+3)(x+3)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 241,
+   "category": "factored",
+   "input": "(3+x)(2+x)",
+   "key": "(x+2)(x+3)",
+   "expected": "accept",
+   "why": "term order inside factors",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 242,
+   "category": "factored",
+   "input": "-(x-5)(x+1)",
+   "key": "-(x-5)(x+1)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 243,
+   "category": "factored",
+   "input": "(5-x)(x+1)",
+   "key": "-(x-5)(x+1)",
+   "expected": "accept",
+   "why": "negative absorbed into a factor",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 244,
+   "category": "factored",
+   "input": "-1(x-5)(x+1)",
+   "key": "-(x-5)(x+1)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 245,
+   "category": "factored",
+   "input": "4x(x+2)",
+   "key": "4x(x+2)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 246,
+   "category": "factored",
+   "input": "4x(2+x)",
+   "key": "4x(x+2)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 247,
+   "category": "factored",
+   "input": "3x²(2x−3)",
+   "key": "3x²(2x-3)",
+   "expected": "accept",
+   "why": "unicode",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 248,
+   "category": "factored",
+   "input": "(2x+1)(3x-2)",
+   "key": "(3x-2)(2x+1)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 249,
+   "category": "equation",
+   "input": "y = 2x - 3",
+   "key": "y = 2x - 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 250,
+   "category": "equation",
+   "input": "y=2x-3",
+   "key": "y = 2x - 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 251,
+   "category": "equation",
+   "input": "y = -3 + 2x",
+   "key": "y = 2x - 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 252,
+   "category": "equation",
+   "input": "2x - 3",
+   "key": "y = 2x - 3",
+   "expected": "accept",
+   "why": "format shows \"y = ___\"",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 253,
+   "category": "equation",
+   "input": "y = -1/3x + 4",
+   "key": "y = -(1/3)x + 4",
+   "expected": "accept",
+   "why": "common typed form of -(1/3)x",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 254,
+   "category": "equation",
+   "input": "y = -x/3 + 4",
+   "key": "y = -(1/3)x + 4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 255,
+   "category": "equation",
+   "input": "y = 0.5x + 1",
+   "key": "y = (1/2)x + 1",
+   "expected": "accept",
+   "why": "decimal slope",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 256,
+   "category": "equation",
+   "input": "y = x/2 + 1",
+   "key": "y = (1/2)x + 1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 257,
+   "category": "equation",
+   "input": "y = 1/2x + 1",
+   "key": "y = (1/2)x + 1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 258,
+   "category": "equation",
+   "input": "y = 6 - x",
+   "key": "y = -x + 6",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 259,
+   "category": "equation",
+   "input": "y = 3x",
+   "key": "y = 3x",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 260,
+   "category": "equation",
+   "input": "y = 2x + 3",
+   "key": "y = 2x - 3",
+   "expected": "reject",
+   "why": "sign of intercept",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 261,
+   "category": "equation",
+   "input": "x = 5",
+   "key": "x = 5",
+   "expected": "accept",
+   "why": "vertical line",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 262,
+   "category": "equation",
+   "input": "y = 5",
+   "key": "x = 5",
+   "expected": "reject",
+   "why": "horizontal vs vertical",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 263,
+   "category": "equation",
+   "input": "3x + 4 = 19",
+   "key": "3x + 4 = 19",
+   "expected": "accept",
+   "why": "translation",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 264,
+   "category": "equation",
+   "input": "19 = 3x + 4",
+   "key": "3x + 4 = 19",
+   "expected": "accept",
+   "why": "sides swapped",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 265,
+   "category": "equation",
+   "input": "y = 2x + 5",
+   "key": "y = 5 + 2x",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 266,
+   "category": "equation",
+   "input": "y = 4(2^x)",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 267,
+   "category": "equation",
+   "input": "y = 4*2^x",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 268,
+   "category": "equation",
+   "input": "y = 4·2^x",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 269,
+   "category": "equation",
+   "input": "4(2)^x",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 270,
+   "category": "equation",
+   "input": "y = 10(1/2)^x",
+   "key": "y=10(0.5<sup>x</sup>)",
+   "expected": "accept",
+   "why": "fraction base",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 271,
+   "category": "equation",
+   "input": "y = 10(.5)^x",
+   "key": "y=10(0.5<sup>x</sup>)",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 272,
+   "category": "equation",
+   "input": "A = 5000(1.03)^t",
+   "key": "5000(1.03)<sup>t</sup>",
+   "expected": "accept",
+   "why": "with the A =",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 273,
+   "category": "equation",
+   "input": "y = 3(x - 2)^2 - 1",
+   "key": "y = 3(x - 2)^2 - 1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 274,
+   "category": "equation",
+   "input": "y=3(x-2)²-1",
+   "key": "y = 3(x - 2)^2 - 1",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 275,
+   "category": "equation",
+   "input": "y = -x^2 + 5",
+   "key": "y = -(x)^2 + 5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 276,
+   "category": "multi-part",
+   "input": "slope = 3, y-intercept = 5",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 277,
+   "category": "multi-part",
+   "input": "m = 3, b = 5",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "accept",
+   "why": "m and b notation from class",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 278,
+   "category": "multi-part",
+   "input": "3, 5",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "accept",
+   "why": "values in the asked order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 279,
+   "category": "multi-part",
+   "input": "slope 3, y-intercept 5",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 280,
+   "category": "multi-part",
+   "input": "4, 2",
+   "key": "x-intercept = 4, y-intercept = 2",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 281,
+   "category": "multi-part",
+   "input": "a=2, b=3, c=-5",
+   "key": "a=2, b=3, c=-5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 282,
+   "category": "multi-part",
+   "input": "2, 3, -5",
+   "key": "a=2, b=3, c=-5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 283,
+   "category": "multi-part",
+   "input": "f(2)=3",
+   "key": "f(2) = 3",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 284,
+   "category": "multi-part",
+   "input": "3",
+   "key": "f(2) = 3",
+   "expected": "accept",
+   "why": "value only",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 285,
+   "category": "multi-part",
+   "input": "{-1, 2, 4}",
+   "key": "{-1,2,4}",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 286,
+   "category": "multi-part",
+   "input": "-1, 2, 4",
+   "key": "{-1,2,4}",
+   "expected": "accept",
+   "why": "no braces",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 287,
+   "category": "multi-part",
+   "input": "{2, 4, -1}",
+   "key": "{-1,2,4}",
+   "expected": "accept",
+   "why": "set order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 288,
+   "category": "multi-part",
+   "input": "0, one solution",
+   "key": "D=0, one solution",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 289,
+   "category": "multi-part",
+   "input": "(2,-3)",
+   "key": "(2, -3)",
+   "expected": "accept",
+   "why": "vertex",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 290,
+   "category": "multi-part",
+   "input": "x=2, y=-3",
+   "key": "(2, -3)",
+   "expected": "accept",
+   "why": "vertex as named pair",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 291,
+   "category": "word-problem",
+   "input": "7,8,9",
+   "key": "7, 8, 9",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 292,
+   "category": "word-problem",
+   "input": "7 8 9",
+   "key": "7, 8, 9",
+   "expected": "accept",
+   "why": "spaces only",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 293,
+   "category": "word-problem",
+   "input": "7, 8, and 9",
+   "key": "7, 8, 9",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 294,
+   "category": "word-problem",
+   "input": "9, 8, 7",
+   "key": "7, 8, 9",
+   "expected": "accept",
+   "why": "order",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 295,
+   "category": "word-problem",
+   "input": "6 by 11",
+   "key": "6 by 11",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 296,
+   "category": "word-problem",
+   "input": "6 x 11",
+   "key": "6 by 11",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 297,
+   "category": "word-problem",
+   "input": "6, 11",
+   "key": "6 by 11",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 298,
+   "category": "word-problem",
+   "input": "w = 6, l = 11",
+   "key": "6 by 11",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 299,
+   "category": "word-problem",
+   "input": "13, 17",
+   "key": "13 and 17",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 300,
+   "category": "word-problem",
+   "input": "17 and 13",
+   "key": "13 and 17",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 301,
+   "category": "word-problem",
+   "input": "30°, 60°, 90°",
+   "key": "30, 60, 90",
+   "expected": "accept",
+   "why": "degree signs",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 302,
+   "category": "word-problem",
+   "input": "60 mph",
+   "key": "60",
+   "expected": "accept",
+   "why": "unit written",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 303,
+   "category": "word-problem",
+   "input": "4 hours",
+   "key": "4",
+   "expected": "accept",
+   "why": "unit written",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 304,
+   "category": "word-problem",
+   "input": "4 hrs",
+   "key": "4",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 305,
+   "category": "word-problem",
+   "input": "1.5 hours",
+   "key": "1.5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 306,
+   "category": "word-problem",
+   "input": "3/2",
+   "key": "1.5",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 307,
+   "category": "word-problem",
+   "input": "10, 20",
+   "key": "10 liters of 40%, 20 liters of 10%",
+   "expected": "accept",
+   "why": "values in the order asked",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 308,
+   "category": "word-problem",
+   "input": "33.3, 16.7",
+   "key": "33.3 mL of 20%, 16.7 mL of 50%",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 309,
+   "category": "word-problem",
+   "input": "5",
+   "key": "5 pounds of each",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 310,
+   "category": "word-problem",
+   "input": "5 lbs each",
+   "key": "5 pounds of each",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 311,
+   "category": "word-problem",
+   "input": "$230",
+   "key": "230",
+   "expected": "accept",
+   "why": "dollar sign",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 312,
+   "category": "word-problem",
+   "input": "11",
+   "key": "11",
+   "expected": "accept",
+   "why": "",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 313,
+   "category": "blank",
+   "input": "",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "blank",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 314,
+   "category": "blank",
+   "input": "   ",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "spaces only",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 315,
+   "category": "blank",
+   "input": "",
+   "key": "no solution",
+   "expected": "reject",
+   "why": "blank must never match a phrase key",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 316,
+   "category": "junk",
+   "input": "<b>8</b>",
+   "key": "x = 8",
+   "expected": "either",
+   "why": "markup typed into the box",
+   "actual": "accept",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 317,
+   "category": "junk",
+   "input": "8 = 8",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 318,
+   "category": "junk",
+   "input": "???",
+   "key": "x = 8",
+   "expected": "reject",
+   "why": "",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 319,
+   "category": "guard",
+   "input": "0",
+   "key": "no solution",
+   "expected": "reject",
+   "why": "linear \"no solution\": 0 more likely means x = 0",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 320,
+   "category": "guard",
+   "input": "1",
+   "key": "two solutions",
+   "expected": "reject",
+   "why": "wrong count",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 321,
+   "category": "guard",
+   "input": "one",
+   "key": "no real solutions",
+   "expected": "reject",
+   "why": "wrong count",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 322,
+   "category": "guard",
+   "input": "7, 8",
+   "key": "7, 8, 9",
+   "expected": "reject",
+   "why": "missing a number",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 323,
+   "category": "guard",
+   "input": "6 by 12",
+   "key": "6 by 11",
+   "expected": "reject",
+   "why": "wrong number",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 324,
+   "category": "guard",
+   "input": "11 by 6",
+   "key": "6 by 11",
+   "expected": "either",
+   "why": "width and length swapped",
+   "actual": "accept",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 325,
+   "category": "guard",
+   "input": "5 hours",
+   "key": "4",
+   "expected": "reject",
+   "why": "wrong number with a unit",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 326,
+   "category": "guard",
+   "input": "4 apples",
+   "key": "4",
+   "expected": "either",
+   "why": "unknown unit word",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 327,
+   "category": "guard",
+   "input": "20, 10",
+   "key": "10 liters of 40%, 20 liters of 10%",
+   "expected": "reject",
+   "why": "amounts swapped",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 328,
+   "category": "guard",
+   "input": "40, 20",
+   "key": "10 liters of 40%, 20 liters of 10%",
+   "expected": "reject",
+   "why": "percent is not an amount",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 329,
+   "category": "guard",
+   "input": "8/12",
+   "key": "2/3",
+   "expected": "reject",
+   "why": "unreduced fraction still rejected",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 330,
+   "category": "guard",
+   "input": "4/8",
+   "key": "0.5",
+   "expected": "either",
+   "why": "unreduced fraction for a decimal key",
+   "actual": "accept",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 331,
+   "category": "guard",
+   "input": "below, dashed",
+   "key": "solid, below",
+   "expected": "reject",
+   "why": "wrong boundary",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 332,
+   "category": "guard",
+   "input": "linear",
+   "key": "not linear",
+   "expected": "reject",
+   "why": "opposite",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 333,
+   "category": "guard",
+   "input": "y = 2(x - 1.5)",
+   "key": "y = 2x - 3",
+   "expected": "either",
+   "why": "equivalent but not slope-intercept form",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 334,
+   "category": "guard",
+   "input": "y = 3x - 2",
+   "key": "y = 2x - 3",
+   "expected": "reject",
+   "why": "wrong line",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 335,
+   "category": "guard",
+   "input": "y = -2x + 3",
+   "key": "y = 2x - 3",
+   "expected": "reject",
+   "why": "wrong line",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 336,
+   "category": "guard",
+   "input": "y = 2*4^x",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "reject",
+   "why": "a and b swapped",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 337,
+   "category": "guard",
+   "input": "y = 4(0.5)^x",
+   "key": "y=4(2<sup>x</sup>)",
+   "expected": "reject",
+   "why": "decay for growth",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 338,
+   "category": "guard",
+   "input": "2x(2x+4)",
+   "key": "4x(x+2)",
+   "expected": "reject",
+   "why": "not the GCF",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 339,
+   "category": "guard",
+   "input": "2(x+2)(x+1)",
+   "key": "2(x+2)(x+1)",
+   "expected": "accept",
+   "why": "exact",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 340,
+   "category": "guard",
+   "input": "(2x+4)(x+1)",
+   "key": "2(x+2)(x+1)",
+   "expected": "reject",
+   "why": "common factor left inside a bracket",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 341,
+   "category": "guard",
+   "input": "(x-2)(x-3)",
+   "key": "(x+2)(x+3)",
+   "expected": "reject",
+   "why": "signs",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 342,
+   "category": "guard",
+   "input": "3.8, 0.2",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "reject",
+   "why": "badly rounded",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 343,
+   "category": "guard",
+   "input": "3.7, 0.3",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "accept",
+   "why": "correct to one decimal place",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 344,
+   "category": "guard",
+   "input": "4, 0",
+   "key": "x = 2+√3 or x = 2-√3",
+   "expected": "reject",
+   "why": "whole-number guesses",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 345,
+   "category": "guard",
+   "input": "m = 5, b = 3",
+   "key": "slope = 3, y-intercept = 5",
+   "expected": "reject",
+   "why": "swapped values",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 346,
+   "category": "guard",
+   "input": "2x",
+   "key": "x<sup>2</sup>",
+   "expected": "reject",
+   "why": "coefficient, not exponent",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 347,
+   "category": "guard",
+   "input": "x^3",
+   "key": "x<sup>2</sup>",
+   "expected": "reject",
+   "why": "wrong exponent",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 348,
+   "category": "guard",
+   "input": "x > 4 or x < 2",
+   "key": "x > 4 or x < -2",
+   "expected": "reject",
+   "why": "wrong boundary",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 349,
+   "category": "guard",
+   "input": "x >= 4 or x < -2",
+   "key": "x > 4 or x < -2",
+   "expected": "reject",
+   "why": "boundary included",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 350,
+   "category": "guard",
+   "input": "-2 < x < 4",
+   "key": "x > 4 or x < -2",
+   "expected": "reject",
+   "why": "complement",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 351,
+   "category": "guard",
+   "input": "x ≥ 3.2",
+   "key": "x >= 16/5",
+   "expected": "accept",
+   "why": "decimal endpoint",
+   "actual": "accept",
+   "verdict": "ok"
+  },
+  {
+   "id": 352,
+   "category": "guard",
+   "input": "±5",
+   "key": "x = 5",
+   "expected": "reject",
+   "why": "extra root",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 353,
+   "category": "guard",
+   "input": "5 ± 0",
+   "key": "x = 5",
+   "expected": "either",
+   "why": "",
+   "actual": "reject",
+   "verdict": "unjudged"
+  },
+  {
+   "id": 354,
+   "category": "guard",
+   "input": "3",
+   "key": "f(2) = 4",
+   "expected": "reject",
+   "why": "wrong value",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 355,
+   "category": "guard",
+   "input": "{2, 4}",
+   "key": "{-1,2,4}",
+   "expected": "reject",
+   "why": "missing element",
+   "actual": "reject",
+   "verdict": "ok"
+  },
+  {
+   "id": 356,
+   "category": "guard",
+   "input": "25 = 3x + 4",
+   "key": "3x + 4 = 19",
+   "expected": "reject",
+   "why": "wrong equation",
+   "actual": "reject",
+   "verdict": "ok"
+  }
+ ]
+}
