@@ -39,7 +39,11 @@
      down to plain ASCII. */
   function clean(s) {
     s = String(s == null ? '' : s);
-    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '');
+    /* Keys mark exponents with <sup>. Keep them as exponents: stripping the tag
+       alone turned x<sup>2</sup> into x2, so a correct x^2 was marked wrong. */
+    s = s.replace(/<sup>([\s\S]*?)<\/sup>/gi, '^($1)');
+    /* Only real tags: "x < -2 or x > 4" must not be read as a tag and deleted. */
+    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<\/?[a-z][^<>]*>/gi, '');
     s = s.replace(/&minus;/gi, '-').replace(/&times;/gi, '*').replace(/&divide;/gi, '/')
       .replace(/&middot;/gi, '*').replace(/&sdot;/gi, '*').replace(/&nbsp;/gi, ' ')
       .replace(/&le;/gi, '<=').replace(/&ge;/gi, '>=').replace(/&ne;/gi, '!=')
@@ -68,6 +72,8 @@
     t = t.replace(/\s+/g, '');
     t = t.replace(/=</g, '<=').replace(/=>/g, '>=');
     t = t.replace(/\^\(\+?(-?\d+)\)/g, '^$1');
+    t = t.replace(/\^\(([a-z])\)/g, '^$1');
+    t = t.replace(/(^|[^a-z])\(([a-z])\)/g, '$1$2');   /* -(x)^2 is -x^2 */
     t = t.replace(/\^\+/g, '^');
     /* 2*x and 2x are the same thing; so are (x+1)*(x+2) and (x+1)(x+2) */
     for (var i = 0; i < 3; i++) t = t.replace(/([0-9a-z)\]])\*([a-z(\[])/g, '$1$2');
@@ -313,26 +319,353 @@
   function varStripEq(a, b) {
     var ra = a.replace(/^[a-z]=/, ''), rb = b.replace(/^[a-z]=/, '');
     if (ra === a && rb === b) return false;
+    /* x = 5 and y = 5 are different lines, not two ways of writing one answer. */
+    if (ra !== a && rb !== b && a.charAt(0) !== b.charAt(0) && /[xy]/.test(a.charAt(0)) && /[xy]/.test(b.charAt(0))) return false;
     return core(ra, rb);
+  }
+
+  /* The original matcher. Everything it accepts is still accepted; the lenient
+     pass below only adds forms it used to reject. */
+  function strictMatch(u, c) {
+    var a = norm(u), b = norm(c);
+    if (!b) return false;
+    if (a === b) return true;
+
+    var A = aliasOf(a), B = aliasOf(b);
+    if (A && B && A === B && b.length > 1) return true;
+
+    if (core(a, b)) return true;
+    if (varStripEq(a, b)) return true;
+    if (isOrderedPair(a) || isOrderedPair(b)) return pairEq(a, b);
+    if (setEq(a, b)) return true;
+    if (ineqEq(a, b)) return true;
+    return false;
+  }
+
+  /* ---- a small evaluator, for checks that compare values rather than text ----
+     Grammar: + - * / ^ ( ) √, implicit multiplication, one-letter variables.
+     1/2x reads as (1/2)x, the way the course writes slopes. Returns NaN on
+     anything it does not understand, and NaN never compares equal. */
+  function evalExpr(src, env) {
+    var s = String(src).replace(/\s+/g, '').replace(/sqrt/g, '√'), i = 0;
+    function peek() { return s.charAt(i); }
+    function atomStart(ch) { return /[0-9.a-z(√]/.test(ch); }
+    function expr() {
+      var v = term();
+      while (peek() === '+' || peek() === '-') { var op = s.charAt(i++); var r = term(); v = op === '+' ? v + r : v - r; }
+      return v;
+    }
+    function term() {
+      var v = unary();
+      for (;;) {
+        var ch = peek();
+        if (ch === '*' || ch === '/') { i++; var r = unary(); v = ch === '*' ? v * r : v / r; }
+        else if (atomStart(ch)) v = v * power();
+        else return v;
+      }
+    }
+    function unary() {
+      if (peek() === '-') { i++; return -unary(); }
+      if (peek() === '+') { i++; return unary(); }
+      return power();
+    }
+    function power() {
+      var b = atom();
+      if (peek() === '^') { i++; return Math.pow(b, unary()); }
+      return b;
+    }
+    function atom() {
+      var ch = peek(), m;
+      if (ch === '(') { i++; var v = expr(); if (peek() !== ')') return NaN; i++; return v; }
+      if (ch === '√') { i++; return Math.sqrt(atom()); }
+      m = /^(\d+\.?\d*|\.\d+)/.exec(s.slice(i));
+      if (m) { i += m[0].length; return parseFloat(m[0]); }
+      if (/[a-z]/.test(ch)) { i++; return env && env.hasOwnProperty(ch) ? env[ch] : NaN; }
+      return NaN;
+    }
+    var out = expr();
+    return i === s.length ? out : NaN;
+  }
+
+  var PROBES = [1.37, -0.83, 2.71, 0.59, 3.14];
+
+  function letters(s) {
+    var seen = {};
+    String(s).replace(/sqrt/g, '').replace(/[a-z]/g, function (ch) { seen[ch] = 1; return ch; });
+    return Object.keys(seen);
+  }
+
+  /* Same value at several points for every variable in either expression. */
+  function sameValues(p, q) {
+    var vars = letters(p + q);
+    for (var k = 0; k < PROBES.length; k++) {
+      var env = {};
+      vars.forEach(function (v, j) { env[v] = PROBES[(k + j) % PROBES.length]; });
+      var x = evalExpr(p, env), y = evalExpr(q, env);
+      if (!isFinite(x) || !isFinite(y)) return false;
+      if (Math.abs(x - y) > 1e-9 * Math.max(1, Math.abs(x), Math.abs(y))) return false;
+    }
+    return true;
+  }
+
+  /* ---- inequalities as sets: "3 > x > -1" = "-1 < x < 3"; "and" is not "or" ---- */
+  function ineqSet(s) {
+    s = s.replace(/=</g, '<=').replace(/=>/g, '>=');
+    var orParts = s.split(/\s+or\s+|,/), set = [], v = null;
+    for (var p = 0; p < orParts.length; p++) {
+      var lo = -Infinity, loC = false, hi = Infinity, hiC = false;
+      var andParts = orParts[p].split(/\s+and\s+/);
+      for (var q = 0; q < andParts.length; q++) {
+        var toks = andParts[q].replace(/\s+/g, '').split(/(<=|>=|<|>)/);
+        if (toks.length !== 3 && toks.length !== 5) return null;
+        for (var t = 1; t < toks.length; t += 2) {
+          var L = toks[t - 1], op = toks[t], R = toks[t + 1], bound, side;
+          if (/^[a-z]$/.test(L)) { v = v || L; if (L !== v) return null; bound = R; side = op; }
+          else if (/^[a-z]$/.test(R)) { v = v || R; if (R !== v) return null; bound = L; side = { '<': '>', '>': '<', '<=': '>=', '>=': '<=' }[op]; }
+          else continue;
+          var n = evalExpr(bound, {});
+          if (!isFinite(n)) return null;
+          if (side.charAt(0) === '>') { if (n > lo || (n === lo && !(side === '>=') )) { lo = n; loC = side === '>='; } }
+          else if (n < hi || (n === hi && side !== '<=')) { hi = n; hiC = side === '<='; }
+        }
+      }
+      if (lo < hi || (lo === hi && loC && hiC)) set.push([lo, loC, hi, hiC]);
+    }
+    if (!v) return null;
+    set.sort(function (a, b) { return a[0] - b[0]; });
+    return set;
+  }
+
+  function ineqSetEq(u, c) {
+    var A = ineqSet(u), B = ineqSet(c);
+    if (!A || !B) return null;
+    if (A.length !== B.length) return false;
+    for (var k = 0; k < A.length; k++)
+      for (var j = 0; j < 4; j++)
+        if (j % 2 ? A[k][j] !== B[k][j] : Math.abs(A[k][j] - B[k][j]) > 1e-9 && A[k][j] !== B[k][j]) return false;
+    return true;
+  }
+
+  /* ---- the lenient pass ---- */
+
+  /* Rewrite common student notation into the form the strict matcher reads. */
+  function studentForms(raw) {
+    var s = clean(raw).trim(), out = [];
+    var t = s
+      .replace(/(^|[^\d])\.(\d)/g, '$10.$2')                       /* .5 -> 0.5 */
+      .replace(/(-?)(\d+)\s+(\d+)\/(\d+)/g, function (_, sg, w, n, d) {   /* 1 1/2 -> 3/2 */
+        return sg + (parseInt(w, 10) * parseInt(d, 10) + parseInt(n, 10)) + '/' + d;
+      })
+      .replace(/sqrt\s*\(?\s*(\d+)\s*\)?/g, '√$1')
+      .replace(/=\s*\+/g, '=');
+    /* ±: "2±√3" -> "2+√3, 2-√3"; "x = ±5" -> "x = 5, x = -5" */
+    var pm = /^(?:([a-z])\s*=\s*)?(.*?)\s*±\s*(.+)$/.exec(t);
+    if (pm) {
+      var v = pm[1] ? pm[1] + '=' : '', base = pm[2];
+      t = base ? v + base + '+' + pm[3] + ',' + v + base + '-' + pm[3] : v + pm[3] + ',' + v + '-' + pm[3];
+    }
+    /* "(3/2)" -> "3/2" */
+    var par = /^\((-?[\d.\/]+)\)$/.exec(t);
+    if (par) t = par[1];
+    /* "7 8 9" -> "7, 8, 9" */
+    if (/^-?\d+(\.\d+)?(\s+-?\d+(\.\d+)?)+$/.test(t)) t = t.split(/\s+/).join(',');
+    out.push(t);
+    /* x2 typed for x^2 (letter followed by digits) */
+    var ex = t.replace(/([a-z])(\d+)/g, '$1^$2');
+    if (ex !== t) out.push(ex);
+    return out;
+  }
+
+  var WORD_SYNONYMS = { max: 'maximum', min: 'minimum', nonlinear: 'not linear', non: 'not' };
+  var WORD_FILLER = { circle: 1, exponential: 1, the: 1, to: 1, a: 1, an: 1, is: 1, it: 1 };
+
+  function wordBag(s) {
+    var words = String(s).toLowerCase().replace(/[^a-z]+/g, ' ').trim().split(' ');
+    var out = [];
+    words.forEach(function (w) {
+      (WORD_SYNONYMS[w] || w).split(' ').forEach(function (x) { if (x && !WORD_FILLER[x]) out.push(x); });
+    });
+    return out.sort().join(' ');
+  }
+
+  /* "solid below" = "below, solid"; "max" = "maximum"; "open circle" = "open" */
+  function wordEq(u, c) {
+    var k = clean(c);
+    if (!/^[a-z][a-z\s,\-]*$/.test(k.trim())) return false;
+    if (!/^[a-z][a-z\s,\-]*$/.test(clean(u).trim())) return false;
+    var a = wordBag(u), b = wordBag(c);
+    return !!a && a === b;
+  }
+
+  /* "two solutions" accepts 2 / two / 2 solutions; "no real solutions" accepts 0 / none */
+  var COUNT = { zero: 0, none: 0, no: 0, one: 1, two: 2 };
+  function countOf(s, isKey) {
+    var m = /^(\d|zero|none|no|one|two)(?:\s+real)?(?:\s+(?:solutions?|x-?\s?intercepts?))?$/.exec(s.trim());
+    /* only the quadratic counting keys ("two solutions", "no real solutions"): for a
+       linear equation "0" is far more likely to mean x = 0 than "zero solutions" */
+    if (!m || (isKey && !(/solution/.test(s) && /two|one|real/.test(s)))) return null;
+    return /^\d$/.test(m[1]) ? +m[1] : COUNT[m[1]];
+  }
+  function countEq(u, c) {
+    var k = countOf(clean(c), true);
+    if (k === null) return false;
+    var a = countOf(clean(u).replace(/\.$/, ''), false);
+    return a !== null && a === k;
+  }
+
+  /* Answers that are just numbers, maybe with units, "$", thousands commas, "by",
+     "and", "of each" ("4 hours" = 4, "$4,000" = 4000, "6 x 11" = "6 by 11").
+     Fractions are left to numEq so an unreduced fraction is still rejected. */
+  var UNIT_WORDS = /^(and|by|x|of|each|a|b|lbs?|pounds?|liters?|l|ml|hours?|hrs?|h|minutes?|mins?|miles?|mi|mph|months?|days?|years?|yrs?|feet|ft|dollars?|degrees?|deg|w|l|width|length|units?|oz|grams?|g|tickets?|items?|guests?|texts?|walks?)$/;
+  function numberList(s, isKey) {
+    s = clean(s).replace(/\$/g, '').replace(/(\d),(\d{3})(?!\d)/g, '$1$2').replace(/°/g, ' ');
+    if (/[\/=<>()^]/.test(s.replace(/^[a-z]\s*=|,\s*[a-z]\s*=/g, ','))) return null;
+    if (isKey) s = s.replace(/-?\d+(\.\d+)?\s*%/g, ' ');            /* "10 liters of 40%" -> the 10 */
+    else if (/%/.test(s)) return null;
+    var nums = s.match(/-?\d+(\.\d+)?/g);
+    if (!nums) return null;
+    var words = s.replace(/-?\d+(\.\d+)?/g, ' ').replace(/[,=]/g, ' ').trim();
+    if (words && !words.split(/\s+/).every(function (w) { return UNIT_WORDS.test(w); })) return null;
+    return { nums: nums.map(parseFloat), unordered: isKey && /^[\s\d.,\-]*(and[\s\d.,\-]*)*$/.test(s) };
+  }
+  function numberListEq(u, c) {
+    var K = numberList(c, true), U = numberList(u, false);
+    if (!K || !U || K.nums.length !== U.nums.length) return false;
+    var a = U.nums.slice(), b = K.nums.slice();
+    if (K.unordered) { a.sort(function (x, y) { return x - y; }); b.sort(function (x, y) { return x - y; }); }
+    for (var k = 0; k < a.length; k++) if (Math.abs(a[k] - b[k]) > 1e-9) return false;
+    return true;
+  }
+
+  /* Split on top-level commas only, so "vertex=(1,-1)" stays whole. */
+  function topSplit(s) {
+    var out = [], depth = 0, cur = '';
+    for (var i = 0; i < s.length; i++) {
+      var ch = s.charAt(i);
+      if (ch === '(' || ch === '{') depth++;
+      if (ch === ')' || ch === '}') depth--;
+      if (ch === ',' && !depth) { out.push(cur); cur = ''; } else cur += ch;
+    }
+    out.push(cur);
+    return out.map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+
+  /* "slope = 3, y-intercept = 5" accepts "m = 3, b = 5", "3, 5", "slope 3, y-intercept 5" */
+  function labeledEq(u, c) {
+    var K = topSplit(clean(c));
+    if (K.length < 2 || !K.some(function (p) { return /^[a-z][a-z\- ]*=/.test(p); })) return false;
+    var U = topSplit(clean(u).replace(/\s+and\s+/g, ','));
+    if (U.length !== K.length) return false;
+    for (var i = 0; i < K.length; i++) {
+      var kv = K[i].replace(/^[a-z][a-z\- ]*=\s*/, '');
+      var uv = U[i].replace(/^[a-z][a-z\- ]*?\s*(=|:)\s*/, '').replace(/^(slope|y-intercept|x-intercept|vertex|aos|d)\s+/, '');
+      if (!(strictMatch(uv, kv) || wordEq(uv, kv) || countEq(uv, kv))) return false;
+    }
+    return true;
+  }
+
+  /* "f(2) = 3" accepts "3" */
+  function fnValueEq(u, c) {
+    var m = /^([a-z])\(([^)]+)\)\s*=\s*(.+)$/.exec(clean(c).trim());
+    return !!m && strictMatch(u, m[3]);
+  }
+
+  /* y = mx + b written any way: "y = 0.5x + 1", "y = x/2 + 1", "y = 1/2x + 1".
+     Only for linear keys, and only answers without leftover brackets. */
+  function lineEq(u, c) {
+    var K = /^([a-z])\s*=\s*(.+)$/.exec(norm(c)), a = norm(u);
+    if (!K) return false;
+    var U = /^([a-z])=(.+)$/.exec(a), rhs = U ? U[2] : a;
+    if (U && U[1] !== K[1]) return false;
+    if (/\(/.test(rhs.replace(/-?\((-?[\d.]+\/[\d.]+)\)/g, '$1'))) return false;
+    var v = letters(K[2]);
+    if (v.length !== 1 || v[0] === K[1]) return false;
+    var f = function (x) { var e = {}; e[v[0]] = x; return evalExpr(K[2], e); };
+    if (Math.abs((f(2) - f(1)) - (f(1) - f(0))) > 1e-9) return false;       /* key must be linear */
+    return letters(rhs).every(function (x) { return x === v[0]; }) && sameValues(rhs, K[2]);
+  }
+
+  /* y = a·b^x written any way: "y = 4*2^x", "4(2)^x", "y = 10(1/2)^x" */
+  function expEq(u, c) {
+    var K = /^(?:([a-z])\s*=\s*)?(.+)$/.exec(norm(c)), a = norm(u);
+    if (!K || !/\^[a-z]/.test(K[2])) return false;
+    var v = letters(K[2]);
+    if (v.length !== 1) return false;
+    var U = /^([a-z])=(.+)$/.exec(a), rhs = U && U[1] !== v[0] ? U[2] : a;
+    if (U && K[1] && U[1] !== K[1]) return false;
+    if (!letters(rhs).every(function (x) { return x === v[0]; })) return false;
+    for (var x = 0; x <= 3; x++) {
+      var e = {}; e[v[0]] = x;
+      var p = evalExpr(rhs, e), q = evalExpr(K[2], e);
+      if (!isFinite(p) || Math.abs(p - q) > 1e-9 * Math.max(1, Math.abs(q))) return false;
+    }
+    return true;
+  }
+
+  /* Factored answers in another arrangement: "(5-x)(x+1)" = "-(x-5)(x+1)",
+     "4x(2+x)" = "4x(x+2)". Both must be products with the same number of
+     bracketed factors, equal as polynomials, and every bracket must have no
+     common whole-number factor left (so 2x(2x+4) is still not the GCF form). */
+  function factorShape(s) {
+    var m = /^(-?\d*(?:[a-z](?:\^\d+)?)*)((?:\([^()]+\)(?:\^\d+)?)+)$/.exec(s);
+    if (!m) return null;
+    var groups = m[2].match(/\(([^()]+)\)(?:\^(\d+))?/g), count = 0, primitive = true;
+    groups.forEach(function (g) {
+      var mm = /\(([^()]+)\)(?:\^(\d+))?/.exec(g);
+      count += mm[2] ? parseInt(mm[2], 10) : 1;
+      var coefs = (splitTerms(mm[1]) || []).map(function (t) { var p = parseProduct(t); return p ? Math.round(p.coef) : 1; });
+      if (coefs.length && coefs.reduce(function (g2, x) { return gcd(g2, x); }, 0) !== 1) primitive = false;
+    });
+    return { count: count, primitive: primitive };
+  }
+  function factoredEq(u, c) {
+    var a = norm(u), b = norm(c), A = factorShape(a), B = factorShape(b);
+    if (!A || !B || A.count !== B.count) return false;
+    if (B.primitive && !A.primitive) return false;
+    return sameValues(a, b);
+  }
+
+  /* Exact roots typed as decimals, where the item invites them ("exact or decimal form"). */
+  function radicalApproxEq(u, c) {
+    var k = norm(c);
+    if (k.indexOf('√') < 0) return false;
+    var K = k.split(',').map(function (p) { return evalExpr(p.replace(/^[a-z]=/, ''), {}); });
+    var U = norm(u).split(',').map(function (p) { return p.replace(/^[a-z]=/, ''); });
+    if (K.length !== U.length || !U.every(function (p) { return /^-?\d+\.\d+$/.test(p); })) return false;
+    var used = [];
+    return U.every(function (p) {
+      var x = parseFloat(p), tol = 0.5 * Math.pow(10, -(p.split('.')[1].length)) + 1e-9;
+      for (var j = 0; j < K.length; j++) if (!used[j] && Math.abs(K[j] - x) <= tol) { used[j] = true; return true; }
+      return false;
+    });
+  }
+
+  function lenientMatch(u, c) {
+    var forms = studentForms(u);
+    for (var i = 0; i < forms.length; i++) {
+      var f = forms[i];
+      if (strictMatch(f, c)) return true;
+      if (wordEq(f, c) || countEq(f, c) || numberListEq(f, c) || labeledEq(f, c) || fnValueEq(f, c)) return true;
+      if (lineEq(f, c) || expEq(f, c) || factoredEq(f, c) || radicalApproxEq(f, c)) return true;
+      if (/[{}]/.test(c) && strictMatch(f.replace(/[{}]/g, ''), String(c).replace(/[{}]/g, ''))) return true;
+      var sw = /^(.+)=(.+)$/.exec(norm(f));
+      if (sw && /=/.test(norm(c)) && !/^[a-z]=/.test(norm(f)) && strictMatch(sw[2] + '=' + sw[1], c)) return true;
+    }
+    return false;
   }
 
   function isMatch(u, c) {
     try {
       if (u === undefined || u === null) return false;
       if (!String(u).trim()) return false;
-      var a = norm(u), b = norm(c);
-      if (!b) return false;
-      if (a === b) return true;
-
-      var A = aliasOf(a), B = aliasOf(b);
-      if (A && B && A === B && b.length > 1) return true;
-
-      if (core(a, b)) return true;
-      if (varStripEq(a, b)) return true;
-      if (isOrderedPair(a) || isOrderedPair(b)) return pairEq(a, b);
-      if (setEq(a, b)) return true;
-      if (ineqEq(a, b)) return true;
-      return false;
+      /* Inequalities are compared as sets, so "and" (both at once) can no
+         longer pass for "or" (either one). */
+      var cu = clean(u), ck = clean(c);
+      if (/[<>]/.test(cu) && /[<>]/.test(ck)) {
+        var r = ineqSetEq(cu, ck);
+        if (r !== null) return r;
+      }
+      return strictMatch(u, c) || lenientMatch(u, c);
     } catch (e) {
       /* Never let a grading bug swallow a student's answer. */
       try { return String(u).trim().toLowerCase() === String(c).trim().toLowerCase(); }

@@ -20,7 +20,7 @@ try {
     await localOnly(page, base);
     await page.goto(base + f, { waitUntil: 'load' });
     identity[f] = await page.evaluate(() => ({
-      shared: typeof window.isMatch === 'function' && /aliasOf/.test(String(window.isMatch)),
+      shared: typeof window.isMatch === 'function' && /strictMatch|aliasOf/.test(String(window.isMatch)),
       matchesIsShared: window.matches === window.isMatch,
       // what an unqualified call inside the page's own gradeT resolves to
       lexical: (function () { try { return isMatch === window.isMatch; } catch (e) { return 'n/a'; } })()
@@ -54,7 +54,11 @@ if (process.argv.includes('--baseline')) {
 }
 if (process.argv.includes('--check')) {
   const baseline = JSON.parse(fs.readFileSync(basePath, 'utf8'));
-  const regressions = results.filter(r => baseline[r.id] === 'accept' && r.actual === 'reject');
+  // Inputs the audit showed were wrongly accepted may become rejected; nothing else may.
+  const allowed = JSON.parse(fs.readFileSync(path.join(ROOT, 'tests/checker-baseline-exceptions.json'), 'utf8'));
+  const regressions = results.filter(r => baseline[r.id] === 'accept' && r.actual === 'reject' && !allowed[String(r.id)]);
+  results.filter(r => baseline[r.id] === 'accept' && r.actual === 'reject' && allowed[String(r.id)])
+    .forEach(r => console.log(`now rejected as intended: #${r.id} ${JSON.stringify(r.input)} vs ${JSON.stringify(r.key)} — ${allowed[String(r.id)]}`));
   regressions.forEach(r => console.log('REGRESSION: previously accepted, now rejected', r));
   if (regressions.length) process.exit(1);
   console.log('no regressions against the baseline');

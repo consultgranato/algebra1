@@ -51,9 +51,15 @@ same plumbing, and this is what stops them drifting again. It provides:
 - **Answer matching** (`isMatch`) — accepts any equivalent form of a correct
   answer: `x^-4` for `1/x^4`, `3+2x` for `2x+3`, `(x+3)(x+2)` for `(x+2)(x+3)`,
   `0.5` for `1/2`, `x = 5` for `5`, `3<x` for `x>3`, unicode superscripts and
-  minus signs, `NS` for "no solution". It still rejects genuinely wrong answers,
-  and it rejects an unreduced fraction such as `2/4` for `1/2`, since
-  simplifying is the point of several units.
+  minus signs, `NS` for "no solution". A second, lenient pass accepts fair
+  student forms the first pass misses: units and `$` on word-problem answers
+  (`4 hours`, `$4,000`), mixed numbers, `.5`, `±` and `sqrt`, `2` or `two` for
+  "two solutions", `m = 3, b = 5`, `y = 0.5x + 1` for `y = (1/2)x + 1`,
+  inequalities in any arrangement (compared as sets, so "and" is not "or").
+  It still rejects genuinely wrong answers, and it rejects an unreduced
+  fraction such as `2/4` for `1/2`, since simplifying is the point of several
+  units. Every rule is pinned by `tests/checker-corpus.json`; run
+  `node tests/run-all.mjs` before changing it.
 - **Progress**, saved to `localStorage` under `alg1.progress.v1`, keyed by unit
   id. Records notes read, best and last practice score per topic, and best
   practice-test and vocabulary-quiz scores.

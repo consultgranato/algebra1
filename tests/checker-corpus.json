@@ -2542,5 +2542,309 @@
   "key": "x = 8",
   "expected": "reject",
   "why": ""
+ },
+ {
+  "id": 319,
+  "category": "guard",
+  "input": "0",
+  "key": "no solution",
+  "expected": "reject",
+  "why": "linear \"no solution\": 0 more likely means x = 0"
+ },
+ {
+  "id": 320,
+  "category": "guard",
+  "input": "1",
+  "key": "two solutions",
+  "expected": "reject",
+  "why": "wrong count"
+ },
+ {
+  "id": 321,
+  "category": "guard",
+  "input": "one",
+  "key": "no real solutions",
+  "expected": "reject",
+  "why": "wrong count"
+ },
+ {
+  "id": 322,
+  "category": "guard",
+  "input": "7, 8",
+  "key": "7, 8, 9",
+  "expected": "reject",
+  "why": "missing a number"
+ },
+ {
+  "id": 323,
+  "category": "guard",
+  "input": "6 by 12",
+  "key": "6 by 11",
+  "expected": "reject",
+  "why": "wrong number"
+ },
+ {
+  "id": 324,
+  "category": "guard",
+  "input": "11 by 6",
+  "key": "6 by 11",
+  "expected": "either",
+  "why": "width and length swapped"
+ },
+ {
+  "id": 325,
+  "category": "guard",
+  "input": "5 hours",
+  "key": "4",
+  "expected": "reject",
+  "why": "wrong number with a unit"
+ },
+ {
+  "id": 326,
+  "category": "guard",
+  "input": "4 apples",
+  "key": "4",
+  "expected": "either",
+  "why": "unknown unit word"
+ },
+ {
+  "id": 327,
+  "category": "guard",
+  "input": "20, 10",
+  "key": "10 liters of 40%, 20 liters of 10%",
+  "expected": "reject",
+  "why": "amounts swapped"
+ },
+ {
+  "id": 328,
+  "category": "guard",
+  "input": "40, 20",
+  "key": "10 liters of 40%, 20 liters of 10%",
+  "expected": "reject",
+  "why": "percent is not an amount"
+ },
+ {
+  "id": 329,
+  "category": "guard",
+  "input": "8/12",
+  "key": "2/3",
+  "expected": "reject",
+  "why": "unreduced fraction still rejected"
+ },
+ {
+  "id": 330,
+  "category": "guard",
+  "input": "4/8",
+  "key": "0.5",
+  "expected": "either",
+  "why": "unreduced fraction for a decimal key"
+ },
+ {
+  "id": 331,
+  "category": "guard",
+  "input": "below, dashed",
+  "key": "solid, below",
+  "expected": "reject",
+  "why": "wrong boundary"
+ },
+ {
+  "id": 332,
+  "category": "guard",
+  "input": "linear",
+  "key": "not linear",
+  "expected": "reject",
+  "why": "opposite"
+ },
+ {
+  "id": 333,
+  "category": "guard",
+  "input": "y = 2(x - 1.5)",
+  "key": "y = 2x - 3",
+  "expected": "either",
+  "why": "equivalent but not slope-intercept form"
+ },
+ {
+  "id": 334,
+  "category": "guard",
+  "input": "y = 3x - 2",
+  "key": "y = 2x - 3",
+  "expected": "reject",
+  "why": "wrong line"
+ },
+ {
+  "id": 335,
+  "category": "guard",
+  "input": "y = -2x + 3",
+  "key": "y = 2x - 3",
+  "expected": "reject",
+  "why": "wrong line"
+ },
+ {
+  "id": 336,
+  "category": "guard",
+  "input": "y = 2*4^x",
+  "key": "y=4(2<sup>x</sup>)",
+  "expected": "reject",
+  "why": "a and b swapped"
+ },
+ {
+  "id": 337,
+  "category": "guard",
+  "input": "y = 4(0.5)^x",
+  "key": "y=4(2<sup>x</sup>)",
+  "expected": "reject",
+  "why": "decay for growth"
+ },
+ {
+  "id": 338,
+  "category": "guard",
+  "input": "2x(2x+4)",
+  "key": "4x(x+2)",
+  "expected": "reject",
+  "why": "not the GCF"
+ },
+ {
+  "id": 339,
+  "category": "guard",
+  "input": "2(x+2)(x+1)",
+  "key": "2(x+2)(x+1)",
+  "expected": "accept",
+  "why": "exact"
+ },
+ {
+  "id": 340,
+  "category": "guard",
+  "input": "(2x+4)(x+1)",
+  "key": "2(x+2)(x+1)",
+  "expected": "reject",
+  "why": "common factor left inside a bracket"
+ },
+ {
+  "id": 341,
+  "category": "guard",
+  "input": "(x-2)(x-3)",
+  "key": "(x+2)(x+3)",
+  "expected": "reject",
+  "why": "signs"
+ },
+ {
+  "id": 342,
+  "category": "guard",
+  "input": "3.8, 0.2",
+  "key": "x = 2+√3 or x = 2-√3",
+  "expected": "reject",
+  "why": "badly rounded"
+ },
+ {
+  "id": 343,
+  "category": "guard",
+  "input": "3.7, 0.3",
+  "key": "x = 2+√3 or x = 2-√3",
+  "expected": "accept",
+  "why": "correct to one decimal place"
+ },
+ {
+  "id": 344,
+  "category": "guard",
+  "input": "4, 0",
+  "key": "x = 2+√3 or x = 2-√3",
+  "expected": "reject",
+  "why": "whole-number guesses"
+ },
+ {
+  "id": 345,
+  "category": "guard",
+  "input": "m = 5, b = 3",
+  "key": "slope = 3, y-intercept = 5",
+  "expected": "reject",
+  "why": "swapped values"
+ },
+ {
+  "id": 346,
+  "category": "guard",
+  "input": "2x",
+  "key": "x<sup>2</sup>",
+  "expected": "reject",
+  "why": "coefficient, not exponent"
+ },
+ {
+  "id": 347,
+  "category": "guard",
+  "input": "x^3",
+  "key": "x<sup>2</sup>",
+  "expected": "reject",
+  "why": "wrong exponent"
+ },
+ {
+  "id": 348,
+  "category": "guard",
+  "input": "x > 4 or x < 2",
+  "key": "x > 4 or x < -2",
+  "expected": "reject",
+  "why": "wrong boundary"
+ },
+ {
+  "id": 349,
+  "category": "guard",
+  "input": "x >= 4 or x < -2",
+  "key": "x > 4 or x < -2",
+  "expected": "reject",
+  "why": "boundary included"
+ },
+ {
+  "id": 350,
+  "category": "guard",
+  "input": "-2 < x < 4",
+  "key": "x > 4 or x < -2",
+  "expected": "reject",
+  "why": "complement"
+ },
+ {
+  "id": 351,
+  "category": "guard",
+  "input": "x ≥ 3.2",
+  "key": "x >= 16/5",
+  "expected": "accept",
+  "why": "decimal endpoint"
+ },
+ {
+  "id": 352,
+  "category": "guard",
+  "input": "±5",
+  "key": "x = 5",
+  "expected": "reject",
+  "why": "extra root"
+ },
+ {
+  "id": 353,
+  "category": "guard",
+  "input": "5 ± 0",
+  "key": "x = 5",
+  "expected": "either",
+  "why": ""
+ },
+ {
+  "id": 354,
+  "category": "guard",
+  "input": "3",
+  "key": "f(2) = 4",
+  "expected": "reject",
+  "why": "wrong value"
+ },
+ {
+  "id": 355,
+  "category": "guard",
+  "input": "{2, 4}",
+  "key": "{-1,2,4}",
+  "expected": "reject",
+  "why": "missing element"
+ },
+ {
+  "id": 356,
+  "category": "guard",
+  "input": "25 = 3x + 4",
+  "key": "3x + 4 = 19",
+  "expected": "reject",
+  "why": "wrong equation"
  }
 ]

@@ -9,7 +9,7 @@ import { RAW, serve, browser, localOnly } from '../tools/lib/site.mjs';
 const items = JSON.parse(fs.readFileSync(path.join(RAW, 'items.json'), 'utf8'));
 const typed = k => String(k)
   .replace(/<sup>(.*?)<\/sup>/g, (_, e) => '^' + (/^-?\w$|^-?\d+$/.test(e) ? e : '(' + e + ')'))
-  .replace(/<[^>]+>/g, '').replace(/[−–]/g, '-').replace(/&[a-z]+;/g, ' ').trim();
+  .replace(/<\/?[a-z][^<>]*>/gi, '').replace(/[−–]/g, '-').replace(/&[a-z]+;/g, ' ').trim();
 
 const { server, base } = await serve();
 const b = await browser();
