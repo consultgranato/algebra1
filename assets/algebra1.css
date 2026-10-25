@@ -820,3 +820,11 @@ sup { font-size: max(11px, .75em); }
 .pqf-btn { min-width: 48px; }
 .a1-saved-btns { display: flex; flex-wrap: wrap; gap: .5rem; }
 .a1-export { background: var(--a1-purple) !important; color: #fff !important; border-color: var(--a1-purple) !important; }
+
+/* Space reserved for the progress hero until the script fills it, so the
+   page does not jump when it appears (heights measured per breakpoint). */
+.a1-hero-pending { min-height: 181px; background: linear-gradient(135deg, #3a1f66 0%, #2a1450 55%, #241046 100%); }
+@media (max-width: 780px) { .a1-hero-pending { min-height: 278px; } }
+@media (max-width: 480px) { .a1-hero-pending { min-height: 378px; } }
+.a1-course-pending { min-height: 126px; }
+@media (max-width: 780px) { .a1-course-pending { min-height: 200px; } }

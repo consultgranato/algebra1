@@ -1335,13 +1335,20 @@
   function buildProgressStrip() {
     if (!unitId()) return;
     var tabs = $('.tabs');
-    if (!tabs || $('#a1-hero')) return;
-    var hero = document.createElement('section');
-    hero.id = 'a1-hero';
-    hero.className = 'a1-hero';
-    hero.setAttribute('aria-label', 'Your progress on this unit');
-    tabs.parentNode.insertBefore(hero, tabs);
+    if (!tabs) return;
+    /* Pages carry an empty, size-reserved placeholder so the hero does not
+       push the page down when it appears; create one if a page lacks it. */
+    var hero = $('#a1-hero');
+    if (hero && hero.childNodes.length) return;
+    if (!hero) {
+      hero = document.createElement('section');
+      hero.id = 'a1-hero';
+      hero.className = 'a1-hero';
+      hero.setAttribute('aria-label', 'Your progress on this unit');
+      tabs.parentNode.insertBefore(hero, tabs);
+    }
     renderProgress();
+    hero.classList.remove('a1-hero-pending');
   }
 
   function renderProgress() {
@@ -1852,7 +1859,8 @@
     var overall = Math.round(totalScore / cards.length);
     var host = $('.page-sub');
     if (host) {
-      var hero = document.createElement('section');
+      /* index.html reserves the space with an empty placeholder; fill it. */
+      var hero = $('.a1-course') || document.createElement('section');
       hero.className = 'a1-course';
       hero.setAttribute('aria-label', 'Your progress across the course');
       var resume = latest
@@ -1870,7 +1878,7 @@
         '<p class="a1-course-v">' + started + ' of ' + cards.length + ' units started' +
         (strongUnits ? ' · <strong>' + strongUnits + '</strong> at 80%+' : '') + '</p>' +
         '</div>' + resume;
-      host.parentNode.insertBefore(hero, host.nextSibling);
+      if (!hero.parentNode) host.parentNode.insertBefore(hero, host.nextSibling);
     }
 
     var reset = $('#a1-reset-all');
@@ -2361,6 +2369,11 @@
     try { watchMath(); } catch (e) { }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  /* This file is the last thing in every page's <body>, so the page is
+     already in the DOM: build the progress hero and the other additions now,
+     before the first paint, rather than at DOMContentLoaded. Waiting let the
+     browser paint first and then shove the page down (mobile layout shift
+     0.25-0.50). Only a page that loads it early still waits. */
+  if (document.readyState === 'loading' && !(document.body && $('.tabs, .unit-card'))) document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
