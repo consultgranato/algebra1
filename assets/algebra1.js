@@ -880,6 +880,7 @@
      as "34", and x<sup>2</sup> becomes "x2". Rebuild both before reading. */
   function flatText(el) {
     var c = el.cloneNode(true);
+    $$('.a1-sr', c).forEach(function (s) { s.parentNode.removeChild(s); });
     $$('.frac', c).forEach(function (f) {
       var n = $('.fn', f), d = $('.fd', f);
       f.parentNode.replaceChild(
@@ -1827,6 +1828,66 @@
     });
   }
 
+  /* ==================================================================
+     5. Maths a screen reader can read
+     ------------------------------------------------------------------
+     Fractions are two stacked spans and exponents are bare <sup>, so a
+     screen reader heard "(7/3)x = 14" as "7 3 x = 14" and x^9 / x^3 as
+     "x 9 x 3". Each fraction and exponent gets a visually hidden spoken
+     form, and the visual markup is hidden from assistive technology. The
+     spoken form is built from the markup itself, so no maths is authored
+     here. Runs on everything the pages render, now and later.
+     ================================================================== */
+
+  function spokenPower(raw) {
+    var e = raw.replace(/[−–]/g, '-').trim();
+    if (e === '2') return ' squared';
+    if (e === '3') return ' cubed';
+    if (/^-/.test(e)) return ' to the power negative ' + e.slice(1);
+    return ' to the power ' + e;
+  }
+
+  /* Spoken text of a node, using the spoken form of any maths inside it. */
+  function spokenOf(node) {
+    if (node.nodeType === 3) return node.nodeValue;
+    if (node.nodeType !== 1) return '';
+    if (node.classList.contains('a1-sr')) return '';
+    if (node.classList.contains('frac')) {
+      var n = $('.fn', node), d = $('.fd', node);
+      return ' ' + (n ? spokenOf(n) : '').trim() + ' over ' + (d ? spokenOf(d) : '').trim() + ' ';
+    }
+    if (node.tagName === 'SUP') return spokenPower(node.textContent || '');
+    var out = '';
+    for (var i = 0; i < node.childNodes.length; i++) out += spokenOf(node.childNodes[i]);
+    return out;
+  }
+
+  function speakMath(root) {
+    $$('.frac, sup', root || document.body).forEach(function (el) {
+      if (el.hasAttribute('data-a1-spoken')) return;
+      /* An exponent inside a fraction is read as part of that fraction. */
+      if (el.tagName === 'SUP' && el.closest('.frac')) return;
+      if (el.closest('svg, script, style, .a1-sr')) return;
+      el.setAttribute('data-a1-spoken', '');
+      var sr = document.createElement('span');
+      sr.className = 'a1-sr';
+      sr.textContent = spokenOf(el).replace(/\s+/g, ' ').replace(/^ (?!to )/, '');
+      el.setAttribute('aria-hidden', 'true');
+      el.parentNode.insertBefore(sr, el);
+    });
+  }
+
+  function watchMath() {
+    speakMath();
+    if (!W.MutationObserver) return;
+    var queued = false;
+    new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      (W.requestAnimationFrame || setTimeout)(function () { queued = false; try { speakMath(); } catch (e) { } });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
   /* ---- Boot ---- */
   function init() {
     try { skipLink(); } catch (e) { }
@@ -1838,6 +1899,7 @@
     try { recordHooks(); } catch (e) { }
     try { refresh(); } catch (e) { }
     try { indexProgress(); } catch (e) { }
+    try { watchMath(); } catch (e) { }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

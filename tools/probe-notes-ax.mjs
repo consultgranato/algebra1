@@ -6,7 +6,7 @@ const b = await browser();
 const page = await b.newPage();
 await localOnly(page, base);
 await page.goto(base + 'unit5.html');
-await page.evaluate(() => openTopic(1));
+await page.evaluate(() => openTopic(1)); await page.waitForTimeout(200);
 const cdp = await page.context().newCDPSession(page);
 await cdp.send('Accessibility.enable');
 async function axText(selector, n = 3) {
@@ -28,6 +28,6 @@ console.log('dialog node:', (await cdp.send('Accessibility.getFullAXTree')).node
 await page.evaluate(() => closeTopic());
 await page.click('.tabs .tab[data-view="practice"]');
 await page.click('.tpbtns .tpbtn:nth-child(2)');
-await page.waitForSelector('#pa0');
+await page.waitForSelector('#pa0'); await page.waitForTimeout(200);
 console.log('practice 5.2 pmath:', await axText('#plist .pmath', 5));
 await b.close(); server.close();

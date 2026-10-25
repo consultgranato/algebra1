@@ -4,7 +4,7 @@
 // which is what NVDA/VoiceOver consume. Output: audit/raw/math-a11y.json
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT, serve, browser, localOnly } from './lib/site.mjs';
+import { ROOT, RAW, serve, browser, localOnly } from './lib/site.mjs';
 
 const SAMPLES = [
   ['unit5.html', 'fraction coefficient', '(7/3)x = 14'],
@@ -13,7 +13,7 @@ const SAMPLES = [
   ['unit11.html', 'exponent', 'x^9 / x^3'],
   ['unit11.html', 'negative exponent', 'x^(-4)'],
   ['unit13.html', 'superscript in markup', '4x<sup>3</sup> - 2x + 7'],
-  ['unit13.html', 'malformed superscript (shipped)', '5x<sup>2(x</sup> - 3)'],
+  ['unit13.html', 'monomial times binomial', '5x<sup>2</sup>(x - 3)'],
   ['unit6.html', 'inequality symbol', '-5x + 10 ≥ -2x - 5'],
   ['unit6.html', 'compound inequality', '-1 < 2x + 1 < 7'],
   ['unit16.html', 'square root in a key', 'x = 2+√3 or x = 2-√3'],
@@ -35,6 +35,7 @@ for (const [file, label, src] of SAMPLES) {
     document.body.prepend(host);
     return host.querySelector('.pmath').innerHTML;
   }, src);
+  await page.waitForTimeout(150); // the spoken-maths observer runs on the next frame
   const innerText = await page.$eval('#probe-m', e => e.innerText.replace(/\n/g, '⏎'));
   const cdp = await page.context().newCDPSession(page);
   const { root } = await cdp.send('DOM.getDocument', { depth: -1 });
@@ -54,5 +55,5 @@ for (const [file, label, src] of SAMPLES) {
 }
 await b.close();
 server.close();
-fs.writeFileSync(path.join(ROOT, 'audit/raw/math-a11y.json'), JSON.stringify(out, null, 1));
+fs.writeFileSync(path.join(RAW, 'math-a11y.json'), JSON.stringify(out, null, 1));
 for (const o of out) console.log(`${o.label.padEnd(32)} source: ${o.source.padEnd(28)} AT reads: "${o.axReading}"   innerText: "${o.innerText}"`);

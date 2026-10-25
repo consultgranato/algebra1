@@ -105,7 +105,20 @@ run(PY, ['tools/verify/verify_items.py']);
   compare('key round-trip', Object.fromEntries(k.rejected.map(r => [r.id, 'rejected'])), 'key-roundtrip.json');
 }
 
-// 4. axe-core on every page and view
+// 4. Maths a screen reader can read: Chrome's accessibility tree for sample problems
+{
+  run('node', ['tools/probe-math-a11y.mjs']);
+  const got = read(path.join(OUT, 'math-a11y.json'));
+  const want = read(path.join(ROOT, 'tests/math-speech.json'));
+  const sq = s => s.replace(/\s+/g, ' ').trim();
+  const bad = got.filter(g => want[g.source] !== undefined && sq(g.axReading) !== sq(want[g.source]))
+    .map(g => `${g.source}: heard "${sq(g.axReading)}", want "${want[g.source]}"`);
+  const missing = Object.keys(want).filter(k => !got.some(g => g.source === k));
+  results.push({ name: 'maths read by assistive technology', status: bad.length || missing.length ? 'FAIL' : 'pass',
+    detail: [...bad, ...missing.map(m => 'no sample: ' + m)].join('\n      ') || `${Object.keys(want).length} samples read as intended` });
+}
+
+// 5. axe-core on every page and view
 if (!process.argv.includes('--skip-axe')) {
   run('node', ['tests/run-axe.mjs']);
   const a = read(path.join(OUT, 'axe-run.json'));
