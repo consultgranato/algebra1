@@ -6,7 +6,8 @@ per-topic breakdown.
 
 **Live:** https://consultgranato.github.io/algebra1/
 
-No build step, no dependencies, no third-party requests at runtime.
+No build step or runtime package dependencies. Opening the graphing calculator
+loads Desmos; video links open YouTube.
 
 ## Layout
 
@@ -39,8 +40,8 @@ banks and practice test inside a single inline `<script>`:
 | `DESCS` | One-line description per topic, shown under the topic picker |
 
 To add a problem, append to the relevant `BANKS` array. Answers go in `a` as
-plain text — `x^12`, `1/x^4`, `(x+2)(x+3)`, `x=5 or x=-2`. You do not need to
-anticipate how a student will format it; see below.
+plain text — `x^12`, `1/x^4`, `(x+2)(x+3)`, `x=5 or x=-2`. Keep grading answers as plain math, never display HTML. Use item-level
+`answerForm` and `absoluteTolerance` only when the prompt requires them.
 
 ### `assets/algebra1.js` owns the shared behaviour
 
@@ -48,12 +49,11 @@ It loads **after** each page's inline script, so its definitions win. That is
 deliberate: the 13 unit pages had drifted into several different copies of the
 same plumbing, and this is what stops them drifting again. It provides:
 
-- **Answer matching** (`isMatch`) — accepts any equivalent form of a correct
-  answer: `x^-4` for `1/x^4`, `3+2x` for `2x+3`, `(x+3)(x+2)` for `(x+2)(x+3)`,
-  `0.5` for `1/2`, `x = 5` for `5`, `3<x` for `x>3`, unicode superscripts and
-  minus signs, `NS` for "no solution". It still rejects genuinely wrong answers,
-  and it rejects an unreduced fraction such as `2/4` for `1/2`, since
-  simplifying is the point of several units.
+- **Answer matching** (`assets/math-engine.js`) parses a bounded algebra subset without
+  evaluating student input as JavaScript. Polynomial identities use exact rational
+  coefficients. Logical AND and OR, variable names, and ordered pairs stay distinct.
+  Item metadata can require factored, expanded, or reduced form. Decimal tolerance
+  is opt-in and printed in the question's answer instructions.
 - **Progress**, saved to `localStorage` under `alg1.progress.v1`, keyed by unit
   id. Records notes read, best and last practice score per topic, and best
   practice-test and vocabulary-quiz scores.
@@ -85,3 +85,36 @@ deploys. `.nojekyll` is present so Pages serves the files as-is.
 ```sh
 git add -A && git commit -m "…" && git push
 ```
+
+## Assessment validity and repeatable verification
+
+Run `node --test tests/*.test.cjs` for parser counterexamples, all 1,140 answer-key
+round trips, content-notation checks, progress denominators, and legacy-score
+preservation. A key round trip only checks input compatibility, not mathematics.
+
+Install `sympy==1.14.0`, then run `python scripts/verify-math.py`. This separate
+oracle solves 371 supported question/answer pairs from the raw banks and feeds
+371 independently generated correct answers plus 371 incorrect variants into
+the browser's actual grading engine. It reports unsupported questions separately;
+the remaining 769 prose, graph, or unsupported items are not mathematically
+certified by this check. Original packet PDFs are absent, so packet alignment
+requires those sources and a teacher review.
+
+GitHub Actions runs these checks and the browser regressions on every push and
+pull request. `tests/browser-regressions.mjs` tests rendered student controls;
+`scripts/browser-ci.mjs` runs it with Playwright. Local browser CI requires
+`playwright@1.64.1` and its Chromium installation. The browser regressions cover
+correct and incorrect inequalities, exponential input, solution wording,
+keyboard navigation, hint use, and agreement between course and unit progress.
+
+Practice distinguishes first attempts without hints from final success after
+hints/retries. Progress is a study guide, not a validated grade or a diagnostic
+of mastery. Notes are recorded as opened, not as evidence of understanding.
+Scores produced before grading version 2 are preserved in `earlierScores` within
+the same local-storage record and excluded from new progress calculations.
+
+The earlier audit's graph preloading and graph-description findings are outside
+this focused mathematical-grading change and still need separate work. The
+supported expression parser is deliberately bounded; unsupported syntax is
+rejected rather than guessed correct. No feature claims universal symbolic
+algebra equivalence.

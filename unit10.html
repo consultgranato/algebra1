@@ -218,7 +218,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
-<link rel="stylesheet" href="assets/algebra1.css">
+<link rel="stylesheet" href="assets/algebra1.css?v=20261101-assessment3">
 </head>
 <body>
 <div class="shell">
@@ -524,7 +524,7 @@ const BANKS={
   {q:"Solve:",eq:"Tickets for adults cost $8. Kids tickets cost $5. 100 tickets were sold for $620. How many adult tickets?",a:"40",fmt:"# adult tickets",h:"8a + 5(100-a) = 620 → 3a = 120 → a = 40"},
   {q:"Solve:",eq:"A student scored 78, 82, and 91 on three tests. What must she score on the 4th test to average 85?",a:"89",fmt:"numerical answer",h:"(78+82+91+x)/4 = 85 → 251+x = 340 → x = 89"},
   {q:"Solve:",eq:"Two investments total $10,000. One earns 4% interest, the other 6%. Total interest is $520. How much at 4%?",a:"$4,000",fmt:"dollar amount",h:"0.04x + 0.06(10000-x) = 520 → -0.02x = -80 → x = 4000"},
-  {q:"Solve:",eq:"A chemistry student needs 50 mL of 30% alcohol. She has 20% and 50% solutions. How much of each?",a:"33.3 mL of 20%, 16.7 mL of 50%",fmt:"mL of each",h:"0.20x + 0.50(50-x) = 15 → -0.30x = -10 → x ≈ 33.3"},
+  {q:"Solve:",eq:"A chemistry student needs 50 mL of 30% alcohol. She has 20% and 50% solutions. How much of each?",a:"33.3 ml of 20%, 16.7 ml of 50%",fmt:"mL of each",h:"0.20x + 0.50(50-x) = 15 → -0.30x = -10 → x ≈ 33.3"},
   {q:"Solve:",eq:"A store sold 120 items. Small items cost $2, large items $7. Total revenue: $480. How many large items?",a:"48",fmt:"numerical answer",h:"2s + 7L = 480, s+L=120. 2(120-L)+7L=480 → 5L=240 → L=48"},
   {q:"Solve:",eq:"Gold worth $40/oz is mixed with an alloy worth $10/oz. The 15-oz mixture is worth $25/oz. How much gold?",a:"7.5",fmt:"numerical answer (oz)",h:"40x + 10(15-x) = 375 → 30x = 225 → x = 7.5"},
   {q:"Solve:",eq:"A bank account has $5000. Part earns 3% annually, part earns 5% annually. Total interest after 1 year is $190. How much at 3%?",a:"$3,000",fmt:"dollar amount",h:"0.03x + 0.05(5000-x) = 190 → -0.02x = -60 → x = 3000"},
@@ -728,7 +728,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=matches(uval,p.a);
+    const ok=matches(uval,p.a,p);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -790,7 +790,7 @@ function mkP(p,i,pfx,topic){
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=matches(inp.value,p.a);
+  const ok=matches(inp.value,p.a,p);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
@@ -844,6 +844,8 @@ function closeTopic(){
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
-<script src="assets/algebra1.js"></script>
+<script src="assets/course-data.js?v=20261101-assessment3"></script>
+<script src="assets/math-engine.js?v=20261101-assessment3"></script>
+<script src="assets/algebra1.js?v=20261101-assessment3"></script>
 </body>
 </html>

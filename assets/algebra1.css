@@ -270,7 +270,7 @@
 .tg-card .tg-arrow::before { content: 'Read notes\00a0'; }
 .tg-card.a1-read { border-left-color: var(--a1-good); }
 .tg-card.a1-read .tg-arrow { color: var(--a1-good); }
-.tg-card.a1-read .tg-arrow::before { content: '\2713\00a0Read\00a0\00a0\00b7\00a0Open again\00a0'; }
+.tg-card.a1-read .tg-arrow::before { content: '\2713\00a0Opened\00a0\00a0\00b7\00a0Open again\00a0'; }
 .a1-tg-practice {
   position: absolute; right: .9rem; bottom: .85rem;
   background: var(--a1-wash); border: 1px solid #d8cdf2; color: var(--a1-purple-d);
