@@ -271,6 +271,11 @@
 .tg-card.a1-read { border-left-color: var(--a1-good); }
 .tg-card.a1-read .tg-arrow { color: var(--a1-good); }
 .tg-card.a1-read .tg-arrow::before { content: '\2713\00a0Opened\00a0\00a0\00b7\00a0Open again\00a0'; }
+
+/* At phone widths a floating calculator can intercept Submit and answer controls. */
+@media (max-width: 700px) {
+  .desmos-trigger { position: static !important; display: flex; margin: 1rem auto; width: max-content; max-width: calc(100% - 2rem); }
+}
 .a1-tg-practice {
   position: absolute; right: .9rem; bottom: .85rem;
   background: var(--a1-wash); border: 1px solid #d8cdf2; color: var(--a1-purple-d);
