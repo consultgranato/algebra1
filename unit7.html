@@ -230,7 +230,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .graph-it-btn{display:inline-flex;align-items:center;gap:5px;margin:.4rem 0 .2rem;padding:5px 13px;border-radius:6px;border:1.5px solid var(--nnp);background:#ede9f7;color:var(--nnp);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
 .graph-it-btn:hover{background:var(--nnp);color:#fff}
 </style>
-<link rel="stylesheet" href="assets/algebra1.css">
+<link rel="stylesheet" href="assets/algebra1.css?v=20261101-assessment4">
 </head>
 <body>
 <div class="shell">
@@ -448,7 +448,7 @@ const BANKS={
   {q:"Find the range of this table: x = -2, 0, 2, 4; y = 3, 5, 7, 9.",eq:"",a:"{3,5,7,9}",fmt:"{list of values}",h:"Range = all y-values in the table."},
   {q:"Find the domain:",eq:"{(5,2),(5,3),(5,4)}",a:"{5}",fmt:"{list of values}",h:"Domain = x-values. Only x = 5 appears (once!)."},
   {q:"Find the range:",eq:"{(5,2),(5,3),(5,4)}",a:"{2,3,4}",fmt:"{list of values}",h:"Range = y-values: 2, 3, 4."},
-  {q:"The coordinate plane is also called the:",eq:"",a:"Cartesian plane",fmt:"name of the plane",h:"Named after René Descartes. Also called xy-plane or coordinate plane."},
+  {q:"The coordinate plane is also called the:",eq:"",a:"cartesian plane",fmt:"name of the plane",h:"Named after René Descartes. Also called xy-plane or coordinate plane."},
   {q:"Which axis holds the domain values?",eq:"",a:"x-axis",fmt:"x-axis or y-axis",h:"Domain = x-values, which are measured on the x-axis (horizontal)."},
   {q:"Which axis holds the range values?",eq:"",a:"y-axis",fmt:"x-axis or y-axis",h:"Range = y-values, which are measured on the y-axis (vertical)."},
   {q:"Find the domain:",eq:"{(-3,0),(0,3),(3,6)}",a:"{-3,0,3}",fmt:"{list of values}",h:"x-values: -3, 0, 3."},
@@ -499,7 +499,7 @@ const T=[
   {t:"7.1",q:"Is this a function?",eq:"{(-1,4),(0,4),(1,4),(2,4)}",a:"yes",fmt:"yes or no",h:"All x-values are unique. Same y-values are perfectly fine."},
   {t:"7.2",q:"Find the domain:",eq:"{(3,9),(5,25),(7,49)}",a:"{3,5,7}",fmt:"{list of values}",h:"Domain = x-values: 3, 5, 7."},
   {t:"7.2",q:"Find the range:",eq:"{(3,9),(5,25),(7,49)}",a:"{9,25,49}",fmt:"{list of values}",h:"Range = y-values: 9, 25, 49."},
-  {t:"7.2",q:"What is another name for the coordinate plane?",eq:"",a:"Cartesian plane",fmt:"name",h:"The coordinate plane is also called the Cartesian plane or xy-plane."},
+  {t:"7.2",q:"What is another name for the coordinate plane?",eq:"",a:"cartesian plane",fmt:"name",h:"The coordinate plane is also called the Cartesian plane or xy-plane."},
   {t:"7.2",q:"Find the domain. Table: x = -1, 0, 1, 2; y = 3, 5, 7, 9.",eq:"",a:"{-1,0,1,2}",fmt:"{list of values}",h:"Domain = all x-values in the table."},
   {t:"7.2",q:"Find the range. Table: x = -1, 0, 1, 2; y = 3, 5, 7, 9.",eq:"",a:"{3,5,7,9}",fmt:"{list of values}",h:"Range = all y-values in the table."},
   {t:"7.3",q:"Table: x = 1,2,3,4; y = 2,4,6,8. Is this linear?",eq:"",a:"linear",fmt:"linear or not linear",h:"Differences in y: +2,+2,+2 — constant. Linear!"},
@@ -672,7 +672,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=isMatch(uval,p.a);
+    const ok=isMatch(uval,p.a,p);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -736,7 +736,7 @@ function mkP(p,i,pfx,topic){
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=isMatch(inp.value,p.a);
+  const ok=isMatch(inp.value,p.a,p);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
@@ -805,6 +805,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos(
     <iframe id="desmos-iframe" data-src="https://www.desmos.com/calculator?lang=en" loading="lazy" class="desmos-iframe" allowfullscreen></iframe>
   </div>
 </div>
-<script src="assets/algebra1.js"></script>
+<script src="assets/course-data.js?v=20261101-assessment4"></script>
+<script src="assets/math-engine.js?v=20261101-assessment4"></script>
+<script src="assets/algebra1.js?v=20261101-assessment4"></script>
 </body>
 </html>

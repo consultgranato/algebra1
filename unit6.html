@@ -230,7 +230,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .graph-it-btn{display:inline-flex;align-items:center;gap:4px;background:#eaf3de;border:1px solid #b0d17c;color:#27500a;padding:5px 10px;border-radius:var(--radius-md);font-size:11px;font-weight:600;cursor:pointer;margin-top:.25rem;transition:all .15s}
 .graph-it-btn:hover{background:#d4ebbb}
 </style>
-<link rel="stylesheet" href="assets/algebra1.css">
+<link rel="stylesheet" href="assets/algebra1.css?v=20261101-assessment4">
 </head>
 <body>
 <div class="shell">
@@ -521,7 +521,7 @@ const T=[
   {t:"6.3",q:"Solve:",eq:"5x + 2 ≤ 3x + 10",a:"x <= 4",fmt:"inequality using x",h:"Subtract 3x: 2x+2≤10. Subtract 2, divide by 2."},
   {t:"6.3",q:"Solve:",eq:"-3(x + 1) ≥ 12",a:"x <= -5",fmt:"inequality using x",h:"Distribute: -3x-3≥12. Add 3: -3x≥15. Divide by -3, FLIP!"},
   {t:"6.3",q:"Solve:",eq:"6x - 7 < 4x + 3",a:"x < 5",fmt:"inequality using x",h:"Subtract 4x: 2x-7<3. Add 7, divide by 2."},
-  {t:"6.3",q:"Solve:",eq:"4(2x - 1) ≥ 3(x + 4)",a:"x >= ≈ 1.6",fmt:"x >= ___",h:"Distribute: 8x-4≥3x+12. Subtract 3x: 5x-4≥12. Add 4: 5x≥16. x≥16/5."},
+  {t:"6.3",q:"Solve:",eq:"4(2x - 1) ≥ 3(x + 4)",a:"x >= 16/5",fmt:"x >= ___",h:"Distribute: 8x-4≥3x+12. Subtract 3x: 5x-4≥12. Add 4: 5x≥16. x≥16/5."},
   {t:"6.4",q:"Solve:",eq:"3x + 7 > 3x - 2",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 3x: 7>-2. True!"},
   {t:"6.4",q:"Solve:",eq:"2x - 5 ≤ 2x + 1",a:"all real numbers",fmt:"no solution / all real numbers / x > ___ etc.",h:"Subtract 2x: -5≤1. True!"},
   {t:"6.4",q:"Solve:",eq:"4(x + 2) > 4x + 10",a:"no solution",fmt:"no solution / all real numbers / x > ___ etc.",h:"Distribute: 4x+8>4x+10. Subtract 4x: 8>10. False."},
@@ -691,7 +691,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=isMatch(uval,p.a);
+    const ok=isMatch(uval,p.a,p);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -755,7 +755,7 @@ function mkP(p,i,pfx,topic){
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=isMatch(inp.value,p.a);
+  const ok=isMatch(inp.value,p.a,p);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
@@ -824,6 +824,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDesmos(
     <iframe id="desmos-iframe" data-src="https://www.desmos.com/calculator?lang=en" loading="lazy" class="desmos-iframe" allowfullscreen></iframe>
   </div>
 </div>
-<script src="assets/algebra1.js"></script>
+<script src="assets/course-data.js?v=20261101-assessment4"></script>
+<script src="assets/math-engine.js?v=20261101-assessment4"></script>
+<script src="assets/algebra1.js?v=20261101-assessment4"></script>
 </body>
 </html>

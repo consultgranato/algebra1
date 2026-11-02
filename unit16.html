@@ -232,7 +232,7 @@ sup{font-size:.7em;vertical-align:super;line-height:0}
 .topic-modal-close:hover{background:rgba(255,255,255,.28)}
 .topic-modal-body{overflow-y:auto;padding:1.1rem 1.3rem;flex:1}
 </style>
-<link rel="stylesheet" href="assets/algebra1.css">
+<link rel="stylesheet" href="assets/algebra1.css?v=20261101-assessment4">
 </head>
 <body>
 <div class="shell">
@@ -454,10 +454,10 @@ const BANKS={
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 5x + 6 = 0",a:"x = 3 or x = 2",fmt:"x = ___, x = ___",h:"a=1,b=-5,c=6. D=25-24=1. x=(5±1)/2"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 + 2x - 8 = 0",a:"x = 2 or x = -4",fmt:"x = ___, x = ___",h:"a=1,b=2,c=-8. D=4+32=36. x=(-2±6)/2"},
   {q:"Use the quadratic formula to solve:",eq:"2x^2 + 3x - 2 = 0",a:"x = 1/2 or x = -2",fmt:"x = ___, x = ___",h:"a=2,b=3,c=-2. D=9+16=25. x=(-3±5)/4"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 - 4x + 1 = 0",a:"x = 2+√3 or x = 2-√3",fmt:"exact or decimal form",h:"a=1,b=-4,c=1. D=16-4=12. x=(4±√12)/2=(4±2√3)/2=2±√3"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 4x + 1 = 0",a:"x = 2+√3 or x = 2-√3",absoluteTolerance:0.0005,fmt:"exact form or decimals rounded to 3 decimal places",h:"a=1,b=-4,c=1. D=16-4=12. x=(4±√12)/2=(4±2√3)/2=2±√3"},
   {q:"Use the quadratic formula to solve:",eq:"3x^2 - 7x + 2 = 0",a:"x = 2 or x = 1/3",fmt:"x = ___, x = ___",h:"a=3,b=-7,c=2. D=49-24=25. x=(7±5)/6"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 + 6x + 5 = 0",a:"x = -1 or x = -5",fmt:"x = ___, x = ___",h:"a=1,b=6,c=5. D=36-20=16. x=(-6±4)/2"},
-  {q:"Use the quadratic formula to solve:",eq:"x^2 - 2x - 4 = 0",a:"x = 1+√5 or x = 1-√5",fmt:"exact or decimal form",h:"a=1,b=-2,c=-4. D=4+16=20. x=(2±√20)/2=1±√5"},
+  {q:"Use the quadratic formula to solve:",eq:"x^2 - 2x - 4 = 0",a:"x = 1+√5 or x = 1-√5",absoluteTolerance:0.0005,fmt:"exact form or decimals rounded to 3 decimal places",h:"a=1,b=-2,c=-4. D=4+16=20. x=(2±√20)/2=1±√5"},
   {q:"Use the quadratic formula to solve:",eq:"2x^2 - 6x + 4 = 0",a:"x = 2 or x = 1",fmt:"x = ___, x = ___",h:"a=2,b=-6,c=4. D=36-32=4. x=(6±2)/4"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 + 4x - 12 = 0",a:"x = 2 or x = -6",fmt:"x = ___, x = ___",h:"a=1,b=4,c=-12. D=16+48=64. x=(-4±8)/2"},
   {q:"Use the quadratic formula to solve:",eq:"x^2 - 6x + 9 = 0",a:"x = 3",fmt:"x = ___ (one solution)",h:"a=1,b=-6,c=9. D=36-36=0. x=6/2=3"},
@@ -474,7 +474,7 @@ const BANKS={
   {q:"How many x-intercepts does this parabola have?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 170" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="0" x2="70" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="110" y1="0" x2="110" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="130" y1="0" x2="130" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="150" y1="0" x2="150" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="76" x2="200" y2="76" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="112" x2="200" y2="112" stroke="#eee" stroke-width="0.5"/><line x1="5" y1="100" x2="195" y2="100" stroke="#555" stroke-width="1.5"/><line x1="90" y1="5" x2="90" y2="165" stroke="#555" stroke-width="1.5"/><text x="195" y="104" font-size="9" fill="#555">x</text><text x="92" y="11" font-size="9" fill="#555">y</text><text x="107" y="113" font-size="8" fill="#555">1</text><text x="127" y="113" font-size="8" fill="#555">2</text><text x="147" y="113" font-size="8" fill="#555">3</text><polyline points="90,64 110,100 130,112 150,100 170,64" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><circle cx="110" cy="100" r="4" fill="#4a2c7a" stroke="none"/><circle cx="150" cy="100" r="4" fill="#4a2c7a" stroke="none"/></svg></div>',eq:"",graphIt:"y=x^2-4x+3",a:"two solutions",fmt:"two solutions / one solution / no real solutions",h:"The parabola crosses the x-axis at 2 points, so there are two real solutions."},
   {q:"How many x-intercepts does this parabola have?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 170" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="0" x2="70" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="110" y1="0" x2="110" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="130" y1="0" x2="130" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="150" y1="0" x2="150" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="52" x2="200" y2="52" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="88" x2="200" y2="88" stroke="#eee" stroke-width="0.5"/><line x1="5" y1="100" x2="195" y2="100" stroke="#555" stroke-width="1.5"/><line x1="90" y1="5" x2="90" y2="165" stroke="#555" stroke-width="1.5"/><text x="195" y="104" font-size="9" fill="#555">x</text><text x="92" y="11" font-size="9" fill="#555">y</text><text x="127" y="113" font-size="8" fill="#555">2</text><polyline points="90,52 110,88 130,100 150,88 170,52" fill="none" stroke="#4a2c7a" stroke-width="2.5"/><circle cx="130" cy="100" r="5" fill="#cc3333" stroke="none"/></svg></div>',eq:"",graphIt:"y=(x-2)^2",a:"one solution",fmt:"two solutions / one solution / no real solutions",h:"The parabola just touches the x-axis at one point → one real solution (double root)."},
   {q:"How many x-intercepts does this parabola have?",svg:'<div style="background:#f8f5ff;border-radius:8px;padding:.5rem .75rem;margin:.35rem 0"><svg viewBox="0 0 200 170" style="display:block;max-width:100%;width:100%" xmlns="http://www.w3.org/2000/svg"><line x1="70" y1="0" x2="70" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="110" y1="0" x2="110" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="130" y1="0" x2="130" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="150" y1="0" x2="150" y2="170" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="40" x2="200" y2="40" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="76" x2="200" y2="76" stroke="#eee" stroke-width="0.5"/><line x1="0" y1="88" x2="200" y2="88" stroke="#eee" stroke-width="0.5"/><line x1="5" y1="100" x2="195" y2="100" stroke="#555" stroke-width="1.5"/><line x1="90" y1="5" x2="90" y2="165" stroke="#555" stroke-width="1.5"/><text x="195" y="104" font-size="9" fill="#555">x</text><text x="92" y="11" font-size="9" fill="#555">y</text><polyline points="90,40 110,76 130,88 150,76 170,40" fill="none" stroke="#4a2c7a" stroke-width="2.5"/></svg></div>',eq:"",graphIt:"y=x^2-4x+5",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"The parabola does not touch the x-axis → no real solutions (discriminant < 0)."},
-  {q:"Find the discriminant and number of solutions:",eq:"x^2 + 6x + 9 = 0",graphIt:"y=x^2+6x+9",a:"D=0, one solution",fmt:"D=___, one/two/no solutions",h:"D=36-36=0. One solution."},
+  {q:"Find the discriminant and number of solutions:",eq:"x^2 + 6x + 9 = 0",graphIt:"y=x^2+6x+9",a:"d=0, one solution",fmt:"D=___, one/two/no solutions",h:"D=36-36=0. One solution."},
   {q:"Find the discriminant:",eq:"2x^2 - 3x + 1 = 0",a:"1",fmt:"numerical value",h:"D = 9 - 4(2)(1) = 9-8 = 1"},
   {q:"How many real solutions?",eq:"x^2 - 2x + 3 = 0",a:"no real solutions",fmt:"two solutions / one solution / no real solutions",h:"D = 4-12 = -8 < 0"},
   {q:"Find the discriminant:",eq:"x^2 - 6x + 5 = 0",graphIt:"y=x^2-6x+5",a:"16",fmt:"numerical value",h:"D = 36 - 20 = 16"},
@@ -661,7 +661,7 @@ function gradeT(){
     if(!map[p.t])map[p.t]={c:0,n:0};map[p.t].n++;
     const fb=document.getElementById('tfb'+i);
     const uval=inp?inp.value:'';
-    const ok=matches(uval,p.a);
+    const ok=matches(uval,p.a,p);
     if(ok)map[p.t].c++;
     fb.className='fb '+(ok?'ok':'no');
     fb.innerHTML=ok?'✓ Correct!':'✗ Answer: <strong>'+formatEq(p.a)+'</strong> — '+formatEq(p.h);
@@ -725,7 +725,7 @@ function mkP(p,i,pfx,topic){
 function check(i,pfx){
   const inp=document.getElementById(pfx+'a'+i);
   const p=pfx==='p'?pset[i]:tset[i];
-  const ok=matches(inp.value,p.a);
+  const ok=matches(inp.value,p.a,p);
   inp.disabled=true;
   const fb=document.getElementById(pfx+'fb'+i);
   fb.className='fb '+(ok?'ok':'no');
@@ -787,6 +787,8 @@ function closeTopic(){
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeTopic();});
 </script>
 
-<script src="assets/algebra1.js"></script>
+<script src="assets/course-data.js?v=20261101-assessment4"></script>
+<script src="assets/math-engine.js?v=20261101-assessment4"></script>
+<script src="assets/algebra1.js?v=20261101-assessment4"></script>
 </body>
 </html>

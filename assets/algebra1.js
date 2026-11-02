@@ -20,327 +20,8 @@
      rejecting genuinely different (or unsimplified) answers.
      ================================================================== */
 
-  var SUPER = {
-    '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4',
-    '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9',
-    '⁺': '+', '⁻': '-'
-  };
-
-  /* x² -> x^(2), x¹² -> x^(12), x⁻³ -> x^(-3) */
-  function unSuper(s) {
-    return s.replace(/[⁰¹²³⁴-⁹⁺⁻]+/g, function (run) {
-      var out = '';
-      for (var i = 0; i < run.length; i++) out += SUPER[run.charAt(i)] || '';
-      return out ? '^(' + out + ')' : '';
-    });
-  }
-
-  /* Strip markup/entities and fold the many ways of typing an operator
-     down to plain ASCII. */
-  function clean(s) {
-    s = String(s == null ? '' : s);
-    s = s.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '');
-    s = s.replace(/&minus;/gi, '-').replace(/&times;/gi, '*').replace(/&divide;/gi, '/')
-      .replace(/&middot;/gi, '*').replace(/&sdot;/gi, '*').replace(/&nbsp;/gi, ' ')
-      .replace(/&le;/gi, '<=').replace(/&ge;/gi, '>=').replace(/&ne;/gi, '!=')
-      .replace(/&sup1;/gi, '^1').replace(/&sup2;/gi, '^2').replace(/&sup3;/gi, '^3')
-      .replace(/&frasl;/gi, '/').replace(/&amp;/gi, '&');
-    s = s.replace(/&#(\d+);/g, function (_, d) {
-      var n = parseInt(d, 10);
-      return (n > 0 && n < 0x10000) ? String.fromCharCode(n) : ' ';
-    });
-    s = unSuper(s);
-    s = s.replace(/[−–—]/g, '-')
-      .replace(/[×⋅·∙]/g, '*')
-      .replace(/÷/g, '/')
-      .replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/≠/g, '!=')
-      .replace(/∞/g, 'inf')
-      .replace(/∪/g, ',')
-      .replace(/[‘’“”]/g, '');
-    return s.toLowerCase();
-  }
-
-  /* Canonical text form: no whitespace, ASCII operators, implicit
-     multiplication, "or"/"and" folded to commas. */
-  function norm(s) {
-    var t = clean(s);
-    t = t.replace(/\s+(?:or|and)\s+/g, ',');
-    t = t.replace(/\s+/g, '');
-    t = t.replace(/=</g, '<=').replace(/=>/g, '>=');
-    t = t.replace(/\^\(\+?(-?\d+)\)/g, '^$1');
-    t = t.replace(/\^\+/g, '^');
-    /* 2*x and 2x are the same thing; so are (x+1)*(x+2) and (x+1)(x+2) */
-    for (var i = 0; i < 3; i++) t = t.replace(/([0-9a-z)\]])\*([a-z(\[])/g, '$1$2');
-    t = t.replace(/\^1(?![0-9])/g, '');
-    t = t.replace(/(^|[^0-9a-z.])1([a-z(])/g, '$1$2');
-    t = t.replace(/^\+/, '');
-    t = t.replace(/[,.]$/, '');
-    return t;
-  }
-
-  var ALIASES = [
-    [/^(nosolution|nosolutions|nosol|ns|none|noanswer|emptyset|empty|\{\}|∅)$/, 'nosolution'],
-    [/^(allrealnumbers|allrealnumber|allreals|allreal|arn|allnumbers|infinitelymany|infinitelymanysolutions|infinite|infinitesolutions)$/, 'allreal'],
-    [/^(yes|y|true|t)$/, 'yes'],
-    [/^(no|n|false|f)$/, 'no'],
-    [/^(dne|doesnotexist|undefined|undef)$/, 'undefined'],
-    [/^(function|isafunction|yesitisafunction)$/, 'yes'],
-    [/^(notafunction|notfunction|nofunction)$/, 'no']
-  ];
-
-  function aliasOf(t) {
-    for (var i = 0; i < ALIASES.length; i++) if (ALIASES[i][0].test(t)) return ALIASES[i][1];
-    return null;
-  }
-
-  function gcd(a, b) {
-    a = Math.abs(a); b = Math.abs(b);
-    while (b) { var t = b; b = a % b; a = t; }
-    return a || 1;
-  }
-
-  function numValue(t) {
-    if (/^-?\d+(?:\.\d+)?$/.test(t)) return parseFloat(t);
-    var m = t.match(/^(-?\d+(?:\.\d+)?)%$/);
-    if (m) return parseFloat(m[1]) / 100;
-    m = t.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
-    if (m) { var d = parseFloat(m[2]); return d === 0 ? null : parseFloat(m[1]) / d; }
-    return null;
-  }
-
-  /* Two plain numbers are equal — but an unreduced fraction is not accepted
-     for a reduced one, since "simplify" is the point of several units. */
-  function numEq(a, b) {
-    var x = numValue(a), y = numValue(b);
-    if (x === null || y === null) return false;
-    if (Math.abs(x - y) > 1e-9) return false;
-    var fa = a.match(/^(-?\d+)\/(-?\d+)$/), fb = b.match(/^(-?\d+)\/(-?\d+)$/);
-    if (fa && fb) return gcd(+fa[1], +fa[2]) === 1 && gcd(+fb[1], +fb[2]) === 1;
-    return true;
-  }
-
-  /* Parse a product of a coefficient and variable powers: 12x^3y, -4a, 8 */
-  function parseProduct(s) {
-    if (s === '' || s == null) return null;
-    var sign = 1;
-    while (s.charAt(0) === '-' || s.charAt(0) === '+') {
-      if (s.charAt(0) === '-') sign = -sign;
-      s = s.slice(1);
-    }
-    if (s === '') s = '1';
-    /* A '-' may still appear inside an exponent (x^-4); the tokeniser below
-       rejects one anywhere else by failing to consume it. */
-    if (/[()<>=,;]/.test(s)) return null;
-    var coef = 1, vars = {}, i = 0, m;
-    while (i < s.length) {
-      var rest = s.slice(i);
-      if (rest.charAt(0) === '*') { i++; continue; }
-      m = /^(\d+(?:\.\d+)?)/.exec(rest);
-      if (m) { coef *= parseFloat(m[1]); i += m[0].length; continue; }
-      m = /^([a-z])(?:\^(-?\d+))?/.exec(rest);
-      if (m) {
-        vars[m[1]] = (vars[m[1]] || 0) + (m[2] === undefined ? 1 : parseInt(m[2], 10));
-        i += m[0].length;
-        continue;
-      }
-      return null;
-    }
-    return { sign: sign, coef: coef, vars: vars };
-  }
-
-  /* Canonical monomial. Returns null for anything that is not a single
-     monomial (or ratio of two), and for pure numbers — those go through
-     numEq instead so unreduced fractions stay rejected. */
-  function monoCanon(t) {
-    var parts = t.split('/');
-    if (parts.length > 2) return null;
-    var N = parseProduct(parts[0]);
-    if (!N) return null;
-    var D = parts.length === 2 ? parseProduct(parts[1]) : { sign: 1, coef: 1, vars: {} };
-    if (!D || D.coef === 0) return null;
-    var vars = {}, k;
-    for (k in N.vars) if (N.vars.hasOwnProperty(k)) vars[k] = (vars[k] || 0) + N.vars[k];
-    for (k in D.vars) if (D.vars.hasOwnProperty(k)) vars[k] = (vars[k] || 0) - D.vars[k];
-    var keys = [];
-    for (k in vars) if (vars.hasOwnProperty(k) && vars[k] !== 0) keys.push(k);
-    if (!keys.length) return null;
-    keys.sort();
-    var coef = (N.sign * D.sign) * (N.coef / D.coef);
-    var out = String(Math.round(coef * 1e9) / 1e9);
-    for (var i = 0; i < keys.length; i++) out += '*' + keys[i] + '^' + vars[keys[i]];
-    return out;
-  }
-
-  /* x^-4 === 1/x^4, and 9x^4y^2 === 9y^2x^4 */
-  function monoEq(a, b) {
-    var x = monoCanon(a), y = monoCanon(b);
-    return x !== null && y !== null && x === y;
-  }
-
-  /* Split a sum on its top-level + and - signs, keeping each sign. */
-  function splitTerms(t) {
-    if (/[=<>,;]/.test(t)) return null;
-    var out = [], depth = 0, cur = '';
-    for (var i = 0; i < t.length; i++) {
-      var ch = t.charAt(i);
-      if (ch === '(') depth++;
-      else if (ch === ')') depth--;
-      if (depth === 0 && (ch === '+' || ch === '-') && i > 0 && !/[\^*\/(+\-]/.test(t.charAt(i - 1))) {
-        out.push(cur); cur = ch;
-      } else cur += ch;
-    }
-    out.push(cur);
-    return out.filter(function (s) { return s !== ''; });
-  }
-
-  /* Order-independent form of a sum: 2x+3 and 3+2x agree. */
-  function canonSum(t) {
-    var ts = splitTerms(t);
-    if (!ts || ts.length < 2) return t;
-    return ts.map(function (s) {
-      if (s.charAt(0) !== '-' && s.charAt(0) !== '+') s = '+' + s;
-      var sign = s.charAt(0), body = s.slice(1), mc = monoCanon(body);
-      return sign + (mc !== null ? mc : body);
-    }).sort().join('');
-  }
-
-  function sumEq(a, b) {
-    var ea = a.split('='), eb = b.split('=');
-    if (ea.length === 2 && eb.length === 2) {
-      return canonSum(ea[0]) === canonSum(eb[0]) && canonSum(ea[1]) === canonSum(eb[1]);
-    }
-    if (ea.length !== 1 || eb.length !== 1) return false;
-    var ca = canonSum(a), cb = canonSum(b);
-    return ca === cb && ca !== a;
-  }
-
-  /* (x+2)(x+3) === (x+3)(x+2), including a leading coefficient and
-     repeated factors written as (x+2)^2. */
-  function factorKey(t) {
-    if (t.indexOf('(') < 0) return null;
-    var lead = '', i = 0, m = /^-?\d*/.exec(t);
-    if (m && m[0]) { lead = m[0]; i = m[0].length; }
-    var out = [];
-    while (i < t.length) {
-      if (t.charAt(i) !== '(') return null;
-      var depth = 0, j = i;
-      for (; j < t.length; j++) {
-        if (t.charAt(j) === '(') depth++;
-        else if (t.charAt(j) === ')') { depth--; if (!depth) break; }
-      }
-      if (depth) return null;
-      var inner = canonSum(t.slice(i + 1, j));
-      i = j + 1;
-      var e = /^\^(\d+)/.exec(t.slice(i)), rep = 1;
-      if (e) { rep = Math.min(parseInt(e[1], 10), 8); i += e[0].length; }
-      for (var k = 0; k < rep; k++) out.push(inner);
-    }
-    if (!out.length) return null;
-    out.sort();
-    return lead + '|' + out.join('|');
-  }
-
-  function factorEq(a, b) {
-    var x = factorKey(a), y = factorKey(b);
-    return x !== null && y !== null && x === y;
-  }
-
-  /* Checks that are safe to recurse into from the list-style checks. */
-  function core(a, b) {
-    if (a === b) return true;
-    if (numEq(a, b)) return true;
-    if (monoEq(a, b)) return true;
-    if (factorEq(a, b)) return true;
-    if (sumEq(a, b)) return true;
-    return false;
-  }
-
-  function isOrderedPair(t) {
-    if (/^\(.+,.+\)$/.test(t)) return true;
-    var parts = t.split(',');
-    if (parts.length < 2) return false;
-    var letters = {};
-    for (var i = 0; i < parts.length; i++) {
-      if (!/^[a-z]=/.test(parts[i])) return false;
-      letters[parts[i].charAt(0)] = 1;
-    }
-    return Object.keys(letters).length === parts.length;
-  }
-
-  function asPair(t) {
-    var m = t.match(/^\((.+)\)$/), body = m ? m[1] : t;
-    if (body.indexOf(',') < 0) return null;
-    var parts = body.split(',');
-    if (parts.length < 2) return null;
-    var named = parts.every(function (p) { return /^[a-z]=/.test(p); });
-    if (named) {
-      parts = parts.slice().sort(function (p, q) {
-        return p.charAt(0) < q.charAt(0) ? -1 : 1;
-      }).map(function (p) { return p.slice(2); });
-    }
-    return parts;
-  }
-
-  /* (3,4) === x=3,y=4 — order matters here, unlike a solution set. */
-  function pairEq(a, b) {
-    var A = asPair(a), B = asPair(b);
-    if (!A || !B || A.length !== B.length) return false;
-    return A.every(function (v, i) { return core(v, B[i]); });
-  }
-
-  /* x=2 or x=5 === 5,2 — order does not matter. */
-  function setEq(a, b) {
-    var A = a.split(/[,;]/).filter(Boolean), B = b.split(/[,;]/).filter(Boolean);
-    if (A.length < 2 && B.length < 2) return false;
-    if (A.length !== B.length) return false;
-    var strip = function (s) { return s.replace(/^[a-z]=/, ''); };
-    A = A.map(strip).sort();
-    B = B.map(strip).sort();
-    return A.every(function (v, i) { return core(v, B[i]); });
-  }
-
-  /* x>3 === 3<x */
-  function ineqEq(a, b) {
-    var re = /^(.+?)(<=|>=|<|>)(.+)$/, A = re.exec(a), B = re.exec(b);
-    if (!A || !B) return false;
-    var flip = { '<': '>', '>': '<', '<=': '>=', '>=': '<=' };
-    if (A[2] === B[2] && core(A[1], B[1]) && core(A[3], B[3])) return true;
-    if (flip[A[2]] === B[2] && core(A[1], B[3]) && core(A[3], B[1])) return true;
-    return false;
-  }
-
-  /* "x = 5" and "5" are both accepted when the other side names a variable. */
-  function varStripEq(a, b) {
-    var ra = a.replace(/^[a-z]=/, ''), rb = b.replace(/^[a-z]=/, '');
-    if (ra === a && rb === b) return false;
-    return core(ra, rb);
-  }
-
-  function isMatch(u, c) {
-    try {
-      if (u === undefined || u === null) return false;
-      if (!String(u).trim()) return false;
-      var a = norm(u), b = norm(c);
-      if (!b) return false;
-      if (a === b) return true;
-
-      var A = aliasOf(a), B = aliasOf(b);
-      if (A && B && A === B && b.length > 1) return true;
-
-      if (core(a, b)) return true;
-      if (varStripEq(a, b)) return true;
-      if (isOrderedPair(a) || isOrderedPair(b)) return pairEq(a, b);
-      if (setEq(a, b)) return true;
-      if (ineqEq(a, b)) return true;
-      return false;
-    } catch (e) {
-      /* Never let a grading bug swallow a student's answer. */
-      try { return String(u).trim().toLowerCase() === String(c).trim().toLowerCase(); }
-      catch (e2) { return false; }
-    }
-  }
-
-  W.norm = norm;
+  var isMatch = W.Alg1Math.matches;
+  W.norm = W.Alg1Math.norm;
   W.isMatch = isMatch;
   W.matches = isMatch;
 
@@ -362,7 +43,11 @@
   var STORE = 'alg1.progress.v1';
 
   function readAll() {
-    try { return JSON.parse(localStorage.getItem(STORE)) || {}; }
+    try {
+      var all = JSON.parse(localStorage.getItem(STORE)) || {};
+      Object.keys(all).forEach(function(id){ all[id] = W.Alg1Course.migrate(all[id]); });
+      return all;
+    }
     catch (e) { return {}; }
   }
 
@@ -380,6 +65,7 @@
     if (!id) return;
     var all = readAll(), u = all[id] || {};
     fn(u);
+    u.gradingVersion = 2;
     u.updated = Date.now();
     all[id] = u;
     writeAll(all);
@@ -416,10 +102,10 @@
 
   function wrap(name, after) {
     var orig = W[name];
-    if (typeof orig !== 'function' || orig.__a1) return;
+    if (typeof orig !== 'function') return;
     var fn = function () {
       var r = orig.apply(this, arguments);
-      try { after.apply(this, arguments); } catch (e) { }
+      try { after.apply(this, arguments); } catch (e) { console.error('Algebra 1 hook failed: ' + name, e); }
       return r;
     };
     fn.__a1 = true;
@@ -822,9 +508,9 @@
       var input = $('.ai', card);
       var num = $('.pnum', card);
       var q = $('.pq-q', card);
-      if (input && !input.getAttribute('aria-label')) {
+      if (input) {
         input.setAttribute('aria-label', 'Answer for question ' + (num ? num.textContent : i + 1) +
-          (q ? ': ' + q.textContent.slice(0, 80) : ''));
+          (q ? ': ' + flatText(q) : '') + ' ' + ($('.pmath', card) ? flatText($('.pmath', card)) : '') + ' ' + ($('.afmt', card) ? $('.afmt', card).textContent : ''));
         input.setAttribute('autocomplete', 'off');
         input.setAttribute('autocapitalize', 'off');
         input.setAttribute('spellcheck', 'false');
@@ -832,6 +518,11 @@
       var fb = $('.fb', card);
       if (fb && !fb.getAttribute('aria-live')) fb.setAttribute('aria-live', 'polite');
       $$('button', card).forEach(function (b) { b.type = 'button'; });
+      $$('.hbtn', card).forEach(function(b){
+        if(b.dataset.tracksHint)return;
+        b.dataset.tracksHint='true';
+        b.addEventListener('click',function(){card.dataset.hintUsed='true';b.textContent='Hint used';});
+      });
     });
     $$('.vq-card').forEach(function (card) {
       var fb = $('.vq-fb', card);
@@ -939,20 +630,7 @@
     return { text: 'Unit complete. Nice work.', cta: null, run: null };
   }
 
-  function mastery(u) {
-    var notes = topicCount(), topics = practiceTopics();
-    var read = u.notesRead ? Object.keys(u.notesRead).length : 0;
-    var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
-    var parts = [
-      [.15, notes ? read / notes : 0],
-      [.35, topics.length ? strong / topics.length : 0],
-      [.35, u.test && u.test.best != null ? u.test.best / 100 : 0],
-      [.15, u.vocab && u.vocab.best != null ? u.vocab.best / 100 : 0]
-    ];
-    var sum = 0, w = 0;
-    parts.forEach(function (p) { sum += p[0] * p[1]; w += p[0]; });
-    return Math.round(sum / w * 100);
-  }
+  function mastery(u) { return W.Alg1Course.score(u, unitId()); }
 
   function ring(p, size) {
     var r = size / 2 - 5, c = 2 * Math.PI * r;
@@ -987,7 +665,7 @@
     var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
 
     var chips = [
-      chip('Notes', notes ? read + '/' + notes : '—', notes && read >= notes),
+      chip('Notes opened', notes ? read + '/' + notes : '—', notes && read >= notes),
       chip('Topics 80%+', topics.length ? strong + '/' + topics.length : '—', topics.length && strong >= topics.length),
       chip('Vocab quiz', u.vocab && u.vocab.best != null ? u.vocab.best + '%' : '—', u.vocab && u.vocab.best >= 80),
       chip('Practice test', u.test && u.test.best != null ? u.test.best + '%' : '—', u.test && u.test.best >= 80)
@@ -999,6 +677,7 @@
       '<p class="a1-hero-eyebrow">Unit ' + id + (m >= 100 ? ' · complete' : '') + '</p>' +
       '<h1 class="a1-hero-title">' + unitName() + '</h1>' +
       '<div class="a1-chips">' + chips + '</div>' +
+      (u.earlierScores ? '<p class="a1-score-note">Answer checking has improved. Earlier scores are preserved separately; new scores use the corrected grader.</p>' : '') +
       '</div>' +
       '<div class="a1-hero-next">' +
       '<p class="a1-next-l">Next step</p>' +
@@ -1059,11 +738,11 @@
       card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       var t = $('.tg-title', card);
-      card.setAttribute('aria-label', (t ? t.textContent : 'Topic') + (on ? ' — already read' : ''));
+      card.setAttribute('aria-label', (t ? t.textContent : 'Topic') + (on ? ' — already opened' : ''));
       if (!card.__a1key) {
         card.__a1key = true;
         card.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+          if (e.target === card && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); card.click(); }
         });
         /* Notes and practice never referred to each other; now one click
            goes straight from a topic's notes to practising that topic. */
@@ -1109,7 +788,7 @@
      test is still one attempt, which is what makes it a test.
      ================================================================== */
 
-  var attempts = {}, streak = 0, bestStreak = 0;
+  var attempts = {}, hintsUsed = {}, streak = 0, bestStreak = 0;
 
   var PRAISE = ['Correct!', 'Correct!', 'Nice.', 'That’s it.', 'Well done.', 'Exactly.'];
   var praiseAt = 0;
@@ -1190,6 +869,7 @@
   }
 
   function showHintFor(i, pfx, p) {
+    hintsUsed[pfx + i] = true;
     var fb = document.getElementById(pfx + 'fb' + i);
     if (!fb || !p) return;
     fb.className = 'fb hint';
@@ -1203,11 +883,12 @@
     var card = document.getElementById(pfx + 'c' + i);
     var fb = document.getElementById(pfx + 'fb' + i);
     var p = problemAt(pfx, i);
-    if (!inp || !card || !fb || !p) return;
+    if (!inp || !card || !fb || !p || inp.disabled) return;
     if (!String(inp.value).trim()) { inp.focus(); return; }
 
     var key = pfx + i;
-    var ok = isMatch(inp.value, p.a);
+    if (fb.classList.contains('hint')) hintsUsed[key] = true;
+    var ok = isMatch(inp.value, p.a, p);
 
     if (ok) {
       inp.disabled = true;
@@ -1215,7 +896,8 @@
       card.classList.remove('no', 'a1-retrying');
       fb.className = 'fb ok';
       fb.innerHTML = '<span class="a1-fb-icon">✓</span> ' + praise() +
-        (attempts[key] ? ' <em>(second try)</em>' : '');
+        (attempts[key] ? ' <em>(second try)</em>' : '') +
+        (card.dataset.hintUsed === 'true' ? ' <em>(with a hint)</em>' : '');
       pop(card);
       if (pfx === 'p') { setStreak(streak + 1); focusNext(pfx, i); }
     } else {
@@ -1252,10 +934,13 @@
     /* A fresh set is a fresh start. */
     wrap('loadP', function () {
       attempts = {};
+      hintsUsed = {};
       setStreak(0);
       mountStreak();
     });
     wrap('loadT', function () { attempts = {}; });
+    wrap('showHint', function (i, pfx) { hintsUsed[(pfx || 'p') + i] = true; });
+    wrap('sh', function (i, enc, pfx) { hintsUsed[(pfx || 'p') + i] = true; });
   }
 
   /* After a finished set: say what to do next instead of just "try another". */
@@ -1302,7 +987,9 @@
       actions.push(['ghost', 'Try another set', function () { W.loadP(); }]);
     }
 
-    box.innerHTML = '<p class="a1-result-head">' + head + '</p><div class="a1-result-btns"></div>';
+    var firstTry = cards.filter(function(c,i){return c.classList.contains('ok') && !attempts['p'+i] && !hintsUsed['p'+i] && c.dataset.hintUsed !== 'true';}).length;
+    box.innerHTML = '<p class="a1-result-head">' + head + '</p>' +
+      '<p>First try without hints: ' + firstTry + '/' + cards.length + '. Final correct, including retries: ' + okCount + '/' + cards.length + '.</p><div class="a1-result-btns"></div>';
     var row = $('.a1-result-btns', box);
     actions.forEach(function (a) {
       var b = document.createElement('button');
@@ -1337,6 +1024,8 @@
         rec.attempts++;
         rec.last = p;
         rec.best = best(rec.best, p);
+        rec.firstTry = cards.filter(function(c,i){return c.classList.contains('ok') && !attempts['p'+i] && !hintsUsed['p'+i] && c.dataset.hintUsed !== 'true';}).length;
+        rec.questions = cards.length;
         u.practice[topic] = rec;
       });
       renderProgress();
@@ -1402,20 +1091,7 @@
 
   /* The unit pages know their own weighting; here we only have the stored
      record, so approximate the same shape from it. */
-  function unitScore(u) {
-    if (!u) return 0;
-    var topics = u.practice ? Object.keys(u.practice) : [];
-    var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
-    var parts = [
-      [.35, topics.length ? strong / topics.length : 0],
-      [.35, u.test && u.test.best != null ? u.test.best / 100 : 0],
-      [.15, u.vocab && u.vocab.best != null ? u.vocab.best / 100 : 0],
-      [.15, u.notesRead ? Math.min(1, Object.keys(u.notesRead).length / 4) : 0]
-    ];
-    var s = 0;
-    parts.forEach(function (p) { s += p[0] * p[1]; });
-    return Math.round(s * 100);
-  }
+  function unitScore(u, id) { return W.Alg1Course.score(u, id); }
 
   function indexProgress() {
     var cards = $$('.unit-card');
@@ -1429,7 +1105,7 @@
       var id = badge.textContent.replace(/[–—]/g, '-').trim();
       var u = all[id];
       var meta = $('.u-meta', card);
-      var score = unitScore(u);
+      var score = unitScore(u, id);
       totalScore += score;
 
       var state = document.createElement('span');
@@ -1450,8 +1126,8 @@
       row.className = 'u-prog';
       if (u) {
         var parts = [];
-        var topics = u.practice ? Object.keys(u.practice) : [];
-        var strong = topics.filter(function (t) { return u.practice[t].best >= 80; }).length;
+        var topics = W.Alg1Course.units[id] ? W.Alg1Course.units[id].topics : [];
+        var strong = topics.filter(function (t) { return u.practice && u.practice[t] && u.practice[t].best >= 80; }).length;
         if (topics.length) parts.push(strong + '/' + topics.length + ' topics strong');
         if (u.test && u.test.best != null) parts.push('test ' + u.test.best + '%');
         row.innerHTML = '<span class="u-prog-bw"><span class="u-prog-bar ' +
