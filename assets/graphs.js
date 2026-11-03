@@ -42,8 +42,8 @@
       }
     });
     if(Number.isFinite(spec.asymptote))out+='<line x1="'+left+'" y1="'+Y(spec.asymptote)+'" x2="'+(left+width)+'" y2="'+Y(spec.asymptote)+'" stroke="#087f83" stroke-width="2.5" stroke-dasharray="7 5"/>';
-    if(Number.isFinite(spec.axisOfSymmetry))out+='<line x1="'+X(spec.axisOfSymmetry)+'" y1="'+top+'" x2="'+X(spec.axisOfSymmetry)+'" y2="'+(top+height)+'" stroke="#b45332" stroke-width="2" stroke-dasharray="7 5"/>';
-    (spec.points||[]).forEach(function(p){out+='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="5" fill="#fff" stroke="'+colors[0]+'" stroke-width="2.5"/>'+(spec.labelPoints===false?'':'<text x="'+Math.min(left+width-85,Math.max(left+4,X(p[0])+9))+'" y="'+Math.min(top+height-8,Math.max(top+18,Y(p[1])-10))+'" class="a1-point-label">('+format(p[0])+', '+format(p[1])+')</text>');});
+    if(Number.isFinite(spec.axisOfSymmetry))out+='<line x1="'+X(spec.axisOfSymmetry)+'" y1="'+top+'" x2="'+X(spec.axisOfSymmetry)+'" y2="'+(top+height)+'" stroke="#c43c47" stroke-width="2" stroke-dasharray="7 5"/>';
+    (spec.points||[]).forEach(function(p){out+='<circle cx="'+X(p[0])+'" cy="'+Y(p[1])+'" r="5" fill="#c43c47" stroke="#fff" stroke-width="2.5"/>'+(spec.labelPoints===false?'':'<text x="'+Math.min(left+width-85,Math.max(left+4,X(p[0])+9))+'" y="'+Math.min(top+height-8,Math.max(top+18,Y(p[1])-10))+'" class="a1-point-label">('+format(p[0])+', '+format(p[1])+')</text>');});
     out+='</g>';if(spec.xLabel)out+='<text x="260" y="393" text-anchor="middle">'+escape(spec.xLabel)+'</text>';if(spec.yLabel)out+='<text x="12" y="20">'+escape(spec.yLabel)+'</text>';
     return '<svg class="a1-coordinate-plot" viewBox="0 0 '+W+' '+H+'" role="img" aria-labelledby="'+id+'-title '+id+'-desc"><title id="'+id+'-title">Coordinate graph</title><desc id="'+id+'-desc">'+escape(spec.description||'Coordinate plane with equal-sized units on both axes.')+'</desc><g font-family="system-ui,sans-serif" font-size="16" fill="#475467">'+out+'</g></svg>';
   }
