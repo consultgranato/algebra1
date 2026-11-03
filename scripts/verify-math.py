@@ -19,7 +19,7 @@ def rel(t):
     p=re.split(r'(<=|>=|<|>)',t.replace('≤','<=').replace('≥','>='))
     if len(p)!=3:raise ValueError()
     return {'<':s.Lt,'>':s.Gt,'<=':s.Le,'>=':s.Ge}[p[1]](parse(p[0]),parse(p[2]))
-counts={'equations':0,'inequalities':0,'expressions':0};failures=[];unverified=[];fixtures=[]
+counts={'equations':0,'inequalities':0,'expressions':0,'systems':0};failures=[];unverified=[];fixtures=[]
 def typed(value):return s.sstr(value).replace('**','^')
 for unit in data:
     groups=list(unit['banks'].items())+[('test',unit['test'])]
@@ -29,7 +29,35 @@ for unit in data:
             ident=f"{unit['file']}:{group}:{i+1}"
             try:
                 x=s.Symbol('x')
-                if re.match(r'\s*x\s*=',ans) and eq.count('=')==1 and not any(c in eq for c in '<>≤≥'):
+                if unit['file']=='unit9.html':
+                    y=s.Symbol('y')
+                    sources=p.get('graph',{}).get('expressions',[]) or re.split(r'\s+and\s+',eq)
+                    if len(sources)!=2:raise ValueError()
+                    expressions=[]
+                    for source in sources:
+                        left,right=source.split('=')
+                        expressions.append(parse(left)-parse(right))
+                    member=re.search(r'Is \(([^,]+),\s*([^)]+)\)',question)
+                    if member:
+                        px,py=map(parse,member.groups())
+                        student='yes' if all(e.subs({x:px,y:py})==0 for e in expressions) else 'no'
+                        wrong='no' if student=='yes' else 'yes'
+                        ok=ans==student
+                    else:
+                        solutions=s.linsolve(expressions,(x,y))
+                        if solutions is s.S.EmptySet:
+                            student='no solution';wrong='infinite solutions';ok='no solution'==ans
+                        else:
+                            pair=list(solutions)[0]
+                            if any(v.free_symbols for v in pair):
+                                student='infinite solutions';wrong='no solution';ok='infinite solutions'==ans
+                            else:
+                                actual=tuple(map(parse,ans.strip('()').split(',')))
+                                ok=pair==actual
+                                student='('+','.join(typed(v) for v in pair)+')'
+                                wrong='('+','.join(typed(v+1) for v in pair)+')'
+                    kind='systems'
+                elif re.match(r'\s*x\s*=',ans) and eq.count('=')==1 and not any(c in eq for c in '<>≤≥'):
                     l,r=map(parse,eq.split('='));expr=l-r
                     if expr.free_symbols!={x}:raise ValueError()
                     values=[parse(v.strip().removeprefix('x').lstrip(' =')) for v in re.split(r'\s+or\s+|,',ans)]
@@ -56,6 +84,9 @@ for unit in data:
                     kind='expressions';ok=s.simplify(l-r)==0
                     solution=s.factor(l) if p.get('answerForm') in ('factored','gcf') else s.expand(l)
                     student=typed(solution);wrong=typed(solution+1)
+                    if p.get('answerForm')=='powers':
+                        numerator,denominator=s.fraction(solution)
+                        student=typed(numerator) if denominator==1 else f'({typed(numerator)})/({typed(denominator)})'
                 else:raise ValueError()
                 counts[kind]+=1
                 if not ok:failures.append({'id':ident,'question':eq,'answer':ans,'expected':str(expected) if kind!='expressions' else str(s.expand(l))})

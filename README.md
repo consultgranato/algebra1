@@ -55,7 +55,7 @@ same plumbing, and this is what stops them drifting again. It provides:
   Item metadata can require factored, expanded, or reduced form. Decimal tolerance
   is opt-in and printed in the question's answer instructions.
 - **Progress**, saved to `localStorage` under `alg1.progress.v1`, keyed by unit
-  id. Records notes read, best and last practice score per topic, and best
+  id. Records notes opened, best and last practice score per topic, and best
   practice-test and vocabulary-quiz scores.
 - **Accessibility** — ARIA tablist with arrow-key navigation, dialog semantics
   and a focus trap on the notes and calculator modals, live regions on feedback
@@ -86,35 +86,36 @@ deploys. `.nojekyll` is present so Pages serves the files as-is.
 git add -A && git commit -m "…" && git push
 ```
 
-## Assessment validity and repeatable verification
+## Learning experience and verification
+
+The course uses a shared visual system and note reader, equation-driven SVG graphs,
+MathML assessment notation, labeled multipart inputs, and an on-site graph workspace.
+It remains a static GitHub Pages site with no build step or graph service account.
 
 Run `node --test tests/*.test.cjs` for parser counterexamples, all 1,140 answer-key
-round trips, content-notation checks, progress denominators, and legacy-score
-preservation. A key round trip only checks input compatibility, not mathematics.
+round trips, response contracts, graph invariants, progress, and score migration.
+Round trips check compatibility; they do not prove answer-key correctness.
 
-Install `sympy==1.14.0`, then run `python scripts/verify-math.py`. This separate
-oracle solves 371 supported question/answer pairs from the raw banks and feeds
-371 independently generated correct answers plus 371 incorrect variants into
-the browser's actual grading engine. It reports unsupported questions separately;
-the remaining 769 prose, graph, or unsupported items are not mathematically
-certified by this check. Original packet PDFs are absent, so packet alignment
-requires those sources and a teacher review.
+With SymPy 1.14.0 installed, run `python scripts/verify-math.py` to solve 451 raw
+assessment entries independently and check 451 correct plus 451 incorrect inputs
+against the actual grader. It reports the other 689 entries as unsupported.
+Run `python scripts/verify-graphs.py` to independently check all 49 graph models,
+24 marked coordinates, 343 curve samples, and six high-impact content calculations.
+These coverage counts overlap; they must not be added as unique verified questions.
 
-GitHub Actions runs these checks and the browser regressions on every push and
-pull request. `tests/browser-regressions.mjs` tests rendered student controls;
-`scripts/browser-ci.mjs` runs it with Playwright. Local browser CI requires
-`playwright@1.64.1` and its Chromium installation. The browser regressions cover
-correct and incorrect inequalities, exponential input, solution wording,
-keyboard navigation, hint use, and agreement between course and unit progress.
+GitHub Actions runs these checks and Playwright regressions at desktop and mobile
+widths. The design suite opens all 66 notes, checks diagrams and containment, exercises
+six graph presets, traces values, handles invalid input, and submits multipart answers.
+Local browser CI requires Playwright 1.64.1 and Chromium, then
+`node scripts/browser-ci.mjs`.
 
-Practice distinguishes first attempts without hints from final success after
-hints/retries. Progress is a study guide, not a validated grade or a diagnostic
-of mastery. Notes are recorded as opened, not as evidence of understanding.
-Scores produced before grading version 2 are preserved in `earlierScores` within
-the same local-storage record and excluded from new progress calculations.
+See [the redesign review](docs/learning-experience-review.md) for scope and limits,
+and [the correction ledger](docs/content-review.json) for the 34 reviewed corrections.
+Six original course DOCX note packets informed the supplement/crosswalk work;
+text extraction omits embedded equation objects and images, so complete visual
+packet fidelity has not been certified. Private packet files are not in this repository.
 
-The earlier audit's graph preloading and graph-description findings are outside
-this focused mathematical-grading change and still need separate work. The
-supported expression parser is deliberately bounded; unsupported syntax is
-rejected rather than guessed correct. No feature claims universal symbolic
-algebra equivalence.
+Progress is study guidance, not a validated grade. Notes count as opened. First tries
+without hints remain separate from eventual success. Grading version 3 archives
+older assessment scores, retaining earlier archives, while preserving opened notes.
+The mathematical parser is bounded and rejects unsupported syntax.

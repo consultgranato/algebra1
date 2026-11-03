@@ -1,0 +1,389 @@
+[
+  {
+    "file": "unit9.html",
+    "group": "9.1",
+    "index": 7,
+    "q": "Is (1, 1) a solution to the system?",
+    "reason": "Given point fails second equation.",
+    "independentCalculation": "At (1,1), x+y=2, not 3.",
+    "changedFields": [
+      "a"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "9.1",
+    "index": 12,
+    "q": "Is (2, 3) a solution to the system?",
+    "reason": "Given point fails first equation.",
+    "independentCalculation": "At (2,3), y=3 but x+2=4.",
+    "changedFields": [
+      "a"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "9.3",
+    "index": 14,
+    "q": "Solve by substitution:",
+    "reason": "Parallel inconsistent system miskeyed as infinite solutions.",
+    "independentCalculation": "The two equations require 2x+y=8 and 2x+y=6 simultaneously.",
+    "changedFields": [
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "9.4",
+    "index": 6,
+    "q": "Solve by elimination:",
+    "reason": "Incorrect ordered pair and unfinished hint.",
+    "independentCalculation": "Adding yields y=4; first equation then yields x=5/2.",
+    "changedFields": [
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "9.4",
+    "index": 3,
+    "q": "Solve by elimination:",
+    "reason": "Clean contradictory intermediate calculation from otherwise correct hint.",
+    "independentCalculation": "3(3)+2y=10, not 3+2y=10.",
+    "changedFields": [
+      "h"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "test",
+    "index": 2,
+    "q": "Is (2, 5) a solution to the system?",
+    "reason": "Given point fails second equation.",
+    "independentCalculation": "At (2,5), x+y=7, not 8.",
+    "changedFields": [
+      "a"
+    ]
+  },
+  {
+    "file": "unit9.html",
+    "group": "test",
+    "index": 18,
+    "q": "Solve by elimination:",
+    "reason": "Answer key contains abandoned answer and self-correction prose.",
+    "independentCalculation": "Add equations: 4y=20 => y=5; 4x+15=18 => x=3/4.",
+    "changedFields": [
+      "a"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.3",
+    "index": 12,
+    "q": "Solve:",
+    "reason": "Original 5,10,15 result is a degenerate triangle; preserve integer objective with feasible context.",
+    "independentCalculation": "For perimeter26, s=4; sides4,10,12 satisfy all strict triangle inequalities.",
+    "changedFields": [
+      "eq",
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.3",
+    "index": 14,
+    "q": "Solve:",
+    "reason": "Original perimeter31 implies5.8 while key6; choose feasible integer problem and remove draft prose.",
+    "independentCalculation": "2(2x−1)+(x+4)=5x+2; with32 givesx6.",
+    "changedFields": [
+      "eq",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.7",
+    "index": 0,
+    "q": "Solve:",
+    "reason": "Original total126 gives fractional clothing counts, not key2and3.",
+    "independentCalculation": "2jeans*42+3shirts*12=120; original126 solvesj2.2 and is infeasible.",
+    "changedFields": [
+      "eq",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "test",
+    "index": 31,
+    "q": "Solve:",
+    "reason": "Equal4lb portions cost40, not44.",
+    "independentCalculation": "x+y=8,4x+6y=44 => x2,y6.",
+    "changedFields": [
+      "a",
+      "fmt",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.6",
+    "index": 6,
+    "q": "Solve:",
+    "reason": "Tailwind prompt did not distinguish ground speed from airspeed.",
+    "independentCalculation": "Distance/time determines ground speed600; no wind speed is supplied.",
+    "changedFields": [
+      "eq",
+      "fmt",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.4",
+    "index": 2,
+    "q": "Write the equation and find total cost:",
+    "reason": "Question requested equation and cost, but one-field key only checks cost.",
+    "independentCalculation": "50+30*6=230; keep the single numeric objective.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.4",
+    "index": 13,
+    "q": "Write the equation and solve:",
+    "reason": "Question requested equation and solution, but single-field key checks only hours.",
+    "independentCalculation": "75+55h=295 => h4.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "12.3",
+    "index": 10,
+    "q": "A colony of 50 bacteria grows 30% per hour. About how many after 4 hours? (round to nearest whole)",
+    "reason": "Incorrect rounded exponential-growth key.",
+    "independentCalculation": "50*1.3^4=142.805 =>143.",
+    "changedFields": [
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "12.3",
+    "index": 12,
+    "q": "A city has 80,000 people and loses 2% per year. About how many after 5 years? (round to nearest whole)",
+    "reason": "Incorrect rounded exponential-decay key.",
+    "independentCalculation": "80000*.98^5=72313.663744 =>72314.",
+    "changedFields": [
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "12.3",
+    "index": 13,
+    "q": "Write the exponential decay formula for an item starting at $A₀, losing r% per year for t years.",
+    "reason": "Prompt saidr% while key treats r as decimal proportion.",
+    "independentCalculation": "A=A₀(1−r)^t for decimalr; percentage notation would require1−r/100.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "test",
+    "index": 13,
+    "q": "Write the growth formula for an initial amount A₀ growing at rate r for t years.",
+    "reason": "Clarify decimal-rate convention consistently with decay prompt.",
+    "independentCalculation": "A=A₀(1+r)^t whenr is decimal annual growth.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "notes",
+    "index": 6,
+    "q": "Mixture &amp; Multi-Step Problems",
+    "reason": "Same impossible shopping example appears in notes. Repair its arithmetic and remove unverified source attribution after changing values.",
+    "independentCalculation": "42j+12(5−j)=120 => j2,shirts3.",
+    "changedFields": [
+      "html"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "notes",
+    "index": 0,
+    "q": "Exponential Functions (Part 1)",
+    "reason": "Malformed exponent entity prints as text in zero-exponent worked example.",
+    "independentCalculation": "3^0=1; display3 with superscript0.",
+    "changedFields": [
+      "html"
+    ]
+  },
+  {
+    "file": "unit6.html",
+    "group": "6.4",
+    "index": 11,
+    "q": "Solve:",
+    "reason": "True constant inequality miskeyed as no solution.",
+    "independentCalculation": "4(x+1)≥4x+3 reduces to4≥3, identically true.",
+    "changedFields": [
+      "a",
+      "h"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.1",
+    "index": 2,
+    "q": "Translate to an equation:",
+    "reason": "Remove ambiguous grouping in phrase three times a number increased by4.",
+    "independentCalculation": "Unambiguous wording corresponds to3x+4=19, not3(x+4)=19.",
+    "changedFields": [
+      "eq"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "10.7",
+    "index": 7,
+    "q": "Solve:",
+    "reason": "Rounded key has no rounding instruction; exact thirds are also mathematically correct.",
+    "independentCalculation": "0.2x+0.5(50−x)=15 =>x100/3 and50−x50/3, rounded33.3 and16.7.",
+    "changedFields": [
+      "fmt"
+    ]
+  },
+  {
+    "file": "unit1-4.html",
+    "group": "unit3",
+    "index": 3,
+    "q": "Can this be simplified? Why or why not:",
+    "reason": "Current single-field key only checks no despite asking why; clarify the intended operation.",
+    "independentCalculation": "3x and5 are unlike terms; cannot be combined into a single like term.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit1-4.html",
+    "group": "unit3",
+    "index": 10,
+    "q": "Can this be simplified?",
+    "reason": "Expression can be factored but unlike terms cannot be combined; simplify is too broad.",
+    "independentCalculation": "5x² and3x have different variable powers; factoringx is possible, so only combine-like-terms question has answer no.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit11.html",
+    "group": "vocabulary",
+    "index": 1,
+    "q": "What does anything raised to the zero power equal?",
+    "reason": "Zero-exponent rule requires a nonzero base.",
+    "independentCalculation": "b^0=1 for b≠0; 0^0 is not covered by this algebra rule.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit12.html",
+    "group": "vocabulary",
+    "index": 16,
+    "q": "True or False: If b<sup>m</sup> = b<sup>n</sup> and the bases are the same, then m = n.",
+    "reason": "Equal-exponent implication needs base restrictions.",
+    "independentCalculation": "Counterexample to original:1²=1³ while2≠3. For positiveb≠1 exponential is injective.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit7.html",
+    "group": "vocabulary",
+    "index": 12,
+    "q": "How do you identify a linear function from a table?",
+    "reason": "Constant y differences alone do not prove constant rate when x steps vary.",
+    "independentCalculation": "For x0,1,3 andy0,1,2, y differences1,1 but slopes1,1/2 differ.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit8.html",
+    "group": "vocabulary",
+    "index": 9,
+    "q": "Parallel lines have...",
+    "reason": "Same-slope statement needs nonvertical restriction.",
+    "independentCalculation": "Two vertical parallel lines both have undefined rather than numerical slopes.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit8.html",
+    "group": "vocabulary",
+    "index": 18,
+    "q": "To check which side to shade, you plug in the test point...",
+    "reason": "The origin is not a valid test point when boundary passes through it.",
+    "independentCalculation": "For y>x, (0,0) lies on boundary y=x and cannot determine which side to shade.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit6.html",
+    "group": "vocabulary",
+    "index": 5,
+    "q": "A solution to an inequality is...",
+    "reason": "Distinguish one solution from set of all solutions.",
+    "independentCalculation": "A single satisfying number is a solution; collection of all satisfying numbers is solution set.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit10.html",
+    "group": "vocabulary",
+    "index": 25,
+    "q": "True or False: Two unknowns always require two equations to solve.",
+    "reason": "Original says two unknowns always require two equations; needs linear independence and scope.",
+    "independentCalculation": "Two dependent equations can leave infinitely many solutions; independent2×2 linear system has a unique solution.",
+    "changedFields": [
+      "q"
+    ]
+  },
+  {
+    "file": "unit15.html",
+    "group": "vocabulary",
+    "index": 4,
+    "q": "The axis of symmetry formula is...",
+    "reason": "Use explicit denominator grouping in plain-text formula.",
+    "independentCalculation": "Axis of symmetry is−b divided by entire2a, not(−b/2)·a.",
+    "changedFields": [
+      "opts"
+    ]
+  },
+  {
+    "file": "unit1-4.html",
+    "group": "test",
+    "index": 13,
+    "q": "Can 4x + 2 be simplified further?",
+    "reason": "Unlike terms cannot be combined, but factoring is possible; the original unqualified question is ambiguous.",
+    "independentCalculation": "4x and 2 have different variable parts. They cannot combine into one term; 4x+2=2(2x+1) is a valid factored equivalent.",
+    "changedFields": [
+      "q"
+    ]
+  }
+]

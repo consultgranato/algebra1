@@ -65,7 +65,7 @@
     if (!id) return;
     var all = readAll(), u = all[id] || {};
     fn(u);
-    u.gradingVersion = 2;
+    u.gradingVersion = 3;
     u.updated = Date.now();
     all[id] = u;
     writeAll(all);
@@ -192,7 +192,7 @@
     });
 
     wrap('openTopic', function (i) {
-      lastFocus = document.activeElement;
+      if (!lastFocus) lastFocus = document.activeElement;
       try { enhanceNote(i); } catch (e) { }
       var close = $('.topic-modal-close', modal);
       if (close) close.focus();
@@ -232,6 +232,7 @@
   /* textContent flattens the maths: the halves of a stacked 3/4 run together
      as "34", and x<sup>2</sup> becomes "x2". Rebuild both before reading. */
   function flatText(el) {
+    if (el.getAttribute('data-math-source')) return el.getAttribute('data-math-source');
     var c = el.cloneNode(true);
     $$('.frac', c).forEach(function (f) {
       var n = $('.fn', f), d = $('.fd', f);
@@ -861,10 +862,10 @@
 
   function focusNext(pfx, i) {
     var next = document.getElementById(pfx + 'a' + (i + 1));
-    if (next && !next.disabled) { next.focus(); return; }
+    if (next && !next.disabled) { (document.getElementById(next.id + "-field-0") || next).focus(); return; }
     for (var j = 0; j < 40; j++) {
       var el = document.getElementById(pfx + 'a' + j);
-      if (el && !el.disabled) { el.focus(); return; }
+      if (el && !el.disabled) { (document.getElementById(el.id + "-field-0") || el).focus(); return; }
     }
   }
 
