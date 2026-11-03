@@ -5,7 +5,7 @@ export async function run(tab, origin) {
   function check(name,ok){if(!ok)throw Error(name);results.push(name);}
   async function section(name){await tab.playwright.getByRole('tab',{name,exact:true}).click();await tab.playwright.domSnapshot();}
   await tab.goto(origin+'/unit6.html');await tab.reload();await tab.playwright.domSnapshot();await section('Practice Test');
-  const inequality=tab.playwright.locator('.pcard').filter({hasText:'4(2x - 1) ≥ 3(x + 4)'});
+  const inequality=tab.playwright.locator('.pcard').filter({has:tab.playwright.locator('[data-math-source="4(2x - 1) >= 3(x + 4)"]')});
   const union=tab.playwright.locator('.pcard').filter({hasText:'2x > 8 OR x + 1 < -2'});
   await inequality.getByRole('textbox').fill('x >= 3.2');
   await union.getByRole('textbox').fill('x > 4 and x < -3');
@@ -37,12 +37,12 @@ export async function run(tab, origin) {
   const practice=await tab.playwright.locator('#plist .pcard').all();let usedHint=false;
   for(const card of practice){
     const question=await card.locator('.pq-q').innerText();
-    const eq=(await card.locator('.pmath').innerText()).replace(/[−–]/g,'-').replace(/\s+/g,'');
+    const eq=((await card.locator('.pmath').getAttribute('data-math-source')) || (await card.locator('.pmath').innerText())).replace(/[−–]/g,'-').replace(/\s+/g,'');
     let value,m;
     if((m=question.match(/Is x = (-?\d+) a solution/))){const x=+m[1];const r=eq.match(/^(-?\d+)x([+-]\d+)=(-?\d+)$/);if(!r)throw Error('Unsupported fixture equation '+eq);value=+r[1]*x+(+r[2])===+r[3]?'yes':'no';}
     else if((m=eq.match(/^x([+-]\d+)=(-?\d+)$/)))value=String(+m[2]-(+m[1]));
     else if((m=eq.match(/^(-?\d+)x=(-?\d+)$/)))value=String(+m[2]/+m[1]);
-    else if((m=eq.match(/^x÷(\d+)=(-?\d+)$/)))value=String(+m[1]*+m[2]);
+    else if((m=eq.match(/^x[÷/](\d+)=(-?\d+)$/)))value=String(+m[1]*+m[2]);
     else throw Error('Unsupported fixture equation '+eq);
     if(!usedHint){await card.getByRole('button',{name:/Hint/}).click();await tab.playwright.domSnapshot();check('hint use recorded on question',await tab.playwright.locator('#pc0').getAttribute('data-hint-used')==='true');usedHint=true;}
     await card.getByRole('textbox').fill(value);await card.getByRole('button',{name:'Check',exact:true}).click();await tab.playwright.domSnapshot();

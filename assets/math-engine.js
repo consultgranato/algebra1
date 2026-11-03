@@ -126,6 +126,7 @@
       var A=parse(a),B=parse(b),form=policy.answerForm;
       if(form==='reduced'&&unreduced(a))return false;
       if(form==='expanded'&&!expanded(A))return false;
+      if(form==='powers'){if(unreduced(a))return false;function powerForm(n){if(n.op==='/'){var top=Object.keys(polynomial(n.a)).join(','),bottom=Object.keys(polynomial(n.b)).join(',');var common=top.match(/[a-z]/g)||[];return expanded(n.a)&&expanded(n.b)&&!common.some(function(v){return bottom.includes(v);});}return expanded(n);}if(!powerForm(A))return false;}
       if(form==='factored'&&factorShape(A)!==factorShape(B))return false;
       if(form==='gcf'&&gcfShape(A)!==gcfShape(B))return false;
       function restrictions(n,out){out=out||{};function names(x){if(x.op==='var')out[x.name]=true;if(x.a)names(x.a);if(x.b)names(x.b);}if(n.op==='/')names(n.b);if(n.op==='^'){try{if(constant(n.b)<0)names(n.a);}catch(e){}}if(n.a)restrictions(n.a,out);if(n.b)restrictions(n.b,out);return Object.keys(out).sort().join(',');}
@@ -160,6 +161,28 @@
   function matches(input,key,policy){
     policy=policy||{};
     if(input==null||!String(input).trim()||String(input).length>1000)return false;
+    if(policy.answerKind){
+      var kind=policy.answerKind,inner=Object.assign({},policy);delete inner.answerKind;delete inner.answerFields;
+      var user=clean(input),correct=clean(key);
+      if(kind==='formula'){var formula=function(s){return s.replace(/a(?:_?0|₀)/g,'p');};if(!/a(?:_?0|₀)/.test(user))return false;return matches(formula(user),formula(correct),inner);}
+      if(kind==='quantity'){var quantity=function(s){return s.replace(/\$/g,'').replace(/(?<=\d),(?=\d{3}(?:\D|$))/g,'').replace(/\b(?:dollars?|hours?|feet|inches|pounds?|lbs?)\b/g,'').trim();};return matches(quantity(user),quantity(correct),inner);}
+      if(kind==='set'){var list=function(s){return s.replace(/[{}]/g,'').replace(/\s+(?:and|or)\s+/g,',');};var us=splitTop(list(user)),cs=splitTop(list(correct)),rest=cs.slice();return us.length===cs.length&&us.every(function(v){var i=rest.findIndex(function(w){return matches(v,w,inner);});if(i<0)return false;rest.splice(i,1);return true;});}
+      if(kind==='functionValue'){var fn=/^([a-z])\(([^)]+)\)\s*=\s*/.exec(correct);var supplied=/^([a-z])\(([^)]+)\)\s*=\s*/.exec(user);if(supplied&&(!fn||supplied[1]!==fn[1]||!matches(supplied[2],fn[2],{})))return false;return matches(user.replace(/^[a-z]\([^)]+\)\s*=\s*/,''),correct.replace(/^[a-z]\([^)]+\)\s*=\s*/,''),inner);}
+      if(kind==='linearClassification'){var linear=function(s){s=s.replace(/\s+/g,'');return /^(yes|true|linear)$/.test(s)?'yes':/^(no|false|notlinear|nonlinear)$/.test(s)?'no':s;};return linear(user)===linear(correct);}
+      if(kind==='solutionCount'){var count=function(s){s=s.replace(/\s+/g,'');return /^(0|none|norealsolutions?|nosolutions?)$/.test(s)?'0':/^(1|one(realsolution|solution)?)$/.test(s)?'1':/^(2|two(realsolutions|solutions)?)$/.test(s)?'2':s;};return count(user)===count(correct);}
+      if(kind==='intercept'){var pair=/^\(\s*([^,]+),\s*([^,]+)\)$/.exec(user);if(pair){var axis=policy.axis||'y';if(!matches(pair[axis==='y'?1:2],'0',{}))return false;user=pair[axis==='y'?2:1];}return matches(user,correct,inner);}
+      if(kind==='dimensions'){var dimensions=function(s){return s.replace(/[()]/g,'').replace(/\s+(?:by|and)\s+/g,',').replace(/[×*]/g,',');};var ds=splitTop(dimensions(user)),dk=splitTop(dimensions(correct));return ds.length===dk.length&&(ds.every(function(v,i){return matches(v,dk[i],inner);})||ds.every(function(v,i){return matches(v,dk[dk.length-1-i],inner);}));}
+      if(kind==='fields'){
+        var fields=policy.answerFields||[],parts=splitTop(user),wanted=splitTop(correct),values={},seen={};
+        if(parts.length!==fields.length||wanted.length!==fields.length)return false;
+        for(var pi=0;pi<parts.length;pi++){
+          var part=parts[pi].trim(),eq=/^([a-z][a-z\s-]*)\s*[:=]\s*(.+)$/.exec(part),name=eq?eq[1].replace(/[\s-]/g,''):null;
+          var fi=name?fields.findIndex(function(f){return [f.key].concat(f.aliases||[]).some(function(k){return k.replace(/[\s-]/g,'')===name;});}):pi;
+          if(fi<0||seen[fi])return false;seen[fi]=true;values[fi]=eq?eq[2]:part;
+        }
+        return fields.every(function(f,i){var expected=wanted[i].trim().replace(/^[a-z][a-z\s-]*\s*[:=]\s*/,'');return matches(values[i],expected,f.kind?Object.assign({},inner,{answerKind:f.kind}):inner);});
+      }
+    }
     var a=clean(input),b=clean(key);
     function logic(s){return s.replace(/\s+or\s+/g,'||').replace(/\s+and\s+/g,'&&').replace(/\s+/g,'');}
     a=logic(a);b=logic(b);if(!b)return false;
@@ -185,5 +208,12 @@
     }
     return scalarEq(a,b,policy);
   }
-  return {clean:clean,norm:norm,matches:matches,parse:parse,polynomialKey:function(s){return pKey(polynomial(parse(norm(s))));}};
+  function evaluateNode(n,bindings){
+    if(n.op==='var'){if(!Number.isFinite(bindings[n.name]))throw Error('Missing variable '+n.name);return bindings[n.name];}
+    if(n.op==='num')return Number(n.r[0])/Number(n.r[1]);
+    var a=evaluateNode(n.a,bindings),b=n.b?evaluateNode(n.b,bindings):0;
+    var result=n.op==='neg'?-a:n.op==='sqrt'?Math.sqrt(a):n.op==='+'?a+b:n.op==='-'?a-b:n.op==='*'?a*b:n.op==='/'?a/b:n.op==='^'?Math.pow(a,b):NaN;
+    if(!Number.isFinite(result))throw Error('Undefined at this point');return result;
+  }
+  return {clean:clean,norm:norm,matches:matches,parse:parse,evaluateNode:evaluateNode,evaluate:function(s,bindings){return evaluateNode(parse(norm(s)),bindings||{});},polynomialKey:function(s){return pKey(polynomial(parse(norm(s))));}};
 });

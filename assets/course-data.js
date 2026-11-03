@@ -17,9 +17,9 @@
   };
   function score(u,id){u=u||{};var m=units[id];if(!m)return 0;var opened=Object.keys(u.notesRead||{}).filter(function(k){return /^\d+$/.test(k)&&+k<m.notes;}).length;var strong=m.topics.filter(function(t){return u.practice&&u.practice[t]&&u.practice[t].best>=80;}).length;function pct(rec){return rec&&Number.isFinite(rec.best)?Math.max(0,Math.min(100,rec.best))/100:0;}return Math.round(15*opened/m.notes+35*strong/m.topics.length+35*pct(u.test)+15*pct(u.vocab));}
   function migrate(u){
-    if(!u||u.gradingVersion===2)return u;
-    var next=Object.assign({},u,{gradingVersion:2});
-    if(u.practice||u.test||u.vocab){next.earlierScores={practice:u.practice,test:u.test,vocab:u.vocab};delete next.practice;delete next.test;delete next.vocab;}
+    if(!u||u.gradingVersion===3)return u;
+    var next=Object.assign({},u,{gradingVersion:3});
+    if(u.practice||u.test||u.vocab){next.earlierScores={version:u.gradingVersion||1,practice:u.practice,test:u.test,vocab:u.vocab,previous:u.earlierScores};delete next.practice;delete next.test;delete next.vocab;}
     return next;
   }
   return {units:units,score:score,migrate:migrate};
