@@ -42,7 +42,7 @@ export async function run(tab, origin) {
     if((m=question.match(/Is x = (-?\d+) a solution/))){const x=+m[1];const r=eq.match(/^(-?\d+)x([+-]\d+)=(-?\d+)$/);if(!r)throw Error('Unsupported fixture equation '+eq);value=+r[1]*x+(+r[2])===+r[3]?'yes':'no';}
     else if((m=eq.match(/^x([+-]\d+)=(-?\d+)$/)))value=String(+m[2]-(+m[1]));
     else if((m=eq.match(/^(-?\d+)x=(-?\d+)$/)))value=String(+m[2]/+m[1]);
-    else if((m=eq.match(/^x÷(\d+)=(-?\d+)$/)))value=String(+m[1]*+m[2]);
+    else if((m=eq.match(/^x[÷/](\d+)=(-?\d+)$/)))value=String(+m[1]*+m[2]);
     else throw Error('Unsupported fixture equation '+eq);
     if(!usedHint){await card.getByRole('button',{name:/Hint/}).click();await tab.playwright.domSnapshot();check('hint use recorded on question',await tab.playwright.locator('#pc0').getAttribute('data-hint-used')==='true');usedHint=true;}
     await card.getByRole('textbox').fill(value);await card.getByRole('button',{name:'Check',exact:true}).click();await tab.playwright.domSnapshot();
